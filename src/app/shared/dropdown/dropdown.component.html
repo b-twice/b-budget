@@ -1,0 +1,11 @@
+<ul class="menu" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+    <li (click)="select(selected)">
+        <a>{{selected}}</a>
+        <i class="fa fa-angle-down" aria-hidden="true"></i>
+    </li>
+    <ul class="menu-more" [hidden]="!active">
+        <li *ngFor="let item of selectList" (click)="select(item)">
+            <a>{{item}}</a>
+        </li>
+    </ul>    
+</ul>

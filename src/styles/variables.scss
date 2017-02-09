@@ -1,0 +1,47 @@
+/* ==========================================================================
+   #SETTINGS-THEME
+   ========================================================================== */
+
+$white: #fff;
+$asphalt: #303e4d;
+$iron: #ededed;
+$grey: #f8f8f8;
+$regent-grey: #8e949f;
+$light-green: #2ecc71;
+$orange: #EBA36F;
+
+$color-background: $white;
+$color-primary: $asphalt;
+$color-secondary: $iron;
+$color-secondary-light: $grey;
+$color-layout: $grey;
+
+$color-category-maps: $orange;
+$color-category-esri: $light-green;
+
+
+$color-text-light: $white;
+$color-text-dark: $asphalt;
+$color-text-weak: $regent-grey;
+
+
+$font-header: Montserrat, sans-serif;
+$font-body: "Droid Serif", serif;
+$font-light: Lato, sans-serif;
+
+$border-default:1px solid $color-secondary;
+
+$link-underline: linear-gradient(to bottom, rgba(0,0,0,0) 90%, rgba(0,0,0,1) 100%);
+
+$masthead-height:4em;
+$masthead-border: .3em;
+$masthead-full: ($masthead-height + $masthead-border);
+
+$break-large:2em;
+$break-medium:1em;
+$break-small:.5em;
+
+$layout-margin--none: $masthead-height 0 0;
+$layout-margin: $masthead-height 0 $break-large;
+$layout-width: 900px;
+
