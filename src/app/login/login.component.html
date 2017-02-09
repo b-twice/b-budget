@@ -1,24 +1,17 @@
-<form>
-  <div class="form-group">
-    <label for="name">Username</label>
-    <input
-      type="text"
-      class="form-control"
-      #username
-      placeholder="Enter your email">
-  </div>
-  <div class="form-group">
-    <label for="name">Password</label>
-    <input
-      type="password"
-      class="form-control"
-      #password
-      placeholder="Enter your password">
-  </div>
-  <button
-    type="submit"
-    class="btn btn-default"
-    (click)="auth.login(username.value, password.value)">
-      Log In
-  </button>
-</form>
+<div *ngIf="authenticationError" class="auth-error response-error">{{authenticationError}}</div>
+<div class="user-login">
+	<form *ngIf="!authenticating">
+		<div class="form-group">
+			<label for="name">Username</label>
+			<input type="text" class="form-control" #username placeholder="Enter your email">
+		</div>
+		<div class="form-group">
+			<label for="name">Password</label>
+			<input type="password" class="form-control" #password placeholder="Enter your password">
+		</div>
+		<button type="submit" class="button-full" (click)="login(username.value, password.value)">
+			Log In
+		</button>
+	</form>
+	<loading *ngIf="authenticating"></loading>
+</div>

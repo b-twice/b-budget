@@ -4,9 +4,10 @@
 // The list of which env maps to which file can be found in `angular-cli.json`.
 
 export const environment = {
-  production: false,
-  user: {
-      domain: 'bgeo.auth0.com',
-      clientID: 'TPZrTRxzqYySVXNwNsokXsFL25cTD1ML'
-  }
+    production: false,
+    auth: {
+        domain: 'bgeo.auth0.com',
+        clientID: 'TPZrTRxzqYySVXNwNsokXsFL25cTD1ML'
+    },
+    apiEndpoint: 'http://localhost:3000'
 };
