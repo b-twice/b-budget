@@ -5,13 +5,17 @@ import { BudgetRoutingModule } from './budget-routing.module';
 
 import { BudgetService } from './budget.service';
 
-import { BudgetDashboardComponent } from './dashboard.component';
-import { BudgetSummaryComponent } from './summary/budget-summary.component';
-import { BudgetHeaderComponent } from './header/budget-header.component';
-
 //shared
 import { SharedModule } from '../shared/shared.module';
+
+import { BudgetDashboardComponent } from './dashboard.component';
+import { SummaryComponent } from './summary/summary.component';
+import { HeaderComponent } from './header/header.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 import { OwnerNavComponent } from './owner-nav/owner-nav.component';
+import { OwnerProfileComponent } from './owner-profile/owner-profile.component';
+import { YearNavComponent } from './year-nav/year-nav.component';
 
 @NgModule({
     imports: [
@@ -21,9 +25,13 @@ import { OwnerNavComponent } from './owner-nav/owner-nav.component';
     ],
     declarations: [
         BudgetDashboardComponent,
-        BudgetSummaryComponent,
-        BudgetHeaderComponent,
-        OwnerNavComponent
+        SummaryComponent,
+        HeaderComponent,
+        OwnerNavComponent,
+        OwnerProfileComponent,
+        CategoriesComponent,
+        TransactionsComponent,
+        YearNavComponent
     ],
     providers: [
         BudgetService

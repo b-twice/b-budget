@@ -6,7 +6,15 @@ import { Component, OnInit } from '@angular/core';
     `
     <budget-header></budget-header>
     <budget-owner-nav></budget-owner-nav>
-    <router-outlet></router-outlet>
+    <div class="dashboard-layout">
+        <main>
+            <budget-owner-profile></budget-owner-profile>
+            <div class="dashboard-main">
+                <budget-year-nav></budget-year-nav>
+                <router-outlet></router-outlet>
+            </div>
+        </main>
+    </div>
     `,
     styleUrls: ['./dashboard.component.scss']
 

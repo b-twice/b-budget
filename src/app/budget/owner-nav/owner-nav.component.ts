@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BudgetService } from '../budget.service';
 import { Owner } from '../models/owner';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'budget-owner-nav',
@@ -10,9 +11,13 @@ import { Owner } from '../models/owner';
 export class OwnerNavComponent implements OnInit {
 
   private owners: Owner[] = [new Owner("Shannon"), new Owner("Brian")];
+  private currentYear: string;
 
   constructor(
-    private budgetService: BudgetService
+    private budgetService: BudgetService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+
   ) { }
 
   ngOnInit() {
@@ -24,6 +29,13 @@ export class OwnerNavComponent implements OnInit {
       .subscribe(
       owners => this.owners = owners
       )
+
+    this.activatedRoute.firstChild.params.subscribe(
+      params => {
+        this.currentYear = params['year']
+        console.log(this.currentYear)
+      }
+    )
   }
 
 }

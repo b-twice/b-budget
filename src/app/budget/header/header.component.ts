@@ -3,10 +3,10 @@ import { AuthService } from '../../login/auth.service';
 
 @Component({
     selector: 'budget-header',
-    templateUrl: './budget-header.component.html',
-    styleUrls: ['./budget-header.component.scss']
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
-export class BudgetHeaderComponent {
+export class HeaderComponent {
 
     constructor(private authService: AuthService) { }
 

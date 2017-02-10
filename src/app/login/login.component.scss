@@ -24,12 +24,12 @@
 button {
     color: white;
     background: #15CD72;
-}
-button:focus {
-    background-color: #0CB863;
-}
 
-button:hover {
-    background-color: #0CB863;
-}
+    &:focus {
+        background-color: #0CB863;
+    }
 
+    &:hover {
+        background-color: #0CB863;
+    }
+}

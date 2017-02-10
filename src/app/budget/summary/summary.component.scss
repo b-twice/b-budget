@@ -1,0 +1,22 @@
+@import '../../../styles/base.scss';
+@import '../../../styles/styles.scss';
+
+$font-style: $font-header;
+.panel-style  {
+    @extend .panel-base
+}
+
+
+:host {
+    display:flex;
+    flex:1;
+    flex-direction:column;
+    align-items:center;
+    max-height:40rem;
+    background: #fff;
+
+    @extend .panel-style;
+}
+
+
+ 

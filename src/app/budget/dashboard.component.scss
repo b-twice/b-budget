@@ -4,4 +4,27 @@
     flex-direction:column;
 }
 
+.dashboard-layout{
+    display:flex;
+    flex:1;
+    flex-direction:row;
+    justify-content:center;
+    background-color: #FAFAFA;
+    margin-top:7.5rem; // skip header and nav
+
+}
+main {
+    display:flex;
+    flex:1;
+    max-width:1080px;
+    padding-top:2rem;
+    padding-bottom:2rem;
+
+    .dashboard-main {
+        display:flex;
+        flex:5;
+        flex-direction:column;
+        margin-left:3rem;
+    }
+}
  
