@@ -1,0 +1,5 @@
+<div class="navbar">
+  <a [routerLink]="['/budget']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="nav-link">All</a>
+  <a *ngFor="let owner of owners" [routerLink]="['/budget/owner', owner.name]" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
+    class="nav-link">{{owner.name}}</a>
+</div>

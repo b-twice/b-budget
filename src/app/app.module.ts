@@ -3,11 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-// app
+// app config
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { NotFoundComponent } from './not-found/not-found.component';
 import { APP_SETTINGS, AppSettings } from './app.settings';
+
+// app components
+import { NotFoundComponent } from './not-found/not-found.component';
+
 // login
 import { LoginModule } from './login/login-module';
 

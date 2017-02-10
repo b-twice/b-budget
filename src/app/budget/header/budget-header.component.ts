@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService } from '../../login/auth.service';
 
 @Component({
     selector: 'budget-header',
     templateUrl: './budget-header.component.html',
     styleUrls: ['./budget-header.component.scss']
 })
-export class BudgetHeaderComponent implements OnInit {
+export class BudgetHeaderComponent {
 
-    constructor() { }
+    constructor(private authService: AuthService) { }
 
-    ngOnInit() {
+    private logout(): void {
+        this.authService.logout();
     }
-
 }

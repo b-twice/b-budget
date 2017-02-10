@@ -1,0 +1,42 @@
+:host {
+    position:fixed;
+    background-color: #ffffff;
+    left:0;
+    right:0;
+
+}
+header {
+    display:flex;
+    flex:1;
+    flex-direction:row-reverse;
+    align-items:center;
+    height:6rem;
+    margin-left:1em;
+    margin-right:1em;
+}
+
+site-header{
+    position:absolute;
+    top:0;
+    left:50%;
+    margin-left:-80.5px; // half width of logo
+
+    // component logic
+    margin-top: 0;
+    margin-bottom:0;
+    margin-right:0;
+}
+
+.header-nav {
+    display:inline-block;
+    margin-top:13px;
+    opacity:.75
+}
+
+.header-nav:hover {
+    opacity:.9;
+}
+.header-nav:focus{
+    opacity:.9;
+}
+

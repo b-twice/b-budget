@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
     template:
     `
     <budget-header></budget-header>
+    <budget-owner-nav></budget-owner-nav>
     <router-outlet></router-outlet>
   `
 })

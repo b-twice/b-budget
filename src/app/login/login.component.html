@@ -1,5 +1,6 @@
-<div *ngIf="authenticationError" class="auth-error response-error">{{authenticationError}}</div>
-<div class="user-login">
+<site-header></site-header>
+<div class="login-container">
+	<message *ngIf="authenticationError" [messageText]="authenticationError" messageType="error" class="login-error"></message>
 	<form *ngIf="!authenticating">
 		<div class="form-group">
 			<label for="name">Username</label>

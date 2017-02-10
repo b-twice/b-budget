@@ -9,17 +9,19 @@ import { AuthGuard } from '../login/auth-guard.service';
 const adminRoutes: Routes = [
     {
         path: '',
-        // redirectTo: '/budget/summary',
         component: BudgetDashboardComponent,
         canActivate: [AuthGuard],
         children: [
             {
-                path: '',
-                component: BudgetSummaryComponent,
+                path: 'owner/:name',
+                component: BudgetDashboardComponent,
                 canActivateChild: [AuthGuard],
                 children: [
-                    { path: 'summary/:name', component: BudgetSummaryComponent },
-                    { path: 'summary', component: BudgetSummaryComponent }
+                    {
+                        path: 'year/:year',
+                        component: BudgetSummaryComponent,
+                        canActivateChild: [AuthGuard],
+                    },
                 ]
             },
         ]

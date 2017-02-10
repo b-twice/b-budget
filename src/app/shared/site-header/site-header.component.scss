@@ -1,0 +1,19 @@
+:host {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:1em;
+
+    font-family: Montserrat, sans-serif;
+    font-size:3.2rem;
+    font-weight:700;
+
+    color:rgba(0, 0, 0, 0.8);
+}
+
+i {
+    font-size:2rem;
+    margin-right:1rem;
+
+    color: rgba(44, 62, 80,1.0);
+}

@@ -1,88 +1,35 @@
-
-
-.user-login {
+:host {
     display:flex;
+    flex-direction:column;
     align-items:center;
-    justify-content:center;
-    align-items:center;
-    min-height:40rem;
+    flex:1;
 }
-.auth-error {
-    margin:1em auto;
+.login-container {
+    display:flex;
+    flex-direction:column;
     width:40rem;
+    min-height:30rem;
+    box-shadow: 0 0 0 1px #e5e5e5;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    padding: 15px;
 }
 
-$error-text: #fff;
-$error-background: #d9534f;
-$error-border: #d43f3a;
 
-.response-error {
-  color:$error-text;
-  background-color:$error-background;
-  border: 1px solid $error-border;
-  padding:1.2em;
-}
+
+/* ==========================================================================
+#SITE-STYLES
+========================================================================== */
 
 button {
     color: white;
     background: #15CD72;
-    margin-top:1em;
 }
 button:focus {
     background-color: #0CB863;
-    transition: background 0.1s;
 }
 
 button:hover {
     background-color: #0CB863;
-    transition: background 0.1s;
-}
-button:disabled {
-  background-color: #eee;
-  color: #aaa;
-  cursor: auto;
 }
 
-input {
-    display: block;
-    background: #fcfcfc;
-    border: 2px solid #e7e7e7;
-    margin: 20px auto;
-    padding: 15px;
-    width: 100%;
-    border-radius: 3px;
-    font-size: 18px;
-    transition: opacity 0.4s;
-    text-align: left;
-    height: auto;
-    -webkit-appearance: none;
-}
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px white inset;
-}
-select {
-    display: block;
-    background: #fcfcfc;
-    border: 2px solid #e7e7e7;
-    margin: 20px auto;
-    padding: 15px;
-    width: 100%;
-    border-radius: 3px;
-    font-size: 18px;
-    transition: opacity 0.4s;
-    text-align: left;
-    height: auto;
-} 
-input.ng-valid {
-  background-color:#FFF;
-  border-left: 5px solid #15CD72;
-}
-
-input.ng-dirty.ng-invalid {
-  border-left: 5px solid #a94442; /* red */
-}
-.error-message {
-    color: rgba(0,0,0,.8);
-    padding:15px;
-    background-color:#f2dede;
-}

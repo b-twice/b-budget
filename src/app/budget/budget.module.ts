@@ -9,15 +9,21 @@ import { BudgetDashboardComponent } from './dashboard.component';
 import { BudgetSummaryComponent } from './summary/budget-summary.component';
 import { BudgetHeaderComponent } from './header/budget-header.component';
 
+//shared
+import { SharedModule } from '../shared/shared.module';
+import { OwnerNavComponent } from './owner-nav/owner-nav.component';
+
 @NgModule({
     imports: [
         CommonModule,
-        BudgetRoutingModule
+        BudgetRoutingModule,
+        SharedModule
     ],
     declarations: [
         BudgetDashboardComponent,
         BudgetSummaryComponent,
-        BudgetHeaderComponent
+        BudgetHeaderComponent,
+        OwnerNavComponent
     ],
     providers: [
         BudgetService

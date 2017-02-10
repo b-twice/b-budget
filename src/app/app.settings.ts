@@ -7,12 +7,14 @@ interface IAuthSettings {
 }
 export interface IAppSettings {
     readonly production: boolean;
+    readonly siteHeader: string;
     readonly apiEndpoint: string;
     readonly auth: IAuthSettings;
 }
 
 export const AppSettings: IAppSettings = {
     production: environment.production,
+    siteHeader: environment.siteHeader,
     apiEndpoint: environment.apiEndpoint,
     auth: environment.auth
 }
