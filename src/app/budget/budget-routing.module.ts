@@ -11,19 +11,22 @@ const adminRoutes: Routes = [
         path: '',
         component: BudgetDashboardComponent,
         canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         children: [
             {
+                path: '',
+                component: BudgetSummaryComponent
+            },
+            {
                 path: 'owner/:name',
-                component: BudgetDashboardComponent,
-                canActivateChild: [AuthGuard],
+                component: BudgetSummaryComponent,
                 children: [
                     {
                         path: 'year/:year',
                         component: BudgetSummaryComponent,
-                        canActivateChild: [AuthGuard],
                     },
                 ]
-            },
+            }
         ]
     }
 ];
