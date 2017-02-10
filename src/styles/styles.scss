@@ -132,21 +132,6 @@ p {
 	margin-top:0;
 }
 
-button {
-    display: block;
-    margin: 20px;
-    padding: 15px;
-    border:none;
-    background:none;
-    font-size: 22px;
-    text-align: center;
-    cursor: pointer;
-}
-.button-full {
-  width:100%;
-  margin: 20px auto;
-}
-
 ol, ul {
   list-style:none;
   margin:0;
@@ -178,21 +163,32 @@ ol, ul {
 /* ==========================================================================
 #BUTTONS
 ========================================================================== */
-
 button {
-    margin-top:1em;
-}
-button:focus {
-    transition: background 0.1s;
-}
+    display: block;
+    padding: 15px;
+    border:none;
+    background:none;
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
 
-button:hover {
-    transition: background 0.1s;
-}
-button:disabled {
-  background-color: #eee;
-  color: #aaa;
-  cursor: auto;
+	&:focus {
+		transition: background 0.1s;
+	}
+	&:hover {
+		transition: background 0.1s;
+	}
+	&:disabled {
+		background-color: #eee;
+		color: #aaa;
+		cursor: auto;
+
+	}
+	&.button-full {
+		width:100%;
+		margin: 20px auto;
+
+	}
 }
 
 /* ==========================================================================
@@ -212,14 +208,14 @@ button:disabled {
 		padding: 15px;
 		width: 100%;
 		border-radius: 3px;
-		font-size: 18px;
 		transition: opacity 0.4s;
 		text-align: left;
 		height: auto;
 		-webkit-appearance: none;
-	}
-	input:-webkit-autofill {
-		-webkit-box-shadow: 0 0 0px 1000px white inset;
+		
+		&:-webkit-autofill {
+			-webkit-box-shadow: 0 0 0px 1000px white inset;
+		}
 	}
 	select {
 		display: block;
@@ -234,12 +230,13 @@ button:disabled {
 		text-align: left;
 		height: auto;
 	} 
-	input.ng-valid {
-		background-color:#FFF;
-		border-left: 5px solid #15CD72;
-	}
-
-	input.ng-dirty.ng-invalid {
-		border-left: 5px solid #a94442; /* red */
+	input {
+		&.ng-valid {
+			background-color:#FFF;
+			border-left: 5px solid #15CD72;
+		}
+		&.ng-dirty.ng-invalid {
+			border-left: 5px solid #a94442; /* red */
+		}
 	}
 }
