@@ -1,0 +1,24 @@
+@import '../../../styles/base.scss';
+.panel-style  {
+    @extend .panel-base
+}
+
+// theme
+$nav-font-size: $nav-font-size;
+
+
+
+:host {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    flex:1;
+    min-width:20rem;
+    max-height:3rem;
+    background: #fff;
+    margin-top:1rem;
+    font-size: $nav-font-size;
+
+    @extend .panel-style;
+}
+

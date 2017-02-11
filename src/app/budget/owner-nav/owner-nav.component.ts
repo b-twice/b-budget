@@ -30,11 +30,9 @@ export class OwnerNavComponent implements OnInit {
       owners => this.owners = owners
       )
 
-    this.activatedRoute.firstChild.params.subscribe(
-      params => {
+    this.activatedRoute.params.subscribe(
+      params =>
         this.currentYear = params['year']
-        console.log(this.currentYear)
-      }
     )
   }
 

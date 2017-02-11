@@ -1,3 +1,9 @@
+@import '../../styles/base.scss';
+
+.panel-style  {
+    @extend .panel-base
+}
+
 :host {
     display:flex;
     flex:1;
@@ -18,13 +24,27 @@ main {
     flex:1;
     max-width:1080px;
     padding-top:2rem;
+    padding-right:2rem;
+    padding-left:2rem;
     padding-bottom:2rem;
 
     .dashboard-main {
         display:flex;
         flex:5;
         flex-direction:column;
-        margin-left:3rem;
+        margin-left:2rem;
+        max-height:40rem;
+        background: #fff;
+
+        @extend .panel-style;
+
     }
+
+    .dashboard-sidebar {
+        display:flex;
+        flex:1;
+        flex-direction:column;
+    }
+
 }
  

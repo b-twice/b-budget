@@ -9,36 +9,36 @@ import { AuthGuard } from '../login/auth-guard.service';
 
 const adminRoutes: Routes = [
     {
-        path: '',
+        path: 'owner/:owner/:year',
         component: BudgetDashboardComponent,
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
         children: [
             {
-                path: 'owner/:owner/:year',
-                component: SummaryComponent,
-                children: [
-                    {
-                        path: 'categories',
-                        component: CategoriesComponent,
-                    },
-                    {
-                        path: 'transactions',
-                        component: TransactionsComponent,
-                    },
-                    {
-                        path: 'summary',
-                        component: SummaryComponent,
-                    },
-                ]
+                path: 'categories',
+                component: CategoriesComponent,
             },
-            // Don't init component, redirect to owner/All to display all in user profile
+            {
+                path: 'transactions',
+                component: TransactionsComponent,
+            },
+            {
+                path: 'summary',
+                component: SummaryComponent,
+            },
             {
                 path: '',
-                redirectTo: '/budget/owner/All/2016'
+                redirectTo: 'summary',
+                pathMatch: 'full'
             }
         ]
+    },
+    // Don't init component, redirect to owner/All to display all in user profile
+    {
+        path: '',
+        redirectTo: '/budget/owner/All/2016/summary'
     }
+
 ];
 
 @NgModule({

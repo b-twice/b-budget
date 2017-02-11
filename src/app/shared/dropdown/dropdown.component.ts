@@ -12,6 +12,7 @@ export class DropdownComponent implements OnInit, OnChanges {
     @Input() items: any[] = [];
     @Input() selectList: any[] = []; // filtered list of items
     @Input() selected: string[] = []; // if selected is array then updates on changes
+    @Input() prefix: string; // prefix select label
     @Output() onSelect = new EventEmitter();
 
     ngOnInit() {
@@ -25,7 +26,7 @@ export class DropdownComponent implements OnInit, OnChanges {
     select(item: any) {
         this.selected = item instanceof Array === true ? [item[0]] : [item];
         this.selectList = this.items.filter(i => i !== this.selected);
-        this.onSelect.emit({ value: this.selected[0]});
+        this.onSelect.emit({ value: this.selected[0] });
         this.active = false;
     };
 

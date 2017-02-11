@@ -14,7 +14,7 @@ export class OwnerProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.firstChild.params.subscribe(
+    this.route.params.subscribe(
       params => this.owner = params['owner']
     )
 

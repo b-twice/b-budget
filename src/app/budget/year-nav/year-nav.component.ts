@@ -25,7 +25,7 @@ export class YearNavComponent implements OnInit {
       fiscalYears => this.years = fiscalYears.map(fy => fy.year)
       )
 
-    this.activatedRoute.firstChild.params.subscribe(
+    this.activatedRoute.params.subscribe(
       params => {
         this.currentOwner = params['owner'];
         this.currentYear = params['year'];
@@ -36,8 +36,6 @@ export class YearNavComponent implements OnInit {
 
   onYearSelect(event): void {
     let yearRoute: string = event.value;
-    console.log(this.currentOwner)
-    console.log(yearRoute);
     this.router.navigate(['/budget/owner', this.currentOwner, yearRoute]);
 
   }

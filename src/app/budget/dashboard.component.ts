@@ -8,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
     <budget-owner-nav></budget-owner-nav>
     <div class="dashboard-layout">
         <main>
-            <budget-owner-profile></budget-owner-profile>
-            <div class="dashboard-main">
+            <aside class="dashboard-sidebar">
+                <budget-owner-profile></budget-owner-profile>
                 <budget-year-nav></budget-year-nav>
+            </aside>
+            <section class="dashboard-main">
+                <budget-panel-nav></budget-panel-nav>
                 <router-outlet></router-outlet>
-            </div>
+            </section>
         </main>
     </div>
     `,

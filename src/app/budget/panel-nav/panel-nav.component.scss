@@ -1,0 +1,62 @@
+@import '../../../styles/base.scss';
+
+// theme
+$active-link--background: $primary-color;
+$nav-font-size: $nav-font-size;
+$nav-opacity-base: $nav-opacity-base;
+$nav-opacity-hover: $nav-opacity-hover;
+
+
+:host {
+    display:flex;
+    width:100%;
+    align-items:center;
+    justify-content:center;
+}
+
+.panel-nav {
+    display:flex;
+    font-size:$nav-font-size;
+
+    a {
+        flex:1;
+        padding:0.25em 0.75em;
+        border: 1px solid rgba(147, 128, 108, 0.1);
+        opacity:$nav-opacity-base;
+
+        &:hover {
+            color:#fff;
+            opacity:$nav-opacity-hover;
+            background: $active-link--background;
+            border:1px solid transparent;
+        }
+        &:focus {
+            color:#fff;
+            opacity:$nav-opacity-hover;
+            background: $active-link--background;
+            border:1px solid transparent;
+        }
+
+        &:first-child {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        &:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+    }
+    .active-link {
+        color:#fff;
+        background: $active-link--background;
+        opacity:1;
+        border:1px solid transparent;
+
+        &:hover {
+            opacity:1;
+        }
+        &:focus {
+            opacity:1;
+        }
+    }
+}

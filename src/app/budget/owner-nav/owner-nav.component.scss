@@ -1,9 +1,11 @@
-@import '../../../styles/variables.scss';
+@import '../../../styles/base.scss';
 
 // theme
-$active-link-underline--color: rgba(230, 126, 34,1.0);
-$nav-font-size: 1.5rem;
+$active-link-underline--color: $primary-color;
+$nav-font-size: $nav-font-size;
 $nav-font-family: $font-body;
+$nav-opacity-base: $nav-opacity-base;
+$nav-opacity-hover: $nav-opacity-hover;
 
 :host {
     position:fixed;
@@ -30,16 +32,21 @@ $nav-font-family: $font-body;
         padding-left:8px;
         padding-right:8px;
         height:2.5rem;
-        color:rgba(0, 0, 0, 0.7);
+        opacity:$nav-opacity-base;
 
         &:hover {
-            color:rgba(0, 0, 0, 0.9);
+            opacity:$nav-opacity-hover;
+            border-bottom: 2px solid $active-link-underline--color;
+        }
+        &:focus{
+            opacity:$nav-opacity-hover;
+            border-bottom: 2px solid $active-link-underline--color;
+
         }
     }
 
     .active-link {
         border-bottom: 2px solid $active-link-underline--color;
-        color: rgba(0, 0, 0, 0.9);
     }
 
 }

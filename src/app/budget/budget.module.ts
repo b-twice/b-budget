@@ -16,6 +16,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { OwnerNavComponent } from './owner-nav/owner-nav.component';
 import { OwnerProfileComponent } from './owner-profile/owner-profile.component';
 import { YearNavComponent } from './year-nav/year-nav.component';
+import { PanelNavComponent } from './panel-nav/panel-nav.component';
 
 @NgModule({
     imports: [
@@ -31,7 +32,8 @@ import { YearNavComponent } from './year-nav/year-nav.component';
         OwnerProfileComponent,
         CategoriesComponent,
         TransactionsComponent,
-        YearNavComponent
+        YearNavComponent,
+        PanelNavComponent
     ],
     providers: [
         BudgetService
