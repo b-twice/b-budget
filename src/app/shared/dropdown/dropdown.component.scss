@@ -1,5 +1,6 @@
 .menu {
     display:inline-block;
+    width:100%;
     li {
         cursor:pointer;
     }
@@ -7,7 +8,7 @@
 .menu-more {
   position:absolute;
   width:250px;
-  margin: -.5rem 0 0 -2rem;
+  margin: -.1rem 0 0 -2rem;
   z-index: 999;
   flex-direction:column;
   background:#FFFFFF;

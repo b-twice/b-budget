@@ -24,25 +24,31 @@ export class AuthService {
     ) {
         this.auth0 = new auth0.WebAuth({
             domain: settings.auth.domain,
-            clientID: settings.auth.clientID
+            clientID: settings.auth.clientID,
+            // specify your desired callback URL
+            callbackURL: 'http://localhost:3000',
+            responseType: 'token id_token'
+
         });
 
     }
 
     public login(username: string, password: string): void {
         this.auth0.client.login({
-            realm: 'Username-Password-Authentication',
+            realm: 'budget',
             username,
             password
         }, (err, authResult) => {
             if (err) {
+                console.log(err)
                 this.authenticationResponse({ error: 'User could not be authenticated' });
                 return;
             }
+            console.log(authResult)
             if (authResult && authResult.idToken && authResult.accessToken) {
                 this.setUser(authResult);
                 this.authenticated = true;
-                this.redirectUrl ? this.router.navigate([this.redirectUrl]) : this.router.navigate(['/dsahboard']);
+                this.redirectUrl ? this.router.navigate([this.redirectUrl]) : this.router.navigate(['/budget']);
             }
         });
     }

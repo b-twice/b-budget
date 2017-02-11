@@ -3,7 +3,7 @@ export const environment = {
     siteHeader: "Budgets",
     auth: {
         domain: 'bgeo.auth0.com',
-        clientID: 'TPZrTRxzqYySVXNwNsokXsFL25cTD1ML'
+        clientID: '2CocHiOvn4pRWyUMfQm22wkuBkv9NxBr'
     },
     apiEndpoint: 'http://budgetapi.bgeo.io'
 };
