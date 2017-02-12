@@ -9,7 +9,7 @@ import { BudgetService } from '../budget.service';
 })
 export class YearNavComponent implements OnInit {
 
-  private years: string[] = ["2016", "2015"];
+  private years: string[];
   private currentOwner: string;
   private currentYear: string;
 

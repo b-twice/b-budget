@@ -18,6 +18,7 @@ $nav-font-size: $nav-font-size;
     background: #fff;
     margin-top:1rem;
     font-size: $nav-font-size;
+    opacity:.7;
 
     @extend .panel-style;
 }

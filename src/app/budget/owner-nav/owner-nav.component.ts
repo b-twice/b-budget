@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class OwnerNavComponent implements OnInit {
 
-  private owners: Owner[] = [new Owner("Shannon"), new Owner("Brian")];
+  private owners: Owner[];
   private currentYear: string;
 
   constructor(

@@ -10,10 +10,10 @@ import { Component, OnInit } from '@angular/core';
         <main>
             <aside class="dashboard-sidebar">
                 <budget-owner-profile></budget-owner-profile>
+                <budget-panel-nav></budget-panel-nav>
                 <budget-year-nav></budget-year-nav>
             </aside>
             <section class="dashboard-main">
-                <budget-panel-nav></budget-panel-nav>
                 <router-outlet></router-outlet>
             </section>
         </main>
