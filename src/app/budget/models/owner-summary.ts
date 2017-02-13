@@ -4,7 +4,6 @@ export class OwnerSummary {
         public income: number,
         public debt: number,
         public asset: number
-
     ) { }
 }
 

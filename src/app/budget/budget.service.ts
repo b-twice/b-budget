@@ -42,20 +42,20 @@ export class BudgetService {
         return this.makeRequest<Owner[]>('owners');
     }
     public getFiscalYears(): Observable<FiscalYear[]> {
-        return this.makeRequest<FiscalYear[]>('fiscalyears');
+        return this.makeRequest<FiscalYear[]>('fiscal-years');
     }
 
     public getBudgets(): Observable<Budget[]> {
-        return this.makeRequest<Budget[]>('budget');
+        return this.makeRequest<Budget[]>('annual-budgets');
     }
     public getBudget(name: string, year: string): Observable<Budget> {
-        return this.makeRequest<Budget>(`budget/owner/${name}/year/${year}`);
+        return this.makeRequest<Budget>(`annual-budgets/year/${year}/owner/${name}`);
     }
 
     public getOwnerSummaries(): Observable<OwnerSummary[]> {
-        return this.makeRequest<OwnerSummary[]>('ownersummary');
+        return this.makeRequest<OwnerSummary[]>('owner-summaries');
     }
     public getOwnerSummary(name: string): Observable<OwnerSummary> {
-        return this.makeRequest<OwnerSummary>(`ownersummary/${name}');
+        return this.makeRequest<OwnerSummary>(`owner-summaries/${name}`);
     }
 }

@@ -17,13 +17,14 @@ export class SummaryComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.route.params.subscribe(
+        this.route.parent.params.subscribe(
             params =>
                 this.getBudget(params['owner'], params['year'])
         )
     }
 
     getBudget(name: string, year: string): void {
+        if (!name || !year) { return; }
         if (name == "All") {
             // this.budgetService.getOwnerSummaries()
             //     .subscribe(
