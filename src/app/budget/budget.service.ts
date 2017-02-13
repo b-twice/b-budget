@@ -7,7 +7,8 @@ import 'rxjs/add/observable/throw';
 import { APP_SETTINGS, IAppSettings } from '../app.settings';
 import {
     Budget, Category,
-    FiscalYear, Owner, Transaction
+    FiscalYear, Owner, Transaction,
+    OwnerSummary
 } from './models';
 
 @Injectable()
@@ -19,7 +20,7 @@ export class BudgetService {
     }
 
     public makeRequest<T>(fragment: string): Observable<T> {
-        let requestUrl = `${this.settings.apiEndpoint}/${fragment}`
+        let requestUrl = `${this.settings.apiEndpoint}/${fragment}`;
         return this.http.get(requestUrl)
             .map(this.extractData)
             .catch(this.handleError);
@@ -37,16 +38,24 @@ export class BudgetService {
     public getCategories(): Observable<Category[]> {
         return this.makeRequest<Category[]>('categories');
     }
-
     public getOwners(): Observable<Owner[]> {
         return this.makeRequest<Owner[]>('owners');
     }
-
     public getFiscalYears(): Observable<FiscalYear[]> {
         return this.makeRequest<FiscalYear[]>('fiscalyears');
     }
 
     public getBudgets(): Observable<Budget[]> {
-        return this.makeRequest<Budget[]>('budgets');
+        return this.makeRequest<Budget[]>('budget');
+    }
+    public getBudget(name: string, year: string): Observable<Budget> {
+        return this.makeRequest<Budget>(`budget/owner/${name}/year/${year}`);
+    }
+
+    public getOwnerSummaries(): Observable<OwnerSummary[]> {
+        return this.makeRequest<OwnerSummary[]>('ownersummary');
+    }
+    public getOwnerSummary(name: string): Observable<OwnerSummary> {
+        return this.makeRequest<OwnerSummary>(`ownersummary/${name}');
     }
 }

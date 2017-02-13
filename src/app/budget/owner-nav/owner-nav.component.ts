@@ -22,6 +22,11 @@ export class OwnerNavComponent implements OnInit {
 
   ngOnInit() {
     this.getOwners();
+    this.activatedRoute.params.subscribe(
+      params =>
+        this.currentYear = params['year']
+    )
+
   }
 
   private getOwners() {
@@ -29,11 +34,6 @@ export class OwnerNavComponent implements OnInit {
       .subscribe(
       owners => this.owners = owners
       )
-
-    this.activatedRoute.params.subscribe(
-      params =>
-        this.currentYear = params['year']
-    )
   }
 
 }
