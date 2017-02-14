@@ -9,14 +9,15 @@ import { BudgetService } from './budget.service';
 import { SharedModule } from '../shared/shared.module';
 
 import { BudgetDashboardComponent } from './dashboard.component';
-import { SummaryComponent } from './summary/summary.component';
 import { HeaderComponent } from './header/header.component';
-import { CategoriesComponent } from './categories/categories.component';
-import { TransactionsComponent } from './transactions/transactions.component';
+import { PanelSummaryComponent } from './panel-summary/summary.component';
+import { PanelCategoriesComponent } from './panel-categories/categories.component';
+import { PanelTransactionsComponent } from './panel-transactions/transactions.component';
 import { OwnerNavComponent } from './owner-nav/owner-nav.component';
 import { OwnerProfileComponent } from './owner-profile/owner-profile.component';
 import { YearNavComponent } from './year-nav/year-nav.component';
 import { PanelNavComponent } from './panel-nav/panel-nav.component';
+import { PanelComponent } from './panel/panel.component';
 
 @NgModule({
     imports: [
@@ -26,14 +27,15 @@ import { PanelNavComponent } from './panel-nav/panel-nav.component';
     ],
     declarations: [
         BudgetDashboardComponent,
-        SummaryComponent,
+        PanelSummaryComponent,
         HeaderComponent,
         OwnerNavComponent,
         OwnerProfileComponent,
-        CategoriesComponent,
-        TransactionsComponent,
+        PanelCategoriesComponent,
+        PanelTransactionsComponent,
         YearNavComponent,
-        PanelNavComponent
+        PanelNavComponent,
+        PanelComponent
     ],
     providers: [
         BudgetService

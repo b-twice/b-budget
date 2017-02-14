@@ -12,6 +12,7 @@ export class OwnerNavComponent implements OnInit {
 
   private owners: Owner[];
   private currentYear: string;
+  private currentPanel: string
 
   constructor(
     private budgetService: BudgetService,
@@ -26,6 +27,12 @@ export class OwnerNavComponent implements OnInit {
       params =>
         this.currentYear = params['year']
     )
+
+    this.activatedRoute.firstChild.params.subscribe(
+      params =>
+        this.currentPanel = params['panel']
+    )
+
 
   }
 

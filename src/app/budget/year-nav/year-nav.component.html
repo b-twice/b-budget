@@ -1,1 +1,3 @@
-<dropdown *ngIf="currentYear && years" [items]="years" [selected]="currentYear" prefix="Fiscal Year:" (onSelect)="onYearSelect($event)"></dropdown>
+<div class="year-nav">
+    <a *ngFor="let year of years" [routerLink]="['../', year, currentPanel]" [class.active-link]="router.isActive(router.createUrlTree(['/budget/owner/', currentOwner, year]))">{{year}}</a>
+</div>

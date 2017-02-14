@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'budget-transactions',
+  selector: 'budget-panel-transactions',
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss']
 })
-export class TransactionsComponent implements OnInit {
+export class PanelTransactionsComponent implements OnInit {
 
   constructor() { }
 

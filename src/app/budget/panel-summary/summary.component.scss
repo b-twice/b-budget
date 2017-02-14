@@ -1,0 +1,18 @@
+:host {
+    display:flex;
+    flex-direction:column;
+    flex:1;
+}
+
+.summary-row {
+    display:flex;
+    width:100%;
+    flex-direction:row;
+    justify-content: space-between;
+    &.summary-row--header {
+
+    }
+    &.summary-row--item {
+
+    }
+}

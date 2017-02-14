@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../budget.service';
 import { OwnerSummary } from '../models';
+import { UtilService } from '../../shared/util/util.service';
 
 @Component({
   selector: 'budget-owner-profile',
@@ -14,7 +15,8 @@ export class OwnerProfileComponent implements OnInit {
   private ownerSummary: OwnerSummary;
   constructor(
     private route: ActivatedRoute,
-    private budgetService: BudgetService
+    private budgetService: BudgetService,
+    private utilService: UtilService
   ) { }
 
   ngOnInit() {
@@ -30,14 +32,8 @@ export class OwnerProfileComponent implements OnInit {
     if (name == "All") {
       this.budgetService.getOwnerSummaries()
         .subscribe(
-        ownerSummaries => {
-          this.ownerSummary = new OwnerSummary("All", 0, 0, 0);
-          ownerSummaries.map(o => {
-            this.ownerSummary.debt += o.debt;
-            this.ownerSummary.asset += o.asset;
-            this.ownerSummary.income += o.income;
-          });
-        }
+        ownerSummaries =>
+          this.ownerSummary = this.utilService.combineObjectValues<OwnerSummary>(new OwnerSummary("All"), ownerSummaries, ["debt", "asset", "income"])
         );
       return;
     }

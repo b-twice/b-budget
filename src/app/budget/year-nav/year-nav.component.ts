@@ -12,6 +12,7 @@ export class YearNavComponent implements OnInit {
   private years: string[];
   private currentOwner: string;
   private currentYear: string;
+  private currentPanel: string;
 
   constructor(
     private budgetService: BudgetService,
@@ -22,7 +23,7 @@ export class YearNavComponent implements OnInit {
   ngOnInit() {
     this.budgetService.getFiscalYears()
       .subscribe(
-      fiscalYears => this.years = fiscalYears.map(fy => fy.year)
+      fiscalYears => this.years = fiscalYears.map(fy => fy.year).reverse()
       )
 
     this.activatedRoute.params.subscribe(
@@ -32,12 +33,11 @@ export class YearNavComponent implements OnInit {
       }
     )
 
+    this.activatedRoute.firstChild.params.subscribe(
+      params => {
+        this.currentPanel = params['panel'];
+      }
+    )
+
   }
-
-  onYearSelect(event): void {
-    let yearRoute: string = event.value;
-    this.router.navigate(['/budget/owner', this.currentOwner, yearRoute]);
-
-  }
-
 }

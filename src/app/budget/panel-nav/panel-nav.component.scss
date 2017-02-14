@@ -2,14 +2,13 @@
 
 // theme
 $active-link--background: $primary-color;
-$nav-font-size: $nav-font-size;
-$nav-opacity-base: $nav-opacity-base;
-$nav-opacity-hover: $nav-opacity-hover;
+
 .panel-style  {
-    @extend .panel-base
+    @extend .panel-base;
 }
-
-
+.nav-style {
+    @extend .select-nav-base;
+}
 
 :host {
     display:flex;
@@ -24,41 +23,17 @@ $nav-opacity-hover: $nav-opacity-hover;
 }
 
 .panel-nav {
-    display:flex;
-    flex-direction:column;
-    font-size:$nav-font-size;
-    width: 100%; 
-
+    @extend .nav-style;
     a {
-        width:100%;
-        padding:0.25em 0.75em;
-        border: 1px solid rgba(147, 128, 108, 0.1);
-        opacity:$nav-opacity-base;
-
         &:hover {
-            color:#fff;
-            opacity:$nav-opacity-hover;
             background: $active-link--background;
-            border:1px solid transparent;
         }
         &:focus {
-            color:#fff;
-            opacity:$nav-opacity-hover;
             background: $active-link--background;
-            border:1px solid transparent;
         }
     }
     .active-link {
         color:#fff;
         background: $active-link--background;
-        opacity:1;
-        border:1px solid transparent;
-
-        &:hover {
-            opacity:1;
-        }
-        &:focus {
-            opacity:1;
-        }
     }
 }

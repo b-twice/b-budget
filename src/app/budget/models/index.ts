@@ -1,4 +1,4 @@
-export * from './budget';
+export * from './annual-budget';
 export * from './category';
 export * from './fiscal-year';
 export * from './owner';

@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { BudgetDashboardComponent } from './dashboard.component';
-import { SummaryComponent } from './summary/summary.component';
-import { TransactionsComponent } from './transactions/transactions.component';
-import { CategoriesComponent } from './categories/categories.component';
+import { PanelComponent } from './panel/panel.component';
 import { AuthGuard } from '../login/auth-guard.service';
 
 const adminRoutes: Routes = [
@@ -15,16 +13,8 @@ const adminRoutes: Routes = [
         canActivateChild: [AuthGuard],
         children: [
             {
-                path: 'categories',
-                component: CategoriesComponent,
-            },
-            {
-                path: 'transactions',
-                component: TransactionsComponent,
-            },
-            {
-                path: 'summary',
-                component: SummaryComponent,
+                path: ":panel",
+                component: PanelComponent
             },
             {
                 path: '',

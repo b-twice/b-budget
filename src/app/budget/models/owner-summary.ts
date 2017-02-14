@@ -1,9 +1,9 @@
 export class OwnerSummary {
     constructor(
         public name: string,
-        public income: number,
-        public debt: number,
-        public asset: number
+        public income: number = 0,
+        public debt: number = 0,
+        public asset: number = 0
     ) { }
 }
 

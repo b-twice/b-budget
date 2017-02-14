@@ -9,6 +9,9 @@ import { MessageComponent } from './message/message.component';
 // Site Components
 import { SiteHeaderComponent } from './site-header/site-header.component';
 
+// Services
+import { UtilService } from './util/util.service';
+
 @NgModule({
     imports: [
         CommonModule
@@ -24,7 +27,11 @@ import { SiteHeaderComponent } from './site-header/site-header.component';
         MessageComponent,
         SiteHeaderComponent,
         DropdownModule
+    ],
+    providers: [
+        UtilService
     ]
+
 })
 export class SharedModule { };
 
