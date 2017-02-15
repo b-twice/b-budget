@@ -9,10 +9,19 @@
     width:100%;
     flex-direction:row;
     justify-content: space-between;
-    &.summary-row--header {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ECEFF1;
+    .summary-row--header {
 
     }
-    &.summary-row--item {
+    .summary-row--item {
+        display:flex;
+        .summary-row--money {
+            width:10rem;
+        }
+        .summary-row--growth {
 
+            width: 2rem;
+        }
     }
 }

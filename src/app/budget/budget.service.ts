@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import { APP_SETTINGS, IAppSettings } from '../app.settings';
 import {
-    Budget, Category,
+    AnnualBudget, Category,
     FiscalYear, Owner, Transaction,
     OwnerSummary
 } from './models';
@@ -45,11 +45,11 @@ export class BudgetService {
         return this.makeRequest<FiscalYear[]>('fiscal-years');
     }
 
-    public getBudgets(): Observable<Budget[]> {
-        return this.makeRequest<Budget[]>('annual-budgets');
+    public getBudgets(): Observable<AnnualBudget[]> {
+        return this.makeRequest<AnnualBudget[]>('annual-budgets');
     }
-    public getBudget(name: string, year: string): Observable<Budget> {
-        return this.makeRequest<Budget>(`annual-budgets/year/${year}/owner/${name}`);
+    public getBudget(name: string, year: string): Observable<AnnualBudget> {
+        return this.makeRequest<AnnualBudget>(`annual-budgets/year/${year}/owner/${name}`);
     }
 
     public getOwnerSummaries(): Observable<OwnerSummary[]> {

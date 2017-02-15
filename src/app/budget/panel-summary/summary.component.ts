@@ -21,12 +21,12 @@ export class PanelSummaryComponent implements OnInit {
         "debt"
     ]
     private displayName: {} = {
-        toSpend: "Spending Amount",
-        spent: "Money Spent",
-        saved: "Savings",
-        invested: "Investments",
+        toSpend: "Money to Spend",
+        spent: "Spent",
+        saved: "Saved",
+        invested: "Invested",
         taxed: "Taxed",
-        debt: "Debts",
+        debt: "Remaining Debts",
 
     }
     constructor(
@@ -63,6 +63,10 @@ export class PanelSummaryComponent implements OnInit {
 
     getGrowth(key: string): number {
         return this.budget[key + 'Growth'];
+    }
+
+    getKeyDisplay(key: string): string {
+        return this.displayName[key];
     }
 
 }
