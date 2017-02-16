@@ -10,7 +10,7 @@ import { BudgetService } from '../budget.service';
 export class YearNavComponent implements OnInit {
 
   private years: string[];
-  private currentOwner: string;
+  private currentUser: string;
   private currentYear: string;
   private currentPanel: string;
 
@@ -28,7 +28,7 @@ export class YearNavComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(
       params => {
-        this.currentOwner = params['owner'];
+        this.currentUser = params['user'];
         this.currentYear = params['year'];
       }
     )

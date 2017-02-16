@@ -1,6 +1,0 @@
-<div *ngIf="owner" class="owner-image" [style.background-image]="'url(/assets/owners/' + owner + '.png)'"></div>
-<div *ngIf="ownerSummary" class="owner-summary">
-  <span>Income: {{ownerSummary.income | currency:'USD':true:'1.0-0'}}</span>
-  <span>Debt: {{ownerSummary.debt  | currency:'USD':true:'1.0-0'}}</span>
-  <span>Assets: {{ownerSummary.asset | currency:'USD':true:'1.0-0'}}</span>
-</div>

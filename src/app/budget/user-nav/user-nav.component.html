@@ -1,0 +1,4 @@
+<div class="navbar">
+  <a [routerLink]="['/budget/user/All', currentYear, currentPanel]" [class.active-link]="router.isActive(router.createUrlTree(['/budget/user/All']))">All</a>
+  <a *ngFor=" let user of users " [routerLink]="[ '/budget/user', user.name, currentYear, currentPanel]" [class.active-link]="router.isActive(router.createUrlTree(['/budget/user/', user.name]))">{{user.name}}</a>
+</div>

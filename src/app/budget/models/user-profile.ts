@@ -1,4 +1,4 @@
-export class OwnerSummary {
+export class UserProfile {
     constructor(
         public name: string,
         public income: number = 0,

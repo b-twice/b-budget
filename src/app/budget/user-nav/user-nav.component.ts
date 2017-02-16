@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { BudgetService } from '../budget.service';
-import { Owner } from '../models/owner';
+import { User } from '../models/user';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'budget-owner-nav',
-  templateUrl: './owner-nav.component.html',
-  styleUrls: ['./owner-nav.component.scss']
+  selector: 'budget-user-nav',
+  templateUrl: './user-nav.component.html',
+  styleUrls: ['./user-nav.component.scss']
 })
-export class OwnerNavComponent implements OnInit {
+export class UserNavComponent implements OnInit {
 
-  private owners: Owner[];
+  private users: User[];
   private currentYear: string;
   private currentPanel: string
 
@@ -22,7 +22,7 @@ export class OwnerNavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getOwners();
+    this.getUsers();
     this.activatedRoute.params.subscribe(
       params =>
         this.currentYear = params['year']
@@ -36,10 +36,10 @@ export class OwnerNavComponent implements OnInit {
 
   }
 
-  private getOwners() {
-    this.budgetService.getOwners()
+  private getUsers() {
+    this.budgetService.getUsers()
       .subscribe(
-      owners => this.owners = owners
+      users => this.users = users
       )
   }
 

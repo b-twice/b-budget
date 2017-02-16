@@ -1,7 +1,7 @@
-export class AnnualBudget {
+export class UserSummary {
     constructor(
         public fiscalYear: string,
-        public ownerName: string,
+        public userName: string,
         public toSpend: number = 0,
         public toSpendGrowth: number = 0,
         public spent: number = 0,

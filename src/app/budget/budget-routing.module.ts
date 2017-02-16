@@ -7,7 +7,7 @@ import { AuthGuard } from '../login/auth-guard.service';
 
 const adminRoutes: Routes = [
     {
-        path: 'owner/:owner/:year',
+        path: 'user/:user/:year',
         component: BudgetDashboardComponent,
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
@@ -23,10 +23,10 @@ const adminRoutes: Routes = [
             }
         ]
     },
-    // Don't init component, redirect to owner/All to display all in user profile
+    // Don't init component, redirect to user/All to display all in user profile
     {
         path: '',
-        redirectTo: '/budget/owner/All/2016/summary'
+        redirectTo: '/budget/user/All/2016/summary'
     }
 
 ];

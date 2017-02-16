@@ -6,9 +6,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import { APP_SETTINGS, IAppSettings } from '../app.settings';
 import {
-    AnnualBudget, Category,
-    FiscalYear, Owner, Transaction,
-    OwnerSummary
+    UserProfile, Category,
+    FiscalYear, User, Transaction,
+    UserSummary
 } from './models';
 
 @Injectable()
@@ -38,24 +38,24 @@ export class BudgetService {
     public getCategories(): Observable<Category[]> {
         return this.makeRequest<Category[]>('categories');
     }
-    public getOwners(): Observable<Owner[]> {
-        return this.makeRequest<Owner[]>('owners');
+    public getUsers(): Observable<User[]> {
+        return this.makeRequest<User[]>('users');
     }
     public getFiscalYears(): Observable<FiscalYear[]> {
         return this.makeRequest<FiscalYear[]>('fiscal-years');
     }
 
-    public getBudgets(): Observable<AnnualBudget[]> {
-        return this.makeRequest<AnnualBudget[]>('annual-budgets');
+    public getUserSummaries(): Observable<[UserSummary]> {
+        return this.makeRequest<UserSummary[]>('user-summaries');
     }
-    public getBudget(name: string, year: string): Observable<AnnualBudget> {
-        return this.makeRequest<AnnualBudget>(`annual-budgets/year/${year}/owner/${name}`);
+    public getUserSummary(name: string, year: string): Observable<UserSummary> {
+        return this.makeRequest<UserSummary>(`user-summaries/year/${year}/user/${name}`);
     }
 
-    public getOwnerSummaries(): Observable<OwnerSummary[]> {
-        return this.makeRequest<OwnerSummary[]>('owner-summaries');
+    public getUserProfiles(): Observable<UserProfile[]> {
+        return this.makeRequest<UserProfile[]>('user-profiles');
     }
-    public getOwnerSummary(name: string): Observable<OwnerSummary> {
-        return this.makeRequest<OwnerSummary>(`owner-summaries/${name}`);
+    public getUserProfile(name: string): Observable<UserProfile> {
+        return this.makeRequest<UserProfile>(`user-profiles/${name}`);
     }
 }

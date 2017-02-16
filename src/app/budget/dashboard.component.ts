@@ -5,11 +5,11 @@ import { Component, OnInit } from '@angular/core';
     template:
     `
     <budget-header></budget-header>
-    <budget-owner-nav></budget-owner-nav>
+    <budget-user-nav></budget-user-nav>
     <div class="dashboard-layout">
         <main>
             <aside class="dashboard-sidebar">
-                <budget-owner-profile></budget-owner-profile>
+                <budget-user-profile></budget-user-profile>
                 <budget-panel-nav></budget-panel-nav>
                 <budget-year-nav></budget-year-nav>
             </aside>

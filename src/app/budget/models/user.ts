@@ -1,5 +1,5 @@
-export class Owner {
+export class User {
     constructor(
         public name: string
-    ) {}
+    ) { }
 }

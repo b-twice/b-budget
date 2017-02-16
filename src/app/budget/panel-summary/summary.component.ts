@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../budget.service';
-import { AnnualBudget } from '../models';
+import { UserSummary } from '../models';
 import { UtilService } from '../../shared/util/util.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { UtilService } from '../../shared/util/util.service';
 })
 export class PanelSummaryComponent implements OnInit {
 
-    private budget: AnnualBudget;
+    private userSummary: UserSummary;
     private displayKeyOrder: string[] = [
         "toSpend",
         "spent",
@@ -38,31 +38,31 @@ export class PanelSummaryComponent implements OnInit {
     ngOnInit() {
         this.route.parent.params.subscribe(
             params =>
-                this.getBudget(params['owner'], params['year'])
+                this.getBudget(params['user'], params['year'])
         )
     }
 
     getBudget(name: string, year: string): void {
         if (!name || !year) { return; }
         if (name == "All") {
-            this.budgetService.getBudgets()
+            this.budgetService.getUserSummaries()
                 .subscribe(
-                budgets =>
-                    this.budget = this.utilService.combineObjectValues(new AnnualBudget(year, "All"), budgets,
+                userSummaries =>
+                    this.userSummary = this.utilService.combineObjectValues(new UserSummary(year, "All"), userSummaries,
                         ["toSpend", "toSpendGrowth", "spent", "spentGrowth", "saved", "savedGrowth", "saved",
                             "invested", "investedGrowth", "taxed", "taxedGrowth", "debt", "debtGrowth"])
 
                 );
             return;
         }
-        this.budgetService.getBudget(name, year)
+        this.budgetService.getUserSummary(name, year)
             .subscribe(
-            budget => this.budget = budget
+            userSummary => this.userSummary = userSummary
             )
     }
 
     getGrowth(key: string): number {
-        return this.budget[key + 'Growth'];
+        return this.userSummary[key + 'Growth'];
     }
 
     getKeyDisplay(key: string): string {

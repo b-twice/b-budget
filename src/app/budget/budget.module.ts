@@ -13,8 +13,8 @@ import { HeaderComponent } from './header/header.component';
 import { PanelSummaryComponent } from './panel-summary/summary.component';
 import { PanelCategoriesComponent } from './panel-categories/categories.component';
 import { PanelTransactionsComponent } from './panel-transactions/transactions.component';
-import { OwnerNavComponent } from './owner-nav/owner-nav.component';
-import { OwnerProfileComponent } from './owner-profile/owner-profile.component';
+import { UserNavComponent } from './user-nav/user-nav.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { YearNavComponent } from './year-nav/year-nav.component';
 import { PanelNavComponent } from './panel-nav/panel-nav.component';
 import { PanelComponent } from './panel/panel.component';
@@ -29,8 +29,8 @@ import { PanelComponent } from './panel/panel.component';
         BudgetDashboardComponent,
         PanelSummaryComponent,
         HeaderComponent,
-        OwnerNavComponent,
-        OwnerProfileComponent,
+        UserNavComponent,
+        UserProfileComponent,
         PanelCategoriesComponent,
         PanelTransactionsComponent,
         YearNavComponent,

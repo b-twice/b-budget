@@ -15,7 +15,7 @@ $font-style: $font-header;
     @extend .panel-style;
 }
 
-.owner-image {
+.user-image {
   display:block;
   width:12rem;
   height:12rem;
@@ -25,7 +25,7 @@ $font-style: $font-header;
   border-radius:50%;
 }
 
-.owner-summary {
+.user-summary {
     display:flex;
     flex:1;
     width:100%;
