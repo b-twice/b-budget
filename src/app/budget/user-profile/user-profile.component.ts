@@ -12,6 +12,7 @@ import { UtilService } from '../../shared/util/util.service';
 export class UserProfileComponent implements OnInit {
 
   private user: string;
+  private year: string;
   private userProfile: UserProfile;
   constructor(
     private route: ActivatedRoute,

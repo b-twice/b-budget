@@ -16,7 +16,8 @@ export class PanelSummaryComponent implements OnInit {
         "toSpend",
         "spent",
         "saved",
-        "invested",
+        "retirement",
+        "stock",
         "taxed",
         "debt"
     ]
@@ -24,7 +25,8 @@ export class PanelSummaryComponent implements OnInit {
         toSpend: "Money to Spend",
         spent: "Spent",
         saved: "Saved",
-        invested: "Invested",
+        retirement: "Retirement",
+        stock: "Personal Investments",
         taxed: "Taxed",
         debt: "Remaining Debts",
 
@@ -45,7 +47,7 @@ export class PanelSummaryComponent implements OnInit {
     getBudget(name: string, year: string): void {
         if (!name || !year) { return; }
         if (name == "All") {
-            this.budgetService.getUserSummaries()
+            this.budgetService.getUserSummaries(year)
                 .subscribe(
                 userSummaries =>
                     this.userSummary = this.utilService.combineObjectValues(new UserSummary(year, "All"), userSummaries,
