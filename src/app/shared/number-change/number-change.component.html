@@ -1,0 +1,6 @@
+<div [ngSwitch]="changeType">
+  <i *ngSwitchCase="'up'" class="fa fa-arrow-up up" aria-hidden="true"></i>
+  <i *ngSwitchCase="'down'" class="fa fa-arrow-down down" aria-hidden="true"></i>
+  <i *ngSwitchCase="'none'" class="fa fa-minus none" aria-hidden="true"></i>
+</div>
+<div class="number {{changeType}}">{{number}}%</div>

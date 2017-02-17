@@ -1,7 +1,14 @@
+@import '../../../styles/base.scss';
+
+.panel-style  {
+    @extend .panel-base
+}
+
+
 :host {
-    display:flex;
-    flex-direction:column;
-    flex:1;
+    width:100%;
+    @extend .panel-style;
+    background:#fff;
 }
 
 .summary-row {
@@ -11,17 +18,21 @@
     justify-content: space-between;
     padding: 8px 12px;
     border-bottom: 1px solid #ECEFF1;
+
+    &:last-child {
+        border-bottom: none;
+    }
     .summary-row--header {
 
     }
     .summary-row--item {
         display:flex;
         .summary-row--money {
-            width:10rem;
+            min-width:10rem;
         }
         .summary-row--growth {
 
-            width: 2rem;
+            min-width: 7.5rem;
         }
     }
 }

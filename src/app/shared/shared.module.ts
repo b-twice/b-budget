@@ -11,6 +11,7 @@ import { SiteHeaderComponent } from './site-header/site-header.component';
 
 // Services
 import { UtilService } from './util/util.service';
+import { NumberChangeComponent } from './number-change/number-change.component';
 
 @NgModule({
     imports: [
@@ -19,14 +20,16 @@ import { UtilService } from './util/util.service';
     declarations: [
         LoadingComponent,
         MessageComponent,
-        SiteHeaderComponent
+        SiteHeaderComponent,
+        NumberChangeComponent
     ],
     exports: [
         CommonModule,
         LoadingComponent,
         MessageComponent,
         SiteHeaderComponent,
-        DropdownModule
+        DropdownModule,
+        NumberChangeComponent
     ],
     providers: [
         UtilService

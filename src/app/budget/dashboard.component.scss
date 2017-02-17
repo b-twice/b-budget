@@ -29,15 +29,9 @@ main {
     padding-bottom:2rem;
 
     .dashboard-main {
-        display:flex;
-        flex:5;
+        width:100%;
         flex-direction:column;
         margin-left:2rem;
-        max-height:40rem;
-        background: #fff;
-
-        @extend .panel-style;
-
     }
 
     .dashboard-sidebar {

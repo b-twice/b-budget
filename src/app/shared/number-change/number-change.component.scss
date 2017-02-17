@@ -1,0 +1,27 @@
+:host {
+    display:flex;
+    flex-direction:row;
+    flex:1;
+}
+
+i {
+    width:2.5rem;
+    margin-right:.25em;
+}
+
+.number {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:5rem;
+}
+
+.up {
+    color: #088F08;
+}
+.down {
+    color: #AE4545
+}
+.none {
+    color: #E38817
+}

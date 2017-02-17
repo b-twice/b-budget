@@ -1,9 +1,11 @@
-<div *ngIf="budget">
+<div *ngIf="userSummary">
     <div class="summary-row" *ngFor="let key of displayKeyOrder">
         <span class="summary-row--header">{{getKeyDisplay(key)}}</span>
         <div class="summary-row--item ">
-            <span class="summary-row--money">{{budget[key] | currency:'USD':true:'1.0-0'}}</span>
-            <span class="summary-row--growth">{{getGrowth(key)}}</span>
+            <span class="summary-row--money">{{userSummary[key] | currency:'USD':true:'1.0-0'}}</span>
+            <span class="summary-row--growth">
+                <number-change [number]="getGrowth(key)"></number-change>
+            </span>
         </div>
     </div>
 </div>
