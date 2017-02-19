@@ -11,7 +11,7 @@ import { UtilService } from '../../shared/util/util.service';
 })
 export class PanelSummaryComponent implements OnInit {
 
-    private userSummary: UserSummary;
+    private userSummary: UserSummary[];
     private displayGroupsOrder: string[] = [
         "Earnings",
         "Investments",
@@ -35,6 +35,7 @@ export class PanelSummaryComponent implements OnInit {
             "stock",
         ],
         Other: [
+            "spent",
             "taxed",
             "debt"
         ]
@@ -43,10 +44,11 @@ export class PanelSummaryComponent implements OnInit {
         income: "Gross Income",
         incomeTaxable: "Taxable Income",
         takeHomePay: "Take Home Pay",
-        spent: "Spent",
+        spent: "Money Spent",
         saved: "Saved",
         retirementContribution: "Retirement",
         stockContribution: "Personal Investments",
+        saving: "Savings",
         retirement: "Retirement",
         stock: "Personal Investments",
         taxed: "Taxed",
@@ -67,24 +69,25 @@ export class PanelSummaryComponent implements OnInit {
     }
 
     getBudget(name: string, year: string): void {
+        this.userSummary = [];
         if (!name || !year) { return; }
         if (name == "All") {
             this.budgetService.getUserSummaries(year)
                 .subscribe(
                 userSummaries =>
-                    this.userSummary = this.utilService.combineObjectValues(new UserSummary(year, "All"), userSummaries)
+                    this.userSummary.push(this.utilService.combineObjectValues(new UserSummary(year, "All"), userSummaries))
 
                 );
             return;
         }
         this.budgetService.getUserSummary(name, year)
             .subscribe(
-            userSummary => this.userSummary = userSummary
+            userSummary => this.userSummary.push(userSummary)
             )
     }
 
     getGrowth(key: string): number {
-        return this.userSummary[key + 'Growth'];
+        return this.userSummary[0][key + 'Growth'];
     }
 
     getKeyDisplay(key: string): string {

@@ -31,6 +31,9 @@ export class UserSummary {
         public stock: number = 0,
         public stockGrowth: number = 0,
 
+        public saving: number = 0,
+        public savingGrowth: number = 0,
+
         public taxed: number = 0,
         public taxedGrowth: number = 0,
 
