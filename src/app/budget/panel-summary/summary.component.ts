@@ -12,23 +12,45 @@ import { UtilService } from '../../shared/util/util.service';
 export class PanelSummaryComponent implements OnInit {
 
     private userSummary: UserSummary;
-    private displayKeyOrder: string[] = [
-        "toSpend",
-        "spent",
-        "saved",
-        "retirement",
-        "stock",
-        "taxed",
-        "debt"
+    private displayGroupsOrder: string[] = [
+        "Earnings",
+        "Investments",
+        "Assets",
+        "Other"
     ]
+    private displayGroups: {} = {
+        Earnings: [
+            "income",
+            "incomeTaxable",
+            "takeHomePay",
+        ],
+        Investments: [
+            "saved",
+            "retirementContribution",
+            "stockContribution"
+        ],
+        Assets: [
+            "saving",
+            "retirement",
+            "stock",
+        ],
+        Other: [
+            "taxed",
+            "debt"
+        ]
+    }
     private displayName: {} = {
-        toSpend: "Money to Spend",
+        income: "Gross Income",
+        incomeTaxable: "Taxable Income",
+        takeHomePay: "Take Home Pay",
         spent: "Spent",
         saved: "Saved",
+        retirementContribution: "Retirement",
+        stockContribution: "Personal Investments",
         retirement: "Retirement",
         stock: "Personal Investments",
         taxed: "Taxed",
-        debt: "Remaining Debts",
+        debt: "Debts",
 
     }
     constructor(
@@ -50,9 +72,7 @@ export class PanelSummaryComponent implements OnInit {
             this.budgetService.getUserSummaries(year)
                 .subscribe(
                 userSummaries =>
-                    this.userSummary = this.utilService.combineObjectValues(new UserSummary(year, "All"), userSummaries,
-                        ["toSpend", "toSpendGrowth", "spent", "spentGrowth", "saved", "savedGrowth", "saved",
-                            "invested", "investedGrowth", "taxed", "taxedGrowth", "debt", "debtGrowth"])
+                    this.userSummary = this.utilService.combineObjectValues(new UserSummary(year, "All"), userSummaries)
 
                 );
             return;

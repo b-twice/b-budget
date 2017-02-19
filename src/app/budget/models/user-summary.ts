@@ -4,14 +4,26 @@ export class UserSummary {
         public fiscalYear: string,
         public userName: string,
 
-        public toSpend: number = 0,
-        public toSpendGrowth: number = 0,
+        public income: number = 0,
+        public incomeGrowth: number = 0,
+
+        public incomeTaxable: number = 0,
+        public incomeTaxableGrowth: number = 0,
+
+        public takeHomePay: number = 0,
+        public takeHomePayGrowth: number = 0,
 
         public spent: number = 0,
         public spentGrowth: number = 0,
 
         public saved: number = 0,
         public savedGrowth: number = 0,
+
+        public retirementContribution: number = 0,
+        public retirementContributionGrowth: number = 0,
+
+        public stockContribution: number = 0,
+        public stockContributionGrowth: number = 0,
 
         public retirement: number = 0,
         public retirementGrowth: number = 0,

@@ -34,7 +34,7 @@ export class UserProfileComponent implements OnInit {
       this.budgetService.getUserProfiles()
         .subscribe(
         userProfiles =>
-          this.userProfile = this.utilService.combineObjectValues<UserProfile>(new UserProfile("All"), userProfiles, ["debt", "asset", "income"])
+          this.userProfile = this.utilService.combineObjectValues<UserProfile>(new UserProfile("All"), userProfiles)
         );
       return;
     }

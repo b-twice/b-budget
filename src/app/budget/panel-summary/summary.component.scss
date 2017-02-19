@@ -1,9 +1,12 @@
 @import '../../../styles/base.scss';
 
 .panel-style  {
-    @extend .panel-base
+    @extend .panel-base;
 }
 
+.section-header {
+    @extend .section-header;
+}
 
 :host {
     width:100%;
