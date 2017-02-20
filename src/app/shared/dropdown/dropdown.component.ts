@@ -2,8 +2,8 @@ import { Component, Input, Output, OnInit, EventEmitter, OnChanges } from '@angu
 
 @Component({
     selector: 'dropdown',
-    template: require('./dropdown.component.html'),
-    styles: [require('./dropdown.component.scss')],
+    templateUrl: './dropdown.component.html',
+    styleUrls: ['./dropdown.component.scss'],
 
 })
 export class DropdownComponent implements OnInit, OnChanges {

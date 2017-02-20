@@ -1,0 +1,60 @@
+sudo apt-get update
+sudo apt-get install letsencrypt
+
+# modify nginx default to allow well known
+sudo vim /etc/nginx/sites-available/default
+#
+location ~ /.well-known {
+    allow all;
+}
+#
+sudo letsencrypt certonly -a webroot --webroot-path=/var/www/bgeo -d bgeo.io -d www.bgeo.io 
+sudo letsencrypt certonly -a webroot --webroot-path=/var/www/budget-web -d budget.bgeo.io 
+sudo letsencrypt certonly -a webroot --webroot-path=/var/www/rvau -d rvau.bgeo.io 
+
+# location of encryption
+/etc/letsencrypt/live/
+
+# increase security generate strong Diffie-Hellman group
+sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+
+# SSL modules
+sudo vim /etc/nginx/snippets/ssl-bgeo.io.conf
+sudo vim /etc/nginx/snippets/ssl-rvau.bgeo.io.conf
+sudo vim /etc/nginx/snippets/ssl-budget.bgeo.io.conf
+#
+ssl_certificate /etc/letsencrypt/live/bgeo.io/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/bgeo.io/privkey.pem;
+#
+ssl_certificate /etc/letsencrypt/live/rvau.bgeo.io/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/rvau.bgeo.io/privkey.pem;
+#
+ssl_certificate /etc/letsencrypt/live/budget.bgeo.io/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/budget.bgeo.io/privkey.pem;
+#
+
+# creat config snippet with strong encrypt settings
+sudo vim /etc/nginx/snippets/ssl-params.conf
+#
+# from https://cipherli.st/
+# and https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html
+
+ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+ssl_prefer_server_ciphers on;
+ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+ssl_ecdh_curve secp384r1;
+ssl_session_cache shared:SSL:10m;
+ssl_session_tickets off;
+ssl_stapling on;
+ssl_stapling_verify on;
+resolver 8.8.8.8 8.8.4.4 valid=300s;
+resolver_timeout 5s;
+# Disable preloading HSTS for now.  You can use the commented out header line that includes
+# the "preload" directive if you understand the implications.
+#add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";
+add_header Strict-Transport-Security "max-age=63072000; includeSubdomains";
+add_header X-Frame-Options DENY;
+add_header X-Content-Type-Options nosniff;
+
+ssl_dhparam /etc/ssl/certs/dhparam.pem;
+#
