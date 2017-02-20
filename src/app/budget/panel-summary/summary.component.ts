@@ -11,24 +11,48 @@ import { UtilService } from '../../shared/util/util.service';
 })
 export class PanelSummaryComponent implements OnInit {
 
-    private userSummary: UserSummary;
-    private displayKeyOrder: string[] = [
-        "toSpend",
-        "spent",
-        "saved",
-        "retirement",
-        "stock",
-        "taxed",
-        "debt"
+    private userSummary: UserSummary[];
+    private displayGroupsOrder: string[] = [
+        "Earnings",
+        "Investments",
+        "Assets",
+        "Other"
     ]
+    private displayGroups: {} = {
+        Earnings: [
+            "income",
+            "incomeTaxable",
+            "takeHomePay",
+        ],
+        Investments: [
+            "saved",
+            "retirementContribution",
+            "stockContribution"
+        ],
+        Assets: [
+            "saving",
+            "retirement",
+            "stock",
+        ],
+        Other: [
+            "spent",
+            "taxed",
+            "debt"
+        ]
+    }
     private displayName: {} = {
-        toSpend: "Money to Spend",
-        spent: "Spent",
+        income: "Gross Income",
+        incomeTaxable: "Taxable Income",
+        takeHomePay: "Take Home Pay",
+        spent: "Money Spent",
         saved: "Saved",
+        retirementContribution: "Retirement",
+        stockContribution: "Personal Investments",
+        saving: "Savings",
         retirement: "Retirement",
         stock: "Personal Investments",
         taxed: "Taxed",
-        debt: "Remaining Debts",
+        debt: "Debts",
 
     }
     constructor(
@@ -45,26 +69,25 @@ export class PanelSummaryComponent implements OnInit {
     }
 
     getBudget(name: string, year: string): void {
+        this.userSummary = [];
         if (!name || !year) { return; }
         if (name == "All") {
             this.budgetService.getUserSummaries(year)
                 .subscribe(
                 userSummaries =>
-                    this.userSummary = this.utilService.combineObjectValues(new UserSummary(year, "All"), userSummaries,
-                        ["toSpend", "toSpendGrowth", "spent", "spentGrowth", "saved", "savedGrowth", "saved",
-                            "invested", "investedGrowth", "taxed", "taxedGrowth", "debt", "debtGrowth"])
+                    this.userSummary.push(this.utilService.combineObjectValues(new UserSummary(year, "All"), userSummaries))
 
                 );
             return;
         }
         this.budgetService.getUserSummary(name, year)
             .subscribe(
-            userSummary => this.userSummary = userSummary
+            userSummary => this.userSummary.push(userSummary)
             )
     }
 
     getGrowth(key: string): number {
-        return this.userSummary[key + 'Growth'];
+        return this.userSummary[0][key + 'Growth'];
     }
 
     getKeyDisplay(key: string): string {
