@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import { AuthHttp } from 'angular2-jwt';
 import { APP_SETTINGS, IAppSettings } from '../app.settings';
 import {
     UserProfile, Category,
@@ -15,12 +16,18 @@ import {
 export class BudgetService {
     constructor(
         private http: Http,
+        private authHttp: AuthHttp,
         @Inject(APP_SETTINGS) private settings: IAppSettings
     ) {
     }
 
-    public makeRequest<T>(fragment: string): Observable<T> {
+    public makeRequest<T>(fragment: string, authenticated = false): Observable<T> {
         let requestUrl = `${this.settings.apiEndpoint}/${fragment}`;
+        if (authenticated) {
+            return this.authHttp.get(requestUrl)
+                .map(this.extractData)
+                .catch(this.handleError);
+        }
         return this.http.get(requestUrl)
             .map(this.extractData)
             .catch(this.handleError);
@@ -46,16 +53,16 @@ export class BudgetService {
     }
 
     public getUserSummaries(year: string): Observable<[UserSummary]> {
-        return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}`);
+        return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}`, true);
     }
     public getUserSummary(name: string, year: string): Observable<UserSummary> {
-        return this.makeRequest<UserSummary>(`user-summaries/year/${year}/user/${name}`);
+        return this.makeRequest<UserSummary>(`user-summaries/year/${year}/user/${name}`, true);
     }
 
     public getUserProfiles(): Observable<UserProfile[]> {
-        return this.makeRequest<UserProfile[]>('user-profiles');
+        return this.makeRequest<UserProfile[]>('user-profiles', true);
     }
     public getUserProfile(name: string): Observable<UserProfile> {
-        return this.makeRequest<UserProfile>(`user-profiles/${name}`);
+        return this.makeRequest<UserProfile>(`user-profiles/${name}`, true);
     }
 }

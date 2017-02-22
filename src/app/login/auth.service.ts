@@ -44,7 +44,6 @@ export class AuthService {
                 this.authenticationResponse({ error: 'User could not be authenticated' });
                 return;
             }
-            console.log(authResult)
             if (authResult && authResult.idToken && authResult.accessToken) {
                 this.setUser(authResult);
                 this.authenticated = true;
@@ -54,10 +53,6 @@ export class AuthService {
     }
 
     public isAuthenticated(): boolean {
-        // NOTE - no authentication in dev
-        if (!this.settings.production) {
-            return true;
-        }
         // Check whether the id_token is expired or not
         return tokenNotExpired();
     }

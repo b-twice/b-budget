@@ -14,7 +14,7 @@ export class PanelComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
-      params => { this.currentPanel = params["panel"], console.log(params["panel"]) }
+      params => this.currentPanel = params["panel"]
     )
   }
 

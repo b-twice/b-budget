@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AUTH_PROVIDERS } from 'angular2-jwt';
 
 import { BudgetRoutingModule } from './budget-routing.module';
 
@@ -38,6 +39,7 @@ import { PanelComponent } from './panel/panel.component';
         PanelComponent
     ],
     providers: [
+        AUTH_PROVIDERS,
         BudgetService
     ]
 })

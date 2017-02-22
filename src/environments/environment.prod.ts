@@ -5,5 +5,5 @@ export const environment = {
         domain: 'bgeo.auth0.com',
         clientID: '2CocHiOvn4pRWyUMfQm22wkuBkv9NxBr'
     },
-    apiEndpoint: 'http://budgetapi.bgeo.io'
+    apiEndpoint: 'https://budgetapi.bgeo.io/api'
 };
