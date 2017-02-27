@@ -1,0 +1,41 @@
+@import '../../../styles/base.scss';
+
+.panel-style  {
+    @extend .panel-base;
+}
+
+.section-header {
+    @extend .section-header;
+}
+
+:host {
+    width:100%;
+    @extend .panel-style;
+    background:#fff;
+}
+
+.category-row {
+    display:flex;
+    width:100%;
+    flex-direction:row;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 1px solid #ECEFF1;
+
+    &:last-child {
+        border-bottom: none;
+    }
+    .category-row--header {
+
+    }
+    .category-row--item {
+        display:flex;
+        .category-row--money {
+            min-width:10rem;
+        }
+        .category-row--growth {
+
+            min-width: 7.5rem;
+        }
+    }
+}

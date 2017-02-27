@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AUTH_PROVIDERS } from 'angular2-jwt';
+import { HttpModule, Http, RequestOptions } from '@angular/http';
+import { provideAuth, AuthHttp, AuthConfig } from 'angular2-jwt';
 
 import { BudgetRoutingModule } from './budget-routing.module';
 
@@ -19,6 +20,10 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { YearNavComponent } from './year-nav/year-nav.component';
 import { PanelNavComponent } from './panel-nav/panel-nav.component';
 import { PanelComponent } from './panel/panel.component';
+
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+    return new AuthHttp(new AuthConfig({}), http, options);
+}
 
 @NgModule({
     imports: [
@@ -39,7 +44,12 @@ import { PanelComponent } from './panel/panel.component';
         PanelComponent
     ],
     providers: [
-        AUTH_PROVIDERS,
+        // AUTH_PROVIDERS,
+        {
+            provide: AuthHttp,
+            useFactory: authHttpServiceFactory,
+            deps: [Http, RequestOptions]
+        },
         BudgetService
     ]
 })

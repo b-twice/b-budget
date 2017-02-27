@@ -9,7 +9,7 @@ import { APP_SETTINGS, IAppSettings } from '../app.settings';
 import {
     UserProfile, Category,
     FiscalYear, User, Transaction,
-    UserSummary
+    UserSummary, UserCategory
 } from './models';
 
 @Injectable()
@@ -53,16 +53,25 @@ export class BudgetService {
     }
 
     public getUserSummaries(year: string): Observable<[UserSummary]> {
-        return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}`, true);
+        return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}`, false);
     }
     public getUserSummary(name: string, year: string): Observable<UserSummary> {
-        return this.makeRequest<UserSummary>(`user-summaries/year/${year}/user/${name}`, true);
+        return this.makeRequest<UserSummary>(`user-summaries/year/${year}/user/${name}`, false);
     }
 
     public getUserProfiles(): Observable<UserProfile[]> {
-        return this.makeRequest<UserProfile[]>('user-profiles', true);
+        return this.makeRequest<UserProfile[]>('user-profiles', false);
     }
     public getUserProfile(name: string): Observable<UserProfile> {
-        return this.makeRequest<UserProfile>(`user-profiles/${name}`, true);
+        return this.makeRequest<UserProfile>(`user-profiles/${name}`, false);
     }
+
+    public getUserCategories(year: string): Observable<[UserCategory]> {
+        return this.makeRequest<UserCategory[]>(`user-categories/year/${year}`, false);
+    }
+    public getUserCategory(name: string, year: string): Observable<[UserCategory]> {
+        return this.makeRequest<UserCategory[]>(`user-categories/year/${year}/user/${name}`, false);
+    }
+
+
 }
