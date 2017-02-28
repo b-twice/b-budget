@@ -1,12 +1,12 @@
-<div *ngIf="userCategories.length > 0">
+<div *ngIf="loaded">
   <div *ngFor="let displayGroup of displayGroupsOrder">
     <h4 class="section-header">{{displayGroup}}</h4>
-    <div class="category-row" *ngFor="let category of getDisplayGroups(displayGroup)">
+    <div class="category-row" *ngFor="let category of displayGroups[displayGroup]">
       <span class="category-row--header">{{category.name}}</span>
       <div class="category-row--item ">
         <span class="category-row--money">{{category.total | currency:'USD':true:'1.0-0'}}</span>
         <span class="category-row--growth">
-            <!--<number-change [number]="getGrowth(key)"></number-change>-->
+            <number-change [number]="category.growth"></number-change>
           </span>
       </div>
     </div>

@@ -11,7 +11,7 @@ import { UtilService } from '../../shared/util/util.service';
   styleUrls: ['./categories.component.scss']
 })
 export class PanelCategoriesComponent implements OnInit {
-  private userCategories: UserCategory[];
+  private loaded: boolean = false;
   private displayGroupsOrder: string[] = [
     "Exercise",
     "Food",
@@ -19,34 +19,9 @@ export class PanelCategoriesComponent implements OnInit {
     "Transportation",
     "Utilities",
     "Miscellaneous"
-  ]
+  ];
   // meh, front end or store in database?
   private displayGroups: {} = {
-    Alcohol: { group: "Food", total: 0 },
-    Restaurants: { group: "Food", total: 0 },
-    Supermarkets: { group: "Food", total: 0 },
-    Fitness: { group: "Exercise", total: 0 },
-    Golf: { group: "Exercise", total: 0 },
-    Clothing: { group: "Goods", total: 0 },
-    Home: { group: "Goods", total: 0 },
-    "Home Improvement": { group: "Goods", total: 0 },
-    Merchandise: { group: "Goods", total: 0 },
-    Automotive: { group: "Transportation", total: 0 },
-    Gasoline: { group: "Transportation", total: 0 },
-    Bike: { group: "Transportation", total: 0 },
-    Insurance: { group: "Transportation", total: 0 },
-    Internet: { group: "Utilities", total: 0 },
-    Phone: { group: "Utilities", total: 0 },
-    TV: { group: "Utilities", total: 0 },
-    Gift: { group: "Miscellaneous", total: 0 },
-    Haircut: { group: "Miscellaneous", total: 0 },
-    Interest: { group: "Miscellaneous", total: 0 },
-    Loan: { group: "Miscellaneous", total: 0 },
-    Medical: { group: "Miscellaneous", total: 0 },
-    Other: { group: "Miscellaneous", total: 0 },
-    Taxes: { group: "Miscellaneous", total: 0 },
-    Travel: { group: "Miscellaneous", total: 0 },
-    "Web Development": { group: "Miscellaneous", total: 0 }
   }
 
   constructor(
@@ -63,7 +38,7 @@ export class PanelCategoriesComponent implements OnInit {
   }
 
   getBudget(name: string, year: string): void {
-    this.userCategories = [];
+    this.loaded = false;
     if (!name || !year) { return; }
     if (name == "All") {
       this.budgetService.getUserCategories(year)
@@ -79,34 +54,27 @@ export class PanelCategoriesComponent implements OnInit {
   }
 
   summarizeCategories(categoriesToSummarize: UserCategory[]) {
-    this.clearCategoryTotals();
+    this.displayGroups = {};
+    let categorySummary = {};
+    // first summarize values
     categoriesToSummarize.forEach(c => {
-      if (this.displayGroups.hasOwnProperty(c.categoryName)) {
-        this.displayGroups[c.categoryName].total = c.amount
+      if (!categorySummary.hasOwnProperty(c.categoryName)) {
+        categorySummary[c.categoryName] = { group: c.categoryGroupName, total: 0, growth: 0 };
       }
+      categorySummary[c.categoryName]["total"] += c.amount;
+      categorySummary[c.categoryName]["growth"] += c.growth;
     });
-  }
-
-  clearCategoryTotals() {
-    let keys = Object.keys(this.displayGroups)
-    keys.forEach(k => this.displayGroups[k].total = 0)
-  }
-
-  getDisplayGroups(group: string) {
-    let displayGroups = [];
-    let keys = Object.keys(this.displayGroups);
-    keys.forEach(k => {
-      let displayGroup = this.displayGroups[k];
-      if (displayGroup.group == group) {
-        displayGroups.push(displayGroup)
+    // build an array for each group with an o summarizing the category
+    Object.keys(categorySummary).forEach(k => {
+      let c = categorySummary[k];
+      if (!this.displayGroups.hasOwnProperty(c.group)) {
+        this.displayGroups[c.group] = [];
       }
+      this.displayGroups[c.group].push({ name: k, total: c.total, growth: c.growth });
     });
-    return displayGroups
+    this.loaded = true;
   }
 
-  // getGrowth(key: string): number {
-  //     return this.userCategory[0][key + 'Growth'];
-  // }
 }
 
 
