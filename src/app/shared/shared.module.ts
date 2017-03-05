@@ -15,7 +15,7 @@ import { NumberChangeComponent } from './number-change/number-change.component';
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
     ],
     declarations: [
         LoadingComponent,

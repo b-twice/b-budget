@@ -9,7 +9,8 @@ import { APP_SETTINGS, IAppSettings } from '../app.settings';
 import {
     UserProfile, Category,
     FiscalYear, User, Transaction,
-    UserSummary, UserCategory
+    UserSummary, UserCategory,
+    UserTransaction
 } from './models';
 
 @Injectable()
@@ -73,5 +74,14 @@ export class BudgetService {
         return this.makeRequest<UserCategory[]>(`user-categories/year/${year}/user/${name}`, false);
     }
 
+    public getUserTransactions(year: string): Observable<[UserTransaction]> {
+        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}`, false);
+    }
+    public getUserTransaction(name: string, year: string): Observable<[UserTransaction]> {
+        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}`, false);
+    }
+    public getUserTransactionCategory(name: string, year: string, category: string): Observable<[UserTransaction]> {
+        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}/category/${category}`, false);
+    }
 
 }

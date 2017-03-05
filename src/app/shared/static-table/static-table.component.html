@@ -1,0 +1,8 @@
+<div class="table-row table-column">
+    <div class="table-row-cell" (click)=sort(columnName) *ngFor="let columnName of columnNames">{{columnName}}</div>
+</div>
+<div class="table-body table-main-content">
+    <div class="table-row" *ngFor="let row of rows">
+        <div class="table-row-cell {{keyValue.value}}" *ngFor="let keyValue of row | mapPipe : keys">{{keyValue.value}}</div>
+    </div>
+</div>
