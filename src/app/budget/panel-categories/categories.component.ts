@@ -11,8 +11,8 @@ import { UtilService } from '../../shared/util/util.service';
   styleUrls: ['./categories.component.scss']
 })
 export class PanelCategoriesComponent implements OnInit {
-  private loaded: boolean = false;
-  private displayGroupsOrder: string[] = [
+  loaded: boolean = false;
+  displayGroupsOrder: string[] = [
     "Exercise",
     "Food",
     "Goods",
@@ -21,13 +21,13 @@ export class PanelCategoriesComponent implements OnInit {
     "Miscellaneous"
   ];
   // meh, front end or store in database?
-  private displayGroups: {} = {
+  displayGroups: {} = {
   }
 
   constructor(
-    private route: ActivatedRoute,
-    private budgetService: BudgetService,
-    private utilService: UtilService
+    public route: ActivatedRoute,
+    public budgetService: BudgetService,
+    public utilService: UtilService
   ) { }
 
   ngOnInit() {

@@ -15,12 +15,12 @@ export class AuthService {
     redirectUrl: string;
 
     authenticated: boolean = false;
-    private authenticatedSource = new Subject<any[]>();
+    authenticatedSource = new Subject<any[]>();
     authenticated$ = this.authenticatedSource = new Subject<any[]>();
 
     constructor(
-        private router: Router,
-        @Inject(APP_SETTINGS) private settings: IAppSettings
+        public router: Router,
+        @Inject(APP_SETTINGS) settings: IAppSettings
     ) {
         this.auth0 = new auth0.WebAuth({
             domain: settings.auth.domain,
@@ -65,12 +65,12 @@ export class AuthService {
         return;
     }
 
-    private setUser(authResult): void {
+    setUser(authResult): void {
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
     }
 
-    private authenticationResponse(response): void {
+    authenticationResponse(response): void {
         this.authenticatedSource.next(response);
     }
 }

@@ -11,7 +11,7 @@ export class NumberChangeComponent implements OnInit {
   @Input() number: number;
 
   // Up, Down, None
-  private changeType: string;
+  changeType: string;
 
   constructor() { }
 

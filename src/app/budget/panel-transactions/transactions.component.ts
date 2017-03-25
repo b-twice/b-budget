@@ -12,13 +12,13 @@ import { UtilService } from '../../shared/util/util.service';
 })
 export class PanelTransactionsComponent implements OnInit {
 
-  private loaded: boolean = false;
-  private userTransactions: UserTransaction[];
+  loaded: boolean = false;
+  userTransactions: UserTransaction[];
 
   constructor(
-    private route: ActivatedRoute,
-    private budgetService: BudgetService,
-    private utilService: UtilService
+    public route: ActivatedRoute,
+    public budgetService: BudgetService,
+    public utilService: UtilService
   ) { }
 
   ngOnInit() {
@@ -40,7 +40,8 @@ export class PanelTransactionsComponent implements OnInit {
     }
     this.budgetService.getUserTransaction(name, year)
       .subscribe(
-      userTransactions => this.setTransactions(userTransactions)
+      userTransactions => this.setTransactions(userTransactions),
+      err => console.log(err)
       )
   }
 

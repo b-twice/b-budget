@@ -9,7 +9,7 @@ import { APP_SETTINGS, IAppSettings } from '../../app.settings';
 export class SiteHeaderComponent implements OnInit {
 
   constructor(
-    @Inject(APP_SETTINGS) private settings: IAppSettings
+    @Inject(APP_SETTINGS) public settings: IAppSettings
   ) {
   }
 

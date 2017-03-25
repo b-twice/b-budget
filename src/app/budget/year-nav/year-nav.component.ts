@@ -9,15 +9,15 @@ import { BudgetService } from '../budget.service';
 })
 export class YearNavComponent implements OnInit {
 
-  private years: string[];
-  private currentUser: string;
-  private currentYear: string;
-  private currentPanel: string;
+  years: string[];
+  currentUser: string;
+  currentYear: string;
+  currentPanel: string;
 
   constructor(
-    private budgetService: BudgetService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router
+    public budgetService: BudgetService,
+    public activatedRoute: ActivatedRoute,
+    public router: Router
   ) { }
 
   ngOnInit() {

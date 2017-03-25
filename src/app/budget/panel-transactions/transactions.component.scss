@@ -19,7 +19,8 @@
   display:flex;
   flex-direction:column;
   font-size:1.4rem;
-  min-height:40rem;
+  max-height:70rem;
+  overflow-x:auto;
 }
 .table-row {
   display:flex;

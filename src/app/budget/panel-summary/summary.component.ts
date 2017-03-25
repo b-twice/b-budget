@@ -11,14 +11,14 @@ import { UtilService } from '../../shared/util/util.service';
 })
 export class PanelSummaryComponent implements OnInit {
 
-    private userSummary: UserSummary[];
-    private displayGroupsOrder: string[] = [
+    userSummary: UserSummary[];
+    displayGroupsOrder: string[] = [
         "Earnings",
         "Investments",
         "Assets",
         "Other"
     ]
-    private displayGroups: {} = {
+    displayGroups: {} = {
         Earnings: [
             "income",
             "incomeTaxable",
@@ -40,7 +40,7 @@ export class PanelSummaryComponent implements OnInit {
             "debt"
         ]
     }
-    private displayName: {} = {
+    displayName: {} = {
         income: "Gross Income",
         incomeTaxable: "Taxable Income",
         takeHomePay: "Take Home Pay",
@@ -56,9 +56,9 @@ export class PanelSummaryComponent implements OnInit {
 
     }
     constructor(
-        private route: ActivatedRoute,
-        private budgetService: BudgetService,
-        private utilService: UtilService
+        public route: ActivatedRoute,
+        public budgetService: BudgetService,
+        public utilService: UtilService
     ) { }
 
     ngOnInit() {

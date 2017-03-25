@@ -10,15 +10,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserNavComponent implements OnInit {
 
-  private users: User[];
-  private currentYear: string;
-  private currentPanel: string
+  users: User[];
+  currentYear: string;
+  currentPanel: string
 
   constructor(
-    private budgetService: BudgetService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router
-
+    public budgetService: BudgetService,
+    public activatedRoute: ActivatedRoute,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -36,7 +35,7 @@ export class UserNavComponent implements OnInit {
 
   }
 
-  private getUsers() {
+  getUsers() {
     this.budgetService.getUsers()
       .subscribe(
       users => this.users = users

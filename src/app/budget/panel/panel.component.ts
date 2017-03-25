@@ -7,9 +7,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PanelComponent implements OnInit {
 
-  private currentPanel: string = '';
+  currentPanel: string = '';
   constructor(
-    private activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {

@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
     authenticationError: string;
 
     constructor(
-        private authService: AuthService
+        public authService: AuthService
     ) { }
 
     ngOnInit() {

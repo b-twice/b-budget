@@ -8,9 +8,9 @@ import { AuthService } from '../../login/auth.service';
 })
 export class HeaderComponent {
 
-    constructor(private authService: AuthService) { }
+    constructor(public authService: AuthService) { }
 
-    private logout(): void {
+    logout(): void {
         this.authService.logout();
     }
 }

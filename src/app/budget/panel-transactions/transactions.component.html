@@ -1,5 +1,4 @@
 <div class="table-row table-column">
-    <div class="table-row-cell row-bank-name" (click)="sort('bankName')">Bank</div>
     <div class="table-row-cell row-category-name" (click)="sort('categoryName')">Category</div>
     <div class="table-row-cell row-date" (click)="sort('date')">Date</div>
     <div class="table-row-cell row-description" (click)="sort('description')">Description</div>
@@ -8,7 +7,6 @@
 <div class="table-body table-main-content">
     <div *ngIf="loaded">
         <div class="table-row" *ngFor="let transaction of userTransactions">
-            <div class="table-row-cell row-bank-name">{{transaction.bankName}}</div>
             <div class="table-row-cell row-category-name">{{transaction.categoryName}}</div>
             <div class="table-row-cell row-date">{{transaction.date | date:'MMM d'}}</div>
             <div class="table-row-cell row-description">{{transaction.description}}</div>

@@ -11,13 +11,13 @@ import { UtilService } from '../../shared/util/util.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  private user: string;
-  private year: string;
-  private userProfile: UserProfile;
+  user: string;
+  year: string;
+  userProfile: UserProfile;
   constructor(
-    private route: ActivatedRoute,
-    private budgetService: BudgetService,
-    private utilService: UtilService
+    public route: ActivatedRoute,
+    public budgetService: BudgetService,
+    public utilService: UtilService
   ) { }
 
   ngOnInit() {

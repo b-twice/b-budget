@@ -16,29 +16,32 @@ import {
 @Injectable()
 export class BudgetService {
     constructor(
-        private http: Http,
-        private authHttp: AuthHttp,
-        @Inject(APP_SETTINGS) private settings: IAppSettings
+        public http: Http,
+        public authHttp: AuthHttp,
+        @Inject(APP_SETTINGS) public settings: IAppSettings
     ) {
     }
 
     public makeRequest<T>(fragment: string, authenticated = false): Observable<T> {
         let requestUrl = `${this.settings.apiEndpoint}/${fragment}`;
         if (authenticated) {
+            console.log('authneticated')
             return this.authHttp.get(requestUrl)
                 .map(this.extractData)
                 .catch(this.handleError);
         }
         return this.http.get(requestUrl)
             .map(this.extractData)
+
             .catch(this.handleError);
     }
-    private extractData(res: Response) {
+    extractData(res: Response) {
         let body = res.json();
         return body || {};
     }
 
-    private handleError(error: Response) {
+    handleError(error: Response) {
+        console.log(error)
         return Observable.throw(error.json().errors || 'Server error');
     }
 
@@ -54,34 +57,34 @@ export class BudgetService {
     }
 
     public getUserSummaries(year: string): Observable<[UserSummary]> {
-        return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}`, false);
+        return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}`, true);
     }
     public getUserSummary(name: string, year: string): Observable<UserSummary> {
-        return this.makeRequest<UserSummary>(`user-summaries/year/${year}/user/${name}`, false);
+        return this.makeRequest<UserSummary>(`user-summaries/year/${year}/user/${name}`, true);
     }
 
     public getUserProfiles(): Observable<UserProfile[]> {
-        return this.makeRequest<UserProfile[]>('user-profiles', false);
+        return this.makeRequest<UserProfile[]>('user-profiles', true);
     }
     public getUserProfile(name: string): Observable<UserProfile> {
-        return this.makeRequest<UserProfile>(`user-profiles/${name}`, false);
+        return this.makeRequest<UserProfile>(`user-profiles/${name}`, true);
     }
 
     public getUserCategories(year: string): Observable<[UserCategory]> {
-        return this.makeRequest<UserCategory[]>(`user-categories/year/${year}`, false);
+        return this.makeRequest<UserCategory[]>(`user-categories/year/${year}`, true);
     }
     public getUserCategory(name: string, year: string): Observable<[UserCategory]> {
-        return this.makeRequest<UserCategory[]>(`user-categories/year/${year}/user/${name}`, false);
+        return this.makeRequest<UserCategory[]>(`user-categories/year/${year}/user/${name}`, true);
     }
 
     public getUserTransactions(year: string): Observable<[UserTransaction]> {
-        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}`, false);
+        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}`, true);
     }
     public getUserTransaction(name: string, year: string): Observable<[UserTransaction]> {
-        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}`, false);
+        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}`, true);
     }
     public getUserTransactionCategory(name: string, year: string, category: string): Observable<[UserTransaction]> {
-        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}/category/${category}`, false);
+        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}/category/${category}`, true);
     }
 
 }
