@@ -25,7 +25,6 @@ export class BudgetService {
     public makeRequest<T>(fragment: string, authenticated = false): Observable<T> {
         let requestUrl = `${this.settings.apiEndpoint}/${fragment}`;
         if (authenticated) {
-            console.log('authneticated')
             return this.authHttp.get(requestUrl)
                 .map(this.extractData)
                 .catch(this.handleError);
