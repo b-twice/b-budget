@@ -40,7 +40,6 @@ export class BudgetService {
     }
 
     handleError(error: Response) {
-        console.log(error)
         return Observable.throw(error.json().errors || 'Server error');
     }
 
@@ -58,15 +57,15 @@ export class BudgetService {
     public getUserSummaries(year: string): Observable<[UserSummary]> {
         return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}`, true);
     }
-    public getUserSummary(name: string, year: string): Observable<UserSummary> {
-        return this.makeRequest<UserSummary>(`user-summaries/year/${year}/user/${name}`, true);
+    public getUserSummary(name: string, year: string): Observable<[UserSummary]> {
+        return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}/user/${name}`, true);
     }
 
     public getUserProfiles(): Observable<UserProfile[]> {
         return this.makeRequest<UserProfile[]>('user-profiles', true);
     }
-    public getUserProfile(name: string): Observable<UserProfile> {
-        return this.makeRequest<UserProfile>(`user-profiles/${name}`, true);
+    public getUserProfile(name: string): Observable<UserProfile[]> {
+        return this.makeRequest<UserProfile[]>(`user-profiles/${name}`, true);
     }
 
     public getUserCategories(year: string): Observable<[UserCategory]> {

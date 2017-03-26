@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../budget.service';
 import { UserSummary } from '../models';
-import { UtilService } from '../../shared/util/util.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'budget-panel-summary',
@@ -11,7 +11,9 @@ import { UtilService } from '../../shared/util/util.service';
 })
 export class PanelSummaryComponent implements OnInit {
 
-    userSummary: UserSummary[];
+    userSummary: Observable<UserSummary[]>;
+    name: string;
+    year: string;
     displayGroupsOrder: string[] = [
         "Earnings",
         "Investments",
@@ -58,7 +60,6 @@ export class PanelSummaryComponent implements OnInit {
     constructor(
         public route: ActivatedRoute,
         public budgetService: BudgetService,
-        public utilService: UtilService
     ) { }
 
     ngOnInit() {
@@ -69,25 +70,11 @@ export class PanelSummaryComponent implements OnInit {
     }
 
     getBudget(name: string, year: string): void {
-        this.userSummary = [];
         if (!name || !year) { return; }
-        if (name == "All") {
-            this.budgetService.getUserSummaries(year)
-                .subscribe(
-                userSummaries =>
-                    this.userSummary.push(this.utilService.combineObjectValues(new UserSummary(year, "All"), userSummaries))
-
-                );
-            return;
-        }
-        this.budgetService.getUserSummary(name, year)
-            .subscribe(
-            userSummary => this.userSummary.push(userSummary)
-            )
-    }
-
-    getGrowth(key: string): number {
-        return this.userSummary[0][key + 'Growth'];
+        this.name = name;
+        this.year = year;
+        if (name == "All") this.userSummary = this.budgetService.getUserSummaries(year)
+        else this.userSummary = this.budgetService.getUserSummary(name, year)
     }
 
     getKeyDisplay(key: string): string {

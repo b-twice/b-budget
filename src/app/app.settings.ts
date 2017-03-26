@@ -2,8 +2,9 @@ import { OpaqueToken } from '@angular/core';
 import { environment } from '../environments/environment';
 
 interface IAuthSettings {
-    domain: string,
-    clientID: string
+    readonly domain: string,
+    readonly clientID: string
+    readonly realm: string;
 }
 export interface IAppSettings {
     readonly production: boolean;

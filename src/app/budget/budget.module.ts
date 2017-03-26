@@ -21,6 +21,10 @@ import { PanelNavComponent } from './panel-nav/panel-nav.component';
 import { PanelComponent } from './panel/panel.component';
 import { AuthModule } from './auth.module';
 
+import { TransactionsSortPipe } from './panel-transactions/transactions-sort.pipe';
+import { SummaryTransformPipe } from './panel-summary/summary-transform.pipe';
+import { UserProfileTransformPipe } from './user-profile/user-profile-transform.pipe';
+import { CategoriesTransformPipe } from './panel-categories/categories-transform.pipe';
 
 @NgModule({
     imports: [
@@ -39,7 +43,11 @@ import { AuthModule } from './auth.module';
         PanelTransactionsComponent,
         YearNavComponent,
         PanelNavComponent,
-        PanelComponent
+        PanelComponent,
+        TransactionsSortPipe,
+        SummaryTransformPipe,
+        UserProfileTransformPipe,
+        CategoriesTransformPipe
     ],
     providers: [
         BudgetService

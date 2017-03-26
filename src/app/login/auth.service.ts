@@ -13,7 +13,7 @@ export class AuthService {
     auth0;
     // store the URL so we can redirect after logging in
     redirectUrl: string;
-
+    realm: string;
     authenticated: boolean = false;
     authenticatedSource = new Subject<any[]>();
     authenticated$ = this.authenticatedSource = new Subject<any[]>();
@@ -28,19 +28,17 @@ export class AuthService {
             // specify your desired callback URL
             callbackURL: 'http://localhost:3000',
             responseType: 'token id_token'
-
         });
-
+        this.realm = settings.auth.realm;
     }
 
-    public login(username: string, password: string): void {
+    login(username: string, password: string): void {
         this.auth0.client.login({
-            realm: 'budget',
+            realm: 'Test',
             username,
             password
         }, (err, authResult) => {
             if (err) {
-                console.log(err)
                 this.authenticationResponse({ error: 'User could not be authenticated' });
                 return;
             }
@@ -52,12 +50,12 @@ export class AuthService {
         });
     }
 
-    public isAuthenticated(): boolean {
+    isAuthenticated(): boolean {
         // Check whether the id_token is expired or not
         return tokenNotExpired();
     }
 
-    public logout(): void {
+    logout(): void {
         // Remove token from localStorage
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');

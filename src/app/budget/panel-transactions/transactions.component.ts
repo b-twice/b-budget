@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../budget.service';
 import { UserTransaction } from '../models';
-import { UtilService } from '../../shared/util/util.service';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -13,12 +13,13 @@ import { UtilService } from '../../shared/util/util.service';
 export class PanelTransactionsComponent implements OnInit {
 
   loaded: boolean = false;
-  userTransactions: UserTransaction[];
+  userTransactions: Observable<UserTransaction[]>;
+  sortProperty: string;
+  sortDesc: boolean = false;
 
   constructor(
     public route: ActivatedRoute,
     public budgetService: BudgetService,
-    public utilService: UtilService
   ) { }
 
   ngOnInit() {
@@ -29,42 +30,16 @@ export class PanelTransactionsComponent implements OnInit {
   }
 
   getTransactions(name: string, year: string): void {
-    this.loaded = false;
+    // this.loaded = false;
     if (!name || !year) { return; }
-    if (name == "All") {
-      this.budgetService.getUserTransactions(year)
-        .subscribe(
-        userTransactions => this.setTransactions(userTransactions)
-        );
-      return;
-    }
-    this.budgetService.getUserTransaction(name, year)
-      .subscribe(
-      userTransactions => this.setTransactions(userTransactions),
-      err => console.log(err)
-      )
+    if (name == "All") this.userTransactions = this.budgetService.getUserTransactions(year);
+    else this.userTransactions = this.budgetService.getUserTransaction(name, year);
   }
 
-  setTransactions(transactions: UserTransaction[]) {
-    this.userTransactions = transactions;
-    this.loaded = true;
-  }
-
-  sort(property) {
-    this.loaded = false;
-    // get key based on pos of column name (assumes same order)
-    let type = typeof this.userTransactions[0][property];
-    this.userTransactions.sort(this.dynamicSort(property, type));
-    this.loaded = true;
-  }
-  dynamicSort(property: string, type: string) {
-    let sortOrder = 1;
-    if (property[0] === "-") {
-      sortOrder = -1;
-      property = property.substr(1);
-    }
-    if (type === 'number') return (a, b) => (a[property] > b[property]) ? -1 : (a[property] < b[property]) ? 1 : 0;
-    if (type === 'string') return (a, b) => a[property].localeCompare(b[property]);
+  sort(sortProperty: string) {
+    if (this.sortProperty === sortProperty) this.sortDesc = !this.sortDesc;
+    else this.sortDesc = false;
+    this.sortProperty = sortProperty;
   }
 
 }
