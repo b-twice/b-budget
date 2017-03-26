@@ -34,7 +34,7 @@ export class AuthService {
 
     login(username: string, password: string): void {
         this.auth0.client.login({
-            realm: 'Test',
+            realm: this.realm,
             username,
             password
         }, (err, authResult) => {

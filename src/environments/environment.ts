@@ -11,6 +11,5 @@ export const environment = {
         domain: 'bgeo.auth0.com',
         clientID: 'xwySOzyNI4eumuYDE83ESq1zQrpL2T7g'
     },
-
     apiEndpoint: 'http://localhost:5000/api'
 };
