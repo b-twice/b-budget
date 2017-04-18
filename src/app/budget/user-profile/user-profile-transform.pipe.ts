@@ -15,7 +15,6 @@ export class UserProfileTransformPipe implements PipeTransform {
     if (values === null) {
       return values
     }
-    if (name === "All") return this.utilService.combineObjectValues<UserProfile>(new UserProfile("All"), values)
     return values
   }
 

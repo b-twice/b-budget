@@ -41,8 +41,7 @@ export class PanelCategoriesComponent implements OnInit {
     if (!name || !year) { return; }
     this.name = name;
     this.year = year;
-    if (name == "All") this.userCategories = this.budgetService.getUserCategories(year)
-    else this.userCategories = this.budgetService.getUserCategory(name, year)
+    this.userCategories = this.budgetService.getUserCategory(name, year)
   }
 
 }

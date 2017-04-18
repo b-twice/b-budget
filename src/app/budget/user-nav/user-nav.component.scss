@@ -8,8 +8,6 @@ $nav-opacity-base: $nav-opacity-base;
 $nav-opacity-hover: $nav-opacity-hover;
 
 :host {
-    position:fixed;
-    margin-top:5rem; // update based on size of header
     left:0;
     right:0;
 }

@@ -13,4 +13,5 @@ export class UtilService {
         });
         return newObject;
     }
+
 }

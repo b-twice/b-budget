@@ -73,8 +73,7 @@ export class PanelSummaryComponent implements OnInit {
         if (!name || !year) { return; }
         this.name = name;
         this.year = year;
-        if (name == "All") this.userSummary = this.budgetService.getUserSummaries(year)
-        else this.userSummary = this.budgetService.getUserSummary(name, year)
+        this.userSummary = this.budgetService.getUserSummary(name, year)
     }
 
     getKeyDisplay(key: string): string {

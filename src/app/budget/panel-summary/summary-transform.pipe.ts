@@ -15,7 +15,6 @@ export class SummaryTransformPipe implements PipeTransform {
     if (values === null) {
       return values
     }
-    if (name === "All") return this.utilService.combineObjectValues(new UserSummary(year, "All"), values)
     return values
   }
 

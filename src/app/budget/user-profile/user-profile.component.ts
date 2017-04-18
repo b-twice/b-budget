@@ -31,7 +31,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUserProfile(name): void {
-    if (name == "All") this.userProfile = this.budgetService.getUserProfiles()
-    else this.userProfile = this.budgetService.getUserProfile(name);
+    this.userProfile = this.budgetService.getUserProfile(name);
   }
 }
