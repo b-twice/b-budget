@@ -10,14 +10,14 @@
     </ng-template>
 </div>
 <div class="transaction-table">
-    <div class="table-row table-column">
-        <div class="table-row-cell row-category-name" (click)="sort('categoryName')">Category</div>
-        <div class="table-row-cell row-date" (click)="sort('date')">Date</div>
-        <div class="table-row-cell row-description" (click)="sort('description')">Description</div>
-        <div class="table-row-cell row-amount" (click)="sort('amount')">Amount</div>
-    </div>
-    <div class="table-body table-main-content">
-        <div *ngIf="userTransactions | async as transactions; else loading">
+    <div *ngIf="userTransactions | async as transactions; else loading">
+        <div class="table-row table-column">
+            <div class="table-row-cell row-category-name" (click)="sort('categoryName')">Category</div>
+            <div class="table-row-cell row-date" (click)="sort('date')">Date</div>
+            <div class="table-row-cell row-description" (click)="sort('description')">Description</div>
+            <div class="table-row-cell row-amount" (click)="sort('amount')">Amount</div>
+        </div>
+        <div class="table-body table-main-content">
             <div class="table-row" *ngFor="let transaction of transactions | transactionsSort:sortProperty:sortDesc">
                 <div class="table-row-cell row-category-name">{{transaction.categoryName}}</div>
                 <div class="table-row-cell row-date">{{transaction.date | date:'MMM d'}}</div>
