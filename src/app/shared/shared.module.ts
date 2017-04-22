@@ -12,6 +12,7 @@ import { SiteHeaderComponent } from './site-header/site-header.component';
 // Services
 import { UtilService } from './util/util.service';
 import { NumberChangeComponent } from './number-change/number-change.component';
+import { SelectIconComponent } from './select-icon/select-icon.component';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { NumberChangeComponent } from './number-change/number-change.component';
         LoadingComponent,
         MessageComponent,
         SiteHeaderComponent,
-        NumberChangeComponent
+        NumberChangeComponent,
+        SelectIconComponent
     ],
     exports: [
         CommonModule,
@@ -29,7 +31,8 @@ import { NumberChangeComponent } from './number-change/number-change.component';
         MessageComponent,
         SiteHeaderComponent,
         DropdownModule,
-        NumberChangeComponent
+        NumberChangeComponent,
+        SelectIconComponent
     ],
     providers: [
         UtilService

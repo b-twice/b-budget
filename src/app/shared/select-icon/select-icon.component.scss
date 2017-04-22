@@ -1,0 +1,21 @@
+@import '../../../styles/base.scss';
+@import '../../../styles/styles.scss';
+
+:host {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    padding: 6px 10px;
+    cursor:pointer;
+    &:hover .select-icon {
+        background:$primary-color;
+    }
+    &.active .select-icon {
+        background:$primary-color;
+    }
+
+}
+.select-icon {
+  @extend .circle-icon;
+  background:$background-shade-color;
+}

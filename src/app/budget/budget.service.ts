@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -22,14 +22,14 @@ export class BudgetService {
     ) {
     }
 
-    public makeRequest<T>(fragment: string, authenticated = false): Observable<T> {
+    public makeRequest<T>(fragment: string, params = null, auth = false): Observable<T> {
         let requestUrl = `${this.settings.apiEndpoint}/${fragment}`;
-        if (authenticated) {
-            return this.authHttp.get(requestUrl)
+        if (auth) {
+            return this.authHttp.get(requestUrl, new RequestOptions({ search: params }))
                 .map(this.extractData)
                 .catch(this.handleError);
         }
-        return this.http.get(requestUrl)
+        return this.http.get(requestUrl, { search: params })
             .map(this.extractData)
 
             .catch(this.handleError);
@@ -55,34 +55,40 @@ export class BudgetService {
     }
 
     public getUserSummaries(year: string): Observable<[UserSummary]> {
-        return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}`, true);
+        return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}`, null, true);
     }
     public getUserSummary(name: string, year: string): Observable<[UserSummary]> {
-        return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}/user/${name}`, true);
+        return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}/user/${name}`, null, true);
     }
 
     public getUserProfiles(): Observable<UserProfile[]> {
-        return this.makeRequest<UserProfile[]>('user-profiles', true);
+        return this.makeRequest<UserProfile[]>('user-profiles', null, true);
     }
     public getUserProfile(name: string): Observable<UserProfile[]> {
-        return this.makeRequest<UserProfile[]>(`user-profiles/${name}`, true);
+        return this.makeRequest<UserProfile[]>(`user-profiles/${name}`, null, true);
     }
 
     public getUserCategories(year: string): Observable<[UserCategory]> {
-        return this.makeRequest<UserCategory[]>(`user-categories/year/${year}`, true);
+        return this.makeRequest<UserCategory[]>(`user-categories/year/${year}`, null, true);
     }
     public getUserCategory(name: string, year: string): Observable<[UserCategory]> {
-        return this.makeRequest<UserCategory[]>(`user-categories/year/${year}/user/${name}`, true);
+        return this.makeRequest<UserCategory[]>(`user-categories/year/${year}/user/${name}`, null, true);
     }
 
-    public getUserTransactions(year: string): Observable<[UserTransaction]> {
-        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}`, true);
+    public getUserTransactions(year: string, categories: string[]): Observable<[UserTransaction]> {
+        let params = new URLSearchParams();
+        categories.map(c => { params.append('categoryNames', c), console.log(c) })
+        console.log(params.toString())
+        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}`, params, true);
     }
-    public getUserTransaction(name: string, year: string): Observable<[UserTransaction]> {
-        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}`, true);
+    public getUserTransaction(name: string, year: string, categories: string[]): Observable<[UserTransaction]> {
+        let params = new URLSearchParams();
+        categories.map(c => { params.append('categoryNames', c), console.log(c) })
+        console.log(params.toString())
+        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}`, params, true);
     }
     public getUserTransactionCategory(name: string, year: string, category: string): Observable<[UserTransaction]> {
-        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}/category/${category}`, true);
+        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}/category/${category}`, null, true);
     }
 
 }
