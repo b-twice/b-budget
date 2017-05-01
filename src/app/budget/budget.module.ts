@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DatePipe, CommonModule } from '@angular/common';
 import { HttpModule, Http, RequestOptions } from '@angular/http';
 
-import { BudgetRoutingModule } from './budget-routing.module';
+import { BudgetRoutingModule } from './routing/budget-routing.module';
 
-import { BudgetService } from './budget.service';
+import { BudgetService } from './services/budget.service';
 
 //shared
 import { SharedModule } from '../shared/shared.module';
@@ -19,12 +19,15 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { YearNavComponent } from './year-nav/year-nav.component';
 import { PanelNavComponent } from './panel-nav/panel-nav.component';
 import { PanelComponent } from './panel/panel.component';
-import { AuthModule } from './auth.module';
+import { AuthModule } from './services/auth.module';
 
 import { TransactionsSortPipe } from './panel-transactions/transactions-sort.pipe';
 import { SummaryTransformPipe } from './panel-summary/summary-transform.pipe';
 import { UserProfileTransformPipe } from './user-profile/user-profile-transform.pipe';
 import { CategoriesTransformPipe } from './panel-categories/categories-transform.pipe';
+import { FilterControlsComponent } from './filter-controls/filter-controls.component';
+import { PanelChartComponent } from './panel-chart/panel-chart.component';
+import { PanelChartService } from './panel-chart/panel-chart.service';
 
 @NgModule({
     imports: [
@@ -47,10 +50,14 @@ import { CategoriesTransformPipe } from './panel-categories/categories-transform
         TransactionsSortPipe,
         SummaryTransformPipe,
         UserProfileTransformPipe,
-        CategoriesTransformPipe
+        CategoriesTransformPipe,
+        FilterControlsComponent,
+        PanelChartComponent
     ],
     providers: [
-        BudgetService
+        BudgetService,
+        PanelChartService,
+        DatePipe
     ]
 })
 export class BudgetModule { }

@@ -18,9 +18,11 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@types/auth0": "^2.4.0",
+    "@types/d3": "^4.8.0",
     "angular2-jwt": "^0.1.28",
     "auth0-js": "^8.4.0",
     "core-js": "^2.4.1",
+    "d3": "^4.8.0",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },

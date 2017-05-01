@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../budget.service';
+import { BudgetService } from '../services/budget.service';
 import { UserSummary } from '../models';
 import { Observable } from 'rxjs/Observable';
 

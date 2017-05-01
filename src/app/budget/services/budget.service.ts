@@ -5,13 +5,13 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import { AuthHttp } from 'angular2-jwt';
-import { APP_SETTINGS, IAppSettings } from '../app.settings';
+import { APP_SETTINGS, IAppSettings } from '../../app.settings';
 import {
     UserProfile, Category,
     FiscalYear, User, Transaction,
     UserSummary, UserCategory,
     UserTransaction
-} from './models';
+} from '../models';
 
 @Injectable()
 export class BudgetService {
@@ -78,13 +78,11 @@ export class BudgetService {
     public getUserTransactions(year: string, categories: string[]): Observable<[UserTransaction]> {
         let params = new URLSearchParams();
         categories.map(c => { params.append('categoryNames', c), console.log(c) })
-        console.log(params.toString())
         return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}`, params, true);
     }
     public getUserTransaction(name: string, year: string, categories: string[]): Observable<[UserTransaction]> {
         let params = new URLSearchParams();
         categories.map(c => { params.append('categoryNames', c), console.log(c) })
-        console.log(params.toString())
         return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}`, params, true);
     }
     public getUserTransactionCategory(name: string, year: string, category: string): Observable<[UserTransaction]> {

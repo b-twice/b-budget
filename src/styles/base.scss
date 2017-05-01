@@ -2,6 +2,7 @@ $font-header: Montserrat, sans-serif;
 $font-body: Lato, sans-serif;
 $primary-color: rgba(230, 126, 34,1.0);
 $background-shade-color:#EBEBEB;
+$error-color:#e74c3c;
 
 
 // NAVIGATION
@@ -56,4 +57,10 @@ $site-opacity-base: .9;
             opacity:1;
         }
     }
+}
+
+
+$link-underline: linear-gradient(to bottom, rgba(0,0,0,0) 90%, rgba(0,0,0,0.3) 100%);
+.link-underline {
+    background-image:$link-underline;
 }

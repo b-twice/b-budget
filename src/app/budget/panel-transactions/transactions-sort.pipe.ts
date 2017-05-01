@@ -5,9 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TransactionsSortPipe implements PipeTransform {
 
-  transform(values: any, sortProperty: string, reverse: boolean): any {
+  transform(values: any[], sortProperty: string, reverse: boolean): any {
     if (!sortProperty) {
       return values
+    }
+    if (!values.length) {
+      return [];
     }
     let type = typeof values[0][sortProperty];
     return values.sort(this.dynamicSort(sortProperty, type, reverse))

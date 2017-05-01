@@ -13,6 +13,8 @@ import { SiteHeaderComponent } from './site-header/site-header.component';
 import { UtilService } from './util/util.service';
 import { NumberChangeComponent } from './number-change/number-change.component';
 import { SelectIconComponent } from './select-icon/select-icon.component';
+import { SelectIconService } from './select-icon/select-icon.service';
+import { SimpleChartComponent } from './simple-chart/simple-chart.component';
 
 @NgModule({
     imports: [
@@ -23,7 +25,8 @@ import { SelectIconComponent } from './select-icon/select-icon.component';
         MessageComponent,
         SiteHeaderComponent,
         NumberChangeComponent,
-        SelectIconComponent
+        SelectIconComponent,
+        SimpleChartComponent
     ],
     exports: [
         CommonModule,
@@ -32,10 +35,12 @@ import { SelectIconComponent } from './select-icon/select-icon.component';
         SiteHeaderComponent,
         DropdownModule,
         NumberChangeComponent,
-        SelectIconComponent
+        SelectIconComponent,
+        SimpleChartComponent
     ],
     providers: [
-        UtilService
+        UtilService,
+        SelectIconService
     ]
 
 })

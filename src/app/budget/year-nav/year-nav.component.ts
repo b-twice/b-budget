@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FiscalYear } from '../models/fiscal-year';
-import { BudgetService } from '../budget.service';
+import { BudgetService } from '../services/budget.service';
 @Component({
   selector: 'budget-year-nav',
   templateUrl: './year-nav.component.html',

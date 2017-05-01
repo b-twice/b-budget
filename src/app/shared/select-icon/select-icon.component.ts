@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, HostListener, HostBinding } from '@angular/core';
+import { SelectIconService } from './select-icon.service';
 
 @Component({
   selector: 'select-icon',
@@ -10,10 +11,14 @@ export class SelectIconComponent implements OnInit {
   @Input() item: string;
   @Input() activeClassName: string = 'active';
   isActive = false;
-  constructor() { }
+  constructor(
+    public selectIconService: SelectIconService
+  ) { }
 
   ngOnInit() {
+    this.selectIconService.clearRequest$.subscribe(r => this.isActive = false);
   }
+
   @HostBinding('class') get setActive() {
     return this.isActive ? this.activeClassName : '';
   }

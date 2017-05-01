@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../budget.service';
+import { BudgetService } from '../services/budget.service';
 import { UserTransaction } from '../models';
 import { Category } from '../models';
 import { Observable } from 'rxjs/Observable';
-
+import { FilterControlsComponent } from '../filter-controls/filter-controls.component';
+import { PanelChartService } from '../panel-chart/panel-chart.service';
 
 @Component({
   selector: 'budget-panel-transactions',
@@ -13,18 +15,22 @@ import { Observable } from 'rxjs/Observable';
 })
 export class PanelTransactionsComponent implements OnInit {
 
-  loaded: boolean = false;
   userTransactions: Observable<UserTransaction[]>;
-  categories: Observable<Category[]>;
+  transactionsTotal: number = 0;
   sortProperty: string;
   sortDesc: boolean = false;
-  userCategories: string[] = [];
   user: string;
   year: string;
+
+  @ViewChild(FilterControlsComponent)
+  private filterControls: FilterControlsComponent;
+
 
   constructor(
     public route: ActivatedRoute,
     public budgetService: BudgetService,
+    public panelChartService: PanelChartService,
+    public datePipe: DatePipe
   ) { }
 
   ngOnInit() {
@@ -35,15 +41,15 @@ export class PanelTransactionsComponent implements OnInit {
         this.getTransactions();
       }
     )
-    this.categories = this.budgetService.getCategories();
   }
 
   getTransactions(): void {
-    // this.loaded = false;
     if (!this.user || !this.year) { return; }
-    console.log(this.userCategories)
-    if (name == "All") this.userTransactions = this.budgetService.getUserTransactions(this.year, this.userCategories);
-    else this.userTransactions = this.budgetService.getUserTransaction(this.user, this.year, this.userCategories);
+    this.userTransactions = this.budgetService.getUserTransaction(this.user, this.year, this.filterControls.userCategories);
+    this.userTransactions.subscribe(t => {
+      this.summarizeTransactions(t);
+      this.panelChartService.sendData(this.summarizeTransactionsByMonth(t));
+    });
   }
 
   sort(sortProperty: string) {
@@ -52,16 +58,18 @@ export class PanelTransactionsComponent implements OnInit {
     this.sortProperty = sortProperty;
   }
 
-  filterCategory(category: Category) {
-    let inList: number = this.userCategories.indexOf(category.name);
-    if (inList == -1) {
-      this.userCategories.push(category.name);
-    }
-    else {
-      this.userCategories.splice(inList, 1);
-    };
-    this.getTransactions()
+  categoryChange() {
+    this.getTransactions();
+  }
 
+  summarizeTransactions(transactions: UserTransaction[]) {
+    this.transactionsTotal = 0;
+    transactions.forEach(t => this.transactionsTotal += t.amount);
+  }
+
+  summarizeTransactionsByMonth(transactions: UserTransaction[]) {
+    transactions.forEach(t => t.date = this.datePipe.transform(t.date, 'MMM'));
+    return transactions
   }
 
 }

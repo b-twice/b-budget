@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { BudgetDashboardComponent } from './dashboard.component';
-import { PanelComponent } from './panel/panel.component';
-import { AuthGuard } from '../login/auth-guard.service';
+import { BudgetDashboardComponent } from '../dashboard.component';
+import { PanelComponent } from '../panel/panel.component';
+import { AuthGuard } from '../../login/auth-guard.service';
 
 const adminRoutes: Routes = [
     {

@@ -1,0 +1,6 @@
+<div *ngIf="chartData;  else loading">
+  <simple-chart [data]="data" x="amount" y="date"></simple-chart>
+</div>
+<ng-template #loading>
+  <loading></loading>
+</ng-template>

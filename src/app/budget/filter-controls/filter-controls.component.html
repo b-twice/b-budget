@@ -1,0 +1,10 @@
+<div class="table-row filter-header">
+  <div class="table-row-cell">Filter:</div>
+  <div class="table-row-cell category-filter--clear" [class.active]="clearActive" (click)="categoryClear()"><i class="fa fa-times" aria-hidden="true"></i></div>
+</div>
+<div class="table-body" *ngIf="categories | async as filterCategories; else loading">
+  <select-icon *ngFor="let category of filterCategories" [item]="category.name" (click)="categorySelect(category)"></select-icon>
+</div>
+<ng-template #loading>
+  <loading></loading>
+</ng-template>

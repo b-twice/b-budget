@@ -1,0 +1,18 @@
+@import '../../../styles/styles.scss';
+@import '../../../styles/table.scss';
+
+:host {
+  display:block;
+  border-right: 1px solid #ECEFF1;
+  .filter-header {
+    justify-content:space-between;
+  }
+  .category-filter--clear {
+    cursor:default;
+    color:rgba(0,0,0, 0.3);
+    &.active {
+        cursor:pointer;
+        color:$error-color;
+    }
+  }
+}
