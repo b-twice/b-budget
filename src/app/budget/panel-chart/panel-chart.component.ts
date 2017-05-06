@@ -15,7 +15,12 @@ export class PanelChartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.panelChartService.data$.subscribe(r => this.chartData = r);
+    this.panelChartService.data$.subscribe(d => this.setChartData(d));
+  }
+
+  setChartData(data: any[]) {
+    this.chartData = [];
+    this.chartData = data;
   }
 
 }
