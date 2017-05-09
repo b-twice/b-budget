@@ -42,6 +42,7 @@ export class SimpleChartComponent implements OnInit {
       // sort objects by date
       .sort((a,b) => d3.ascending(a.key, b.key));
 
+    //http://codepen.io/levvsha/pen/gWbXdm
     console.log(entries)
     console.log(this.data[0])
     let x = d3.scalePoint<string>().range([0, width])
