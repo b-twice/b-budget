@@ -38,26 +38,27 @@ export class SimpleChartComponent implements OnInit {
       .key(d => d[this.x]) // group data by unique values
       // rollup data into object  
       .rollup(d => d3.sum(d, g => g[this.y])).entries(this.data)
-      .map(d => {return {key:+d.key, value:d.value}})
+      .map(d => {return {key:d.key, value:d.value}})
       // sort objects by date
       .sort((a,b) => d3.ascending(a.key, b.key));
 
     console.log(entries)
     console.log(this.data[0])
-    let x = d3.scalePoint<number>().range([0, width])
+    let x = d3.scalePoint<string>().range([0, width])
     let y = d3.scaleLinear().rangeRound([height, 0]);
     // assign data type of data to line
-    let line = d3.line<{key: number, value:number}>()
+    let line = d3.line<{key: string, value:number}>()
       .curve(d3.curveLinear)
       .x(d => x(d["key"]))  // use attribute to avoid type errors
       .y(d => y(d["value"]));
 
     // x domain
     x.domain(entries.map(d => d.key));
+    // x.domain(entries.map(d => d3.timeFormat('%b')(d3.timeParse('%m')(d.key))));
     y.domain([0, d3.max(entries, d => d.value)]);
 
+    // console.log(entries.map(e=> d3.timeFormat('%b')(d3.timeParse('%m')(e.key))))
     let xAxis = d3.axisBottom(x)
-      .tickValues(entries.map(d=>d.key))
 
     let g = svg.append("g")
       .attr("transform", `translate(${this.marginLeft}, ${this.marginTop})`);
