@@ -68,7 +68,7 @@ export class PanelTransactionsComponent implements OnInit {
   }
 
   summarizeTransactionsByMonth(transactions: UserTransaction[]) {
-    transactions.forEach(t => t.date = this.datePipe.transform(t.date, 'MMM'));
+    transactions.forEach(t => t.date = this.datePipe.transform(t.date, 'MM'));
     return transactions
   }
 
