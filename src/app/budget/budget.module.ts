@@ -28,6 +28,7 @@ import { CategoriesTransformPipe } from './panel-categories/categories-transform
 import { FilterControlsComponent } from './filter-controls/filter-controls.component';
 import { PanelChartComponent } from './panel-chart/panel-chart.component';
 import { PanelChartService } from './panel-chart/panel-chart.service';
+import { PanelGroceriesComponent } from './panel-groceries/panel-groceries.component';
 
 @NgModule({
     imports: [
@@ -52,7 +53,8 @@ import { PanelChartService } from './panel-chart/panel-chart.service';
         UserProfileTransformPipe,
         CategoriesTransformPipe,
         FilterControlsComponent,
-        PanelChartComponent
+        PanelChartComponent,
+        PanelGroceriesComponent
     ],
     providers: [
         BudgetService,
