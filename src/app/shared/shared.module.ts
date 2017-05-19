@@ -16,6 +16,9 @@ import { SelectIconComponent } from './select-icon/select-icon.component';
 import { SelectIconService } from './select-icon/select-icon.service';
 import { SimpleChartComponent } from './simple-chart/simple-chart.component';
 
+// Pipes
+import { DynamicSortPipe } from './pipes/dynamic-sort.pipe';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -26,7 +29,8 @@ import { SimpleChartComponent } from './simple-chart/simple-chart.component';
         SiteHeaderComponent,
         NumberChangeComponent,
         SelectIconComponent,
-        SimpleChartComponent
+        SimpleChartComponent,
+        DynamicSortPipe
     ],
     exports: [
         CommonModule,
@@ -36,7 +40,8 @@ import { SimpleChartComponent } from './simple-chart/simple-chart.component';
         DropdownModule,
         NumberChangeComponent,
         SelectIconComponent,
-        SimpleChartComponent
+        SimpleChartComponent,
+        DynamicSortPipe
     ],
     providers: [
         UtilService,

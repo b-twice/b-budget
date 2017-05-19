@@ -8,7 +8,7 @@
     </div>
     <div *ngIf="userTransactions | async as transactions;  else loading">
         <div class="table-body table-main-content">
-            <div class="table-row" *ngFor="let transaction of transactions | transactionsSort:sortProperty:sortDesc">
+            <div class="table-row" *ngFor="let transaction of transactions | dynamicSort:sortProperty:sortDesc">
                 <div class="table-row-cell flex-size-1">{{transaction.categoryName}}</div>
                 <div class="table-row-cell flex-size-1">{{transaction.date | date:'MMM d'}}</div>
                 <div class="table-row-cell flex-size-3">{{transaction.description}}</div>

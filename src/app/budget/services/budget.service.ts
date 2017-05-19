@@ -10,7 +10,7 @@ import {
     UserProfile, Category,
     FiscalYear, User, Transaction,
     UserSummary, UserCategory,
-    UserTransaction
+    UserTransaction, UserGrocery
 } from '../models';
 
 @Injectable()
@@ -77,16 +77,31 @@ export class BudgetService {
 
     public getUserTransactions(year: string, categories: string[]): Observable<[UserTransaction]> {
         let params = new URLSearchParams();
-        categories.map(c => { params.append('categoryNames', c), console.log(c) })
+        categories.map(c => params.append('categoryNames', c))
         return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}`, params, true);
     }
     public getUserTransaction(name: string, year: string, categories: string[]): Observable<[UserTransaction]> {
         let params = new URLSearchParams();
-        categories.map(c => { params.append('categoryNames', c), console.log(c) })
+        categories.map(c => params.append('categoryNames', c))
         return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}`, params, true);
     }
     public getUserTransactionCategory(name: string, year: string, category: string): Observable<[UserTransaction]> {
         return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}/category/${category}`, null, true);
     }
+
+    public getUserGroceries(year: string, categories: string[]): Observable<[UserGrocery]> {
+        let params = new URLSearchParams();
+        categories.map(c => params.append('categoryNames', c))
+        return this.makeRequest<UserGrocery[]>(`user-groceries/year/${year}`, params, true);
+    }
+    public getUserGrocery(name: string, year: string, categories: string[]): Observable<[UserGrocery]> {
+        let params = new URLSearchParams();
+        categories.map(c => params.append('categoryNames', c))
+        return this.makeRequest<UserGrocery[]>(`user-groceries/year/${year}/user/${name}`, params, true);
+    }
+    public getUserGroceryCategory(name: string, year: string, category: string): Observable<[UserGrocery]> {
+        return this.makeRequest<UserGrocery[]>(`user-groceries/year/${year}/user/${name}/category/${category}`, null, true);
+    }
+
 
 }

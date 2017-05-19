@@ -1,0 +1,36 @@
+<!--<budget-filter-controls (onCategoryChange)="categoryChange()"></budget-filter-controls>-->
+<div class="grocery-table">
+  <div class="table-row table-column">
+    <div class="table-row-cell flex-size-1" (click)="sort('date')">Date</div>
+    <div class="table-row-cell flex-size-2" (click)="sort('supermarket')">Supermarket</div>
+    <div class="table-row-cell flex-size-2" (click)="sort('category')">Category</div>
+    <div class="table-row-cell flex-size-2" (click)="sort('name')">Name</div>
+    <div class="table-row-cell flex-size-1" (click)="sort('weight')">Weight</div>
+    <div class="table-row-cell flex-size-1" (click)="sort('organic')">Organic</div>
+    <div class="table-row-cell flex-size-1" (click)="sort('price')">Price</div>
+  </div>
+  <div *ngIf="userGroceries | async as groceries; else loading">
+    <div class="table-body table-main-content">
+      <div class="table-row" *ngFor="let grocery of groceries | dynamicSort:sortProperty:sortDesc">
+        <div class="table-row-cell flex-size-1">{{grocery.date | date:'MMM d'}}</div>
+        <div class="table-row-cell flex-size-2">{{grocery.supermarket}}</div>
+        <div class="table-row-cell flex-size-2">{{grocery.category}}</div>
+        <div class="table-row-cell flex-size-2">{{grocery.name}}</div>
+        <div class="table-row-cell flex-size-1">{{grocery.weight}} {{grocery.unit}}</div>
+        <div class="table-row-cell flex-size-1">{{grocery.organic}}</div>
+        <div class="table-row-cell flex-size-1">{{grocery.price| currency:'USD':true:'1.0-0'}}</div>
+      </div>
+    </div>
+  </div>
+  <ng-template #loading>
+    <loading></loading>
+  </ng-template>
+  <div class="table-summary">
+    <div class="table-row-cell flex-size-1"></div>
+    <div class="table-row-cell flex-size-1"></div>
+    <div class="table-row-cell flex-size-3"></div>
+    <div class="table-row-cell flex-size-1">
+      <span class="link-underline">{{groceriesTotal | currency:'USD':true:'1.0-0'}}</span>
+    </div>
+  </div>
+</div>

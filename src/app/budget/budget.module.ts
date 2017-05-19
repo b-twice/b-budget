@@ -21,14 +21,13 @@ import { PanelNavComponent } from './panel-nav/panel-nav.component';
 import { PanelComponent } from './panel/panel.component';
 import { AuthModule } from './services/auth.module';
 
-import { TransactionsSortPipe } from './panel-transactions/transactions-sort.pipe';
 import { SummaryTransformPipe } from './panel-summary/summary-transform.pipe';
 import { UserProfileTransformPipe } from './user-profile/user-profile-transform.pipe';
 import { CategoriesTransformPipe } from './panel-categories/categories-transform.pipe';
 import { FilterControlsComponent } from './filter-controls/filter-controls.component';
 import { PanelChartComponent } from './panel-chart/panel-chart.component';
 import { PanelChartService } from './panel-chart/panel-chart.service';
-import { PanelGroceriesComponent } from './panel-groceries/panel-groceries.component';
+import { PanelGroceriesComponent } from './panel-groceries/groceries.component';
 
 @NgModule({
     imports: [
@@ -48,7 +47,6 @@ import { PanelGroceriesComponent } from './panel-groceries/panel-groceries.compo
         YearNavComponent,
         PanelNavComponent,
         PanelComponent,
-        TransactionsSortPipe,
         SummaryTransformPipe,
         UserProfileTransformPipe,
         CategoriesTransformPipe,

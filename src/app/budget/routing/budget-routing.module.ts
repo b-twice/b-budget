@@ -26,7 +26,7 @@ const adminRoutes: Routes = [
     // Don't init component, redirect to user/All to display all in user profile
     {
         path: '',
-        redirectTo: '/budget/user/All/2016/summary'
+        redirectTo: '/budget/user/All/2017/summary'
     }
 
 ];

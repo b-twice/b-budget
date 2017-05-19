@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'transactionsSort'
+  name: 'dynamicSort'
 })
-export class TransactionsSortPipe implements PipeTransform {
+export class DynamicSortPipe implements PipeTransform {
 
   transform(values: any[], sortProperty: string, reverse: boolean): any {
     if (!sortProperty) {
