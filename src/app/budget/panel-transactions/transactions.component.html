@@ -1,4 +1,4 @@
-<budget-filter-controls (onCategoryChange)="categoryChange()"></budget-filter-controls>
+<budget-filter-controls (onCategoryChange)="categoryChange()" [categories]="categories"></budget-filter-controls>
 <div class="transaction-table">
     <div class="table-row table-column">
         <div class="table-row-cell flex-size-1" (click)="sort('categoryName')">Category</div>

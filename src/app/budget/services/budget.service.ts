@@ -89,6 +89,10 @@ export class BudgetService {
         return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}/category/${category}`, null, true);
     }
 
+    // FOOD API CALLS
+    public getFoodCategories(): Observable<Category[]> {
+        return this.makeRequest<Category[]>('food-categories');
+    }
     public getUserGroceries(year: string, categories: string[]): Observable<[UserGrocery]> {
         let params = new URLSearchParams();
         categories.map(c => params.append('categoryNames', c))

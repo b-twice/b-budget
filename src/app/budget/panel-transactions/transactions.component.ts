@@ -16,6 +16,7 @@ import { PanelChartService } from '../panel-chart/panel-chart.service';
 export class PanelTransactionsComponent implements OnInit {
 
   userTransactions: Observable<UserTransaction[]>;
+  categories: Observable<Category[]>;
   transactionsTotal: number = 0;
   sortProperty: string;
   sortDesc: boolean = false;
@@ -41,11 +42,12 @@ export class PanelTransactionsComponent implements OnInit {
         this.getTransactions();
       }
     )
+    this.categories = this.budgetService.getCategories();
   }
 
   getTransactions(): void {
     if (!this.user || !this.year) { return; }
-    this.userTransactions = this.budgetService.getUserTransaction(this.user, this.year, this.filterControls.userCategories);
+    this.userTransactions = this.budgetService.getUserTransaction(this.user, this.year, this.filterControls.activeCategories);
     this.userTransactions.subscribe(t => {
       this.summarizeTransactions(t);
       this.panelChartService.sendData(this.summarizeTransactionsByMonth(t));

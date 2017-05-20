@@ -17,6 +17,7 @@ export class PanelGroceriesComponent implements OnInit {
 
   userGroceries: Observable<UserGrocery[]>;
   groceriesTotal: number = 0;
+  foodCategories: Observable<Category[]>;
   sortProperty: string;
   sortDesc: boolean = false;
   user: string;
@@ -40,11 +41,12 @@ export class PanelGroceriesComponent implements OnInit {
         this.getGroceries();
       }
     )
+    this.foodCategories = this.budgetService.getFoodCategories();
   }
 
   getGroceries(): void {
     if (!this.user || !this.year) { return; }
-    this.userGroceries = this.budgetService.getUserGrocery(this.user, this.year, []);
+    this.userGroceries = this.budgetService.getUserGrocery(this.user, this.year, this.filterControls.activeCategories);
     this.userGroceries.subscribe(t => {
       this.summarizeGroceries(t);
       // this.panelChartService.sendData(this.summarizeGroceriesByMonth(t));

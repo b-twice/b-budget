@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { BudgetService } from '../services/budget.service';
 import { SelectIconService } from '../../shared/select-icon/select-icon.service';
 import { Category } from '../models';
@@ -13,9 +13,9 @@ import { Observable } from 'rxjs/Observable';
 export class FilterControlsComponent implements OnInit {
 
   @Output() onCategoryChange = new EventEmitter();
-  userCategories: string[] = [];
+  activeCategories: string[] = [];
   clearActive: boolean = false;
-  categories: Observable<Category[]>;
+  @Input() categories: Observable<Category[]>;
 
   constructor(
     public budgetService: BudgetService,
@@ -23,24 +23,23 @@ export class FilterControlsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.categories = this.budgetService.getCategories();
   }
 
   categorySelect(category: Category) {
-    let inList: number = this.userCategories.indexOf(category.name);
+    let inList: number = this.activeCategories.indexOf(category.name);
     // toggle, if not in list, add, if in list, remove
     if (inList == -1) {
-      this.userCategories.push(category.name);
+      this.activeCategories.push(category.name);
     }
     else {
-      this.userCategories.splice(inList, 1);
+      this.activeCategories.splice(inList, 1);
     };
-    this.clearActive = this.userCategories.length > 0 ? true : false;
+    this.clearActive = this.activeCategories.length > 0 ? true : false;
     this.onCategoryChange.emit();
   }
 
   categoryClear() {
-    this.userCategories = [];
+    this.activeCategories = [];
     this.selectIconService.requestClear(true);
     this.onCategoryChange.emit();
     this.clearActive = false;
