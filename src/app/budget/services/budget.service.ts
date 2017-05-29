@@ -10,7 +10,7 @@ import {
     UserProfile, Category,
     FiscalYear, User, Transaction,
     UserSummary, UserCategory,
-    UserTransaction, UserGrocery
+    UserTransaction, UserGrocery, UserRecipe, UserRecipeIngredient
 } from '../models';
 
 @Injectable()
@@ -93,6 +93,10 @@ export class BudgetService {
     public getFoodCategories(): Observable<Category[]> {
         return this.makeRequest<Category[]>('food-categories');
     }
+    public getRecipeCategories(): Observable<Category[]> {
+        return this.makeRequest<Category[]>('recipe-categories');
+    }
+
     public getUserGroceries(year: string, categories: string[]): Observable<[UserGrocery]> {
         let params = new URLSearchParams();
         categories.map(c => params.append('categoryNames', c))
@@ -105,6 +109,19 @@ export class BudgetService {
     }
     public getUserGroceryCategory(name: string, year: string, category: string): Observable<[UserGrocery]> {
         return this.makeRequest<UserGrocery[]>(`user-groceries/year/${year}/user/${name}/category/${category}`, null, true);
+    }
+
+    public getUserRecipe(name: string, categories: string[]): Observable<[UserRecipe]> {
+        let params = new URLSearchParams();
+        categories.map(c => params.append('categoryNames', c))
+        return this.makeRequest<UserRecipe[]>(`user-recipes/user/${name}`, params, true);
+    }
+    public getUserRecipeCategory(name: string, category: string): Observable<[UserRecipe]> {
+        return this.makeRequest<UserRecipe[]>(`user-recipes/user/${name}/category/${category}`, null, true);
+    }
+
+    public getUserRecipeIngredients(name: string): Observable<[UserRecipeIngredient]> {
+        return this.makeRequest<UserRecipeIngredient[]>(`user-recipe-ingredients/recipe/${name}`, null, true);
     }
 
 

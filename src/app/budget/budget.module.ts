@@ -28,6 +28,8 @@ import { FilterControlsComponent } from './filter-controls/filter-controls.compo
 import { PanelChartComponent } from './panel-chart/panel-chart.component';
 import { PanelChartService } from './panel-chart/panel-chart.service';
 import { PanelGroceriesComponent } from './panel-groceries/groceries.component';
+import { PanelRecipesComponent } from './panel-recipes/panel-recipes.component';
+import { CardRecipeIngredientsComponent } from './card-recipe-ingredients/card-recipe-ingredients.component';
 
 @NgModule({
     imports: [
@@ -52,7 +54,9 @@ import { PanelGroceriesComponent } from './panel-groceries/groceries.component';
         CategoriesTransformPipe,
         FilterControlsComponent,
         PanelChartComponent,
-        PanelGroceriesComponent
+        PanelGroceriesComponent,
+        PanelRecipesComponent,
+        CardRecipeIngredientsComponent
     ],
     providers: [
         BudgetService,

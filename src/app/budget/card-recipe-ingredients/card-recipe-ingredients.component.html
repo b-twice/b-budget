@@ -1,0 +1,20 @@
+<div class="form-wrapper" (click)="closeRecipe()">
+  <div class="form-content">
+    <div class="form-body" (click)="stopPropogation($event)">
+      <div class="form-close">
+        <i class="fa fa-times fa-22" (click)="closeRecipe()" aria-hidden="true"></i>
+      </div>
+      <h3>{{recipe}}</h3>
+      <ul class="ingredient-list">
+        <li class="ingredient-item" *ngFor="let ingredient of ingredients">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+          <div *ngIf="ingredient.count > 0">{{ingredient.count}}</div>
+          <div *ngIf="ingredient.weight > 0">{{ingredient.weight | number:'1.2-2'}} {{ingredient.unit}}</div>
+          <div>
+            {{ingredient.name}} - {{ingredient.cost | currency:'USD':true:'1.2-2'}}, Organic: {{ingredient.costOrganic | currency:'USD':true:'1.2-2'}},
+            Seasonal: {{ingredient.costSeasonal | currency:'USD':true:'1.2-2'}}</div>
+          <li>
+      </ul>
+    </div>
+  </div>
+</div>

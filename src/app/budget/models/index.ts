@@ -7,3 +7,5 @@ export * from './user-summary';
 export * from './user-category';
 export * from './user-transaction';
 export * from './user-grocery';
+export * from './user-recipe';
+export * from './user-recipe-ingredient';
