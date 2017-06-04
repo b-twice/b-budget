@@ -1,21 +1,23 @@
 <div class="popup-wrapper" (click)="closeRecipe()">
   <div class="popup-content">
     <div class="popup-body" (click)="stopPropogation($event)">
+
       <div class="popup-close">
         <i class="fa fa-times fa-22" (click)="closeRecipe()" aria-hidden="true"></i>
       </div>
+
       <div class="recipe-title">
         <h3>{{recipe.name}}</h3><em *ngIf="recipe.pageNumber > 0">pg. {{recipe.pageNumber}}</em>
       </div>
       <div class="ingredient-table">
         <div class="table-row table-column">
-          <div class="table-row-cell flex-size-4">Ingredient</div>
-          <div class="table-row-cell flex-size-2 flex-center">Cost</div>
-          <div class="table-row-cell flex-size-2 flex-center">Cost (O)</div>
-          <div class="table-row-cell flex-size-2 flex-center">Cost (S)</div>
+          <div class="table-row-cell flex-size-4" (click)="sort('name')">Ingredient</div>
+          <div class="table-row-cell flex-size-2 flex-center" (click)="sort('cost')">Cost</div>
+          <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
+          <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
         </div>
         <div class="table-body table-main-content">
-          <div class="table-row" *ngFor="let ingredient of ingredients">
+          <div class="table-row" *ngFor="let ingredient of ingredients | dynamicSort:sortProperty:sortDesc">
             <div class="table-row-cell flex-size-4">{{ingredient.measurement}} {{ingredient.name}}</div>
             <div class="table-row-cell flex-size-2">{{ingredient.cost | currency:'USD':true:'1.2-2'}}</div>
             <div class="table-row-cell flex-size-2">{{ingredient.costOrganic | currency:'USD':true:'1.2-2'}}</div>
@@ -23,6 +25,15 @@
           </div>
         </div>
       </div>
+      <div class="table-summary">
+        <div class="table-row-cell flex-size-4"></div>
+        <div class="table-row-cell flex-size-2"></div>
+        <div class="table-row-cell flex-size-2"></div>
+        <div class="table-row-cell flex-size-2">
+          <span class="link-underline">Total: {{recipeTotal | currency:'USD':true:'1.2-2'}}</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

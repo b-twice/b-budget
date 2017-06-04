@@ -9,12 +9,18 @@ import { UserRecipeIngredient, UserRecipe } from '../models';
 })
 export class CardRecipeIngredientsComponent implements OnInit {
 
-  @Input() ingredients: Observable<UserRecipeIngredient[]>;
+  @Input() ingredients: UserRecipeIngredient[];
   @Input() recipe: UserRecipe;
   @Output() onRecipeClose = new EventEmitter();
+  recipeTotal: number = 0;
+  sortProperty: string;
+  sortDesc: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
+    this.ingredients.forEach(i => this.recipeTotal += i.cost)
+
   }
 
   closeRecipe() {
@@ -22,4 +28,12 @@ export class CardRecipeIngredientsComponent implements OnInit {
   }
 
   stopPropogation(event): void { event.stopPropagation(); }
+
+  sort(sortProperty: string) {
+    if (this.sortProperty === sortProperty) this.sortDesc = !this.sortDesc;
+    else this.sortDesc = false;
+    this.sortProperty = sortProperty;
+  }
+
+
 }
