@@ -26,5 +26,5 @@
     <loading></loading>
   </ng-template>
 </div>
-<budget-recipe-ingredients *ngIf="recipeIngredients | async as ingredients" [ingredients]="ingredients" [recipe]="selectedRecipe"
+<budget-recipe-ingredients *ngIf="recipeIngredients && selectedRecipe" [ingredients]="recipeIngredients" [recipe]="selectedRecipe"
   (onRecipeClose)="recipeClose()"></budget-recipe-ingredients>

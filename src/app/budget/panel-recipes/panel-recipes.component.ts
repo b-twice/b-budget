@@ -21,8 +21,8 @@ export class PanelRecipesComponent implements OnInit {
   sortProperty: string;
   sortDesc: boolean = false;
   user: string;
-  recipeIngredients: Observable<UserRecipeIngredient[]>;
-  selectedRecipe: string;
+  recipeIngredients: UserRecipeIngredient[];
+  selectedRecipe: UserRecipe;
 
   @ViewChild(FilterControlsComponent)
   private filterControls: FilterControlsComponent;
@@ -46,7 +46,7 @@ export class PanelRecipesComponent implements OnInit {
 
   getRecipes(): void {
     if (!this.user) { return; }
-    this.userRecipes = this.budgetService.getUserRecipe(this.user, this.filterControls.activeCategories);
+    this.userRecipes = this.budgetService.getUserRecipes(this.user, this.filterControls.activeCategories);
 
     // this.userRecipes.subscribe(t => {
     // console.log(t);
@@ -71,12 +71,12 @@ export class PanelRecipesComponent implements OnInit {
   // }
 
   getRecipeIngredients(name: string) {
-    this.recipeIngredients = this.budgetService.getUserRecipeIngredients(name);
-    this.selectedRecipe = name;
+    this.budgetService.getUserRecipeIngredients(name).subscribe(i => this.recipeIngredients = i);
+    this.budgetService.getUserRecipe(this.user, name).subscribe(r => { this.selectedRecipe = r; console.log(r) });
   }
   recipeClose(name: string) {
     this.recipeIngredients = null;
-
+    this.selectedRecipe = null;
   }
 
 }
