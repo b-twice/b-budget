@@ -18,8 +18,8 @@
 
 .recipe-title {
     display:flex;
-    flex-direction:row;
-    align-items:flex-end;
+    flex-direction:column;
+    align-items:flex-start;
     margin-bottom:1rem;
 
     h3 {
@@ -27,8 +27,8 @@
         padding:0;
     }
 
-    em {
-        margin-left:2rem;
-    }
+}
 
+.recipe-total {
+    font-weight:700;
 }

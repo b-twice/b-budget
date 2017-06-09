@@ -13,13 +13,19 @@ export class CardRecipeIngredientsComponent implements OnInit {
   @Input() recipe: UserRecipe;
   @Output() onRecipeClose = new EventEmitter();
   recipeTotal: number = 0;
+  recipeOrganicTotal: number = 0;
+  recipeSeasonalTotal: number = 0;
   sortProperty: string;
   sortDesc: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
-    this.ingredients.forEach(i => this.recipeTotal += i.cost)
+    this.ingredients.forEach(i => {
+      this.recipeTotal += i.cost;
+      this.recipeOrganicTotal += i.costOrganic;
+      this.recipeSeasonalTotal += i.costSeasonal;
+    });
 
   }
 

@@ -7,7 +7,11 @@
       </div>
 
       <div class="recipe-title">
-        <h3>{{recipe.name}}</h3><em *ngIf="recipe.pageNumber > 0">pg. {{recipe.pageNumber}}</em>
+        <h3>{{recipe.name}}</h3>
+        <div>
+          <em>{{recipe.cookbook}}</em>
+          <em *ngIf="recipe.pageNumber > 0">pg. {{recipe.pageNumber}}</em>
+        </div>
       </div>
       <div class="ingredient-table">
         <div class="table-row table-column">
@@ -24,16 +28,15 @@
             <div class="table-row-cell flex-size-2">{{ingredient.costSeasonal | currency:'USD':true:'1.2-2'}}</div>
           </div>
         </div>
-      </div>
-      <div class="table-summary">
-        <div class="table-row-cell flex-size-4"></div>
-        <div class="table-row-cell flex-size-2"></div>
-        <div class="table-row-cell flex-size-2"></div>
-        <div class="table-row-cell flex-size-2">
-          <span class="link-underline">Total: {{recipeTotal | currency:'USD':true:'1.2-2'}}</span>
+        <div class="table-body table-main-content">
+          <div class="table-row recipe-total">
+            <div class="table-row-cell flex-size-4">Total</div>
+            <div class="table-row-cell flex-size-2">{{recipeTotal | currency:'USD':true:'1.2-2'}}</div>
+            <div class="table-row-cell flex-size-2">{{recipeOrganicTotal | currency:'USD':true:'1.2-2'}}</div>
+            <div class="table-row-cell flex-size-2">{{recipeSeasonalTotal | currency:'USD':true:'1.2-2'}}</div>
+          </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
