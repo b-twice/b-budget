@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PanelChartService } from './panel-chart.service';
+import { UserTransaction } from '../models';
+import { SimpleChartComponent } from '../../shared/simple-chart/simple-chart.component';
 
 @Component({
   selector: 'budget-panel-chart',
@@ -8,19 +10,18 @@ import { PanelChartService } from './panel-chart.service';
 })
 export class PanelChartComponent implements OnInit {
 
-  chartData: any[];
+  @ViewChild(SimpleChartComponent)
+  private simpleChart: SimpleChartComponent;
 
   constructor(
     public panelChartService: PanelChartService
   ) { }
 
   ngOnInit() {
-    this.panelChartService.data$.subscribe(d => this.setChartData(d));
-  }
-
-  setChartData(data: any[]) {
-    this.chartData = [];
-    this.chartData = data;
+    this.panelChartService.data$.subscribe(d => {
+      console.log("new data")
+      this.simpleChart.drawActive ? this.simpleChart.update(d) : this.simpleChart.draw(d)
+    });
   }
 
 }
