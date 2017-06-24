@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PanelChartService } from './panel-chart.service';
 import { UserTransaction } from '../models';
-import { SimpleChartComponent } from '../../shared/simple-chart/simple-chart.component';
+import { LineChartComponent } from '../../shared/line-chart/line-chart.component';
 
 @Component({
   selector: 'budget-panel-chart',
@@ -10,8 +10,8 @@ import { SimpleChartComponent } from '../../shared/simple-chart/simple-chart.com
 })
 export class PanelChartComponent implements OnInit {
 
-  @ViewChild(SimpleChartComponent)
-  private simpleChart: SimpleChartComponent;
+  @ViewChild(LineChartComponent)
+  private LineChart: LineChartComponent;
 
   constructor(
     public panelChartService: PanelChartService
@@ -20,7 +20,7 @@ export class PanelChartComponent implements OnInit {
   ngOnInit() {
     this.panelChartService.data$.subscribe(d => {
       console.log("new data")
-      this.simpleChart.drawActive ? this.simpleChart.update(d) : this.simpleChart.draw(d)
+      this.LineChart.drawActive ? this.LineChart.update(d) : this.LineChart.draw(d)
     });
   }
 

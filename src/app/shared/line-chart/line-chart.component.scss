@@ -1,0 +1,6 @@
+@import '../../../styles/base.scss';
+/deep/ .chart-line {
+    stroke: $primary-color;
+    stroke-width: 1.5;
+    fill:none;
+}
