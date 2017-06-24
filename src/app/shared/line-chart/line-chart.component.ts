@@ -19,7 +19,7 @@ export class LineChartComponent implements OnInit {
   @Input() xTicks: number = 0;
   @Input() yTicks: number = 5;
   @Input() lineCurve: any = d3.curveLinear;
-
+  @Input() yMax: number = 5000;
 
   chart: d3.Selection<any, any, any, any>;
   xAxis: any;
@@ -41,7 +41,7 @@ export class LineChartComponent implements OnInit {
     // parse and scale data again
     let entries = this.parseData(data, this.xProperty, this.yProperty);
     this.xDomain.domain(entries.map(d => d.key));
-    this.yDomain.domain([0, 5000]);
+    this.yDomain.domain([0, this.yMax]);
 
     this.xAxis = this.createXAxis(this.xDomain);
     this.yAxis = this.createYAxis(this.yDomain, this.yTicks)
@@ -78,7 +78,7 @@ export class LineChartComponent implements OnInit {
     this.line = this.createLine(this.lineCurve, this.xDomain, this.yDomain);
     // x domain
     this.xDomain.domain(entries.map(d => d.key));
-    this.yDomain.domain([0, 5000]);
+    this.yDomain.domain([0, this.yMax]);
     this.xAxis = this.createXAxis(this.xDomain);
     this.yAxis = this.createYAxis(this.yDomain, this.yTicks)
 

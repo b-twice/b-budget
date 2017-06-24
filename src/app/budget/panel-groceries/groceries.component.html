@@ -8,7 +8,7 @@
     <div class="table-row-cell flex-size-1" (click)="sort('count')">Count</div>
     <div class="table-row-cell flex-size-1" (click)="sort('weight')">Weight</div>
     <div class="table-row-cell flex-size-1" (click)="sort('organic')">Organic</div>
-    <div class="table-row-cell flex-size-1" (click)="sort('price')">Price</div>
+    <div class="table-row-cell flex-size-1" (click)="sort('amount')">Price</div>
   </div>
   <div *ngIf="userGroceries | async as groceries; else loading">
     <div class="table-body table-main-content">
@@ -20,7 +20,7 @@
         <div class="table-row-cell flex-size-1 flex-center">{{grocery.count}}</div>
         <div class="table-row-cell flex-size-1 flex-center">{{grocery.weight | number:'1.2-2'}} {{grocery.unit}}</div>
         <div class="table-row-cell flex-size-1 flex-center">{{grocery.organic}}</div>
-        <div class="table-row-cell flex-size-1 flex-center">{{grocery.price| currency:'USD':true:'1.2-2'}}</div>
+        <div class="table-row-cell flex-size-1 flex-center">{{grocery.amount| currency:'USD':true:'1.2-2'}}</div>
       </div>
     </div>
   </div>

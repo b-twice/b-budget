@@ -49,7 +49,7 @@ export class PanelGroceriesComponent implements OnInit {
     this.userGroceries = this.budgetService.getUserGrocery(this.user, this.year, this.filterControls.activeCategories);
     this.userGroceries.subscribe(t => {
       this.summarizeGroceries(t);
-      // this.panelChartService.sendData(this.summarizeGroceriesByMonth(t));
+      this.panelChartService.sendData(this.summarizeGroceriesByMonth(t));
     });
   }
 
@@ -65,13 +65,13 @@ export class PanelGroceriesComponent implements OnInit {
 
   summarizeGroceries(groceries: UserGrocery[]) {
     this.groceriesTotal = 0;
-    groceries.forEach(g => this.groceriesTotal += g.price);
+    groceries.forEach(g => this.groceriesTotal += g.amount);
   }
 
-  // summarizeGroceriesByMonth(groceries: UserGrocery[]) {
-  //   groceries.forEach(t => t.date = this.datePipe.transform(t.date, 'MM'));
-  //   return groceries
-  // }
+  summarizeGroceriesByMonth(groceries: UserGrocery[]) {
+    groceries.forEach(t => t.date = this.datePipe.transform(t.date, 'MM'));
+    return groceries
+  }
 
 }
 

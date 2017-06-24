@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { PanelChartService } from './panel-chart.service';
 import { UserTransaction } from '../models';
 import { LineChartComponent } from '../../shared/line-chart/line-chart.component';
@@ -12,6 +12,15 @@ export class PanelChartComponent implements OnInit {
 
   @ViewChild(LineChartComponent)
   private LineChart: LineChartComponent;
+  @Input() panelType: string;
+  configuration = {
+    transactions: {
+      yMax: 5000
+    },
+    groceries: {
+      yMax: 1000
+    }
+  }
 
   constructor(
     public panelChartService: PanelChartService
@@ -19,7 +28,6 @@ export class PanelChartComponent implements OnInit {
 
   ngOnInit() {
     this.panelChartService.data$.subscribe(d => {
-      console.log("new data")
       this.LineChart.drawActive ? this.LineChart.update(d) : this.LineChart.draw(d)
     });
   }
