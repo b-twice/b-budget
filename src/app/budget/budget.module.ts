@@ -30,6 +30,7 @@ import { PanelChartService } from './panel-chart/panel-chart.service';
 import { PanelGroceriesComponent } from './panel-groceries/groceries.component';
 import { PanelRecipesComponent } from './panel-recipes/panel-recipes.component';
 import { CardRecipeIngredientsComponent } from './card-recipe-ingredients/card-recipe-ingredients.component';
+import { CardGroceriesComponent } from './card-groceries/card-groceries.component';
 
 @NgModule({
     imports: [
@@ -56,7 +57,8 @@ import { CardRecipeIngredientsComponent } from './card-recipe-ingredients/card-r
         PanelChartComponent,
         PanelGroceriesComponent,
         PanelRecipesComponent,
-        CardRecipeIngredientsComponent
+        CardRecipeIngredientsComponent,
+        CardGroceriesComponent
     ],
     providers: [
         BudgetService,

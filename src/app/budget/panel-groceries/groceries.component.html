@@ -8,11 +8,12 @@
     <div class="table-row-cell flex-size-1" (click)="sort('count')">Count</div>
     <div class="table-row-cell flex-size-1" (click)="sort('weight')">Weight</div>
     <div class="table-row-cell flex-size-1" (click)="sort('organic')">Organic</div>
+    <div class="table-row-cell flex-size-2" (click)="sort('unitPrice')">Unit Price</div>
     <div class="table-row-cell flex-size-1" (click)="sort('amount')">Price</div>
   </div>
   <div *ngIf="userGroceries | async as groceries; else loading">
     <div class="table-body table-main-content">
-      <div class="table-row" *ngFor="let grocery of groceries | dynamicSort:sortProperty:sortDesc">
+      <div class="table-row" *ngFor="let grocery of groceries | dynamicSort:sortProperty:sortDesc" (click)="getGroceryPage(grocery.name)">
         <div class="table-row-cell flex-size-1">{{grocery.date | date:'MMM d'}}</div>
         <div class="table-row-cell flex-size-2">{{grocery.supermarket}}</div>
         <div class="table-row-cell flex-size-2">{{grocery.category}}</div>
@@ -20,6 +21,7 @@
         <div class="table-row-cell flex-size-1 flex-center">{{grocery.count}}</div>
         <div class="table-row-cell flex-size-1 flex-center">{{grocery.weight | number:'1.2-2'}} {{grocery.unit}}</div>
         <div class="table-row-cell flex-size-1 flex-center">{{grocery.organic}}</div>
+        <div class="table-row-cell flex-size-2 flex-center">{{grocery.unitPrice | currency:'USD':true:'1.2-2'}}</div>
         <div class="table-row-cell flex-size-1 flex-center">{{grocery.amount| currency:'USD':true:'1.2-2'}}</div>
       </div>
     </div>
@@ -34,8 +36,10 @@
     <div class="table-row-cell flex-size-2"></div>
     <div class="table-row-cell flex-size-1"></div>
     <div class="table-row-cell flex-size-1"></div>
+    <div class="table-row-cell flex-size-2"></div>
     <div class="table-row-cell flex-size-1">
       <span class="link-underline">{{groceriesTotal | currency:'USD':true:'1.0-0'}}</span>
     </div>
   </div>
 </div>
+<budget-groceries-card *ngIf="selectedGroceries" [groceryName]="selectedGroceryName" [groceries]="selectedGroceries" (onModalClose)="modalClose()"></budget-groceries-card>

@@ -10,7 +10,7 @@ export class LineChartComponent implements OnInit {
 
   @Input() xProperty: string;
   @Input() yProperty: string;
-  @Input() width: number = 920;
+  @Input() width: number = 1120;
   @Input() height: number = 220;
   @Input() marginTop: number = 20;
   @Input() marginBottom: number = 30;
@@ -37,11 +37,10 @@ export class LineChartComponent implements OnInit {
 
   update(data) {
     console.log("Updating chart")
-
     // parse and scale data again
     let entries = this.parseData(data, this.xProperty, this.yProperty);
     this.xDomain.domain(entries.map(d => d.key));
-    this.yDomain.domain([0, this.yMax]);
+    this.yDomain.domain(d3.extent(entries, d => d.value));
 
     this.xAxis = this.createXAxis(this.xDomain);
     this.yAxis = this.createYAxis(this.yDomain, this.yTicks)
@@ -78,7 +77,8 @@ export class LineChartComponent implements OnInit {
     this.line = this.createLine(this.lineCurve, this.xDomain, this.yDomain);
     // x domain
     this.xDomain.domain(entries.map(d => d.key));
-    this.yDomain.domain([0, this.yMax]);
+    // this.yDomain.domain([0, this.yMax]);
+    this.yDomain.domain(d3.extent(entries, d => d.value));
     this.xAxis = this.createXAxis(this.xDomain);
     this.yAxis = this.createYAxis(this.yDomain, this.yTicks)
 
@@ -168,7 +168,7 @@ export class LineChartComponent implements OnInit {
     return d3.axisBottom(xDomain);
   }
   createYAxis(yDomain, ticks): d3.Axis<{}> {
-    return d3.axisLeft(yDomain).ticks(ticks);
+    return d3.axisLeft(yDomain);
   }
 
 

@@ -47,12 +47,6 @@ export class PanelRecipesComponent implements OnInit {
   getRecipes(): void {
     if (!this.user) { return; }
     this.userRecipes = this.budgetService.getUserRecipes(this.user, this.filterControls.activeCategories);
-
-    // this.userRecipes.subscribe(t => {
-    // console.log(t);
-    // this.summarizeRecipes(t);
-    // this.panelChartService.sendData(this.summarizeRecipesByMonth(t));
-    // });
   }
 
   sort(sortProperty: string) {
@@ -65,16 +59,11 @@ export class PanelRecipesComponent implements OnInit {
     this.getRecipes();
   }
 
-  // summarizeRecipesByMonth(recipes: UserRecipe[]) {
-  //   recipes.forEach(t => t.date = this.datePipe.transform(t.date, 'MM'));
-  //   return recipes
-  // }
-
   getRecipeIngredients(name: string) {
     this.budgetService.getUserRecipeIngredients(name).subscribe(i => this.recipeIngredients = i);
     this.budgetService.getUserRecipe(this.user, name).subscribe(r => { this.selectedRecipe = r; console.log(r) });
   }
-  recipeClose(name: string) {
+  recipeClose() {
     this.recipeIngredients = null;
     this.selectedRecipe = null;
   }

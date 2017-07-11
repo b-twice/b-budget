@@ -10,6 +10,7 @@ export class UserGrocery {
         public weight: number = 0,
         public unit: string = 'lb',
         public organic: number = 0,
-        public amount: number = 0
+        public amount: number = 0,
+        public unitPrice: number = 0
     ) { }
 }

@@ -7,6 +7,7 @@ export class UserRecipe {
         public name: string,
         public pageNumber: number,
         public servings: number = 0,
+        public servingCost: number = 0,
         public cost: number = 0,
         public costOrganic: number = 0,
         public costSeasonal: number = 0

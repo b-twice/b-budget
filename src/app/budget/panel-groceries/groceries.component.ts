@@ -23,6 +23,9 @@ export class PanelGroceriesComponent implements OnInit {
   user: string;
   year: string;
 
+  selectedGroceries: UserGrocery[];
+  selectedGroceryName: string | null;
+
   @ViewChild(FilterControlsComponent)
   private filterControls: FilterControlsComponent;
 
@@ -72,6 +75,16 @@ export class PanelGroceriesComponent implements OnInit {
     groceries.forEach(t => t.date = this.datePipe.transform(t.date, 'MM'));
     return groceries
   }
+
+  getGroceryPage(groceryName: string) {
+    this.budgetService.getUserGroceryByName(this.user, this.year, groceryName).subscribe(i => { console.log(i); this.selectedGroceries = i });
+    this.selectedGroceryName = groceryName;
+  }
+  modalClose() {
+    this.selectedGroceries = null;
+    this.selectedGroceryName = null;
+  }
+
 
 }
 

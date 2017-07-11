@@ -85,9 +85,6 @@ export class BudgetService {
         categories.map(c => params.append('categoryNames', c))
         return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}`, params, true);
     }
-    public getUserTransactionCategory(name: string, year: string, category: string): Observable<[UserTransaction]> {
-        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}/category/${category}`, null, true);
-    }
 
     // FOOD API CALLS
     public getFoodCategories(): Observable<Category[]> {
@@ -107,9 +104,10 @@ export class BudgetService {
         categories.map(c => params.append('categoryNames', c))
         return this.makeRequest<UserGrocery[]>(`user-groceries/year/${year}/user/${name}`, params, true);
     }
-    public getUserGroceryCategory(name: string, year: string, category: string): Observable<[UserGrocery]> {
-        return this.makeRequest<UserGrocery[]>(`user-groceries/year/${year}/user/${name}/category/${category}`, null, true);
+    public getUserGroceryByName(name: string, year: string, groceryName: string): Observable<[UserGrocery]> {
+        return this.makeRequest<UserGrocery[]>(`user-groceries/year/${year}/user/${name}/grocery/${groceryName}`, null, true);
     }
+
 
     public getUserRecipes(name: string, categories: string[]): Observable<[UserRecipe]> {
         let params = new URLSearchParams();
@@ -118,9 +116,6 @@ export class BudgetService {
     }
     public getUserRecipe(name: string, recipeName: string): Observable<UserRecipe> {
         return this.makeRequest<UserRecipe>(`user-recipes/user/${name}/recipe/${recipeName}`, null, true);
-    }
-    public getUserRecipeCategory(name: string, category: string): Observable<[UserRecipe]> {
-        return this.makeRequest<UserRecipe[]>(`user-recipes/user/${name}/category/${category}`, null, true);
     }
 
     public getUserRecipeIngredients(name: string): Observable<[UserRecipeIngredient]> {

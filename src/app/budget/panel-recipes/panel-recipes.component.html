@@ -3,8 +3,9 @@
   <div class="table-row table-column">
     <div class="table-row-cell flex-size-2" (click)="sort('cookbook')">Cookbook</div>
     <div class="table-row-cell flex-size-2" (click)="sort('category')">Category</div>
-    <div class="table-row-cell flex-size-2" (click)="sort('name')">Name</div>
+    <div class="table-row-cell flex-size-3" (click)="sort('name')">Name</div>
     <div class="table-row-cell flex-size-2 flex-center" (click)="sort('servings')">Servings</div>
+    <div class="table-row-cell flex-size-2 flex-center" (click)="sort('servingCost')">Serving Cost</div>
     <div class="table-row-cell flex-size-2 flex-center" (click)="sort('cost')">Cost</div>
     <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
     <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
@@ -14,8 +15,9 @@
       <div class="table-row" *ngFor="let recipe of recipes | dynamicSort:sortProperty:sortDesc" (click)="getRecipeIngredients(recipe.name)">
         <div class="table-row-cell flex-size-2">{{recipe.cookbook}}</div>
         <div class="table-row-cell flex-size-2">{{recipe.category}}</div>
-        <div class="table-row-cell flex-size-2">{{recipe.name}}</div>
+        <div class="table-row-cell flex-size-3">{{recipe.name}}</div>
         <div class="table-row-cell flex-size-2 flex-center">{{recipe.servings}}</div>
+        <div class="table-row-cell flex-size-2 flex-center">{{recipe.servingCost | currency:'USD':true:'1.2-2'}}</div>
         <div class="table-row-cell flex-size-2 flex-center">{{recipe.cost | currency:'USD':true:'1.2-2'}}</div>
         <div class="table-row-cell flex-size-2 flex-center">{{recipe.costOrganic | currency:'USD':true:'1.2-2'}}</div>
         <div class="table-row-cell flex-size-2 flex-center">{{recipe.costSeasonal | currency:'USD':true:'1.2-2'}}</div>

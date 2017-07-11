@@ -1,5 +1,4 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { UserRecipeIngredient, UserRecipe } from '../models';
 
 @Component({

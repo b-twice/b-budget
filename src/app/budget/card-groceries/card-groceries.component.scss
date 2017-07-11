@@ -10,23 +10,25 @@
     @extend .section-header;
 }
 
-:host {
-    display:flex;
-    flex-direction:row;
-    width:100%;
-    @extend .panel-style;
-    background:#fff;
-}
-.recipe-table {
+.grocery-card-table {
   display:flex;
   flex-direction:column;
   flex:1;
 }
 
-.table-main-content {
-  max-height:70rem;
+.grocery-title {
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    margin-bottom:1rem;
+
+    h3 {
+        margin:0;
+        padding:0;
+    }
+
 }
 
-.table-row {
-    cursor:pointer;
+.grocery-total {
+    font-weight:700;
 }
