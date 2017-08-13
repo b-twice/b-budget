@@ -40,7 +40,8 @@ export class LineChartComponent implements OnInit {
     // parse and scale data again
     let entries = this.parseData(data, this.xProperty, this.yProperty);
     this.xDomain.domain(entries.map(d => d.key));
-    this.yDomain.domain(d3.extent(entries, d => d.value));
+    this.yDomain.domain([0, d3.max(entries.map(d => d.value))]);
+    // this.yDomain.domain(d3.extent(entries, d => d.value));
 
     this.xAxis = this.createXAxis(this.xDomain);
     this.yAxis = this.createYAxis(this.yDomain, this.yTicks)
@@ -77,8 +78,9 @@ export class LineChartComponent implements OnInit {
     this.line = this.createLine(this.lineCurve, this.xDomain, this.yDomain);
     // x domain
     this.xDomain.domain(entries.map(d => d.key));
+    this.yDomain.domain([0, d3.max(entries.map(d => d.value))]);
     // this.yDomain.domain([0, this.yMax]);
-    this.yDomain.domain(d3.extent(entries, d => d.value));
+    // this.yDomain.domain(d3.extent(entries, d => d.value));
     this.xAxis = this.createXAxis(this.xDomain);
     this.yAxis = this.createYAxis(this.yDomain, this.yTicks)
 
