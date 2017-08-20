@@ -1,2 +1,1 @@
-sudo lsof -t -i:4200
-sudo kill <x>
+sudo kill -9 $(lsof -t -i:4200)

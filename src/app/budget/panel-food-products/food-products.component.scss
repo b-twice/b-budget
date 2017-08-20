@@ -1,0 +1,31 @@
+@import '../../../styles/base.scss';
+@import '../../../styles/flex.scss';
+@import '../../../styles/table.scss';
+.panel-style  {
+    @extend .panel-base;
+    padding:0;
+}
+
+.section-header {
+    @extend .section-header;
+}
+
+:host {
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    @extend .panel-style;
+    background:#fff;
+}
+.food-product-table {
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+.flex-center {
+    justify-content:center;
+}
+
+.table-row {
+    cursor:pointer;
+}

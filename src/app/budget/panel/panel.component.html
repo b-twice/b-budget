@@ -1,6 +1,7 @@
 <budget-panel-summary *ngIf="currentPanel == 'summary'"></budget-panel-summary>
 <budget-panel-categories *ngIf="currentPanel == 'categories'"></budget-panel-categories>
 <budget-panel-transactions *ngIf="currentPanel == 'transactions'"></budget-panel-transactions>
+<budget-panel-food-products *ngIf="currentPanel == 'foodProducts'"></budget-panel-food-products>
 <budget-panel-groceries *ngIf="currentPanel == 'groceries'"></budget-panel-groceries>
 <budget-panel-recipes *ngIf="currentPanel == 'recipes'"></budget-panel-recipes>
 <budget-panel-chart *ngIf="currentPanel == 'transactions' || currentPanel == 'groceries'" [panelType]="currentPanel"></budget-panel-chart>

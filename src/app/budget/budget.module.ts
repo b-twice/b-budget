@@ -28,6 +28,7 @@ import { FilterControlsComponent } from './filter-controls/filter-controls.compo
 import { PanelChartComponent } from './panel-chart/panel-chart.component';
 import { PanelChartService } from './panel-chart/panel-chart.service';
 import { PanelGroceriesComponent } from './panel-groceries/groceries.component';
+import { PanelFoodProductsComponent } from './panel-food-products/food-products.component';
 import { PanelRecipesComponent } from './panel-recipes/panel-recipes.component';
 import { CardRecipeIngredientsComponent } from './card-recipe-ingredients/card-recipe-ingredients.component';
 import { CardGroceriesComponent } from './card-groceries/card-groceries.component';
@@ -56,6 +57,7 @@ import { CardGroceriesComponent } from './card-groceries/card-groceries.componen
         FilterControlsComponent,
         PanelChartComponent,
         PanelGroceriesComponent,
+        PanelFoodProductsComponent,
         PanelRecipesComponent,
         CardRecipeIngredientsComponent,
         CardGroceriesComponent

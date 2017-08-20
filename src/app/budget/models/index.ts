@@ -9,3 +9,4 @@ export * from './user-transaction';
 export * from './user-grocery';
 export * from './user-recipe';
 export * from './user-recipe-ingredient';
+export * from './user-food-product';
