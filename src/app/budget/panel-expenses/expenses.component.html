@@ -1,0 +1,37 @@
+<budget-filter-controls (onCategoryChange)="categoryChange()" [categories]="categories"></budget-filter-controls>
+<div class="expenses-table">
+    <div class="table-row table-column">
+        <div class="table-row-cell flex-size-1" (click)="sort('month')">Month</div>
+        <div class="table-row-cell flex-size-3" (click)="sort('categoryName')">Category</div>
+        <div class="table-row-cell flex-size-2" (click)="sort('plannedExpense')">Planned Expense</div>
+        <div class="table-row-cell flex-size-2" (click)="sort('actualExpense')">Actual Expense</div>
+        <div class="table-row-cell flex-size-1" (click)="sort('difference')">Difference</div>
+    </div>
+    <div *ngIf="userExpenses | async as expenses;  else loading">
+        <div class="table-body table-main-content">
+            <div class="table-row" *ngFor="let expense of expenses | dynamicSort:sortProperty:sortDesc">
+                <div class="table-row-cell flex-size-1">{{expense.month}}</div>
+                <div class="table-row-cell flex-size-3">{{expense.categoryName}}</div>
+                <div class="table-row-cell flex-size-2">{{expense.plannedExpense | currency:'USD':true:'1.0-0'}}</div>
+                <div class="table-row-cell flex-size-2">{{expense.actualExpense| currency:'USD':true:'1.0-0'}}</div>
+                <div class="table-row-cell flex-size-1">{{expense.difference | currency:'USD':true:'1.0-0'}}</div>
+            </div>
+        </div>
+    </div>
+    <ng-template #loading>
+        <loading></loading>
+    </ng-template>
+    <div class="table-summary" style="height:10rem">
+        <div class="table-row-cell flex-size-1"></div>
+        <div class="table-row-cell flex-size-3"></div>
+        <div class="table-row-cell flex-size-2"></div>
+        <div class="table-row-cell flex-size-3" style="flex-direction:column;">
+            <span class="flex-row flex-between">
+                <span>Planned Expenses:</span>
+            <span class="link-underline">{{plannedExpensesTotal | currency:'USD':true:'1.0-0'}}</span>
+            </span>
+            <span class="flex-row flex-between">Actual Expenses: <span class="link-underline">{{actualExpensesTotal | currency:'USD':true:'1.0-0'}}</span></span>
+            <span class="flex-row flex-between">Difference: <span class="link-underline">{{differencesTotal | currency:'USD':true:'1.0-0'}}</span></span>
+        </div>
+    </div>
+</div>

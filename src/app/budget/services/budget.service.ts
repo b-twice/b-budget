@@ -10,7 +10,8 @@ import {
     UserProfile, Category,
     FiscalYear, User, Transaction,
     UserSummary, UserCategory,
-    UserTransaction, UserGrocery, UserRecipe, UserRecipeIngredient, UserFoodProduct
+    UserTransaction, UserGrocery, UserRecipe, UserRecipeIngredient, UserFoodProduct, ExpenseMonth,
+    UserExpense
 } from '../models';
 
 @Injectable()
@@ -53,6 +54,10 @@ export class BudgetService {
     public getFiscalYears(): Observable<FiscalYear[]> {
         return this.makeRequest<FiscalYear[]>('fiscal-years');
     }
+    public getExpenseMonths(): Observable<ExpenseMonth[]> {
+        return this.makeRequest<ExpenseMonth[]>('expense-months');
+    }
+
 
     public getUserSummaries(year: string): Observable<UserSummary[]> {
         return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}`, null, true);
@@ -85,6 +90,18 @@ export class BudgetService {
         categories.map(c => params.append('categoryNames', c))
         return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}`, params, true);
     }
+
+    public getUserExpenses(year: string, months: string[]): Observable<UserExpense[]> {
+        let params = new URLSearchParams();
+        months.map(c => params.append('monthNames', c))
+        return this.makeRequest<UserExpense[]>(`user-expenses/year/${year}`, params, true);
+    }
+    public getUserExpense(name: string, year: string, months: string[]): Observable<UserExpense[]> {
+        let params = new URLSearchParams();
+        months.map(c => params.append('monthNames', c))
+        return this.makeRequest<UserExpense[]>(`user-expenses/year/${year}/user/${name}`, params, true);
+    }
+
 
     // FOOD API CALLS
     public getFoodCategories(): Observable<Category[]> {

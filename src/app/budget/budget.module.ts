@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { PanelSummaryComponent } from './panel-summary/summary.component';
 import { PanelCategoriesComponent } from './panel-categories/categories.component';
 import { PanelTransactionsComponent } from './panel-transactions/transactions.component';
+import { PanelExpensesComponent } from './panel-expenses/expenses.component';
 import { UserNavComponent } from './user-nav/user-nav.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { YearNavComponent } from './year-nav/year-nav.component';
@@ -48,6 +49,7 @@ import { CardGroceriesComponent } from './card-groceries/card-groceries.componen
         UserProfileComponent,
         PanelCategoriesComponent,
         PanelTransactionsComponent,
+        PanelExpensesComponent,
         YearNavComponent,
         PanelNavComponent,
         PanelComponent,
