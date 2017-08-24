@@ -16,7 +16,7 @@ export class SelectIconComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.selectIconService.clearRequest$.subscribe(r => this.isActive = false);
+    this.selectIconService.clearRequest$.subscribe(r => this.item !== r ? this.isActive = false : this.isActive = true);
   }
 
   @HostBinding('class') get setActive() {

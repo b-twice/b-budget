@@ -6,13 +6,13 @@ export class SelectIconService {
     constructor() { }
 
     // Observable string sources
-    public clearRequest = new Subject<boolean>();
+    public clearRequest = new Subject<string>();
 
     // Observable string streams
     clearRequest$ = this.clearRequest.asObservable();
 
     // Service message commands
-    requestClear(request: boolean) {
+    requestClear(request: string) {
         this.clearRequest.next(request);
     }
 }

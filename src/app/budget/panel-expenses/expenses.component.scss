@@ -27,8 +27,16 @@
 }
 
 .table-main-content {
+  height:100rem;
   max-height:70rem;
 }
 .table-row {
     cursor:pointer;
+}
+
+.up {
+    color: #088F08;
+}
+.down {
+    color: #AE4545
 }

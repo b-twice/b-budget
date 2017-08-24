@@ -16,6 +16,7 @@ export class FilterControlsComponent implements OnInit {
   activeCategories: string[] = [];
   clearActive: boolean = false;
   @Input() categories: Observable<Category[]>;
+  @Input() clearOnChange: boolean = false; // force clear on cat change
 
   constructor(
     public budgetService: BudgetService,
@@ -27,8 +28,15 @@ export class FilterControlsComponent implements OnInit {
 
   categorySelect(category: Category) {
     let inList: number = this.activeCategories.indexOf(category.name);
+    // force clear categories if clearOnChange is true, meaning whenever changing categories clear out the others
+    // only one category active at a time
+    if (this.activeCategories.length > 0 && this.clearOnChange && inList == -1) {
+      this.activeCategories = [];
+      this.selectIconService.requestClear(category.name);
+      this.activeCategories.push(category.name);
+    }
     // toggle, if not in list, add, if in list, remove
-    if (inList == -1) {
+    else if (inList == -1) {
       this.activeCategories.push(category.name);
     }
     else {
@@ -40,7 +48,7 @@ export class FilterControlsComponent implements OnInit {
 
   categoryClear() {
     this.activeCategories = [];
-    this.selectIconService.requestClear(true);
+    this.selectIconService.requestClear(null);
     this.onCategoryChange.emit();
     this.clearActive = false;
   }
