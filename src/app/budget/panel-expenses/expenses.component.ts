@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../services/budget.service';
-import { UserExpense } from '../models';
+import { UserExpense, UserTransaction } from '../models';
 import { Category } from '../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../filter-controls/filter-controls.component';
@@ -24,6 +24,24 @@ export class PanelExpensesComponent implements OnInit {
   sortDesc: boolean = false;
   user: string;
   year: string;
+
+  selectedTransactions: UserTransaction[];
+  selectedTransactionCategoryName: string;
+
+  monthMap: any = {
+    "January": "01",
+    "February": "02",
+    "March": "03",
+    "April": "04",
+    "May": "05",
+    "June": "06",
+    "July": "07",
+    "August": "08",
+    "September": "09",
+    "October": "10",
+    "November": "11",
+    "December": "12",
+  };
 
   @ViewChild(FilterControlsComponent)
   private filterControls: FilterControlsComponent;
@@ -76,10 +94,20 @@ export class PanelExpensesComponent implements OnInit {
       this.differencesTotal += t.difference;
     });
   }
+  getExpensePage(expense: UserExpense) {
+    this.budgetService.getUserTransactionByMonth(this.user, this.year, this.monthMap[expense.month], expense.categoryName)
+      .subscribe(i => this.selectedTransactions = i);
+    this.selectedTransactionCategoryName = expense.categoryName;
+  }
 
   // summarizeExpensesByMonth(expenses: UserExpense[]) {
   //   expenses.forEach(t => t.date = this.datePipe.transform(t.date, 'MM'));
   //   return expenses
   // }
+
+  modalClose() {
+    this.selectedTransactions = null;
+    this.selectedTransactionCategoryName = null;
+  }
 
 }

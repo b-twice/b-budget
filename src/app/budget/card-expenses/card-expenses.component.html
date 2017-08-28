@@ -1,0 +1,38 @@
+<div class="popup-wrapper" (click)="closeModal()">
+  <div class="popup-content">
+    <div class="popup-body" (click)="stopPropogation($event)">
+
+      <div class="popup-close">
+        <i class="fa fa-times fa-22" (click)="closeModal()" aria-hidden="true"></i>
+      </div>
+
+      <div class="expense-title">
+        <h3>{{transactionCategoryName}}</h3>
+      </div>
+      <div class="expense-table">
+        <div class="table-row table-column">
+          <div class="table-row-cell flex-size-2" (click)="sort('userName')">User</div>
+          <div class="table-row-cell flex-size-2" (click)="sort('date')">Date</div>
+          <div class="table-row-cell flex-size-3" (click)="sort('description')">Description</div>
+          <div class="table-row-cell flex-size-1" (click)="sort('amount')">Cost</div>
+        </div>
+        <div class="table-body table-main-content">
+          <div class="table-row" *ngFor="let transaction of transactions | dynamicSort:sortProperty:sortDesc">
+            <div class="table-row-cell flex-size-2">{{transaction.userName}}</div>
+            <div class="table-row-cell flex-size-2">{{transaction.date}}</div>
+            <div class="table-row-cell flex-size-3">{{transaction.description}}</div>
+            <div class="table-row-cell flex-size-1">{{transaction.amount | currency:'USD':true:'1.2-2'}}</div>
+          </div>
+        </div>
+        <div class="table-body table-main-content">
+          <div class="table-row expense-total">
+            <div class="table-row-cell flex-size-2">Total</div>
+            <div class="table-row-cell flex-size-2"></div>
+            <div class="table-row-cell flex-size-3"></div>
+            <div class="table-row-cell flex-size-1">{{transactionsTotal | currency:'USD':true:'1.2-2'}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

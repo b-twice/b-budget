@@ -77,7 +77,7 @@ export class PanelGroceriesComponent implements OnInit {
   }
 
   getGroceryPage(groceryName: string) {
-    this.budgetService.getUserGroceryByName(this.user, this.year, groceryName).subscribe(i => { console.log(i); this.selectedGroceries = i });
+    this.budgetService.getUserGroceryByName(this.user, this.year, groceryName).subscribe(i => this.selectedGroceries = i);
     this.selectedGroceryName = groceryName;
   }
   modalClose() {
