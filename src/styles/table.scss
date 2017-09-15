@@ -1,7 +1,5 @@
 @import 'base.scss';
 .table-body {
-  display:flex;
-  flex-direction:column;
   font-size:1.4rem;
   min-height:10rem;
   max-height:50rem;
@@ -17,6 +15,7 @@
   margin:0;
   border-bottom: 1px solid #ECEFF1;
   align-items:center;
+  min-height:auto;
 }
 .table-summary {
   display:flex;
