@@ -5,6 +5,7 @@ interface IAuthSettings {
     readonly domain: string,
     readonly clientID: string
     readonly realm: string;
+    readonly audience: string;
 }
 export interface IAppSettings {
     readonly production: boolean;

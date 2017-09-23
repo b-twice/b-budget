@@ -9,7 +9,8 @@ export const environment = {
     auth: {
         realm: "Test",
         domain: 'bgeo.auth0.com',
-        clientID: 'xwySOzyNI4eumuYDE83ESq1zQrpL2T7g'
+        clientID: 'xwySOzyNI4eumuYDE83ESq1zQrpL2T7g',
+        audience: 'localhost:5000/api'
     },
     apiEndpoint: 'http://localhost:5000/api'
 };

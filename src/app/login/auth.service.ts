@@ -14,6 +14,7 @@ export class AuthService {
     // store the URL so we can redirect after logging in
     redirectUrl: string;
     realm: string;
+    audience: string;
     authenticated: boolean = false;
     authenticatedSource = new Subject<any[]>();
     authenticated$ = this.authenticatedSource = new Subject<any[]>();
@@ -23,26 +24,30 @@ export class AuthService {
         @Inject(APP_SETTINGS) settings: IAppSettings
     ) {
         this.auth0 = new auth0.WebAuth({
+            audience: settings.auth.audience,
             domain: settings.auth.domain,
             clientID: settings.auth.clientID,
             // specify your desired callback URL
             callbackURL: 'http://localhost:3000',
-            responseType: 'token id_token'
+            responseType: 'token id_token',
+            scope: 'openid'
         });
         this.realm = settings.auth.realm;
+        this.audience = settings.auth.audience;
     }
 
     login(username: string, password: string): void {
         this.auth0.client.login({
             realm: this.realm,
-            username,
-            password
+            username: username,
+            password: password,
+            audience: this.audience
         }, (err, authResult) => {
             if (err) {
                 this.authenticationResponse({ error: 'User could not be authenticated' });
                 return;
             }
-            if (authResult && authResult.idToken && authResult.accessToken) {
+            if (authResult && authResult.accessToken && authResult.idToken) {
                 this.setUser(authResult);
                 this.authenticated = true;
                 this.redirectUrl ? this.router.navigate([this.redirectUrl]) : this.router.navigate(['/budget']);
@@ -52,20 +57,24 @@ export class AuthService {
 
     isAuthenticated(): boolean {
         // Check whether the id_token is expired or not
-        return tokenNotExpired();
+        const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+        return new Date().getTime() < expiresAt;
     }
 
     logout(): void {
         // Remove token from localStorage
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
+        localStorage.removeItem('expires_at');
         this.router.navigate(['/login']);
         return;
     }
 
     setUser(authResult): void {
+        const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
+        localStorage.setItem('expires_at', expiresAt);
     }
 
     authenticationResponse(response): void {
