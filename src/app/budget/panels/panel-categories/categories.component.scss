@@ -1,4 +1,4 @@
-@import '../../../styles/base.scss';
+@import '../../../../styles/base.scss';
 
 .panel-style  {
     @extend .panel-base;
@@ -14,7 +14,7 @@
     background:#fff;
 }
 
-.summary-row {
+.category-row {
     display:flex;
     width:100%;
     flex-direction:row;
@@ -25,15 +25,15 @@
     &:last-child {
         border-bottom: none;
     }
-    .summary-row--header {
+    .category-row--header {
 
     }
-    .summary-row--item {
+    .category-row--item {
         display:flex;
-        .summary-row--money {
+        .category-row--money {
             min-width:10rem;
         }
-        .summary-row--growth {
+        .category-row--growth {
 
             min-width: 7.5rem;
         }

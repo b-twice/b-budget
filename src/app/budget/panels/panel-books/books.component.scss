@@ -1,6 +1,6 @@
-@import '../../../styles/base.scss';
-@import '../../../styles/flex.scss';
-@import '../../../styles/table.scss';
+@import '../../../../styles/base.scss';
+@import '../../../../styles/flex.scss';
+@import '../../../../styles/table.scss';
 .panel-style  {
     @extend .panel-base;
     padding:0;
@@ -16,17 +16,23 @@
     width:100%;
     @extend .panel-style;
     background:#fff;
+    height:75rem;
 }
-.recipe-table {
+.book-table {
   display:flex;
   flex-direction:column;
   flex:1;
 }
 
 .table-main-content {
-  max-height:70rem;
+  height:100rem;
+  max-height:65rem;
 }
 
 .table-row {
     cursor:pointer;
+}
+
+budget-filter-controls .table-body{
+    max-height:70rem;
 }

@@ -1,0 +1,31 @@
+@import '../../../../styles/base.scss';
+@import '../../../../styles/flex.scss';
+@import '../../../../styles/table.scss';
+.panel-style  {
+    @extend .panel-base;
+    padding:0;
+}
+
+.section-header {
+    @extend .section-header;
+}
+
+:host {
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    @extend .panel-style;
+    background:#fff;
+    max-height:75rem;
+}
+.recipe-table {
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+.table-main-content {
+  max-height:68rem;
+}
+.table-row {
+    cursor:pointer;
+}

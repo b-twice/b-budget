@@ -1,6 +1,6 @@
-@import '../../../styles/base.scss';
-@import '../../../styles/flex.scss';
-@import '../../../styles/table.scss';
+@import '../../../../styles/base.scss';
+@import '../../../../styles/flex.scss';
+@import '../../../../styles/table.scss';
 .panel-style  {
     @extend .panel-base;
     padding:0;
@@ -16,6 +16,7 @@
     width:100%;
     @extend .panel-style;
     background:#fff;
+    height:55rem;
 }
 .transaction-table {
   display:flex;

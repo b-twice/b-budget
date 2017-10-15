@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../services/budget.service';
-import { UserRecipe, UserRecipeIngredient } from '../models';
-import { Category } from '../models';
+import { BudgetService } from '../../services/budget.service';
+import { UserRecipe, UserRecipeIngredient } from '../../models';
+import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
-import { FilterControlsComponent } from '../filter-controls/filter-controls.component';
-import { PanelChartService } from '../panel-chart/panel-chart.service';
+import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
+import { PanelChartService } from '../../panel-chart/panel-chart.service';
 
 @Component({
   selector: 'budget-panel-recipes',
@@ -61,7 +61,7 @@ export class PanelRecipesComponent implements OnInit {
 
   getRecipeIngredients(name: string) {
     this.budgetService.getUserRecipeIngredients(name).subscribe(i => this.recipeIngredients = i);
-    this.budgetService.getUserRecipe(this.user, name).subscribe(r => { this.selectedRecipe = r; console.log(r) });
+    this.budgetService.getUserRecipe(this.user, name).subscribe(r => { this.selectedRecipe = r });
   }
   recipeClose() {
     this.recipeIngredients = null;

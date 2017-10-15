@@ -12,3 +12,4 @@ export * from './user-recipe-ingredient';
 export * from './user-food-product';
 export * from './user-expense';
 export * from './expense-month';
+export * from './user-books';

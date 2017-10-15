@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../services/budget.service';
-import { UserFoodProduct } from '../models';
-import { UserGrocery } from '../models';
-import { Category } from '../models';
+import { BudgetService } from '../../services/budget.service';
+import { UserFoodProduct } from '../../models';
+import { UserGrocery } from '../../models';
+import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
-import { FilterControlsComponent } from '../filter-controls/filter-controls.component';
+import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
 
 @Component({
   selector: 'budget-panel-food-products',

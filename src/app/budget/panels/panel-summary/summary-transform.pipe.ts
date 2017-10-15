@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { UtilService } from '../../shared/util/util.service';
-import { UserSummary } from '../models';
+import { UtilService } from '../../../shared/util/util.service';
+import { UserSummary } from '../../models';
 
 @Pipe({
   name: 'summaryTransform'

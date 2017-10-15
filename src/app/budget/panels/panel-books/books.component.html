@@ -1,0 +1,35 @@
+<budget-filter-controls (onCategoryChange)="categoryChange()" [categories]="bookCategories"></budget-filter-controls>
+<div class="book-table">
+  <div class="table-row table-column">
+    <div class="table-row-cell flex-size-2" (click)="sort('category')">Category</div>
+    <div class="table-row-cell flex-size-3" (click)="sort('author')">Author</div>
+    <div class="table-row-cell flex-size-4" (click)="sort('name')">Name</div>
+    <div class="table-row-cell flex-size-1" (click)="sort('status')">Status</div>
+  </div>
+  <div *ngIf="userBooks | async as books; else loading">
+    <div class="table-body table-main-content">
+      <div class="table-row" *ngFor="let book of books | dynamicSort:sortProperty:sortDesc" (click)="getBooksByAuthor(book.author)">
+        <div class="table-row-cell flex-size-2">{{book.category}}</div>
+        <div class="table-row-cell flex-size-3">{{book.author}}</div>
+        <div class="table-row-cell flex-size-4">{{book.name}}</div>
+        <div class="table-row-cell flex-size-1">{{book.status}}</div>
+      </div>
+    </div>
+  </div>
+  <ng-template #loading>
+    <loading></loading>
+  </ng-template>
+  <div class="table-summary">
+    <div class="table-row-cell flex-size-2"></div>
+    <div class="table-row-cell flex-size-3"></div>
+    <div class="table-row-cell flex-size-4"></div>
+    <div class="table-row-cell flex-size-2" style="flex-direction:column;">
+      <span class="flex-row flex-between">
+        <span>Books Read:</span>
+      <span class="link-underline">{{(userBooks | async)?.length}}</span>
+      </span>
+    </div>
+  </div>
+
+</div>
+<budget-books-card *ngIf="selectedBooks" [author]="selectedAuthor" [books]="selectedBooks" (onModalClose)="modalClose()"></budget-books-card>

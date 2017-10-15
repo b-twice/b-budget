@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { UtilService } from '../../shared/util/util.service';
-import { UserCategory } from '../models';
+import { UtilService } from '../../../shared/util/util.service';
+import { UserCategory } from '../../models';
 
 @Pipe({
   name: 'categoriesTransform'

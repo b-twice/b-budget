@@ -33,7 +33,7 @@
             <span class="link-underline">{{plannedExpensesTotal | currency:'USD':true:'1.0-0'}}</span>
             </span>
             <span class="flex-row flex-between">Actual Expenses: <span class="link-underline">{{actualExpensesTotal | currency:'USD':true:'1.0-0'}}</span></span>
-            <span class="flex-row flex-between">Difference: <span class="link-underline">{{differencesTotal | currency:'USD':true:'1.0-0'}}</span></span>
+            <span class="flex-row flex-between">Difference: <span class="link-underline" [ngClass]="differencesTotal > 0 ? 'up' : 'down'">{{differencesTotal | currency:'USD':true:'1.0-0'}}</span></span>
         </div>
     </div>
 </div>

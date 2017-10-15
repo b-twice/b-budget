@@ -1,6 +1,6 @@
-@import '../../../styles/base.scss';
-@import '../../../styles/flex.scss';
-@import '../../../styles/table.scss';
+@import '../../../../styles/base.scss';
+@import '../../../../styles/flex.scss';
+@import '../../../../styles/table.scss';
 .panel-style  {
     @extend .panel-base;
     padding:0;
@@ -16,8 +16,9 @@
     width:100%;
     @extend .panel-style;
     background:#fff;
+    max-height:75rem;
 }
-.food-product-table {
+.expenses-table {
   display:flex;
   flex-direction:column;
   flex:1;
@@ -26,6 +27,18 @@
     justify-content:center;
 }
 
+.table-main-content {
+  height:100rem;
+  max-height:70rem;
+}
+
 .table-row {
     cursor:pointer;
+}
+
+.up {
+    color: #088F08;
+}
+.down {
+    color: #AE4545
 }
