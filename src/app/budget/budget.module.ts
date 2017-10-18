@@ -27,14 +27,14 @@ import { SummaryTransformPipe } from './panels/panel-summary/summary-transform.p
 import { UserProfileTransformPipe } from './user-profile/user-profile-transform.pipe';
 import { CategoriesTransformPipe } from './panels/panel-categories/categories-transform.pipe';
 import { FilterControlsComponent } from './filter-controls/filter-controls.component';
-import { PanelChartComponent } from './panel-chart/panel-chart.component';
-import { PanelChartService } from './panel-chart/panel-chart.service';
+import { PanelChartComponent } from './panels/panel-chart/panel-chart.component';
+import { PanelChartService } from './panels/panel-chart/panel-chart.service';
 import { PanelGroceriesComponent } from './panels/panel-groceries/groceries.component';
 import { PanelFoodProductsComponent } from './panels/panel-food-products/food-products.component';
 import { PanelRecipesComponent } from './panels/panel-recipes/panel-recipes.component';
-import { CardRecipeIngredientsComponent } from './card-recipe-ingredients/card-recipe-ingredients.component';
-import { CardGroceriesComponent } from './card-groceries/card-groceries.component';
-import { CardExpensesComponent } from './card-expenses/card-expenses.component';
+import { CardRecipeIngredientsComponent } from './cards/card-recipe-ingredients/card-recipe-ingredients.component';
+import { CardGroceriesComponent } from './cards/card-groceries/card-groceries.component';
+import { CardExpensesComponent } from './cards/card-expenses/card-expenses.component';
 import { CardBooksComponent } from './cards/card-books/card-books.component';
 
 @NgModule({

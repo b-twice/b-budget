@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { UserRecipeIngredient, UserRecipe } from '../models';
+import { UserRecipeIngredient, UserRecipe } from '../../models';
 
 @Component({
   selector: 'budget-recipe-ingredients',

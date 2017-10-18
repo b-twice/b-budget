@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { UserGrocery } from '../models';
+import { UserGrocery } from '../../models';
 
 
 @Component({

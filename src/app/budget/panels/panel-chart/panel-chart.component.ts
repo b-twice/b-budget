@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { PanelChartService } from './panel-chart.service';
-import { UserTransaction } from '../models';
-import { LineChartComponent } from '../../shared/line-chart/line-chart.component';
+import { UserTransaction } from '../../models';
+import { LineChartComponent } from '../../../shared/line-chart/line-chart.component';
 
 @Component({
   selector: 'budget-panel-chart',

@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { UserTransaction } from '../models';
+import { UserTransaction } from '../../models';
 
 
 @Component({
