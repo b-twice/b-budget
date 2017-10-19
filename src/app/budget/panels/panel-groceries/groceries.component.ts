@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../../services/budget.service';
-import { UserGrocery } from '../../models';
+import { UserGrocery, UserExpenseMonthly } from '../../models';
 import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
-import { PanelChartService } from '../../panel-chart/panel-chart.service';
+import { PanelChartService } from '../panel-chart/panel-chart.service';
 
 @Component({
   selector: 'budget-panel-groceries',
@@ -49,11 +49,12 @@ export class PanelGroceriesComponent implements OnInit {
 
   getGroceries(): void {
     if (!this.user || !this.year) { return; }
-    this.userGroceries = this.budgetService.getUserGrocery(this.user, this.year, this.filterControls.activeCategories);
-    this.userGroceries.subscribe(t => {
+    this.userGroceries = this.budgetService.getUserGroceries(this.user, this.year, this.filterControls.activeCategories);
+    this.budgetService.getUserGroceriesMonthly(this.user, this.year, this.filterControls.activeCategories).subscribe(t => {
       this.summarizeGroceries(t);
-      this.panelChartService.sendData(this.summarizeGroceriesByMonth(t));
+      this.panelChartService.sendData(t);
     });
+
   }
 
   sort(sortProperty: string) {
@@ -71,13 +72,8 @@ export class PanelGroceriesComponent implements OnInit {
     groceries.forEach(g => this.groceriesTotal += g.amount);
   }
 
-  summarizeGroceriesByMonth(groceries: UserGrocery[]) {
-    groceries.forEach(t => t.date = this.datePipe.transform(t.date, 'MM'));
-    return groceries
-  }
-
   getGroceryPage(groceryName: string) {
-    this.budgetService.getUserGroceryByName(this.user, this.year, groceryName).subscribe(i => this.selectedGroceries = i);
+    this.budgetService.getUserGroceriesByName(this.user, this.year, groceryName).subscribe(i => this.selectedGroceries = i);
     this.selectedGroceryName = groceryName;
   }
   modalClose() {

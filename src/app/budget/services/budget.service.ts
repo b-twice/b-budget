@@ -11,7 +11,8 @@ import {
     FiscalYear, User, Transaction,
     UserSummary, UserCategory,
     UserTransaction, UserGrocery, UserRecipe, UserRecipeIngredient, UserFoodProduct, ExpenseMonth,
-    UserExpense, UserBook
+    UserExpense, UserBook,
+    UserExpenseMonthly
 } from '../models';
 
 @Injectable()
@@ -80,18 +81,21 @@ export class BudgetService {
         return this.makeRequest<UserCategory[]>(`user-categories/year/${year}/user/${name}`, null, true);
     }
 
-    public getUserTransactions(year: string, categories: string[]): Observable<UserTransaction[]> {
-        let params = new URLSearchParams();
-        categories.map(c => params.append('categoryNames', c))
-        return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}`, params, true);
-    }
-    public getUserTransaction(name: string, year: string, categories: string[]): Observable<UserTransaction[]> {
+    // to populate the transaction panel
+    public getUserTransactions(name: string, year: string, categories: string[]): Observable<UserTransaction[]> {
         let params = new URLSearchParams();
         categories.map(c => params.append('categoryNames', c))
         return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/user/${name}`, params, true);
     }
+    // for expenses, summarizing expense by category by month
     public getUserTransactionByMonth(name: string, year: string, month: string, category): Observable<UserTransaction[]> {
         return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/month/${month}/user/${name}/category/${category}`, null, true);
+    }
+    // for charting
+    public getUserTransactionsMonthly(name: string, year: string, categories: string[]): Observable<UserExpenseMonthly[]> {
+        let params = new URLSearchParams();
+        categories.map(c => params.append('categoryNames', c))
+        return this.makeRequest<UserExpenseMonthly[]>(`user-transactions/year/${year}/user/${name}/monthly`, params, true);
     }
 
 
@@ -120,18 +124,18 @@ export class BudgetService {
 
 
     // Groceries
-    public getUserGroceries(year: string, categories: string[]): Observable<UserGrocery[]> {
-        let params = new URLSearchParams();
-        categories.map(c => params.append('categoryNames', c))
-        return this.makeRequest<UserGrocery[]>(`user-groceries/year/${year}`, params, true);
-    }
-    public getUserGrocery(name: string, year: string, categories: string[]): Observable<UserGrocery[]> {
+    public getUserGroceries(name: string, year: string, categories: string[]): Observable<UserGrocery[]> {
         let params = new URLSearchParams();
         categories.map(c => params.append('categoryNames', c))
         return this.makeRequest<UserGrocery[]>(`user-groceries/year/${year}/user/${name}`, params, true);
     }
-    public getUserGroceryByName(name: string, year: string, groceryName: string): Observable<UserGrocery[]> {
+    public getUserGroceriesByName(name: string, year: string, groceryName: string): Observable<UserGrocery[]> {
         return this.makeRequest<UserGrocery[]>(`user-groceries/year/${year}/user/${name}/grocery/${groceryName}`, null, true);
+    }
+    public getUserGroceriesMonthly(name: string, year: string, categories: string[]): Observable<UserExpenseMonthly[]> {
+        let params = new URLSearchParams();
+        categories.map(c => params.append('categoryNames', c))
+        return this.makeRequest<UserExpenseMonthly[]>(`user-groceries/year/${year}/user/${name}/monthly`, params, true);
     }
 
     // Food products

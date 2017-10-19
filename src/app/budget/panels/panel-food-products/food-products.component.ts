@@ -70,7 +70,7 @@ export class PanelFoodProductsComponent implements OnInit {
   }
 
   getFoodProductPage(groceryName: string) {
-    this.budgetService.getUserGroceryByName(this.user, this.year, groceryName).subscribe(i => { this.selectedFoodProducts = i });
+    this.budgetService.getUserGroceriesByName(this.user, this.year, groceryName).subscribe(i => { this.selectedFoodProducts = i });
     this.selectedFoodProductName = groceryName;
   }
   modalClose() {

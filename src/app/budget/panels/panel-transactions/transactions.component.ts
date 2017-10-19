@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../../services/budget.service';
-import { UserTransaction } from '../../models';
+import { UserTransaction, UserExpenseMonthly } from '../../models';
 import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
-import { PanelChartService } from '../../panel-chart/panel-chart.service';
+import { PanelChartService } from '../panel-chart/panel-chart.service';
 
 @Component({
   selector: 'budget-panel-transactions',
@@ -47,10 +47,10 @@ export class PanelTransactionsComponent implements OnInit {
 
   getTransactions(): void {
     if (!this.user || !this.year) { return; }
-    this.userTransactions = this.budgetService.getUserTransaction(this.user, this.year, this.filterControls.activeCategories);
-    this.userTransactions.subscribe(t => {
+    this.userTransactions = this.budgetService.getUserTransactions(this.user, this.year, this.filterControls.activeCategories);
+    this.budgetService.getUserTransactionsMonthly(this.user, this.year, this.filterControls.activeCategories).subscribe(t => {
       this.summarizeTransactions(t);
-      this.panelChartService.sendData(this.summarizeTransactionsByMonth(t));
+      this.panelChartService.sendData(t);
     });
   }
 
@@ -64,14 +64,9 @@ export class PanelTransactionsComponent implements OnInit {
     this.getTransactions();
   }
 
-  summarizeTransactions(transactions: UserTransaction[]) {
+  summarizeTransactions(transactions: UserExpenseMonthly[]) {
     this.transactionsTotal = 0;
     transactions.forEach(t => this.transactionsTotal += t.amount);
-  }
-
-  summarizeTransactionsByMonth(transactions: UserTransaction[]) {
-    transactions.forEach(t => t.date = this.datePipe.transform(t.date, 'MM'));
-    return transactions
   }
 
 }

@@ -5,7 +5,7 @@ import { UserBook } from '../../models';
 import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
-import { PanelChartService } from '../../panel-chart/panel-chart.service';
+import { PanelChartService } from '../panel-chart/panel-chart.service';
 
 @Component({
   selector: 'budget-panel-books',
