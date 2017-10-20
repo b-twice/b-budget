@@ -10,6 +10,7 @@ export class LineChartComponent implements OnInit {
 
   @Input() xProperty: string;
   @Input() yProperty: string;
+  @Input() groupProperty: string;
   @Input() width: number = 1120;
   @Input() height: number = 220;
   @Input() marginTop: number = 20;
@@ -26,7 +27,8 @@ export class LineChartComponent implements OnInit {
   yAxis: any;
   xDomain: d3.ScalePoint<string>;
   yDomain: d3.ScaleLinear<number, number>;
-  line: d3.Line<{ key: string, value: number }>;
+  zDomain: d3.ScaleOrdinal<any, any>;
+  line: d3.Line<{ month: string, amount: number }>;
 
   drawActive: boolean = false;
 
@@ -37,25 +39,27 @@ export class LineChartComponent implements OnInit {
 
   update(data) {
     console.log("Updating chart")
-    // parse and scale data again
-    let entries = this.parseData(data, this.xProperty, this.yProperty);
-    this.xDomain.domain(entries.map(d => d.key));
-    this.yDomain.domain([0, d3.max(entries.map(d => d.value))]);
-    // this.yDomain.domain(d3.extent(entries, d => d.value));
+    // // parse and scale data again
+    // let entries = this.parseData(data, this.xProperty, this.yProperty, this.groupProperty);
+    // this.xDomain.domain(data.map(d => d.month));
+    // let xValues: number[] = data.map(d => d.amount)
+    // this.yDomain.domain([0, d3.max(xValues)]);
+    // // this.yDomain.domain([0, d3.max(data.map(d => d.amount))]);
+    // // this.yDomain.domain(d3.extent(entries, d => d.value));
 
-    this.xAxis = this.createXAxis(this.xDomain);
-    this.yAxis = this.createYAxis(this.yDomain, this.yTicks)
-    //update graph
-    let chart = d3.select(".chart").transition();
-    chart.select(".chart-line")   // change the line
-      .duration(750)
-      .attr("d", this.line(entries));
-    chart.select(".x.axis") // change the x axis
-      .duration(750)
-      .call(this.xAxis);
-    chart.select(".y.axis") // change the y axis
-      .duration(750)
-      .call(this.yAxis);
+    // this.xAxis = this.createXAxis(this.xDomain);
+    // this.yAxis = this.createYAxis(this.yDomain, this.yTicks)
+    // //update graph
+    // let chart = d3.select(".chart").transition();
+    // chart.select(".chart-line")   // change the line
+    //   .duration(750)
+    //   .attr("d", this.line(entries));
+    // chart.select(".x.axis") // change the x axis
+    //   .duration(750)
+    //   .call(this.xAxis);
+    // chart.select(".y.axis") // change the y axis
+    //   .duration(750)
+    //   .call(this.yAxis);
   }
 
 
@@ -67,18 +71,22 @@ export class LineChartComponent implements OnInit {
     let chartWidth = this.calculateChartWidth(this.width, this.marginLeft, this.marginRight);
     let chartHeight = this.calculateChartHeight(this.height, this.marginTop, this.marginBottom);
 
-    let entries = this.parseData(data, this.xProperty, this.yProperty);
+    let entries = this.parseData(data, this.xProperty, this.yProperty, this.groupProperty);
 
     //http://codepen.io/levvsha/pen/gWbXdm
     this.xDomain = this.createDomainPointScale(0, chartWidth);
     this.yDomain = this.createDomainLinearScale(chartHeight, 0);
+    this.zDomain = d3.scaleOrdinal(d3.schemeCategory10);
     // this.xDomain = d3.scalePoint<string>().range([0, width])
     // this.yDomain = d3.scaleLinear().rangeRound([height, 0]);
     // assign data type of data to line
     this.line = this.createLine(this.lineCurve, this.xDomain, this.yDomain);
     // x domain
-    this.xDomain.domain(entries.map(d => d.key));
-    this.yDomain.domain([0, d3.max(entries.map(d => d.value))]);
+    this.xDomain.domain(data.map(d => d.month));
+    let xValues: number[] = data.map(d => d.amount)
+    this.yDomain.domain([0, d3.max(xValues)]);
+
+    this.zDomain(entries.keys);
     // this.yDomain.domain([0, this.yMax]);
     // this.yDomain.domain(d3.extent(entries, d => d.value));
     this.xAxis = this.createXAxis(this.xDomain);
@@ -89,22 +97,19 @@ export class LineChartComponent implements OnInit {
     this.addXAxis(g, chartHeight, this.xAxis);
     this.addYAxis(g, this.yAxis, "Amount ($)");
 
-    this.addPath(g, entries, this.line);
+    entries.forEach(entry => this.addPath(g, entry.values, entry.key, this.line));
     this.drawActive = true;
   }
 
-  parseData(data, xProperty, yProperty) {
-    let parseTime = d3.timeParse("%m");
+  parseData(data, xProperty, yProperty, groupProperty) {
     let formatTime = d3.timeFormat("%b");
-    return d3.nest<{}, number>()
-      .key(d => d[xProperty]) // group data by unique values
-      // rollup data into object  
-      .rollup(d => d3.sum(d, g => g[yProperty])).entries(data)
+    return d3.nest<{}, { month: string, amount: number }>()
+      .key(d => d[groupProperty]) // group data by unique values
+      .entries(data)
       // sort objects by date
-      .sort((a, b) => d3.ascending(a.key, b.key))
-      // prettify data here
-      .map(d => { return { key: formatTime(parseTime(d.key)), value: d.value } })
-
+      .sort((a, b) => d3.ascending(a.values.month, b.values.month))
+    // // prettify data here
+    // .map(d => { return { key: d.key, value: d.value } })
   }
 
 
@@ -145,16 +150,17 @@ export class LineChartComponent implements OnInit {
     return height - marginTop - marginBottom;
   }
 
-  createLine(lineCurve: any, xDomain: d3.ScalePoint<string>, yDomain: d3.ScaleLinear<number, number>): d3.Line<{ key: string, value: number }> {
-    return d3.line<{ key: string, value: number }>()
+  createLine(lineCurve: any, xDomain: d3.ScalePoint<string>, yDomain: d3.ScaleLinear<number, number>): d3.Line<{ month: string, amount: number }> {
+    return d3.line<{ month: string, amount: number }>()
       .curve(lineCurve)
-      .x(d => xDomain(d["key"]))  // use attribute to avoid type errors
-      .y(d => yDomain(d["value"]));
+      .x(d => xDomain(d["month"]))  // use attribute to avoid type errors
+      .y(d => yDomain(d["amount"]));
   }
-  addPath(g: d3.Selection<Element, any, any, any>, data, line): void {
+  addPath(g: d3.Selection<Element, any, any, any>, data, key, line): void {
     g.append("path")
       .datum(data)
       .attr("d", line)
+      .style("stroke", this.zDomain(key))
       .classed("chart-line", true);
   }
 
