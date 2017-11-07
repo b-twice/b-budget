@@ -48,7 +48,7 @@ export class PanelTransactionsComponent implements OnInit {
   getTransactions(): void {
     if (!this.user || !this.year) { return; }
     this.userTransactions = this.budgetService.getUserTransactions(this.user, this.year, this.filterControls.activeCategories);
-    this.budgetService.getUserTransactionsMonthly(this.user, this.year, this.filterControls.activeCategories).subscribe(t => {
+    this.budgetService.getUserTransactionsMonthly(this.user, this.year, 2, this.filterControls.activeCategories).subscribe(t => {
       this.summarizeTransactions(t);
       this.panelChartService.sendData(t);
     });
@@ -66,7 +66,7 @@ export class PanelTransactionsComponent implements OnInit {
 
   summarizeTransactions(transactions: UserExpenseMonthly[]) {
     this.transactionsTotal = 0;
-    transactions.forEach(t => this.transactionsTotal += t.amount);
+    transactions.forEach(t => this.year == t.year ? this.transactionsTotal += t.amount : null);
   }
 
 }

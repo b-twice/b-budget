@@ -92,10 +92,10 @@ export class BudgetService {
         return this.makeRequest<UserTransaction[]>(`user-transactions/year/${year}/month/${month}/user/${name}/category/${category}`, null, true);
     }
     // for charting
-    public getUserTransactionsMonthly(name: string, year: string, categories: string[]): Observable<UserExpenseMonthly[]> {
+    public getUserTransactionsMonthly(name: string, year: string, range: number, categories: string[]): Observable<UserExpenseMonthly[]> {
         let params = new URLSearchParams();
         categories.map(c => params.append('categoryNames', c))
-        return this.makeRequest<UserExpenseMonthly[]>(`user-transactions/year/${year}/user/${name}/monthly`, params, true);
+        return this.makeRequest<UserExpenseMonthly[]>(`user-transactions/year/${year}/user/${name}/monthly/range/${range}`, params, true);
     }
 
 

@@ -39,27 +39,31 @@ export class LineChartComponent implements OnInit {
 
   update(data) {
     console.log("Updating chart")
-    // // parse and scale data again
-    // let entries = this.parseData(data, this.xProperty, this.yProperty, this.groupProperty);
-    // this.xDomain.domain(data.map(d => d.month));
-    // let xValues: number[] = data.map(d => d.amount)
-    // this.yDomain.domain([0, d3.max(xValues)]);
-    // // this.yDomain.domain([0, d3.max(data.map(d => d.amount))]);
-    // // this.yDomain.domain(d3.extent(entries, d => d.value));
+    // parse and scale data again
+    let entries = this.parseData(data, this.xProperty, this.yProperty, this.groupProperty);
+    this.xDomain.domain(data.map(d => d.month));
+    this.xDomain.domain(data.map(d => d.month));
+    let xValues: number[] = data.map(d => d.amount)
+    this.yDomain.domain([0, d3.max(xValues)]);
 
-    // this.xAxis = this.createXAxis(this.xDomain);
-    // this.yAxis = this.createYAxis(this.yDomain, this.yTicks)
-    // //update graph
-    // let chart = d3.select(".chart").transition();
-    // chart.select(".chart-line")   // change the line
-    //   .duration(750)
-    //   .attr("d", this.line(entries));
-    // chart.select(".x.axis") // change the x axis
-    //   .duration(750)
-    //   .call(this.xAxis);
-    // chart.select(".y.axis") // change the y axis
-    //   .duration(750)
-    //   .call(this.yAxis);
+    this.zDomain(entries.keys);
+    this.xAxis = this.createXAxis(this.xDomain);
+    this.yAxis = this.createYAxis(this.yDomain, this.yTicks)
+    //update graph
+    let chart = d3.select(".chart").transition();
+
+    // seems kinda non-d3 to use the class to update line data...
+    entries.forEach(entry => {
+      chart.select(`.chart-line-${entry.key}`)
+        .duration(750)
+        .attr("d", this.line(entry.values));
+    });
+    chart.select(".x.axis") // change the x axis
+      .duration(750)
+      .call(this.xAxis);
+    chart.select(".y.axis") // change the y axis
+      .duration(750)
+      .call(this.yAxis);
   }
 
 
@@ -77,8 +81,6 @@ export class LineChartComponent implements OnInit {
     this.xDomain = this.createDomainPointScale(0, chartWidth);
     this.yDomain = this.createDomainLinearScale(chartHeight, 0);
     this.zDomain = d3.scaleOrdinal(d3.schemeCategory10);
-    // this.xDomain = d3.scalePoint<string>().range([0, width])
-    // this.yDomain = d3.scaleLinear().rangeRound([height, 0]);
     // assign data type of data to line
     this.line = this.createLine(this.lineCurve, this.xDomain, this.yDomain);
     // x domain
@@ -87,8 +89,6 @@ export class LineChartComponent implements OnInit {
     this.yDomain.domain([0, d3.max(xValues)]);
 
     this.zDomain(entries.keys);
-    // this.yDomain.domain([0, this.yMax]);
-    // this.yDomain.domain(d3.extent(entries, d => d.value));
     this.xAxis = this.createXAxis(this.xDomain);
     this.yAxis = this.createYAxis(this.yDomain, this.yTicks)
 
@@ -106,10 +106,6 @@ export class LineChartComponent implements OnInit {
     return d3.nest<{}, { month: string, amount: number }>()
       .key(d => d[groupProperty]) // group data by unique values
       .entries(data)
-      // sort objects by date
-      .sort((a, b) => d3.ascending(a.values.month, b.values.month))
-    // // prettify data here
-    // .map(d => { return { key: d.key, value: d.value } })
   }
 
 
@@ -159,9 +155,11 @@ export class LineChartComponent implements OnInit {
   addPath(g: d3.Selection<Element, any, any, any>, data, key, line): void {
     g.append("path")
       .datum(data)
+      .attr("id", d => `${key}${d.month}`)
       .attr("d", line)
       .style("stroke", this.zDomain(key))
-      .classed("chart-line", true);
+      .classed(`chart-line`, true)
+      .classed(`chart-line-${key}`, true);
   }
 
   createDomainPointScale(start: number, end: number): d3.ScalePoint<string> {
