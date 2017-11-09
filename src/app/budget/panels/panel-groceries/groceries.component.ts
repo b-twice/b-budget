@@ -50,7 +50,7 @@ export class PanelGroceriesComponent implements OnInit {
   getGroceries(): void {
     if (!this.user || !this.year) { return; }
     this.userGroceries = this.budgetService.getUserGroceries(this.user, this.year, this.filterControls.activeCategories);
-    this.budgetService.getUserGroceriesMonthly(this.user, this.year, this.filterControls.activeCategories).subscribe(t => {
+    this.budgetService.getUserGroceriesMonthly(this.user, this.year, 2, this.filterControls.activeCategories).subscribe(t => {
       this.summarizeGroceries(t);
       this.panelChartService.sendData(t);
     });

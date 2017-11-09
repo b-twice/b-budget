@@ -132,10 +132,10 @@ export class BudgetService {
     public getUserGroceriesByName(name: string, year: string, groceryName: string): Observable<UserGrocery[]> {
         return this.makeRequest<UserGrocery[]>(`user-groceries/year/${year}/user/${name}/grocery/${groceryName}`, null, true);
     }
-    public getUserGroceriesMonthly(name: string, year: string, categories: string[]): Observable<UserExpenseMonthly[]> {
+    public getUserGroceriesMonthly(name: string, year: string, range: number, categories: string[]): Observable<UserExpenseMonthly[]> {
         let params = new URLSearchParams();
         categories.map(c => params.append('categoryNames', c))
-        return this.makeRequest<UserExpenseMonthly[]>(`user-groceries/year/${year}/user/${name}/monthly`, params, true);
+        return this.makeRequest<UserExpenseMonthly[]>(`user-groceries/year/${year}/user/${name}/monthly/range/${range}`, params, true);
     }
 
     // Food products

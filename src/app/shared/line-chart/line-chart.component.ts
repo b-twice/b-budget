@@ -102,10 +102,14 @@ export class LineChartComponent implements OnInit {
   }
 
   parseData(data, xProperty, yProperty, groupProperty) {
+    let parseTime = d3.timeParse("%m");
     let formatTime = d3.timeFormat("%b");
-    return d3.nest<{}, { month: string, amount: number }>()
+    // lol doens't seem like the d3 way again, force transform data values before adding as entries
+    data.forEach(entry => entry.month = formatTime(parseTime(entry['month'])))
+    let entries = d3.nest<{}, { month: string, amount: number }>()
       .key(d => d[groupProperty]) // group data by unique values
-      .entries(data)
+      .entries(data);
+    return entries;
   }
 
 
