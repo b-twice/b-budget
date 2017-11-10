@@ -23,6 +23,7 @@ export class LineChartComponent implements OnInit {
   @Input() yMax: number = 5000;
 
   chart: d3.Selection<any, any, any, any>;
+  chartGroup: any;
   xAxis: any;
   yAxis: any;
   xDomain: d3.ScalePoint<string>;
@@ -53,11 +54,14 @@ export class LineChartComponent implements OnInit {
     let chart = d3.select(".chart").transition();
 
     // seems kinda non-d3 to use the class to update line data...
-    entries.forEach(entry => {
-      chart.select(`.chart-line-${entry.key}`)
-        .duration(750)
-        .attr("d", this.line(entry.values));
-    });
+    // entries.forEach(entry => {
+    //   chart.select(`.chart-line-${entry.key}`)
+    //     .duration(750)
+    //     .attr("d", this.line(entry.values));
+    // });
+
+    d3.selectAll(".chart-line").remove();
+    entries.forEach(entry => this.addPath(this.chartGroup, entry.values, entry.key, this.line));
     chart.select(".x.axis") // change the x axis
       .duration(750)
       .call(this.xAxis);
@@ -93,11 +97,11 @@ export class LineChartComponent implements OnInit {
     this.yAxis = this.createYAxis(this.yDomain, this.yTicks)
 
 
-    let g = this.addChartGroup(this.chart, this.marginLeft, this.marginTop);
-    this.addXAxis(g, chartHeight, this.xAxis);
-    this.addYAxis(g, this.yAxis, "Amount ($)");
+    this.chartGroup = this.addChartGroup(this.chart, this.marginLeft, this.marginTop);
+    this.addXAxis(this.chartGroup, chartHeight, this.xAxis);
+    this.addYAxis(this.chartGroup, this.yAxis, "Amount ($)");
 
-    entries.forEach(entry => this.addPath(g, entry.values, entry.key, this.line));
+    entries.forEach(entry => this.addPath(this.chartGroup, entry.values, entry.key, this.line));
     this.drawActive = true;
   }
 
