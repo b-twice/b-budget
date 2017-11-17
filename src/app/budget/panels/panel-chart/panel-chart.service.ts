@@ -8,14 +8,20 @@ export class PanelChartService {
   constructor() { }
 
   // Observable string sources
-  public data = new Subject<any[]>();
+  public updateData = new Subject<any[]>();
+  public drawData = new Subject<any[]>();
 
   // Observable string streams
-  data$ = this.data.asObservable();
+  updateData$ = this.updateData.asObservable();
+  drawData$ = this.drawData.asObservable();
 
   // Service message commands
-  sendData(data: any[]) {
-    this.data.next(data);
+  update(data: any[]) {
+    this.updateData.next(data);
+  }
+
+  draw(data: any[]) {
+    this.drawData.next(data);
   }
 
 }

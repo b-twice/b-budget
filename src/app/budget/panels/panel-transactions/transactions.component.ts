@@ -22,6 +22,7 @@ export class PanelTransactionsComponent implements OnInit {
   sortDesc: boolean = false;
   user: string;
   year: string;
+  chartLoaded: boolean = false;
 
   @ViewChild(FilterControlsComponent)
   private filterControls: FilterControlsComponent;
@@ -50,7 +51,14 @@ export class PanelTransactionsComponent implements OnInit {
     this.userTransactions = this.budgetService.getUserTransactions(this.user, this.year, this.filterControls.activeCategories);
     this.budgetService.getUserTransactionsMonthly(this.user, this.year, 1, this.filterControls.activeCategories).subscribe(t => {
       this.summarizeTransactions(t);
-      this.panelChartService.sendData(t);
+      if (this.chartLoaded) {
+        this.panelChartService.update(t);
+      }
+      else {
+        this.panelChartService.draw(t);
+        this.chartLoaded = true;
+      }
+
     });
   }
 

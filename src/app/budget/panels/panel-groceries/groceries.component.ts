@@ -25,6 +25,7 @@ export class PanelGroceriesComponent implements OnInit {
 
   selectedGroceries: UserGrocery[];
   selectedGroceryName: string | null;
+  chartLoaded: boolean = false;
 
   @ViewChild(FilterControlsComponent)
   private filterControls: FilterControlsComponent;
@@ -52,7 +53,13 @@ export class PanelGroceriesComponent implements OnInit {
     this.userGroceries = this.budgetService.getUserGroceries(this.user, this.year, this.filterControls.activeCategories);
     this.budgetService.getUserGroceriesMonthly(this.user, this.year, 1, this.filterControls.activeCategories).subscribe(t => {
       this.summarizeGroceries(t);
-      this.panelChartService.sendData(t);
+      if (this.chartLoaded) {
+        this.panelChartService.update(t);
+      }
+      else {
+        this.panelChartService.draw(t);
+        this.chartLoaded = true;
+      }
     });
 
   }

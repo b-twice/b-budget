@@ -14,7 +14,6 @@ import { UtilService } from './util/util.service';
 import { NumberChangeComponent } from './number-change/number-change.component';
 import { SelectIconComponent } from './select-icon/select-icon.component';
 import { SelectIconService } from './select-icon/select-icon.service';
-import { LineChartComponent } from './line-chart/line-chart.component';
 
 // Pipes
 import { DynamicSortPipe } from './pipes/dynamic-sort.pipe';
@@ -29,7 +28,6 @@ import { DynamicSortPipe } from './pipes/dynamic-sort.pipe';
         SiteHeaderComponent,
         NumberChangeComponent,
         SelectIconComponent,
-        LineChartComponent,
         DynamicSortPipe
     ],
     exports: [
@@ -40,7 +38,6 @@ import { DynamicSortPipe } from './pipes/dynamic-sort.pipe';
         DropdownModule,
         NumberChangeComponent,
         SelectIconComponent,
-        LineChartComponent,
         DynamicSortPipe
     ],
     providers: [
