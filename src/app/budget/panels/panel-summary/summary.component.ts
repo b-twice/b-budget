@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../../services/budget.service';
-import { UserSummary } from '../../models';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -11,9 +8,6 @@ import { Observable } from 'rxjs/Observable';
 })
 export class PanelSummaryComponent implements OnInit {
 
-    userSummary: Observable<UserSummary[]>;
-    name: string;
-    year: string;
     displayGroupsOrder: string[] = [
         "Earnings",
         "Investments",
@@ -58,22 +52,9 @@ export class PanelSummaryComponent implements OnInit {
 
     }
     constructor(
-        public route: ActivatedRoute,
-        public budgetService: BudgetService,
     ) { }
 
     ngOnInit() {
-        this.route.parent.params.subscribe(
-            params =>
-                this.getBudget(params['user'], params['year'])
-        )
-    }
-
-    getBudget(name: string, year: string): void {
-        if (!name || !year) { return; }
-        this.name = name;
-        this.year = year;
-        this.userSummary = this.budgetService.getUserSummary(name, year)
     }
 
     getKeyDisplay(key: string): string {

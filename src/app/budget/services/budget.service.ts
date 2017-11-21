@@ -63,7 +63,7 @@ export class BudgetService {
     public getUserSummaries(year: string): Observable<UserSummary[]> {
         return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}`, null, true);
     }
-    public getUserSummary(name: string, year: string): Observable<UserSummary[]> {
+    public getUserSummary(name: string, year: number): Observable<UserSummary[]> {
         return this.makeRequest<UserSummary[]>(`user-summaries/year/${year}/user/${name}`, null, true);
     }
 

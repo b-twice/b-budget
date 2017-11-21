@@ -1,17 +1,1 @@
-<div *ngIf="userSummary | async | summaryTransform: name: year as summary; else loading">
-    <div *ngFor="let displayGroup of displayGroupsOrder">
-        <h4 class="section-header">{{displayGroup}}</h4>
-        <div class="summary-row" *ngFor="let key of displayGroups[displayGroup]">
-            <span class="summary-row--header">{{getKeyDisplay(key)}}</span>
-            <div class="summary-row--item ">
-                <span class="summary-row--money">{{summary[key] | currency:'USD':true:'1.0-0'}}</span>
-                <span class="summary-row--growth">
-                        <number-change [number]="summary[key + 'Growth']"></number-change>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
-<ng-template #loading>
-    <loading></loading>
-</ng-template>
+<budget-panel-chart></budget-panel-chart>

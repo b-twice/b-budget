@@ -29,6 +29,8 @@ import { CategoriesTransformPipe } from './panels/panel-categories/categories-tr
 import { FilterControlsComponent } from './filter-controls/filter-controls.component';
 import { PanelChartComponent } from './panels/panel-chart/panel-chart.component';
 import { PanelChartService } from './panels/panel-chart/panel-chart.service';
+import { PanelSummaryChartComponent } from './panels/panel-summary-chart/summary-chart.component';
+import { PanelSummaryChartService } from './panels/panel-summary-chart/summary-chart.service';
 import { PanelGroceriesComponent } from './panels/panel-groceries/groceries.component';
 import { PanelFoodProductsComponent } from './panels/panel-food-products/food-products.component';
 import { PanelRecipesComponent } from './panels/panel-recipes/panel-recipes.component';
@@ -62,6 +64,7 @@ import { CardBooksComponent } from './cards/card-books/card-books.component';
         CategoriesTransformPipe,
         FilterControlsComponent,
         PanelChartComponent,
+        PanelSummaryChartComponent,
         PanelGroceriesComponent,
         PanelFoodProductsComponent,
         PanelRecipesComponent,
@@ -73,6 +76,7 @@ import { CardBooksComponent } from './cards/card-books/card-books.component';
     providers: [
         BudgetService,
         PanelChartService,
+        PanelSummaryChartService,
         DatePipe
     ]
 })
