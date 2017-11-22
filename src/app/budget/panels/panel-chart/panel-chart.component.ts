@@ -1,14 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { PanelChartService } from './panel-chart.service';
 import { UserTransaction } from '../../models';
 import * as d3 from 'd3';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'budget-panel-chart',
   templateUrl: './panel-chart.component.html',
   styleUrls: ['./panel-chart.component.scss']
 })
-export class PanelChartComponent implements OnInit {
+export class PanelChartComponent implements OnInit, OnDestroy {
 
   // dimensions
   width: number = 1120;
@@ -39,18 +41,27 @@ export class PanelChartComponent implements OnInit {
 
   drawActive: boolean = false;
 
-
+  ngUnsubscribe: Subject<any> = new Subject();
   constructor(
     public panelChartService: PanelChartService
   ) { }
 
   ngOnInit() {
-    this.panelChartService.updateData$.subscribe(d => {
-      this.drawActive ? this.update(d) : this.draw(d)
-    });
-    this.panelChartService.drawData$.subscribe(d => {
-      this.draw(d)
-    });
+    this.panelChartService.updateData$
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(d => {
+        this.drawActive ? this.update(d) : this.draw(d)
+      });
+    this.panelChartService.drawData$
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(d => {
+        this.draw(d)
+      });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   update(data) {

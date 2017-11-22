@@ -1,6 +1,5 @@
 @import '../../../../styles/base.scss';
 .panel-style  {
-    @extend .panel-base;
     padding:0;
 }
 
@@ -11,10 +10,8 @@
 :host {
     display:flex;
     flex-direction:row;
-    width:100%;
-    @extend .panel-style;
     background:#fff;
-    height:22rem; 
+    flex:1;
 }
 
 /deep/ .line {

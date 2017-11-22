@@ -1,7 +1,7 @@
 export class UserSummary {
     constructor(
 
-        public fiscalYear: string,
+        public fiscalYear: number,
         public userName: string,
 
         public income: number = 0,
