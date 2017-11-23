@@ -1,9 +1,16 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { PanelChartService } from './panel-chart.service';
-import { UserTransaction } from '../../models';
-import * as d3 from 'd3';
+import { Transaction } from './transaction';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
+import * as d3Axis from 'd3-axis';
+import * as d3Selection from 'd3-selection';
+import * as d3Scale from 'd3-scale';
+import * as d3Shape from 'd3-shape';
+import * as d3Collection from 'd3-collection';
+import * as d3Transition from 'd3-transition';
+import * as d3TimeFormat from 'd3-time-format';
+
 
 @Component({
   selector: 'budget-panel-chart',
@@ -22,22 +29,22 @@ export class PanelChartComponent implements OnInit, OnDestroy {
   marginRight: number = 35;
 
   // line properties
-  lineCurve: any = d3.curveLinear;
+  lineCurve: d3Shape.CurveFactory = d3Shape.curveLinear;
 
   // containers
-  chart: d3.Selection<any, any, any, any>;
+  chart: d3Selection.Selection<any, any, any, any>;
   chartGroup: any;
   lineGroup: any;
   xAxis: any;
   yAxis: any;
-  xDomain: d3.ScalePoint<string>;
-  yDomain: d3.ScaleLinear<number, number>;
-  zDomain: d3.ScaleOrdinal<any, any>;
-  line: d3.Line<{ month: string, amount: number }>;
+  xDomain: d3Scale.ScalePoint<string>;
+  yDomain: d3Scale.ScaleLinear<number, number>;
+  zDomain: d3Scale.ScaleOrdinal<any, any>;
+  line: d3Shape.Line<Transaction>;
 
   // data
-  data: Array<{ year: string, month: string, amount: number }>;
-  entries: Array<{ key: string, values: { amount: number, month: string } }>;
+  data: Array<Transaction>;
+  entries: Array<{ key: string, values: Transaction }>;
 
   drawActive: boolean = false;
 
@@ -65,12 +72,11 @@ export class PanelChartComponent implements OnInit, OnDestroy {
   }
 
   update(data) {
-    console.log("Updating chart")
     // parse and scale data again
     this.data = data;
     this.setData()
     //update graph
-    let chart = d3.select(".chart").transition();
+    let chart = d3Transition.transition(".chart")
 
     this.lineGroup.data(this.entries)
 
@@ -94,11 +100,10 @@ export class PanelChartComponent implements OnInit, OnDestroy {
 
 
   draw(data) {
-    console.log("Drawing Chart")
 
-    d3.select('.svg-container').remove();
+    d3Selection.select('.svg-container').remove();
     // create the svg container that will hold the graph
-    this.chart = d3.select(".chart")
+    this.chart = d3Selection.select(".chart")
       .append("svg")
       .classed('svg-container', true)
       .attr("width", this.width)
@@ -110,12 +115,12 @@ export class PanelChartComponent implements OnInit, OnDestroy {
     let chartHeight = this.height - this.marginTop - this.marginBottom;
 
     // setup domains for data
-    this.xDomain = d3.scalePoint<string>().range([0, chartWidth]); // equal intervals across width of chart
-    this.yDomain = d3.scaleLinear().rangeRound([chartHeight, 0]); // linear range of rounded values
-    this.zDomain = d3.scaleOrdinal(d3.schemeCategory10); // ordinal scale of colors
+    this.xDomain = d3Scale.scalePoint<string>().range([0, chartWidth]); // equal intervals across width of chart
+    this.yDomain = d3Scale.scaleLinear().rangeRound([chartHeight, 0]); // linear range of rounded values
+    this.zDomain = d3Scale.scaleOrdinal(d3Scale.schemeCategory10); // ordinal scale of colors
 
     // create the line that is configured to consume data
-    this.line = d3.line<{ year: string, month: string, amount: number }>()
+    this.line = d3Shape.line<Transaction>()
       .curve(this.lineCurve)  // make the line curvy
       .x(d => this.xDomain(d.month))  // specify x axis to use the month prop of the data
       .y(d => this.yDomain(d.amount));  // specify y axis to use the amount prop of the data
@@ -172,11 +177,11 @@ export class PanelChartComponent implements OnInit, OnDestroy {
 
   // prettify and transform incoming data for consumption in chart
   parseData() {
-    let parseTime = d3.timeParse("%m");
-    let formatTime = d3.timeFormat("%b");
+    let parseTime = d3TimeFormat.timeParse("%m");
+    let formatTime = d3TimeFormat.timeFormat("%b");
     // lol doens't seem like the d3 way again, force transform data values before adding as entries
     this.data.forEach(entry => entry.month = formatTime(parseTime(entry.month)))
-    let entries = d3.nest<{ year: string, month: string, amount: number }, { month: string, amount: number }>()
+    let entries = d3Collection.nest<Transaction, Transaction>()
       .key(d => d.year) // group data by unique values
       .entries(this.data);
     this.entries = entries
@@ -188,12 +193,12 @@ export class PanelChartComponent implements OnInit, OnDestroy {
     this.parseData();
 
     this.xDomain.domain(this.data.map(d => d.month));
-    let xValues: number[] = this.data.map(d => d.amount);
-    this.yDomain.domain([0, d3.max(xValues)]);
+    let yValues: number[] = this.data.map(d => d.amount);
+    this.yDomain.domain([0, yValues.reduce((a, b) => Math.max(a, b))]);
 
     this.zDomain(this.entries.keys);
-    this.xAxis = d3.axisBottom(this.xDomain);
-    this.yAxis = d3.axisLeft(this.yDomain);
+    this.xAxis = d3Axis.axisBottom(this.xDomain);
+    this.yAxis = d3Axis.axisLeft(this.yDomain);
   }
 
 }

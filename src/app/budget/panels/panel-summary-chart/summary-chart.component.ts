@@ -4,7 +4,12 @@ import { BudgetService } from '../../services/budget.service';
 import { PanelSummaryChartService } from './summary-chart.service';
 import { UserSummary } from '../../models';
 import { SummaryByCategory } from './summary-by-category';
-import * as d3 from 'd3';
+import * as d3Axis from 'd3-axis';
+import * as d3Selection from 'd3-selection';
+import * as d3Scale from 'd3-scale';
+import * as d3Shape from 'd3-shape';
+import * as d3Collection from 'd3-collection';
+import * as d3Transition from 'd3-transition';
 
 @Component({
   selector: 'budget-panel-summary-chart',
@@ -25,18 +30,18 @@ export class PanelSummaryChartComponent implements OnInit {
   marginRight: number = 100;
 
   // line properties
-  lineCurve: any = d3.curveLinear;
+  lineCurve: d3Shape.CurveFactory = d3Shape.curveLinear;
 
   // containers
-  chart: d3.Selection<any, any, any, any>;
+  chart: d3Selection.Selection<any, any, any, any>;
   chartGroup: any;
   lineGroup: any;
   xAxis: any;
   yAxis: any;
-  xDomain: d3.ScalePoint<number>;
-  yDomain: d3.ScaleLinear<number, number>;
-  zDomain: d3.ScaleOrdinal<any, any>;
-  line: d3.Line<SummaryByCategory>;
+  xDomain: d3Scale.ScalePoint<number>;
+  yDomain: d3Scale.ScaleLinear<number, number>;
+  zDomain: d3Scale.ScaleOrdinal<any, any>;
+  line: d3Shape.Line<SummaryByCategory>;
 
   // data
   data: Array<UserSummary>;
@@ -71,7 +76,6 @@ export class PanelSummaryChartComponent implements OnInit {
   }
 
   activate(user, year) {
-    this.data = null;
     this.budgetService.getUserSummary(user, year).subscribe(data => {
       this.data = data;
       if (this.drawActive) {
@@ -85,12 +89,10 @@ export class PanelSummaryChartComponent implements OnInit {
   }
 
   update(data) {
-    console.log("Updating chart")
     // parse and scale data again
     this.setData()
     //update graph
-    let chart = d3.select(".chart").transition();
-
+    let chart = d3Transition.transition(".chart")
     this.lineGroup.data(this.entries)
 
     this.lineGroup.select('.line')
@@ -113,11 +115,9 @@ export class PanelSummaryChartComponent implements OnInit {
 
 
   draw(data) {
-    console.log("Drawing Chart")
 
-    d3.select('.svg-container').remove();
     // create the svg container that will hold the graph
-    this.chart = d3.select(".chart")
+    this.chart = d3Selection.select(".chart")
       .append("svg")
       .classed('svg-container', true)
       .attr("width", this.width)
@@ -129,12 +129,12 @@ export class PanelSummaryChartComponent implements OnInit {
     let chartHeight = this.height - this.marginTop - this.marginBottom;
 
     // setup domains for data
-    this.xDomain = d3.scalePoint<number>().range([0, chartWidth]); // equal intervals across width of chart
-    this.yDomain = d3.scaleLinear().rangeRound([chartHeight, 0]); // linear range of rounded values
-    this.zDomain = d3.scaleOrdinal(d3.schemeCategory10); // ordinal scale of colors
+    this.xDomain = d3Scale.scalePoint<number>().range([0, chartWidth]); // equal intervals across width of chart
+    this.yDomain = d3Scale.scaleLinear().rangeRound([chartHeight, 0]); // linear range of rounded values
+    this.zDomain = d3Scale.scaleOrdinal(d3Scale.schemeCategory10); // ordinal scale of colors
 
     // create the line that is configured to consume data
-    this.line = d3.line<SummaryByCategory>()
+    this.line = d3Shape.line<SummaryByCategory>()
       .curve(this.lineCurve)  // make the line curvy
       .x(d => this.xDomain(d.year))  // specify x axis to use the month prop of the data
       .y(d => this.yDomain(d.amount));  // specify y axis to use the amount prop of the data
@@ -202,7 +202,7 @@ export class PanelSummaryChartComponent implements OnInit {
         }
       )
     );
-    let entries = d3.nest<SummaryByCategory, SummaryByCategory>()
+    let entries = d3Collection.nest<SummaryByCategory, SummaryByCategory>()
       .key(d => d.category) // group data by unique values
       .entries(dataFlattened);
     this.entries = entries
@@ -216,11 +216,11 @@ export class PanelSummaryChartComponent implements OnInit {
 
     this.xDomain.domain(dataFlattened.map(d => d.year));
     let yValues: number[] = dataFlattened.map(d => d.amount);
-    this.yDomain.domain([0, d3.max(yValues)]);
+    this.yDomain.domain([0, yValues.reduce((a, b) => Math.max(a, b))]);
 
     this.zDomain(this.entries.keys);
-    this.xAxis = d3.axisBottom(this.xDomain);
-    this.yAxis = d3.axisLeft(this.yDomain);
+    this.xAxis = d3Axis.axisBottom(this.xDomain);
+    this.yAxis = d3Axis.axisLeft(this.yDomain);
   }
 
 }
