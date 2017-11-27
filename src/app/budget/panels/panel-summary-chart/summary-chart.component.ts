@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../../services/budget.service';
-import { PanelSummaryChartService } from './summary-chart.service';
 import { UserSummary } from '../../models';
 import { SummaryByCategory } from './summary-by-category';
 import * as d3Axis from 'd3-axis';
@@ -22,7 +21,7 @@ export class PanelSummaryChartComponent implements OnInit {
 
   // dimensions
   width: number = 1120;
-  height: number = 700;
+  height: number = 500;
   // spacing
   marginTop: number = 20;
   marginBottom: number = 30;
@@ -64,7 +63,6 @@ export class PanelSummaryChartComponent implements OnInit {
 
   constructor(
     public route: ActivatedRoute,
-    public panelSummaryChartService: PanelSummaryChartService,
     public budgetService: BudgetService
   ) { }
 

@@ -1,0 +1,6 @@
+<div class="spending-chart"></div>
+<div *ngIf="data; else loading">
+</div>
+<ng-template #loading>
+    <loading></loading>
+</ng-template>

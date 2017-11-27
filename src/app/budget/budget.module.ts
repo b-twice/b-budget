@@ -23,14 +23,13 @@ import { PanelNavComponent } from './panel-nav/panel-nav.component';
 import { PanelComponent } from './panel/panel.component';
 import { AuthModule } from './services/auth.module';
 
-import { SummaryTransformPipe } from './panels/panel-summary/summary-transform.pipe';
 import { UserProfileTransformPipe } from './user-profile/user-profile-transform.pipe';
 import { CategoriesTransformPipe } from './panels/panel-categories/categories-transform.pipe';
 import { FilterControlsComponent } from './filter-controls/filter-controls.component';
 import { PanelChartComponent } from './panels/panel-chart/panel-chart.component';
 import { PanelChartService } from './panels/panel-chart/panel-chart.service';
 import { PanelSummaryChartComponent } from './panels/panel-summary-chart/summary-chart.component';
-import { PanelSummaryChartService } from './panels/panel-summary-chart/summary-chart.service';
+import { PanelSpendingChartComponent } from './panels/panel-spending-chart/spending-chart.component';
 import { PanelGroceriesComponent } from './panels/panel-groceries/groceries.component';
 import { PanelFoodProductsComponent } from './panels/panel-food-products/food-products.component';
 import { PanelRecipesComponent } from './panels/panel-recipes/panel-recipes.component';
@@ -59,12 +58,12 @@ import { CardBooksComponent } from './cards/card-books/card-books.component';
         YearNavComponent,
         PanelNavComponent,
         PanelComponent,
-        SummaryTransformPipe,
         UserProfileTransformPipe,
         CategoriesTransformPipe,
         FilterControlsComponent,
         PanelChartComponent,
         PanelSummaryChartComponent,
+        PanelSpendingChartComponent,
         PanelGroceriesComponent,
         PanelFoodProductsComponent,
         PanelRecipesComponent,
@@ -76,7 +75,6 @@ import { CardBooksComponent } from './cards/card-books/card-books.component';
     providers: [
         BudgetService,
         PanelChartService,
-        PanelSummaryChartService,
         DatePipe
     ]
 })

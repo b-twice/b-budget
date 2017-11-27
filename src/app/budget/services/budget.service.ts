@@ -99,11 +99,6 @@ export class BudgetService {
     }
 
 
-    public getUserExpenses(year: string, months: string[]): Observable<UserExpense[]> {
-        let params = new URLSearchParams();
-        months.map(c => params.append('monthNames', c))
-        return this.makeRequest<UserExpense[]>(`user-expenses/year/${year}`, params, true);
-    }
     public getUserExpense(name: string, year: string, months: string[]): Observable<UserExpense[]> {
         let params = new URLSearchParams();
         months.map(c => params.append('monthNames', c))

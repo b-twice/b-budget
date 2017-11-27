@@ -18,8 +18,10 @@
     flex:1;
 }
 
-/deep/ .line {
-    // stroke: $primary-color;
-    stroke-width: 1.5;
-    fill:none;
-}
+/deep/ .spending-bar {
+    fill: steelblue;
+  }
+  
+/deep/  .spending-bar:hover {
+    fill: brown;
+  }
