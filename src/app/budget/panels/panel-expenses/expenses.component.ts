@@ -95,8 +95,15 @@ export class PanelExpensesComponent implements OnInit {
     });
   }
   getExpensePage(expense: UserExpense) {
-    this.budgetService.getUserTransactionByMonth(this.user, this.year, this.monthMap[expense.month], expense.categoryName)
-      .subscribe(i => this.selectedTransactions = i);
+    if (expense.month) {
+      this.budgetService.getUserTransactionByMonth(this.user, this.year, this.monthMap[expense.month], expense.categoryName)
+        .subscribe(i => this.selectedTransactions = i);
+    }
+    else {
+      this.budgetService.getUserTransactions(this.user, this.year, [expense.categoryName])
+        .subscribe(i => this.selectedTransactions = i);
+    }
+
     this.selectedTransactionCategoryName = expense.categoryName;
   }
 

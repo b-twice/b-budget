@@ -16,4 +16,12 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            mail to:"brbrowngeo@gmail.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "We did it!"
+        }
+        failure {
+            mail to:"brbrowngeo@gmail.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "I've made a huge mistake..."
+        }
+    }   
 }
