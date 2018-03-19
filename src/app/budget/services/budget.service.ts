@@ -10,7 +10,7 @@ import {
     UserProfile, Category,
     FiscalYear, User, Transaction,
     UserSummary, UserCategory,
-    UserTransaction, UserGrocery, UserRecipe, UserRecipeIngredient, UserFoodProduct, ExpenseMonth,
+    UserTransaction, UserGrocery, UserRecipe, UserRecipeIngredient, UserFoodProduct, ExpenseMonth, FoodProduct,
     UserExpense, UserBook,
     UserExpenseMonthly
 } from '../models';
@@ -148,6 +148,11 @@ export class BudgetService {
     public getUserFoodProductByName(name: string, year: string, food_productName: string): Observable<UserFoodProduct[]> {
         return this.makeRequest<UserFoodProduct[]>(`user-food_products/year/${year}/user/${name}/food_product/${food_productName}`, null, true);
     }
+    public getFoodProducts(): Observable<FoodProduct[]> {
+        return this.makeRequest<FoodProduct[]>('food-products');
+    }
+
+
 
 
     // Recipes

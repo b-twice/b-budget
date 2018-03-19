@@ -8,13 +8,17 @@ import { ActivatedRoute } from '@angular/router';
 export class PanelComponent implements OnInit {
 
   currentPanel: string = '';
+  currentAction: string = '';
   constructor(
     public activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
-      params => this.currentPanel = params["panel"]
+      params => {
+        this.currentPanel = params["panel"];
+        this.currentAction = params["action"];
+      }
     )
   }
 

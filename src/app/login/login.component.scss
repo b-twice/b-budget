@@ -1,3 +1,4 @@
+@import '../../styles/base.scss';
 :host {
     display:flex;
     flex-direction:column;
@@ -15,21 +16,3 @@
     padding: 15px;
 }
 
-
-
-/* ==========================================================================
-#SITE-STYLES
-========================================================================== */
-
-button {
-    color: white;
-    background: #15CD72;
-
-    &:focus {
-        background-color: #0CB863;
-    }
-
-    &:hover {
-        background-color: #0CB863;
-    }
-}

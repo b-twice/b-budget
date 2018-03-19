@@ -1,0 +1,69 @@
+@import '../../../../styles/base.scss';
+.panel-style  {
+    @extend .panel-base;
+    padding:0;
+}
+
+.section-header {
+    @extend .section-header;
+}
+
+.panel {
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    @extend .panel-style;
+    background:#fff;
+    height:75rem;
+}
+
+.controls {
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    margin-bottom:$content-space;
+    a {
+        cursor:pointer;
+    }
+}
+
+
+.cart {
+    display:flex;
+    flex:1;
+    border-right:1px solid #ECEFF1;
+    padding:$content-space;
+    flex-direction:column;
+
+    .cart-item {
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        width:35rem;
+        justify-content:space-between;
+        i {
+            margin-right:.5rem;
+        }
+    }
+}
+
+.console {
+    display:flex;
+    flex:0 0 35rem;
+    flex-direction:column;
+
+    .register {
+        flex:1;
+        border-bottom:1px solid #ECEFF1;
+        padding:$content-space;
+    }
+    .checkout {
+        flex:1;
+        padding:$content-space;
+    }
+}
+
+.completer-limit /deep/ .completer-dropdown {
+    overflow-y: auto;
+    max-height: 30rem;
+  }

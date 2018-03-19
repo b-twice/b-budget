@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Ng2CompleterModule } from 'ng2-completer';
 import { DatePipe, CommonModule } from '@angular/common';
 import { HttpModule, Http, RequestOptions } from '@angular/http';
 
@@ -31,6 +33,8 @@ import { PanelChartService } from './panels/panel-chart/panel-chart.service';
 import { PanelSummaryChartComponent } from './panels/panel-summary-chart/summary-chart.component';
 import { PanelSpendingChartComponent } from './panels/panel-spending-chart/spending-chart.component';
 import { PanelGroceriesComponent } from './panels/panel-groceries/groceries.component';
+import { PanelGroceryCartComponent } from './panels/panel-grocery-cart/grocery-cart.component';
+import { PanelGroceryControlsComponent } from './panels/panel-grocery-controls/grocery-controls.component';
 import { PanelFoodProductsComponent } from './panels/panel-food-products/food-products.component';
 import { PanelRecipesComponent } from './panels/panel-recipes/panel-recipes.component';
 import { CardRecipeIngredientsComponent } from './cards/card-recipe-ingredients/card-recipe-ingredients.component';
@@ -41,6 +45,8 @@ import { CardBooksComponent } from './cards/card-books/card-books.component';
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
+        Ng2CompleterModule,
         BudgetRoutingModule,
         SharedModule,
         AuthModule
@@ -64,6 +70,8 @@ import { CardBooksComponent } from './cards/card-books/card-books.component';
         PanelChartComponent,
         PanelSummaryChartComponent,
         PanelSpendingChartComponent,
+        PanelGroceryControlsComponent,
+        PanelGroceryCartComponent,
         PanelGroceriesComponent,
         PanelFoodProductsComponent,
         PanelRecipesComponent,

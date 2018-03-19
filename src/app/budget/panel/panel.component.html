@@ -3,7 +3,16 @@
 <budget-panel-transactions *ngIf="currentPanel == 'transactions'"></budget-panel-transactions>
 <budget-panel-expenses *ngIf="currentPanel == 'expenses'"></budget-panel-expenses>
 <budget-panel-food-products *ngIf="currentPanel == 'foodProducts'"></budget-panel-food-products>
-<budget-panel-groceries *ngIf="currentPanel == 'groceries'"></budget-panel-groceries>
+<div *ngIf="currentPanel == 'groceries'">
+    <div *ngIf="currentAction == 'add'">
+        <budget-panel-grocery-cart></budget-panel-grocery-cart>
+
+    </div>
+    <div *ngIf="!currentAction">
+        <budget-panel-grocery-controls></budget-panel-grocery-controls>
+        <budget-panel-groceries></budget-panel-groceries>
+    </div>
+</div>
 <budget-panel-recipes *ngIf="currentPanel == 'recipes'"></budget-panel-recipes>
 <budget-panel-books *ngIf="currentPanel == 'books'"></budget-panel-books>
-<budget-panel-chart *ngIf="currentPanel == 'transactions' || currentPanel == 'groceries'"></budget-panel-chart>
+<budget-panel-chart *ngIf="!currentAction && (currentPanel == 'transactions' || currentPanel == 'groceries')"></budget-panel-chart>

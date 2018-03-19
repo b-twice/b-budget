@@ -1,8 +1,11 @@
 $font-header: Montserrat, sans-serif;
 $font-body: Lato, sans-serif;
 $primary-color: rgba(230, 126, 34,1.0);
+$secondary-color:  #15CD72;
+$secondary-color-focus: #0CB863;
 $background-shade-color:#EBEBEB;
 $error-color:#e74c3c;
+$content-space: 1rem;
 
 
 // NAVIGATION
@@ -64,4 +67,49 @@ $site-opacity-base: .9;
 $link-underline: linear-gradient(to bottom, rgba(0,0,0,0) 90%, rgba(0,0,0,0.3) 100%);
 .link-underline {
     background-image:$link-underline;
+}
+
+/* ==========================================================================
+#Icons
+========================================================================== */
+
+.icon-container {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+	font-size:$nav-font-size;
+
+    opacity:$nav-opacity-base;
+
+	i {
+        margin-right:.5rem;
+    }
+
+    &:hover {
+        opacity: $nav-opacity-hover;
+    }
+    &:focus {
+        opacity:$nav-opacity-hover;
+    }
+}
+
+/* ==========================================================================
+#Buttons
+========================================================================== */
+button {
+    color: white;
+    background: $secondary-color;
+
+    &:focus {
+        background-color: $secondary-color-focus;
+    }
+
+    &:hover {
+        background-color: $secondary-color-focus;
+    }
+    &:disabled{
+        cursor:not-allowed;
+        background:#ecf0f1;
+        color:#95a5a6;
+    }
 }

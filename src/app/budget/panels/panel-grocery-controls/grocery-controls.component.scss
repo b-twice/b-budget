@@ -1,0 +1,15 @@
+@import '../../../../styles/base.scss';
+@import '../../../../styles/flex.scss';
+@import '../../../../styles/table.scss';
+
+:host {
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    width:100%;
+    margin-bottom:$content-space;
+}
+
+a {
+    cursor:pointer;
+}
