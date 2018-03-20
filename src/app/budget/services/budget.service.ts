@@ -11,6 +11,7 @@ import {
     FiscalYear, User, Transaction,
     UserSummary, UserCategory,
     UserTransaction, UserGrocery, UserRecipe, UserRecipeIngredient, UserFoodProduct, ExpenseMonth, FoodProduct,
+    GroceryStore,
     UserExpense, UserBook,
     UserExpenseMonthly
 } from '../models';
@@ -133,6 +134,13 @@ export class BudgetService {
         categories.map(c => params.append('categoryNames', c))
         return this.makeRequest<UserExpenseMonthly[]>(`user-groceries/year/${year}/user/${name}/monthly/range/${range}`, params, true);
     }
+    public getGroceryStores(): Observable<GroceryStore[]> {
+        return this.makeRequest<GroceryStore[]>('grocery-stores');
+    }
+    public getLatestGrocery(foodProduct: string): Observable<UserGrocery> {
+        return this.makeRequest<UserGrocery>(`user-groceries/latest/${foodProduct}`, null, true);
+    }
+
 
     // Food products
     public getUserFoodProducts(year: string, categories: string[]): Observable<UserFoodProduct[]> {

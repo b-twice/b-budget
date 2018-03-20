@@ -7,16 +7,25 @@
 <div class="panel">
     <div class="cart">
         <h4 class='section-header'>Cart</h4>
-        <div *ngFor="let item of groceryCart">
-            <div class="cart-item">
+        <div class="cart-items" *ngIf="groceryCart.length">
+            <div class="cart-item" *ngFor="let item of groceryCart; let i = index" [attr.data-index]="i">
                 <div>
-                    <i class="fa fa-angle-right"></i>
+                    <i class="fa fa-angle-right"></i>&nbsp; &nbsp;
                     <span *ngIf="!item.weight">{{item.quantity}}</span>
                     <span *ngIf="!item.quantity">{{item.weight}}</span>&nbsp; {{item.name}}
                 </div>
-                <div>${{item.cost}}</div>
+                <div>
+                    ${{item.cost}} &nbsp; &nbsp;
+                    <i class="fa fa-close icon-error" style="cursor:pointer" (click)="removeCartItem(i)"></i>
+                </div>
             </div>
         </div>
+        <div class="cart-total" *ngIf="groceryCart.length">
+            <span>Total: {{cartTotal | currency:'USD':true:'1.2-2'}}</span>
+        </div>
+        <span *ngIf="!groceryCart.length">
+            <em>No items in the cart</em>
+        </span>
     </div>
     <div class="console">
         <div class="register">
@@ -24,10 +33,20 @@
             <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
 
                 <div class="form-group">
-                    <label for="foodProduct">Product:</label>
-                    <ng2-completer class="completer-limit" [(ngModel)]="model.name" name="foodProduct" #foodProduct="ngModel" [datasource]="dataService"
-                        [inputClass]="'form-control'" [placeholder]="'Search food products'" [autoMatch]="true" [clearUnselected]="true"
+                    <label for="date">Date:</label>
+                    <input type="date" class="form-control" id="date" [(ngModel)]="model.date" name="date" #date="ngModel" required>
+                </div>
+                <div class="form-group">
+                    <label for="groceryStore">Store:</label>
+                    <ng2-completer class="completer-limit" [(ngModel)]="model.store" name="groceryStores" #groceryStore="ngModel" [datasource]="groceryStoresService"
+                        [inputClass]="'form-control'" [placeholder]="'Search grocery stores'" [autoMatch]="true" [clearUnselected]="false"
                         [minSearchLength]="0" required></ng2-completer>
+                </div>
+                <div class="form-group">
+                    <label for="foodProduct">Product:</label>
+                    <ng2-completer class="completer-limit" (blur)="onProductSelect()" [(ngModel)]="model.name" name="foodProduct" #foodProduct="ngModel"
+                        [datasource]="foodProductsService" [inputClass]="'form-control'" [placeholder]="'Search food products'"
+                        [autoMatch]="true" [clearUnselected]="true" [minSearchLength]="0" required></ng2-completer>
                 </div>
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
@@ -41,22 +60,21 @@
                     <label for="cost">Cost</label>
                     <input type="number" class="form-control" id="cost" required [(ngModel)]="model.cost" name="cost" #cost="ngModel">
                 </div>
-
+                <div class="form-group checkbox">
+                    <div>
+                        <input type="checkbox" [(ngModel)]="model.organic" name="organic" #organic="ngModel">
+                        <label>Organic</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" [(ngModel)]="model.seasonal" name="seasonal" #seasonal="ngModel">
+                        <label>Seasonal</label>
+                    </div>
+                </div>
                 <button type="submit" [disabled]="!registerForm.form.valid" class="button-full">Add To Cart</button>
+                <button type="button" [disabled]="!groceryCart.length" class="button-full" (click)="checkout">Checkout</button>
             </form>
 
         </div>
-        <div class="checkout">
-            <h4 class='section-header'>Checkout</h4>
-            <div class="check-out--summary">
-                <div>
-                    <span>Total:</span>
-                </div>
-
-            </div>
-            <button type="button" [disabled]="!groceryCart.length" class="button-full">Save Cart</button>
-        </div>
-
     </div>
 
 </div>
