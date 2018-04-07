@@ -98,6 +98,7 @@ export class PanelGroceryCartComponent implements OnInit {
     this.budgetService.postData(data, 'grocery-cart').subscribe(result => {
       console.log('success')
       this.groceryCart = [];
+      this.cartTotal = 0;
     }, error => { console.log(error); this.saveError = true });
   }
 
