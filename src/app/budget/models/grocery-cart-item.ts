@@ -1,7 +1,7 @@
 export class GroceryCartItem {
     constructor(
         public date: string,
-        public store: string,
+        public supermarket: string,
         public name: string,
         public weight: number,
         public quantity: number,

@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http, Response, RequestOptions, URLSearchParams } from '@angular/http';
+import { Http, Response, RequestOptions, URLSearchParams, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -11,7 +11,7 @@ import {
     FiscalYear, User, Transaction,
     UserSummary, UserCategory,
     UserTransaction, UserGrocery, UserRecipe, UserRecipeIngredient, UserFoodProduct, ExpenseMonth, FoodProduct,
-    GroceryStore,
+    Supermarket,
     UserExpense, UserBook,
     UserExpenseMonthly
 } from '../models';
@@ -34,16 +34,33 @@ export class BudgetService {
         }
         return this.http.get(requestUrl, { search: params })
             .map(this.extractData)
-
             .catch(this.handleError);
     }
+
+    public postData(data: {}, fragment: string): Observable<any> {
+        let postUrl = `${this.settings.apiEndpoint}/${fragment}`;
+        let body = JSON.stringify(data);
+        let params = new URLSearchParams();
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.authHttp.post(postUrl, body, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+
     extractData(res: Response) {
         let body = res.json();
         return body || {};
     }
 
     handleError(error: Response) {
-        return Observable.throw(error.json().errors || 'Server error');
+        try {
+            return Observable.throw(error.json().errors || 'Server error');
+        }
+        catch (e) {
+            return Observable.throw('Server error');
+        }
     }
 
     // API CALLS
@@ -134,11 +151,11 @@ export class BudgetService {
         categories.map(c => params.append('categoryNames', c))
         return this.makeRequest<UserExpenseMonthly[]>(`user-groceries/year/${year}/user/${name}/monthly/range/${range}`, params, true);
     }
-    public getGroceryStores(): Observable<GroceryStore[]> {
-        return this.makeRequest<GroceryStore[]>('grocery-stores');
+    public getSupermarkets(): Observable<Supermarket[]> {
+        return this.makeRequest<Supermarket[]>('supermarkets');
     }
-    public getLatestGrocery(foodProduct: string): Observable<UserGrocery> {
-        return this.makeRequest<UserGrocery>(`user-groceries/latest/${foodProduct}`, null, true);
+    public getLatestGrocery(foodProduct: string, supermarket: string): Observable<UserGrocery> {
+        return this.makeRequest<UserGrocery>(`user-groceries/latest/${foodProduct}/supermarket/${supermarket}`, null, true);
     }
 
 

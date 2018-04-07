@@ -21,7 +21,9 @@
             </div>
         </div>
         <div class="cart-total" *ngIf="groceryCart.length">
-            <span>Total: {{cartTotal | currency:'USD':true:'1.2-2'}}</span>
+            <span>
+                <b>{{cartTotal | currency:'USD':true:'1.2-2'}}</b>
+            </span>
         </div>
         <span *ngIf="!groceryCart.length">
             <em>No items in the cart</em>
@@ -37,9 +39,9 @@
                     <input type="date" class="form-control" id="date" [(ngModel)]="model.date" name="date" #date="ngModel" required>
                 </div>
                 <div class="form-group">
-                    <label for="groceryStore">Store:</label>
-                    <ng2-completer class="completer-limit" [(ngModel)]="model.store" name="groceryStores" #groceryStore="ngModel" [datasource]="groceryStoresService"
-                        [inputClass]="'form-control'" [placeholder]="'Search grocery stores'" [autoMatch]="true" [clearUnselected]="false"
+                    <label for="supermarket">Supermarket:</label>
+                    <ng2-completer class="completer-limit" [(ngModel)]="model.supermarket" name="supermarkets" #supermarket="ngModel" [datasource]="supermarketsService"
+                        [inputClass]="'form-control'" [placeholder]="'Search grocery supermarkets'" [autoMatch]="true" [clearUnselected]="false"
                         [minSearchLength]="0" required></ng2-completer>
                 </div>
                 <div class="form-group">
@@ -71,7 +73,7 @@
                     </div>
                 </div>
                 <button type="submit" [disabled]="!registerForm.form.valid" class="button-full">Add To Cart</button>
-                <button type="button" [disabled]="!groceryCart.length" class="button-full" (click)="checkout">Checkout</button>
+                <button type="button" [disabled]="!groceryCart.length" class="button-full" (click)="checkout()">Checkout</button>
             </form>
 
         </div>
