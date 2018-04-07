@@ -34,6 +34,7 @@
     border-right:1px solid #ECEFF1;
     padding:$content-space;
     flex-direction:column;
+    overflow:auto;
 
     .cart-items {
         width:35rem;
