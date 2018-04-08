@@ -6,7 +6,7 @@ export class UserGrocery {
         public name: string,
         public date: string = '',
         public category: string = '',
-        public count: number = 1,
+        public count: number = 0,
         public weight: number = 0,
         public unit: string = 'lb',
         public organic: string = 'No',

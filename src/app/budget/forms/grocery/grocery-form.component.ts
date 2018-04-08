@@ -44,7 +44,7 @@ export class GroceryFormComponent implements OnInit {
     }
 
     rebuild() {
-        this.model = new UserGrocery(0, this.user, this.model.date, this.model.supermarket);
+        this.model = new UserGrocery(0, this.user, this.model.supermarket, null, this.model.date);
     }
 
     onProductSelect() {
