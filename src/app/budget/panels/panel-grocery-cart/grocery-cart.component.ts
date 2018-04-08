@@ -86,9 +86,9 @@ export class PanelGroceryCartComponent implements OnInit {
         category: "",
         supermarket: item.supermarket,
         name: item.name,
-        weight: item.weight,
-        count: item.count,
-        amount: item.cost,
+        weight: item.weight ? item.weight : 0,
+        count: item.count ? item.count : 0,
+        amount: item.cost ? item.cost : 0,
         organic: item.organic ? 'Yes' : 'No',
         seasonal: item.seasonal ? 'Yes' : 'No',
         unitPrice: 0
