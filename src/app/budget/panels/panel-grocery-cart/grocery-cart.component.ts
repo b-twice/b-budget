@@ -56,7 +56,7 @@ export class PanelGroceryCartComponent implements OnInit {
       this.budgetService.getLatestGrocery(this.model.name, this.model.supermarket).subscribe(grocery => {
         if (grocery) {
           this.model.weight = grocery.weight;
-          this.model.quantity = grocery.count;
+          this.model.count = grocery.count;
           this.model.cost = grocery.amount;
           this.model.organic = grocery.organic == 'Yes' ? 1 : 0;
           this.model.seasonal = grocery.seasonal == 'Yes' ? 1 : 0;
@@ -87,7 +87,7 @@ export class PanelGroceryCartComponent implements OnInit {
         supermarket: item.supermarket,
         name: item.name,
         weight: item.weight,
-        quantity: item.quantity,
+        count: item.count,
         amount: item.cost,
         organic: item.organic ? 'Yes' : 'No',
         seasonal: item.seasonal ? 'Yes' : 'No',
@@ -96,7 +96,6 @@ export class PanelGroceryCartComponent implements OnInit {
     );
     let data = { basket: basket }
     this.budgetService.postData(data, 'grocery-cart').subscribe(result => {
-      console.log('success')
       this.groceryCart = [];
       this.cartTotal = 0;
     }, error => { console.log(error); this.saveError = true });
