@@ -13,7 +13,7 @@
         <label for="foodProduct">Product:</label>
         <ng2-completer class="completer-limit" (blur)="onProductSelect()" [(ngModel)]="model.name" name="foodProduct" #foodProduct="ngModel"
             [datasource]="foodProductsService" [inputClass]="'form-control'" [placeholder]="'Search Food Products'" [autoMatch]="true"
-            [clearUnselected]="true" [minSearchLength]="0" required></ng2-completer>
+            [clearUnselected]="true" [minSearchLength]="0" required #foodProduct></ng2-completer>
     </div>
     <div class="form-group">
         <label for="count">count</label>

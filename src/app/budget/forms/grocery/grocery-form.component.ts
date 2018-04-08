@@ -1,6 +1,6 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CompleterService, CompleterData } from 'ng2-completer';
+import { CompleterService, CompleterData, CompleterCmp } from 'ng2-completer';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../../services/budget.service';
 import { FoodProduct, UserGrocery, Supermarket } from '../../models';
@@ -22,6 +22,8 @@ export class GroceryFormComponent implements OnInit {
     supermarketsService: CompleterData;
     model: UserGrocery = new UserGrocery(0, null, null, null);
     @Output() onSubmit = new EventEmitter<UserGrocery>();
+
+    @ViewChild("foodProduct") _foodProduct: CompleterCmp;
 
     constructor(
         public route: ActivatedRoute,
@@ -45,6 +47,7 @@ export class GroceryFormComponent implements OnInit {
 
     rebuild() {
         this.model = new UserGrocery(0, this.user, this.model.supermarket, null, this.model.date);
+        this._foodProduct.focus();
     }
 
     onProductSelect() {
