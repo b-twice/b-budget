@@ -1,0 +1,41 @@
+<form #registerForm="ngForm" (ngSubmit)="submit()">
+    <div class="form-group">
+        <label for="date">Date:</label>
+        <input type="date" class="form-control" id="date" [(ngModel)]="model.date" name="date" #date="ngModel" required>
+    </div>
+    <div class="form-group">
+        <label for="supermarket">Supermarket:</label>
+        <ng2-completer class="completer-limit" [(ngModel)]="model.supermarket" name="supermarkets" #supermarket="ngModel" [datasource]="supermarketsService"
+            [inputClass]="'form-control'" [placeholder]="'Search Supermarkets'" [autoMatch]="false" [clearUnselected]="false"
+            [minSearchLength]="0" required></ng2-completer>
+    </div>
+    <div class="form-group">
+        <label for="foodProduct">Product:</label>
+        <ng2-completer class="completer-limit" (blur)="onProductSelect()" [(ngModel)]="model.name" name="foodProduct" #foodProduct="ngModel"
+            [datasource]="foodProductsService" [inputClass]="'form-control'" [placeholder]="'Search Food Products'" [autoMatch]="true"
+            [clearUnselected]="true" [minSearchLength]="0" required></ng2-completer>
+    </div>
+    <div class="form-group">
+        <label for="count">count</label>
+        <input type="number" class="form-control" id="count" [(ngModel)]="model.count" name="count" #count="ngModel">
+    </div>
+    <div class="form-group">
+        <label for="weight">Weight</label>
+        <input type="number" class="form-control" id="weight" [(ngModel)]="model.weight" name="weight" #weight="ngModel">
+    </div>
+    <div class="form-group">
+        <label for="amount">Cost</label>
+        <input type="number" class="form-control" id="amount" required [(ngModel)]="model.amount" name="amount" #amount="ngModel">
+    </div>
+    <div class="form-group checkbox">
+        <div>
+            <input type="checkbox" name="organic" (change)="model.organic = $event.target.checked ? 'Yes' : 'No'" [checked]="model.organic == 'Yes'">
+            <label>Organic</label>
+        </div>
+        <div>
+            <input type="checkbox" name="seasonal" (change)="model.seasonal = $event.target.checked ? 'Yes' : 'No'" [checked]="model.seasonal == 'Yes'">
+            <label>Seasonal</label>
+        </div>
+    </div>
+    <button type="submit" [disabled]="!registerForm.form.valid" class="button-full">{{submitLabel}}</button>
+</form>

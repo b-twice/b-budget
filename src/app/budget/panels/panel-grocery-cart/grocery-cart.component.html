@@ -15,7 +15,7 @@
                     <span *ngIf="!item.count">{{item.weight}}</span>&nbsp; {{item.name}}
                 </div>
                 <div>
-                    ${{item.cost}} &nbsp; &nbsp;
+                    ${{item.amount}} &nbsp; &nbsp;
                     <i class="fa fa-close icon-error" style="cursor:pointer" (click)="removeCartItem(i)"></i>
                 </div>
             </div>
@@ -31,52 +31,10 @@
     </div>
     <div class="console">
         <div class="register">
-
-            <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
-
-                <div class="form-group">
-                    <label for="date">Date:</label>
-                    <input type="date" class="form-control" id="date" [(ngModel)]="model.date" name="date" #date="ngModel" required>
-                </div>
-                <div class="form-group">
-                    <label for="supermarket">Supermarket:</label>
-                    <ng2-completer class="completer-limit" [(ngModel)]="model.supermarket" name="supermarkets" #supermarket="ngModel" [datasource]="supermarketsService"
-                        [inputClass]="'form-control'" [placeholder]="'Search supermarkets'" [autoMatch]="false" [clearUnselected]="false"
-                        [minSearchLength]="0" required></ng2-completer>
-                </div>
-                <div class="form-group">
-                    <label for="foodProduct">Product:</label>
-                    <ng2-completer class="completer-limit" (blur)="onProductSelect()" [(ngModel)]="model.name" name="foodProduct" #foodProduct="ngModel"
-                        [datasource]="foodProductsService" [inputClass]="'form-control'" [placeholder]="'Search food products'"
-                        [autoMatch]="true" [clearUnselected]="true" [minSearchLength]="0" required></ng2-completer>
-                </div>
-                <div class="form-group">
-                    <label for="count">count</label>
-                    <input type="number" class="form-control" id="count" [(ngModel)]="model.count" name="count" #count="ngModel">
-                </div>
-                <div class="form-group">
-                    <label for="weight">Weight</label>
-                    <input type="number" class="form-control" id="weight" [(ngModel)]="model.weight" name="weight" #weight="ngModel">
-                </div>
-                <div class="form-group">
-                    <label for="cost">Cost</label>
-                    <input type="number" class="form-control" id="cost" required [(ngModel)]="model.cost" name="cost" #cost="ngModel">
-                </div>
-                <div class="form-group checkbox">
-                    <div>
-                        <input type="checkbox" [(ngModel)]="model.organic" name="organic" #organic="ngModel">
-                        <label>Organic</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" [(ngModel)]="model.seasonal" name="seasonal" #seasonal="ngModel">
-                        <label>Seasonal</label>
-                    </div>
-                </div>
-                <button type="submit" [disabled]="!registerForm.form.valid" class="button-full">Add To Cart</button>
-                <button type="button" [disabled]="!groceryCart.length" class="button-full" (click)="checkout()">Checkout</button>
-            </form>
-
+            <budget-grocery-form submitLabel="Add To Cart" (onSubmit)="onSubmit($event)"></budget-grocery-form>
+            <button type="button" [disabled]="!groceryCart.length" class="button-full" (click)="checkout()">Checkout</button>
         </div>
+
     </div>
 
 </div>

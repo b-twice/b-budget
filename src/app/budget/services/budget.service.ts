@@ -48,6 +48,16 @@ export class BudgetService {
             .catch(this.handleError);
     }
 
+    public putData(fragment: string, data: {}): Observable<any> {
+        let postUrl = `${this.settings.apiEndpoint}/${fragment}`;
+        let body = JSON.stringify(data);
+        let params = new URLSearchParams();
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.authHttp.put(postUrl, body, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
 
     extractData(res: Response) {
         let body = res.json();
@@ -156,6 +166,11 @@ export class BudgetService {
     }
     public getLatestGrocery(foodProduct: string, supermarket: string): Observable<UserGrocery> {
         return this.makeRequest<UserGrocery>(`user-groceries/latest/${foodProduct}/supermarket/${supermarket}`, null, true);
+    }
+
+    public putGrocery(id: number, data: any) {
+        return this.putData(`grocery-cart/grocery/${id}`, data);
+
     }
 
 

@@ -13,7 +13,7 @@
   </div>
   <div *ngIf="userGroceries | async as groceries; else loading">
     <div class="table-body table-main-content">
-      <div class="table-row" *ngFor="let grocery of groceries | dynamicSort:sortProperty:sortDesc" (click)="getGroceryPage(grocery.name)">
+      <div class="table-row" *ngFor="let grocery of groceries | dynamicSort:sortProperty:sortDesc" (click)="getGroceryPage(grocery)">
         <div class="table-row-cell flex-size-1">{{grocery.date | date:'MMM d'}}</div>
         <div class="table-row-cell flex-size-2">{{grocery.supermarket}}</div>
         <div class="table-row-cell flex-size-2">{{grocery.category}}</div>
@@ -42,4 +42,4 @@
     </div>
   </div>
 </div>
-<budget-groceries-card *ngIf="selectedGroceries" [groceryName]="selectedGroceryName" [groceries]="selectedGroceries" (onModalClose)="modalClose()"></budget-groceries-card>
+<budget-groceries-card *ngIf="selectedGroceries" [grocery]="selectedGrocery" [groceries]="selectedGroceries" (onModalClose)="modalClose()"></budget-groceries-card>

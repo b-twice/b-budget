@@ -1,4 +1,4 @@
-<a [routerLink]="['add']" class="icon-container">
-    <i class="fa fa-plus"></i>
+<a [routerLink]="['add']" class="icon-container" *ngIf="user !== 'All'">
+    <i class=" fa fa-plus "></i>
     <span>Add Groceries</span>
 </a>

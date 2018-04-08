@@ -42,6 +42,8 @@ import { CardGroceriesComponent } from './cards/card-groceries/card-groceries.co
 import { CardExpensesComponent } from './cards/card-expenses/card-expenses.component';
 import { CardBooksComponent } from './cards/card-books/card-books.component';
 
+import { GroceryFormComponent } from './forms/grocery/grocery-form.component';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -72,6 +74,7 @@ import { CardBooksComponent } from './cards/card-books/card-books.component';
         PanelSpendingChartComponent,
         PanelGroceryControlsComponent,
         PanelGroceryCartComponent,
+        GroceryFormComponent,
         PanelGroceriesComponent,
         PanelFoodProductsComponent,
         PanelRecipesComponent,

@@ -6,39 +6,52 @@
         <i class="fa fa-times fa-22" (click)="closeModal()" aria-hidden="true"></i>
       </div>
 
-      <div class="grocery-title">
-        <h3>{{groceryName}}</h3>
+      <div [hidden]="editing">
+        <div class="grocery-title">
+          <h3>{{grocery.name}}</h3>
+        </div>
+        <div class="grocery-table">
+          <div class="table-row table-column">
+            <div class="table-row-cell flex-size-3" (click)="sort('supermarket')">Supermarket</div>
+            <div class="table-row-cell flex-size-3" (click)="sort('name')">Count/Weight</div>
+            <div class="table-row-cell flex-size-2 flex-center" (click)="sort('organic')">Organic</div>
+            <div class="table-row-cell flex-size-2 flex-center" (click)="sort('seasonal')">Seasonal</div>
+            <div class="table-row-cell flex-size-2 flex-center" (click)="sort('unitPrice')">Unit Price</div>
+            <div class="table-row-cell flex-size-1 flex-center" (click)="sort('amount')">Cost</div>
+            <div class="table-row-cell flex-size-1 flex-center">Edit</div>
+          </div>
+          <div class="table-body table-main-content">
+            <div class="table-row" *ngFor="let grocery of groceries | dynamicSort:sortProperty:sortDesc">
+              <div class="table-row-cell flex-size-3">{{grocery.supermarket}}</div>
+              <div class="table-row-cell flex-size-3 flex-center" *ngIf="grocery.count > 0">{{grocery.count}}</div>
+              <div class="table-row-cell flex-size-3 flex-center" *ngIf="grocery.weight > 0">{{grocery.weight | number:'1.2-2'}} {{grocery.unit}}</div>
+              <div class="table-row-cell flex-size-2">{{grocery.organic}}</div>
+              <div class="table-row-cell flex-size-2">{{grocery.seasonal}}</div>
+              <div class="table-row-cell flex-size-2">{{grocery.unitPrice | currency:'USD':true:'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-1">{{grocery.amount | currency:'USD':true:'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-1 table-row-edit" (click)="edit(grocery)">
+                <i class="fa fa-edit"></i>
+              </div>
+            </div>
+          </div>
+          <div class="table-body table-main-content">
+            <div class="table-row grocery-total">
+              <div class="table-row-cell flex-size-3">Total</div>
+              <div class="table-row-cell flex-size-3"></div>
+              <div class="table-row-cell flex-size-2"></div>
+              <div class="table-row-cell flex-size-2"></div>
+              <div class="table-row-cell flex-size-2"></div>
+              <div class="table-row-cell flex-size-1">{{groceriesTotal | currency:'USD':true:'1.2-2'}}</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="grocery-table">
-        <div class="table-row table-column">
-          <div class="table-row-cell flex-size-3" (click)="sort('supermarket')">Supermarket</div>
-          <div class="table-row-cell flex-size-3" (click)="sort('name')">Count/Weight</div>
-          <div class="table-row-cell flex-size-2 flex-center" (click)="sort('organic')">Organic</div>
-          <div class="table-row-cell flex-size-2 flex-center" (click)="sort('seasonal')">Seasonal</div>
-          <div class="table-row-cell flex-size-2 flex-center" (click)="sort('unitPrice')">Unit Price</div>
-          <div class="table-row-cell flex-size-1 flex-center" (click)="sort('amount')">Cost</div>
+      <div [hidden]="!editing">
+        <div (click)="editing = false" class="icon-container" style="cursor:pointer;">
+          <i class="fa fa-arrow-left"></i>
+          <span>Back</span>
         </div>
-        <div class="table-body table-main-content">
-          <div class="table-row" *ngFor="let grocery of groceries | dynamicSort:sortProperty:sortDesc">
-            <div class="table-row-cell flex-size-3">{{grocery.supermarket}}</div>
-            <div class="table-row-cell flex-size-3 flex-center" *ngIf="grocery.count > 0">{{grocery.count}}</div>
-            <div class="table-row-cell flex-size-3 flex-center" *ngIf="grocery.weight > 0">{{grocery.weight | number:'1.2-2'}} {{grocery.unit}}</div>
-            <div class="table-row-cell flex-size-2">{{grocery.organic}}</div>
-            <div class="table-row-cell flex-size-2">{{grocery.seasonal}}</div>
-            <div class="table-row-cell flex-size-2">{{grocery.unitPrice | currency:'USD':true:'1.2-2'}}</div>
-            <div class="table-row-cell flex-size-1">{{grocery.amount | currency:'USD':true:'1.2-2'}}</div>
-          </div>
-        </div>
-        <div class="table-body table-main-content">
-          <div class="table-row grocery-total">
-            <div class="table-row-cell flex-size-3">Total</div>
-            <div class="table-row-cell flex-size-3"></div>
-            <div class="table-row-cell flex-size-2"></div>
-            <div class="table-row-cell flex-size-2"></div>
-            <div class="table-row-cell flex-size-2"></div>
-            <div class="table-row-cell flex-size-1">{{groceriesTotal | currency:'USD':true:'1.2-2'}}</div>
-          </div>
-        </div>
+        <budget-grocery-form submitLabel="Update" (onSubmit)="onSubmit($event)"></budget-grocery-form>
       </div>
     </div>
   </div>

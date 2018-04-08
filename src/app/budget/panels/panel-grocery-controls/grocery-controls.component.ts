@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'budget-panel-grocery-controls',
@@ -7,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PanelGroceryControlsComponent implements OnInit {
 
+  user: string;
+
   constructor(
+    public route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.route.parent.params.subscribe(
+      params => {
+        this.user = params['user'];
+      }
+    )
+
   }
 
 

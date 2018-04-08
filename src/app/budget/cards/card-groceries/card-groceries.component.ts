@@ -1,5 +1,7 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { UserGrocery } from '../../models';
+import { GroceryFormComponent } from '../../forms/grocery/grocery-form.component';
+import { BudgetService } from '../../services/budget.service';
 
 
 @Component({
@@ -9,7 +11,7 @@ import { UserGrocery } from '../../models';
 })
 export class CardGroceriesComponent implements OnInit {
 
-  @Input() groceryName: string;
+  @Input() grocery: UserGrocery;
   @Input() groceries: UserGrocery[];
   @Output() onModalClose = new EventEmitter();
   groceriesTotal: number = 0;
@@ -18,7 +20,15 @@ export class CardGroceriesComponent implements OnInit {
   sortProperty: string;
   sortDesc: boolean = false;
 
-  constructor() { }
+  editing: boolean = false;
+
+  @ViewChild(GroceryFormComponent)
+  groceryForm: GroceryFormComponent;
+
+
+  constructor(
+    public budgetService: BudgetService
+  ) { }
 
   ngOnInit() {
     this.groceries.forEach(i => {
@@ -39,5 +49,16 @@ export class CardGroceriesComponent implements OnInit {
     this.sortProperty = sortProperty;
   }
 
+  edit(grocery) {
+    this.groceryForm.model = grocery;
+    this.editing = true;
+  }
+
+  onSubmit(item: UserGrocery) {
+    this.budgetService.putGrocery(item.id, item).subscribe(result => {
+      this.editing = false;
+    }, error => { console.log(error); });
+
+  }
 
 }

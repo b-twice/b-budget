@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CompleterService, CompleterData } from 'ng2-completer';
-import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../../services/budget.service';
-import { FoodProduct, GroceryCartItem, Supermarket } from '../../models';
+import { UserGrocery } from '../../models';
 import { Observable } from 'rxjs/Observable';
+import { GroceryFormComponent } from '../../forms/grocery/grocery-form.component';
 
 @Component({
   selector: 'budget-panel-grocery-cart',
@@ -13,88 +12,40 @@ import { Observable } from 'rxjs/Observable';
 })
 export class PanelGroceryCartComponent implements OnInit {
 
-  // registerForm: FormGroup; // <--- heroForm is of type FormGroup
-  foodProducts: Observable<FoodProduct[]>;
-  supermarkets: Observable<Supermarket[]>;
   user: string;
   year: string;
-  foodProductsService: CompleterData;
-  supermarketsService: CompleterData;
-  model: GroceryCartItem = new GroceryCartItem(null, null, null, null, null, null, 0, 0);
-  groceryCart: GroceryCartItem[];
+  groceryCart: UserGrocery[];
   cartTotal: number = 0;
   saveError: boolean = false;
 
+  @ViewChild(GroceryFormComponent)
+  groceryForm: GroceryFormComponent;
+
 
   constructor(
-    public route: ActivatedRoute,
-    public budgetService: BudgetService,
-    public completerService: CompleterService,
+    public budgetService: BudgetService
   ) {
   }
 
   ngOnInit() {
-    this.route.parent.params.subscribe(
-      params => {
-        this.user = params['user'];
-        this.year = params['year'];
-      }
-    )
-    this.foodProducts = this.budgetService.getFoodProducts();
-    this.supermarkets = this.budgetService.getSupermarkets();
-    this.foodProductsService = this.completerService.local(this.foodProducts, 'name', 'name');
-    this.supermarketsService = this.completerService.local(this.supermarkets, 'name', 'name');
     this.groceryCart = [];
   }
 
-  rebuildForm() {
-    this.model = new GroceryCartItem(this.model.date, this.model.supermarket, null, null, null, null, 0, 0);
-  }
-
-  onProductSelect() {
-    if (this.model.name) {
-      this.budgetService.getLatestGrocery(this.model.name, this.model.supermarket).subscribe(grocery => {
-        if (grocery) {
-          this.model.weight = grocery.weight;
-          this.model.count = grocery.count;
-          this.model.cost = grocery.amount;
-          this.model.organic = grocery.organic == 'Yes' ? 1 : 0;
-          this.model.seasonal = grocery.seasonal == 'Yes' ? 1 : 0;
-        }
-      });
-    }
-  }
-
-  onSubmit() {
-    this.groceryCart.push(this.model);
-    this.cartTotal += this.model.cost;
-    this.rebuildForm();
+  onSubmit(item: UserGrocery) {
+    this.groceryCart.push(item);
+    this.cartTotal += item.amount;
+    this.groceryForm.rebuild();
   }
 
   removeCartItem(index: number): void {
-    this.cartTotal -= this.groceryCart[index].cost;
+    this.cartTotal -= this.groceryCart[index].amount;
     this.groceryCart.splice(index, 1);
   }
 
   checkout(): void {
     this.saveError = false;
-    let basket = []
-    this.groceryCart.forEach(item =>
-      basket.push({
-        user: this.user,
-        date: item.date,
-        category: "",
-        supermarket: item.supermarket,
-        name: item.name,
-        weight: item.weight ? item.weight : 0,
-        count: item.count ? item.count : 0,
-        amount: item.cost ? item.cost : 0,
-        organic: item.organic ? 'Yes' : 'No',
-        seasonal: item.seasonal ? 'Yes' : 'No',
-        unitPrice: 0
-      })
-    );
-    let data = { basket: basket }
+    let data = { basket: this.groceryCart }
+    console.log(data)
     this.budgetService.postData(data, 'grocery-cart').subscribe(result => {
       this.groceryCart = [];
       this.cartTotal = 0;

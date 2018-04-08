@@ -34,5 +34,4 @@
     </div>
   </div>
 </div>
-<budget-groceries-card *ngIf="selectedFoodProducts" [groceryName]="selectedFoodProductName" [groceries]="selectedFoodProducts"
-  (onModalClose)="modalClose()"></budget-groceries-card>
+<budget-groceries-card *ngIf="selectedFoodProducts" [grocery]="selectedGrocery" [groceries]="selectedFoodProducts" (onModalClose)="modalClose()"></budget-groceries-card>

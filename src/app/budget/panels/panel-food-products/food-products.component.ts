@@ -24,7 +24,7 @@ export class PanelFoodProductsComponent implements OnInit {
   year: string;
 
   selectedFoodProducts: UserGrocery[];
-  selectedFoodProductName: string | null;
+  selectedGrocery: UserGrocery | null;
 
   @ViewChild(FilterControlsComponent)
   private filterControls: FilterControlsComponent;
@@ -71,11 +71,11 @@ export class PanelFoodProductsComponent implements OnInit {
 
   getFoodProductPage(groceryName: string) {
     this.budgetService.getUserGroceriesByName(this.user, this.year, groceryName).subscribe(i => { this.selectedFoodProducts = i });
-    this.selectedFoodProductName = groceryName;
+    this.selectedGrocery = new UserGrocery(null, null, null, null, groceryName, null);
   }
   modalClose() {
     this.selectedFoodProducts = null;
-    this.selectedFoodProductName = null;
+    this.selectedGrocery = null;
   }
 
 

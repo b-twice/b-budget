@@ -24,7 +24,7 @@ export class PanelGroceriesComponent implements OnInit {
   year: string;
 
   selectedGroceries: UserGrocery[];
-  selectedGroceryName: string | null;
+  selectedGrocery: UserGrocery | null;
   chartLoaded: boolean = false;
 
   @ViewChild(FilterControlsComponent)
@@ -79,13 +79,13 @@ export class PanelGroceriesComponent implements OnInit {
     groceries.forEach(g => this.groceriesTotal += g.amount);
   }
 
-  getGroceryPage(groceryName: string) {
-    this.budgetService.getUserGroceriesByName(this.user, this.year, groceryName).subscribe(i => this.selectedGroceries = i);
-    this.selectedGroceryName = groceryName;
+  getGroceryPage(grocery: UserGrocery) {
+    this.budgetService.getUserGroceriesByName(this.user, this.year, grocery.name).subscribe(i => this.selectedGroceries = i);
+    this.selectedGrocery = grocery;
   }
   modalClose() {
     this.selectedGroceries = null;
-    this.selectedGroceryName = null;
+    this.selectedGrocery = null;
   }
 
 

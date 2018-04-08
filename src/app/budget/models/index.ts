@@ -15,5 +15,4 @@ export * from './user-expense';
 export * from './expense-month';
 export * from './user-books';
 export * from './user-expense-monthly';
-export * from './grocery-cart-item';
 export * from './supermarket';
