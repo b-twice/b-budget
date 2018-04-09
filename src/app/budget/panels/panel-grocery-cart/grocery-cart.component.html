@@ -12,7 +12,9 @@
                 <div>
                     <i class="fa fa-angle-right"></i>&nbsp; &nbsp;
                     <span *ngIf="!item.weight">{{item.count}}</span>
-                    <span *ngIf="!item.count">{{item.weight}}</span>&nbsp; {{item.name}}
+                    <span *ngIf="!item.count">{{item.weight}}</span>{{item.unit}}&nbsp; {{item.name}}
+                    <span *ngIf="item.organic == 'Yes'">&nbsp;(O)</span>
+                    <span *ngIf="item.seasonal == 'Yes'">&nbsp;(S)</span>
                 </div>
                 <div>
                     ${{item.amount}} &nbsp; &nbsp;

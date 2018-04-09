@@ -76,7 +76,11 @@ export class PanelGroceriesComponent implements OnInit {
 
   summarizeGroceries(groceries: UserExpenseMonthly[]) {
     this.groceriesTotal = 0;
-    groceries.forEach(g => this.groceriesTotal += g.amount);
+    groceries.forEach(g => {
+      if (g.year == this.year) {
+        this.groceriesTotal += g.amount
+      }
+    });
   }
 
   getGroceryPage(grocery: UserGrocery) {

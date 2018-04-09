@@ -21,11 +21,22 @@
     </div>
     <div class="form-group">
         <label for="weight">Weight</label>
-        <input type="number" class="form-control" id="weight" [(ngModel)]="model.weight" name="weight" #weight="ngModel">
+        <!-- appending -->
+        <div class="input-addon">
+            <input type="number" class="form-control input-addon-field" id="weight" [(ngModel)]="model.weight" name="weight" #weight="ngModel">
+            <span class="input-addon-item">
+                <span>{{model.unit}}</span>
+            </span>
+        </div>
     </div>
     <div class="form-group">
         <label for="amount">Cost</label>
-        <input type="number" class="form-control" id="amount" required [(ngModel)]="model.amount" name="amount" #amount="ngModel">
+        <div class="input-addon">
+            <span class="input-addon-item">
+                <span>$</span>
+            </span>
+            <input type="number" class="form-control" id="amount" required [(ngModel)]="model.amount" name="amount" #amount="ngModel">
+        </div>
     </div>
     <div class="form-group checkbox">
         <div>

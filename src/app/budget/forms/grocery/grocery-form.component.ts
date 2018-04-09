@@ -59,6 +59,7 @@ export class GroceryFormComponent implements OnInit {
                     this.model.amount = grocery.amount;
                     this.model.organic = grocery.organic;
                     this.model.seasonal = grocery.seasonal;
+                    this.model.unit = grocery.unit;
                 }
             });
         }

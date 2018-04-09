@@ -117,3 +117,31 @@ button {
         color:#95a5a6;
     }
 }
+
+/* ==========================================================================
+#Input Addons
+========================================================================== */
+.input-addon{
+    display: flex;
+}
+  
+.input-addon-field {
+    flex: 1;
+}
+  
+.input-addon-item {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-color: rgba(147, 128, 108, 0.1);
+    color: #666666;
+    font-weight: normal;
+    border: 2px solid #e7e7e7;
+    height:5rem;
+    width:5rem;
+    margin-top:.25rem;
+    span {
+        padding: 0.5rem 0.75rem;
+    }
+}
+
