@@ -20,7 +20,9 @@
         <div class="table-row-cell flex-size-2">{{grocery.name}}</div>
         <div class="table-row-cell flex-size-1 flex-center">{{grocery.count}}</div>
         <div class="table-row-cell flex-size-1 flex-center">{{grocery.weight | number:'1.2-2'}} {{grocery.unit}}</div>
-        <div class="table-row-cell flex-size-1 flex-center">{{grocery.organic}}</div>
+        <div class="table-row-cell flex-size-1 flex-center">
+          <i *ngIf="grocery.organic == 'Yes'" class="fa fa-check"></i>
+        </div>
         <div class="table-row-cell flex-size-2 flex-center">{{grocery.unitPrice | currency:'USD':true:'1.2-2'}}</div>
         <div class="table-row-cell flex-size-1 flex-center">{{grocery.amount| currency:'USD':true:'1.2-2'}}</div>
       </div>

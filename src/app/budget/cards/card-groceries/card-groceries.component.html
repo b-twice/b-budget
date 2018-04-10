@@ -21,15 +21,19 @@
             <div class="table-row-cell flex-size-1 flex-center">Edit</div>
           </div>
           <div class="table-body table-main-content">
-            <div class="table-row" *ngFor="let grocery of groceries | dynamicSort:sortProperty:sortDesc">
-              <div class="table-row-cell flex-size-3">{{grocery.supermarket}}</div>
-              <div class="table-row-cell flex-size-3 flex-center" *ngIf="grocery.count > 0">{{grocery.count}}</div>
-              <div class="table-row-cell flex-size-3 flex-center" *ngIf="grocery.weight > 0">{{grocery.weight | number:'1.2-2'}} {{grocery.unit}}</div>
-              <div class="table-row-cell flex-size-2">{{grocery.organic}}</div>
-              <div class="table-row-cell flex-size-2">{{grocery.seasonal}}</div>
-              <div class="table-row-cell flex-size-2">{{grocery.unitPrice | currency:'USD':true:'1.2-2'}}</div>
-              <div class="table-row-cell flex-size-1">{{grocery.amount | currency:'USD':true:'1.2-2'}}</div>
-              <div class="table-row-cell flex-size-1 table-row-edit" (click)="edit(grocery)">
+            <div class="table-row" *ngFor="let item of groceries | dynamicSort:sortProperty:sortDesc">
+              <div class="table-row-cell flex-size-3">{{item.supermarket}}</div>
+              <div class="table-row-cell flex-size-3 flex-center" *ngIf="item.count > 0">{{item.count}}</div>
+              <div class="table-row-cell flex-size-3 flex-center" *ngIf="item.weight > 0">{{item.weight | number:'1.2-2'}} {{item.unit}}</div>
+              <div class="table-row-cell flex-size-2 flex-center">
+                <i *ngIf="item.organic == 'Yes'" class="fa fa-check"></i>
+              </div>
+              <div class="table-row-cell flex-size-2 flex-center">
+                <i *ngIf="item.seasonal == 'Yes'" class="fa fa-check"></i>
+              </div>
+              <div class="table-row-cell flex-size-2 flex-center">{{item.unitPrice | currency:'USD':true:'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-1 flex-center">{{item.amount | currency:'USD':true:'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-1 table-row-edit" (click)="edit(item)">
                 <i class="fa fa-edit"></i>
               </div>
             </div>
