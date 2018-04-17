@@ -6,6 +6,7 @@ $secondary-color-focus: #0CB863;
 $background-shade-color:#EBEBEB;
 $error-color:#e74c3c;
 $content-space: 1rem;
+$card-shadow:0px 1px 4px 0px rgba(0,0,0,0.2);
 
 
 // NAVIGATION
@@ -22,7 +23,7 @@ $site-opacity-base: .9;
 
 .panel-base {
     padding:2rem;
-    box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.2);
+    box-shadow: $card-shadow;
     border-top-right-radius: 2px;
     border-top-left-radius: 2px;
 }

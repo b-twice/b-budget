@@ -1,0 +1,78 @@
+@import '../../../styles/base.scss';
+@import '../../../styles/flex.scss';
+:host {
+    display:flex;
+    flex-direction:column;
+    width:$site-width;
+    padding-top:2rem;
+    padding-right:2rem;
+    padding-left:2rem;
+    padding-bottom:2rem;
+
+}
+
+.title {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    max-width:800px;
+    h2 {
+        font-family: Montserrat, sans-serif;
+        font-size:3.2rem;
+        font-weight:700;
+        color:rgba(0, 0, 0, 0.8);
+        margin-bottom:2rem;
+    }
+    margin:5rem auto;
+}
+.next-content {
+    margin-top:5rem;
+    i {
+        font-size:6rem;
+        color: rgba(44, 62, 80,1.0);
+    }
+}
+
+
+.item {
+    display:flex;
+    flex-direction:row;
+    margin-bottom:10rem;
+
+    &.vertical {
+        flex-direction:column !important;
+        width:800px;
+        margin:0 auto;
+        align-items:center;
+    }
+
+    .image-content {
+        display:flex;
+        flex-direction:column;
+        flex:2;
+        margin-left:1rem;
+        margin-right:1rem;
+        .item-image {
+            display:block;
+            width:100%;
+            height:100%;
+            background-repeat: no-repeat;
+            background-position:center;
+            background-size:cover;
+            box-shadow:$card-shadow;
+       }
+        .item-image-subtext {
+            font-size: 1.4rem;
+            vertical-align:middle;
+            margin-top:.5rem;
+        }
+    }
+    .item-description {
+        display:flex;
+        margin-left:1rem;
+        margin-right:1rem;
+        flex:1;
+        align-items:center;
+        justify-content:center;
+    }
+}
