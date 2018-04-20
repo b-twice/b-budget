@@ -1,5 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
-import { tokenNotExpired } from 'angular2-jwt';
+import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { APP_SETTINGS, IAppSettings } from '../app.settings';
@@ -18,11 +17,13 @@ export class AuthService {
     authenticated: boolean = false;
     authenticatedSource = new Subject<any[]>();
     authenticated$ = this.authenticatedSource = new Subject<any[]>();
+    settings: IAppSettings
 
     constructor(
         public router: Router,
-        @Inject(APP_SETTINGS) settings: IAppSettings
+        public injector: Injector
     ) {
+        const settings = injector.get(APP_SETTINGS);
         this.auth0 = new auth0.WebAuth({
             audience: settings.auth.audience,
             domain: settings.auth.domain,

@@ -1,4 +1,4 @@
-import { OpaqueToken } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 import { environment } from '../environments/environment';
 
 interface IAuthSettings {
@@ -21,4 +21,4 @@ export const AppSettings: IAppSettings = {
     auth: environment.auth
 }
 
-export let APP_SETTINGS = new OpaqueToken("app.settings")
+export let APP_SETTINGS = new InjectionToken<IAppSettings>("app.settings")

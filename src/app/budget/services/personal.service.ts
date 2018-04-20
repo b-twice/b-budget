@@ -1,7 +1,6 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http, Response, RequestOptions, URLSearchParams, Headers } from '@angular/http';
+import { Injectable, Injector } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { AuthHttp } from 'angular2-jwt';
 import { CoreService } from './core.service'
 import { APP_SETTINGS, IAppSettings } from '../../app.settings';
 import {
@@ -12,27 +11,27 @@ import {
 @Injectable()
 export class PersonalService extends CoreService {
     constructor(
-        public http: Http,
-        public authHttp: AuthHttp,
-        @Inject(APP_SETTINGS) public settings: IAppSettings
+        public http: HttpClient,
+        public injector: Injector
     ) {
-        super(http, authHttp, settings);
+        super(http, injector);
     }
 
     // Books
     public getBooks(name: string, year: string, categories: string[]): Observable<Book[]> {
-        let params = new URLSearchParams();
-        categories.map(c => params.append('categoryNames', c))
-        return this.request<Book[]>(`personal/books/year/${year}/user/${name}`, params, true);
+        let params = new HttpParams();
+        categories.map(c => params.append('categoryNames', c));
+        const httpOptions = { params: params };
+        return this.request<Book[]>(`personal/books/year/${year}/user/${name}`, httpOptions);
     }
     public getBook(name: string, bookName: string): Observable<Book> {
-        return this.request<Book>(`personal/books/user/${name}/book/${bookName}`, null, true);
+        return this.request<Book>(`personal/books/user/${name}/book/${bookName}`, null);
     }
     public getBooksByAuthor(name: string): Observable<Book[]> {
-        return this.request<Book[]>(`personal/books/author/${name}`, null, true);
+        return this.request<Book[]>(`personal/books/author/${name}`, null);
     }
     public getBookCategories(): Observable<Category[]> {
-        return this.request<Category[]>('personal/books/categories', null, true);
+        return this.request<Category[]>('personal/books/categories', null);
     }
 
 

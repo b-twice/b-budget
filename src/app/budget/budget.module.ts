@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { DatePipe, CommonModule } from '@angular/common';
-import { HttpModule, Http, RequestOptions } from '@angular/http';
 
 import { BudgetRoutingModule } from './routing/budget-routing.module';
 

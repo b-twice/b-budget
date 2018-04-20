@@ -1,10 +1,11 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http, Response, RequestOptions, URLSearchParams, Headers } from '@angular/http';
+import { Injectable, Injector } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { catchError } from 'rxjs/operators';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
-import { AuthHttp } from 'angular2-jwt';
 import { APP_SETTINGS, IAppSettings } from '../../app.settings';
 import {
     User,
@@ -13,60 +14,58 @@ import {
 
 @Injectable()
 export class CoreService {
+    settings: IAppSettings;
     constructor(
-        public http: Http,
-        public authHttp: AuthHttp,
-        @Inject(APP_SETTINGS) public settings: IAppSettings
+        public http: HttpClient,
+        public injector: Injector
     ) {
+        this.settings = injector.get(APP_SETTINGS);
     }
 
-    public request<T>(fragment: string, params = null, auth = true): Observable<T> {
+    public request<T>(fragment: string, httpOptions = null): Observable<T> {
         let requestUrl = `${this.settings.apiEndpoint}/${fragment}`;
-        if (auth) {
-            return this.authHttp.get(requestUrl, new RequestOptions({ search: params }))
-                .map(this.extractData)
-                .catch(this.handleError);
-        }
-        return this.http.get(requestUrl, { search: params })
-            .map(this.extractData)
-            .catch(this.handleError);
+        httpOptions = httpOptions ? httpOptions : { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        return this.http.get<T>(requestUrl, httpOptions)
+            .pipe(
+                catchError(this.handleError)
+            );
     }
 
-    public post(data: {}, fragment: string): Observable<any> {
+    public post<T>(data: {}, fragment: string): Observable<{} | T> {
         let postUrl = `${this.settings.apiEndpoint}/${fragment}`;
         let body = JSON.stringify(data);
-        let params = new URLSearchParams();
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.authHttp.post(postUrl, body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
+        let httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        return this.http.post<T>(postUrl, body, httpOptions)
+            .pipe(
+                catchError(this.handleError)
+            );
     }
 
-    public put(fragment: string, data: {}): Observable<any> {
+    public put<T>(fragment: string, data: {}): Observable<{} | T> {
         let postUrl = `${this.settings.apiEndpoint}/${fragment}`;
         let body = JSON.stringify(data);
-        let params = new URLSearchParams();
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.authHttp.put(postUrl, body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
+        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        return this.http.put<T>(postUrl, body, httpOptions)
+            .pipe(
+                catchError(this.handleError)
+            );
     }
 
-    extractData(res: Response) {
-        let body = res.json();
-        return body || {};
-    }
-
-    handleError(error: Response) {
-        try {
-            return Observable.throw(error.json().errors || 'Server error');
+    private handleError(error: HttpErrorResponse) {
+        if (error.error instanceof ErrorEvent) {
+            // A client-side or network error occurred. Handle it accordingly.
+            console.error('An error occurred:', error.error.message);
+        } else {
+            // The backend returned an unsuccessful response code.
+            // The response body may contain clues as to what went wrong,
+            console.error(
+                `Backend returned code ${error.status}, ` +
+                `body was: ${error.error}`);
         }
-        catch (e) {
-            return Observable.throw('Server error');
-        }
-    }
+        // return an ErrorObservable with a user-facing error message
+        return new ErrorObservable(
+            'Something bad happened; please try again later.');
+    };
 
     public getUsers(): Observable<User[]> {
         return this.request<User[]>('core/users');

@@ -1,7 +1,6 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http, Response, RequestOptions, URLSearchParams, Headers } from '@angular/http';
+import { Injectable, Injector } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { AuthHttp } from 'angular2-jwt';
 import { CoreService } from './core.service'
 import { APP_SETTINGS, IAppSettings } from '../../app.settings';
 import {
@@ -18,18 +17,18 @@ import {
 @Injectable()
 export class FoodService extends CoreService {
     constructor(
-        public http: Http,
-        public authHttp: AuthHttp,
-        @Inject(APP_SETTINGS) public settings: IAppSettings
+        public http: HttpClient,
+        public injector: Injector
     ) {
-        super(http, authHttp, settings);
+        super(http, injector);
     }
 
+
     public getFoodCategories(): Observable<Category[]> {
-        return this.request<Category[]>('food/categories', null, true);
+        return this.request<Category[]>('food/categories', null);
     }
     public getRecipeCategories(): Observable<Category[]> {
-        return this.request<Category[]>('food/recipes/categories', null, true);
+        return this.request<Category[]>('food/recipes/categories', null);
     }
     public getSupermarkets(): Observable<Supermarket[]> {
         return this.request<Supermarket[]>('food/supermarkets');
@@ -38,20 +37,22 @@ export class FoodService extends CoreService {
 
     // Groceries
     public getGroceries(name: string, year: string, categories: string[]): Observable<Grocery[]> {
-        let params = new URLSearchParams();
-        categories.map(c => params.append('categoryNames', c))
-        return this.request<Grocery[]>(`food/groceries/year/${year}/user/${name}`, params, true);
+        let params = new HttpParams();
+        categories.map(c => params.append('categoryNames', c));
+        const httpOptions = { params: params };
+        return this.request<Grocery[]>(`food/groceries/year/${year}/user/${name}`, httpOptions);
     }
     public getGroceriesByName(name: string, year: string, groceryName: string): Observable<Grocery[]> {
-        return this.request<Grocery[]>(`food/groceries/year/${year}/user/${name}/grocery/${groceryName}`, null, true);
+        return this.request<Grocery[]>(`food/groceries/year/${year}/user/${name}/grocery/${groceryName}`, null);
     }
     public getGroceriesMonthly(name: string, year: string, range: number, categories: string[]): Observable<TransactionMonthly[]> {
-        let params = new URLSearchParams();
-        categories.map(c => params.append('categoryNames', c))
-        return this.request<TransactionMonthly[]>(`food/groceries/year/${year}/user/${name}/monthly/range/${range}`, params, true);
+        let params = new HttpParams();
+        categories.map(c => params.append('categoryNames', c));
+        const httpOptions = { params: params };
+        return this.request<TransactionMonthly[]>(`food/groceries/year/${year}/user/${name}/monthly/range/${range}`, httpOptions);
     }
     public getLatestGrocery(foodProduct: string, supermarket: string): Observable<Grocery> {
-        return this.request<Grocery>(`food/groceries/latest/${foodProduct}/supermarket/${supermarket}`, null, true);
+        return this.request<Grocery>(`food/groceries/latest/${foodProduct}/supermarket/${supermarket}`, null);
     }
     public updateGrocery(id: number, data: any) {
         return this.put(`food/groceries/grocery/${id}`, data);
@@ -64,33 +65,36 @@ export class FoodService extends CoreService {
 
     // Food products
     public getAnnualFoodProducts(year: string, categories: string[]): Observable<AnnualFoodProduct[]> {
-        let params = new URLSearchParams();
-        categories.map(c => params.append('categoryNames', c))
-        return this.request<AnnualFoodProduct[]>(`food/products/year/${year}`, params, true);
+        let params = new HttpParams();
+        categories.map(c => params.append('categoryNames', c));
+        const httpOptions = { params: params };
+        return this.request<AnnualFoodProduct[]>(`food/products/year/${year}`, httpOptions);
     }
     public getAnnualFoodProduct(name: string, year: string, categories: string[]): Observable<AnnualFoodProduct[]> {
-        let params = new URLSearchParams();
-        categories.map(c => params.append('categoryNames', c))
-        return this.request<AnnualFoodProduct[]>(`food/products/year/${year}/user/${name}`, params, true);
+        let params = new HttpParams();
+        categories.map(c => params.append('categoryNames', c));
+        const httpOptions = { params: params };
+        return this.request<AnnualFoodProduct[]>(`food/products/year/${year}/user/${name}`, httpOptions);
     }
     public getAnnualFoodProductByName(name: string, year: string, food_productName: string): Observable<AnnualFoodProduct[]> {
-        return this.request<AnnualFoodProduct[]>(`food/products/year/${year}/user/${name}/food_product/${food_productName}`, null, true);
+        return this.request<AnnualFoodProduct[]>(`food/products/year/${year}/user/${name}/food_product/${food_productName}`, null);
     }
     public getFoodProducts(): Observable<FoodProduct[]> {
-        return this.request<FoodProduct[]>('food/products', null, true);
+        return this.request<FoodProduct[]>('food/products', null);
     }
 
     // Recipes
     public getRecipes(name: string, categories: string[]): Observable<Recipe[]> {
-        let params = new URLSearchParams();
-        categories.map(c => params.append('categoryNames', c))
-        return this.request<Recipe[]>(`food/recipes/user/${name}`, params, true);
+        let params = new HttpParams();
+        categories.map(c => params.append('categoryNames', c));
+        const httpOptions = { params: params };
+        return this.request<Recipe[]>(`food/recipes/user/${name}`, httpOptions);
     }
     public getRecipe(name: string, recipeName: string): Observable<Recipe> {
-        return this.request<Recipe>(`food/recipes/user/${name}/recipe/${recipeName}`, null, true);
+        return this.request<Recipe>(`food/recipes/user/${name}/recipe/${recipeName}`, null);
     }
     public getRecipeIngredients(name: string): Observable<RecipeIngredient[]> {
-        return this.request<RecipeIngredient[]>(`food/recipes/recipe/${name}`, null, true);
+        return this.request<RecipeIngredient[]>(`food/recipes/recipe/${name}`, null);
     }
 
 }

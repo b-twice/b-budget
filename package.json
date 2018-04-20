@@ -9,14 +9,14 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "^4.2.4",
-    "@angular/compiler": "^4.2.4",
-    "@angular/core": "^4.2.4",
-    "@angular/forms": "^4.2.4",
-    "@angular/http": "^4.2.4",
-    "@angular/platform-browser": "^4.2.4",
-    "@angular/platform-browser-dynamic": "^4.2.4",
-    "@angular/router": "^4.2.4",
+    "@angular/common": "^5.2.0",
+    "@angular/compiler": "^5.2.0",
+    "@angular/core": "^5.2.0",
+    "@angular/forms": "^5.2.0",
+    "@angular/http": "^5.2.0",
+    "@angular/platform-browser": "^5.2.0",
+    "@angular/platform-browser-dynamic": "^5.2.0",
+    "@angular/router": "^5.2.0",
     "@types/auth0": "^2.4.0",
     "@types/d3-axis": "^1.0.9",
     "@types/d3-collection": "^1.0.5",
@@ -25,8 +25,8 @@
     "@types/d3-shape": "^1.2.0",
     "@types/d3-time-format": "^2.1.0",
     "@types/d3-transition": "^1.1.1",
-    "angular2-jwt": "^0.2.3",
-    "auth0-js": "^8.8.0",
+    "@auth0/angular-jwt": "^1.1.0",
+    "auth0-js": "^9.4.0",
     "core-js": "^2.4.1",
     "d3-axis": "^1.0.8",
     "d3-collection": "^1.0.4",
@@ -36,16 +36,16 @@
     "d3-time-format": "^2.1.1",
     "d3-transition": "^1.1.1",
     "ng2-completer": "^1.6.3",
-    "rxjs": "^5.4.2",
-    "zone.js": "^0.8.14"
+    "rxjs": "^5.5.6",
+    "zone.js": "^0.8.19"
   },
   "devDependencies": {
-    "@angular/cli": "^1.5.0",
-    "@angular/compiler-cli": "^4.2.4",
-    "codelyzer": "~3.2.0",
+    "@angular/cli": "^1.7.4",
+    "@angular/compiler-cli": "^5.2.0",
+    "codelyzer": "~4.0.1",
     "font-awesome": "^4.7.0",
-    "ts-node": "~3.2.0",
-    "tslint": "^5.7.0",
-    "typescript": "~2.4.0"
+    "ts-node": "~4.1.0",
+    "tslint": "^5.9.1",
+    "typescript": "~2.5.3"
   }
 }

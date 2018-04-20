@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { APP_SETTINGS, IAppSettings } from '../../app.settings';
 
 @Component({
@@ -7,10 +7,12 @@ import { APP_SETTINGS, IAppSettings } from '../../app.settings';
   styleUrls: ['./site-header.component.scss']
 })
 export class SiteHeaderComponent implements OnInit {
+  settings: IAppSettings;
 
   constructor(
-    @Inject(APP_SETTINGS) public settings: IAppSettings
+    public injector: Injector
   ) {
+    this.settings = injector.get(APP_SETTINGS);
   }
 
   ngOnInit() {

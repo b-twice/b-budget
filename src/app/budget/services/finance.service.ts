@@ -1,7 +1,6 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http, Response, RequestOptions, URLSearchParams, Headers } from '@angular/http';
+import { Injectable, Injector } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { AuthHttp } from 'angular2-jwt';
 import { CoreService } from './core.service'
 import { APP_SETTINGS, IAppSettings } from '../../app.settings';
 
@@ -19,12 +18,12 @@ import {
 @Injectable()
 export class FinanceService extends CoreService {
     constructor(
-        public http: Http,
-        public authHttp: AuthHttp,
-        @Inject(APP_SETTINGS) public settings: IAppSettings
+        public http: HttpClient,
+        public injector: Injector
     ) {
-        super(http, authHttp, settings);
+        super(http, injector);
     }
+
 
 
     public getTransactionCategories(): Observable<Category[]> {
@@ -36,37 +35,40 @@ export class FinanceService extends CoreService {
 
 
     public getUserSummary(name: string, year: number): Observable<UserSummary[]> {
-        return this.request<UserSummary[]>(`finance/user-summaries/year/${year}/user/${name}`, null, true);
+        return this.request<UserSummary[]>(`finance/user-summaries/year/${year}/user/${name}`, null);
     }
     public getUserProfile(name: string): Observable<UserProfile[]> {
-        return this.request<UserProfile[]>(`finance/user-profiles/${name}`, null, true);
+        return this.request<UserProfile[]>(`finance/user-profiles/${name}`, null);
     }
     public getUserCategoryGrowth(name: string, year: string): Observable<UserCategoryGrowth[]> {
-        return this.request<UserCategoryGrowth[]>(`finance/user-categories-growth/year/${year}/user/${name}`, null, true);
+        return this.request<UserCategoryGrowth[]>(`finance/user-categories-growth/year/${year}/user/${name}`, null);
     }
 
     // to populate the transaction panel
     public getTransactions(name: string, year: string, categories: string[]): Observable<Transaction[]> {
-        let params = new URLSearchParams();
-        categories.map(c => params.append('categoryNames', c))
-        return this.request<Transaction[]>(`finance/transactions/year/${year}/user/${name}`, params, true);
+        let params = new HttpParams();
+        categories.map(c => params.append('categoryNames', c));
+        const httpOptions = { params: params };
+        return this.request<Transaction[]>(`finance/transactions/year/${year}/user/${name}`, httpOptions);
     }
     // for expenses, summarizing expense by category by month
     public getTransactionByMonth(name: string, year: string, month: string, category): Observable<Transaction[]> {
-        return this.request<Transaction[]>(`finance/transactions/year/${year}/month/${month}/user/${name}/category/${category}`, null, true);
+        return this.request<Transaction[]>(`finance/transactions/year/${year}/month/${month}/user/${name}/category/${category}`, null);
     }
     // for charting
     public getTransactionsMonthly(name: string, year: string, range: number, categories: string[]): Observable<TransactionMonthly[]> {
-        let params = new URLSearchParams();
-        categories.map(c => params.append('categoryNames', c))
-        return this.request<TransactionMonthly[]>(`finance/transactions/year/${year}/user/${name}/monthly/range/${range}`, params, true);
+        let params = new HttpParams();
+        categories.map(c => params.append('categoryNames', c));
+        const httpOptions = { params: params };
+        return this.request<TransactionMonthly[]>(`finance/transactions/year/${year}/user/${name}/monthly/range/${range}`, httpOptions);
     }
 
     public getExpense(name: string, year: string, months: string[]): Observable<Expense[]> {
-        let params = new URLSearchParams();
+        let params = new HttpParams();
         months.map(c => params.append('monthNames', c))
-        if (months.length) return this.request<Expense[]>(`finance/expenses/year/${year}/user/${name}/monthly`, params, true);
-        return this.request<Expense[]>(`finance/expenses/year/${year}/user/${name}`, null, true);
+        const httpOptions = { params: params };
+        if (months.length) return this.request<Expense[]>(`finance/expenses/year/${year}/user/${name}/monthly`, httpOptions);
+        return this.request<Expense[]>(`finance/expenses/year/${year}/user/${name}`, null);
     }
 
 }
