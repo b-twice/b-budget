@@ -1,4 +1,4 @@
-export class UserRecipe {
+export class Recipe {
     constructor(
         public id: number,
         public user: string,

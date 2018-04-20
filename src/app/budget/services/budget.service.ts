@@ -10,9 +10,9 @@ import {
     UserProfile, Category,
     FiscalYear, User, Transaction,
     UserSummary, UserCategory,
-    UserTransaction, UserGrocery, UserRecipe, UserRecipeIngredient, UserFoodProduct, ExpenseMonth, FoodProduct,
+    UserTransaction, Grcocery, Recipe, RecipeIngredient, AnnualFoodProduct, ExpenseMonth, FoodProduct,
     Supermarket,
-    UserExpense, UserBook,
+    UserExpense, Book,
     UserExpenseMonthly
 } from '../models';
 
@@ -78,10 +78,10 @@ export class BudgetService {
         return this.makeRequest<Category[]>('categories');
     }
     public getUsers(): Observable<User[]> {
-        return this.makeRequest<User[]>('users');
+        return this.makeRequest<User[]>('core/users');
     }
     public getFiscalYears(): Observable<FiscalYear[]> {
-        return this.makeRequest<FiscalYear[]>('fiscal-years');
+        return this.makeRequest<FiscalYear[]>('core/fiscal-years');
     }
     public getExpenseMonths(): Observable<ExpenseMonth[]> {
         return this.makeRequest<ExpenseMonth[]>('expense-months');
@@ -137,88 +137,88 @@ export class BudgetService {
 
     // FOOD API CALLS
     public getFoodCategories(): Observable<Category[]> {
-        return this.makeRequest<Category[]>('food-categories');
+        return this.makeRequest<Category[]>('food/products/categories', null, true);
     }
     public getRecipeCategories(): Observable<Category[]> {
-        return this.makeRequest<Category[]>('recipe-categories');
+        return this.makeRequest<Category[]>('food/recipes/categories', null, true);
     }
-    public getBookCategories(): Observable<Category[]> {
-        return this.makeRequest<Category[]>('book-categories');
-    }
-
 
     // Groceries
-    public getUserGroceries(name: string, year: string, categories: string[]): Observable<UserGrocery[]> {
+    public getUserGroceries(name: string, year: string, categories: string[]): Observable<Grcocery[]> {
         let params = new URLSearchParams();
         categories.map(c => params.append('categoryNames', c))
-        return this.makeRequest<UserGrocery[]>(`user-groceries/year/${year}/user/${name}`, params, true);
+        return this.makeRequest<Grcocery[]>(`food/groceries/year/${year}/user/${name}`, params, true);
     }
-    public getUserGroceriesByName(name: string, year: string, groceryName: string): Observable<UserGrocery[]> {
-        return this.makeRequest<UserGrocery[]>(`user-groceries/year/${year}/user/${name}/grocery/${groceryName}`, null, true);
+    public getUserGroceriesByName(name: string, year: string, groceryName: string): Observable<Grcocery[]> {
+        return this.makeRequest<Grcocery[]>(`food/groceries/year/${year}/user/${name}/grocery/${groceryName}`, null, true);
     }
     public getUserGroceriesMonthly(name: string, year: string, range: number, categories: string[]): Observable<UserExpenseMonthly[]> {
         let params = new URLSearchParams();
         categories.map(c => params.append('categoryNames', c))
-        return this.makeRequest<UserExpenseMonthly[]>(`user-groceries/year/${year}/user/${name}/monthly/range/${range}`, params, true);
+        return this.makeRequest<UserExpenseMonthly[]>(`food/groceries/year/${year}/user/${name}/monthly/range/${range}`, params, true);
     }
     public getSupermarkets(): Observable<Supermarket[]> {
-        return this.makeRequest<Supermarket[]>('supermarkets');
+        return this.makeRequest<Supermarket[]>('food/supermarkets');
     }
-    public getLatestGrocery(foodProduct: string, supermarket: string): Observable<UserGrocery> {
-        return this.makeRequest<UserGrocery>(`user-groceries/latest/${foodProduct}/supermarket/${supermarket}`, null, true);
+    public getLatestGrocery(foodProduct: string, supermarket: string): Observable<Grcocery> {
+        return this.makeRequest<Grcocery>(`food/groceries/latest/${foodProduct}/supermarket/${supermarket}`, null, true);
     }
 
     public putGrocery(id: number, data: any) {
-        return this.putData(`grocery-cart/grocery/${id}`, data);
+        return this.putData(`food/groceries/grocery/${id}`, data);
 
     }
 
 
     // Food products
-    public getUserFoodProducts(year: string, categories: string[]): Observable<UserFoodProduct[]> {
+    public getAnnualFoodProducts(year: string, categories: string[]): Observable<AnnualFoodProduct[]> {
         let params = new URLSearchParams();
         categories.map(c => params.append('categoryNames', c))
-        return this.makeRequest<UserFoodProduct[]>(`user-food_products/year/${year}`, params, true);
+        return this.makeRequest<AnnualFoodProduct[]>(`food/products/year/${year}`, params, true);
     }
-    public getUserFoodProduct(name: string, year: string, categories: string[]): Observable<UserFoodProduct[]> {
+    public getAnnualFoodProduct(name: string, year: string, categories: string[]): Observable<AnnualFoodProduct[]> {
         let params = new URLSearchParams();
         categories.map(c => params.append('categoryNames', c))
-        return this.makeRequest<UserFoodProduct[]>(`user-food_products/year/${year}/user/${name}`, params, true);
+        return this.makeRequest<AnnualFoodProduct[]>(`food/products/year/${year}/user/${name}`, params, true);
     }
-    public getUserFoodProductByName(name: string, year: string, food_productName: string): Observable<UserFoodProduct[]> {
-        return this.makeRequest<UserFoodProduct[]>(`user-food_products/year/${year}/user/${name}/food_product/${food_productName}`, null, true);
+    public getAnnualFoodProductByName(name: string, year: string, food_productName: string): Observable<AnnualFoodProduct[]> {
+        return this.makeRequest<AnnualFoodProduct[]>(`food/products/year/${year}/user/${name}/food_product/${food_productName}`, null, true);
     }
     public getFoodProducts(): Observable<FoodProduct[]> {
-        return this.makeRequest<FoodProduct[]>('food-products');
+        return this.makeRequest<FoodProduct[]>('food/products', null, true);
     }
 
 
 
 
     // Recipes
-    public getUserRecipes(name: string, categories: string[]): Observable<UserRecipe[]> {
+    public getRecipes(name: string, categories: string[]): Observable<Recipe[]> {
         let params = new URLSearchParams();
         categories.map(c => params.append('categoryNames', c))
-        return this.makeRequest<UserRecipe[]>(`user-recipes/user/${name}`, params, true);
+        return this.makeRequest<Recipe[]>(`food/recipes/user/${name}`, params, true);
     }
-    public getUserRecipe(name: string, recipeName: string): Observable<UserRecipe> {
-        return this.makeRequest<UserRecipe>(`user-recipes/user/${name}/recipe/${recipeName}`, null, true);
+    public getRecipe(name: string, recipeName: string): Observable<Recipe> {
+        return this.makeRequest<Recipe>(`food/recipes/user/${name}/recipe/${recipeName}`, null, true);
     }
-    public getUserRecipeIngredients(name: string): Observable<UserRecipeIngredient[]> {
-        return this.makeRequest<UserRecipeIngredient[]>(`user-recipe-ingredients/recipe/${name}`, null, true);
+    public getRecipeIngredients(name: string): Observable<RecipeIngredient[]> {
+        return this.makeRequest<RecipeIngredient[]>(`food/recipes/recipe/${name}`, null, true);
     }
 
     // Books
-    public getUserBooks(name: string, year: string, categories: string[]): Observable<UserBook[]> {
+    public getBooks(name: string, year: string, categories: string[]): Observable<Book[]> {
         let params = new URLSearchParams();
         categories.map(c => params.append('categoryNames', c))
-        return this.makeRequest<UserBook[]>(`user-books/year/${year}/user/${name}`, params, true);
+        return this.makeRequest<Book[]>(`personal/books/year/${year}/user/${name}`, params, true);
     }
-    public getUserBook(name: string, bookName: string): Observable<UserBook> {
-        return this.makeRequest<UserBook>(`user-books/user/${name}/book/${bookName}`, null, true);
+    public getBook(name: string, bookName: string): Observable<Book> {
+        return this.makeRequest<Book>(`personal/books/user/${name}/book/${bookName}`, null, true);
     }
-    public getBooksByAuthor(name: string): Observable<UserBook[]> {
-        return this.makeRequest<UserBook[]>(`user-books/author/${name}`, null, true);
+    public getBooksByAuthor(name: string): Observable<Book[]> {
+        return this.makeRequest<Book[]>(`personal/books/author/${name}`, null, true);
     }
+    public getBookCategories(): Observable<Category[]> {
+        return this.makeRequest<Category[]>('personal/books/categories', null, true);
+    }
+
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../../services/budget.service';
-import { UserGrocery, UserExpenseMonthly } from '../../models';
+import { Grcocery, UserExpenseMonthly } from '../../models';
 import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
@@ -15,7 +15,7 @@ import { PanelChartService } from '../panel-chart/panel-chart.service';
 })
 export class PanelGroceriesComponent implements OnInit {
 
-  userGroceries: Observable<UserGrocery[]>;
+  userGroceries: Observable<Grcocery[]>;
   groceriesTotal: number = 0;
   foodCategories: Observable<Category[]>;
   sortProperty: string;
@@ -23,8 +23,8 @@ export class PanelGroceriesComponent implements OnInit {
   user: string;
   year: string;
 
-  selectedGroceries: UserGrocery[];
-  selectedGrocery: UserGrocery | null;
+  selectedGroceries: Grcocery[];
+  selectedGrocery: Grcocery | null;
   chartLoaded: boolean = false;
 
   @ViewChild(FilterControlsComponent)
@@ -83,7 +83,7 @@ export class PanelGroceriesComponent implements OnInit {
     });
   }
 
-  getGroceryPage(grocery: UserGrocery) {
+  getGroceryPage(grocery: Grcocery) {
     this.budgetService.getUserGroceriesByName(this.user, this.year, grocery.name).subscribe(i => this.selectedGroceries = i);
     this.selectedGrocery = grocery;
   }

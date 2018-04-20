@@ -1,4 +1,4 @@
-export class UserGrocery {
+export class Grcocery {
     constructor(
         public id: number,
         public user: string,

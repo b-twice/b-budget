@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { UserRecipeIngredient, UserRecipe } from '../../models';
+import { RecipeIngredient, Recipe } from '../../models';
 
 @Component({
   selector: 'budget-recipe-ingredients',
@@ -8,8 +8,8 @@ import { UserRecipeIngredient, UserRecipe } from '../../models';
 })
 export class CardRecipeIngredientsComponent implements OnInit {
 
-  @Input() ingredients: UserRecipeIngredient[];
-  @Input() recipe: UserRecipe;
+  @Input() ingredients: RecipeIngredient[];
+  @Input() recipe: Recipe;
   @Output() onRecipeClose = new EventEmitter();
   recipeTotal: number = 0;
   recipeOrganicTotal: number = 0;

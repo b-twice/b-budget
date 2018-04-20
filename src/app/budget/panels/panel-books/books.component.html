@@ -6,7 +6,7 @@
     <div class="table-row-cell flex-size-4" (click)="sort('name')">Name</div>
     <div class="table-row-cell flex-size-1" (click)="sort('status')">Status</div>
   </div>
-  <div *ngIf="userBooks | async as books; else loading">
+  <div *ngIf="Books | async as books; else loading">
     <div class="table-body table-main-content">
       <div class="table-row" *ngFor="let book of books | dynamicSort:sortProperty:sortDesc" (click)="getBooksByAuthor(book.author)">
         <div class="table-row-cell flex-size-2">{{book.category}}</div>
@@ -26,7 +26,7 @@
     <div class="table-row-cell flex-size-2" style="flex-direction:column;">
       <span class="flex-row flex-between">
         <span>Books Read:</span>
-      <span class="link-underline">{{(userBooks | async)?.length}}</span>
+        <span class="link-underline">{{(Books | async)?.length}}</span>
       </span>
     </div>
   </div>

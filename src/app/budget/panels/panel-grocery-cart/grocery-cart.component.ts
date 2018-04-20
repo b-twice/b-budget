@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BudgetService } from '../../services/budget.service';
-import { UserGrocery } from '../../models';
+import { Grcocery } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { GroceryFormComponent } from '../../forms/grocery/grocery-form.component';
 
@@ -14,7 +14,7 @@ export class PanelGroceryCartComponent implements OnInit {
 
   user: string;
   year: string;
-  groceryCart: UserGrocery[];
+  groceryCart: Grcocery[];
   cartTotal: number = 0;
   saveError: boolean = false;
 
@@ -31,7 +31,7 @@ export class PanelGroceryCartComponent implements OnInit {
     this.groceryCart = [];
   }
 
-  onSubmit(item: UserGrocery) {
+  onSubmit(item: Grcocery) {
     this.groceryCart.push(item);
     this.cartTotal += item.amount;
     this.groceryForm.rebuild();

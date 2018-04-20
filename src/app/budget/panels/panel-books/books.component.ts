@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../../services/budget.service';
-import { UserBook } from '../../models';
+import { Book } from '../../models';
 import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
@@ -14,14 +14,14 @@ import { PanelChartService } from '../panel-chart/panel-chart.service';
 })
 export class PanelBooksComponent implements OnInit {
 
-  userBooks: Observable<UserBook[]>;
+  Books: Observable<Book[]>;
   booksTotal: number = 0;
   bookCategories: Observable<Category[]>;
   sortProperty: string;
   sortDesc: boolean = false;
   user: string;
   year: string;
-  selectedBooks: UserBook[];
+  selectedBooks: Book[];
   selectedAuthor: string;
 
   @ViewChild(FilterControlsComponent)
@@ -46,7 +46,7 @@ export class PanelBooksComponent implements OnInit {
   getBooks(): void {
     if (!this.user) { return; }
     if (!this.year) { return; }
-    this.userBooks = this.budgetService.getUserBooks(this.user, this.year, this.filterControls.activeCategories);
+    this.Books = this.budgetService.getBooks(this.user, this.year, this.filterControls.activeCategories);
   }
 
   sort(sortProperty: string) {

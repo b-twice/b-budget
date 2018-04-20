@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { UserBook } from '../../models';
+import { Book } from '../../models';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { UserBook } from '../../models';
 export class CardBooksComponent implements OnInit {
 
   @Input() author: string;
-  @Input() books: UserBook[];
+  @Input() books: Book[];
   @Output() onModalClose = new EventEmitter();
   booksTotal: number = 0;
   sortProperty: string;

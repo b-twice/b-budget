@@ -8,7 +8,7 @@
     <div class="table-row-cell flex-size-2 flex-center" (click)="sort('unitPrice')">Unit Price</div>
     <div class="table-row-cell flex-size-1 flex-center" (click)="sort('amount')">Price</div>
   </div>
-  <div *ngIf="userFoodProducts | async as food_products; else loading">
+  <div *ngIf="AnnualFoodProducts | async as food_products; else loading">
     <div class="table-body table-main-content">
       <div class="table-row" *ngFor="let food_product of food_products | dynamicSort:sortProperty:sortDesc" (click)="getFoodProductPage(food_product.name)">
         <div class="table-row-cell flex-size-2">{{food_product.category}}</div>

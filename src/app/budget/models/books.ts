@@ -1,4 +1,4 @@
-export class UserBook {
+export class Book {
     constructor(
         public user: string,
         public year: string,

@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CompleterService, CompleterData, CompleterCmp } from 'ng2-completer';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../../services/budget.service';
-import { FoodProduct, UserGrocery, Supermarket } from '../../models';
+import { FoodProduct, Grcocery, Supermarket } from '../../models';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -20,8 +20,8 @@ export class GroceryFormComponent implements OnInit {
     year: string;
     foodProductsService: CompleterData;
     supermarketsService: CompleterData;
-    model: UserGrocery = new UserGrocery(0, null, null, null);
-    @Output() onSubmit = new EventEmitter<UserGrocery>();
+    model: Grcocery = new Grcocery(0, null, null, null);
+    @Output() onSubmit = new EventEmitter<Grcocery>();
 
     @ViewChild("foodProduct") _foodProduct: CompleterCmp;
 
@@ -46,7 +46,7 @@ export class GroceryFormComponent implements OnInit {
     }
 
     rebuild() {
-        this.model = new UserGrocery(0, this.user, this.model.supermarket, null, this.model.date);
+        this.model = new Grcocery(0, this.user, this.model.supermarket, null, this.model.date);
         this._foodProduct.focus();
     }
 

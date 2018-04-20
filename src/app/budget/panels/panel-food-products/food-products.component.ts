@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetService } from '../../services/budget.service';
-import { UserFoodProduct } from '../../models';
-import { UserGrocery } from '../../models';
+import { AnnualFoodProduct } from '../../models';
+import { Grcocery } from '../../models';
 import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
@@ -15,7 +15,7 @@ import { FilterControlsComponent } from '../../filter-controls/filter-controls.c
 })
 export class PanelFoodProductsComponent implements OnInit {
 
-  userFoodProducts: Observable<UserFoodProduct[]>;
+  AnnualFoodProducts: Observable<AnnualFoodProduct[]>;
   food_productsTotal: number = 0;
   foodCategories: Observable<Category[]>;
   sortProperty: string;
@@ -23,8 +23,8 @@ export class PanelFoodProductsComponent implements OnInit {
   user: string;
   year: string;
 
-  selectedFoodProducts: UserGrocery[];
-  selectedGrocery: UserGrocery | null;
+  selectedFoodProducts: Grcocery[];
+  selectedGrocery: Grcocery | null;
 
   @ViewChild(FilterControlsComponent)
   private filterControls: FilterControlsComponent;
@@ -48,8 +48,8 @@ export class PanelFoodProductsComponent implements OnInit {
 
   getFoodProducts(): void {
     if (!this.user || !this.year) { return; }
-    this.userFoodProducts = this.budgetService.getUserFoodProduct(this.user, this.year, this.filterControls.activeCategories);
-    this.userFoodProducts.subscribe(t => {
+    this.AnnualFoodProducts = this.budgetService.getAnnualFoodProduct(this.user, this.year, this.filterControls.activeCategories);
+    this.AnnualFoodProducts.subscribe(t => {
       this.summarizeFoodProducts(t);
     });
   }
@@ -64,14 +64,14 @@ export class PanelFoodProductsComponent implements OnInit {
     this.getFoodProducts();
   }
 
-  summarizeFoodProducts(food_products: UserFoodProduct[]) {
+  summarizeFoodProducts(food_products: AnnualFoodProduct[]) {
     this.food_productsTotal = 0;
     food_products.forEach(g => this.food_productsTotal += g.amount);
   }
 
   getFoodProductPage(groceryName: string) {
     this.budgetService.getUserGroceriesByName(this.user, this.year, groceryName).subscribe(i => { this.selectedFoodProducts = i });
-    this.selectedGrocery = new UserGrocery(null, null, null, groceryName);
+    this.selectedGrocery = new Grcocery(null, null, null, groceryName);
   }
   modalClose() {
     this.selectedFoodProducts = null;
