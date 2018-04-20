@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BudgetService } from '../services/budget.service';
+import { CoreService } from '../services/core.service';
 import { User } from '../models/user';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class UserNavComponent implements OnInit {
   currentPanel: string
 
   constructor(
-    public budgetService: BudgetService,
+    public apiService: CoreService,
     public activatedRoute: ActivatedRoute,
     public router: Router
   ) { }
@@ -36,9 +36,9 @@ export class UserNavComponent implements OnInit {
   }
 
   getUsers() {
-    this.budgetService.getUsers()
+    this.apiService.getUsers()
       .subscribe(
-      users => this.users = users
+        users => this.users = users
       )
   }
 

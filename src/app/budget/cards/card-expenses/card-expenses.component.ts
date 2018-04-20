@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { UserTransaction } from '../../models';
+import { Transaction } from '../../models';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { UserTransaction } from '../../models';
 export class CardExpensesComponent implements OnInit {
 
   @Input() transactionCategoryName: string;
-  @Input() transactions: UserTransaction[];
+  @Input() transactions: Transaction[];
   @Output() onModalClose = new EventEmitter();
   transactionsTotal: number = 0;
   sortProperty: string;

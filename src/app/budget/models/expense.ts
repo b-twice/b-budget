@@ -1,4 +1,4 @@
-export class UserExpense {
+export class Expense {
     constructor(
         public userName: string,
         public year: string,

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../../services/budget.service';
+import { PersonalService } from '../../services/personal.service';
 import { Book } from '../../models';
 import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
@@ -29,7 +29,7 @@ export class PanelBooksComponent implements OnInit {
 
   constructor(
     public route: ActivatedRoute,
-    public budgetService: BudgetService,
+    public apiService: PersonalService,
   ) { }
 
   ngOnInit() {
@@ -40,13 +40,13 @@ export class PanelBooksComponent implements OnInit {
         this.getBooks();
       }
     )
-    this.bookCategories = this.budgetService.getBookCategories();
+    this.bookCategories = this.apiService.getBookCategories();
   }
 
   getBooks(): void {
     if (!this.user) { return; }
     if (!this.year) { return; }
-    this.Books = this.budgetService.getBooks(this.user, this.year, this.filterControls.activeCategories);
+    this.Books = this.apiService.getBooks(this.user, this.year, this.filterControls.activeCategories);
   }
 
   sort(sortProperty: string) {
@@ -61,7 +61,7 @@ export class PanelBooksComponent implements OnInit {
 
   getBooksByAuthor(name: string) {
     this.selectedAuthor = name;
-    this.budgetService.getBooksByAuthor(name).subscribe(books => { this.selectedBooks = books });
+    this.apiService.getBooksByAuthor(name).subscribe(books => { this.selectedBooks = books });
     return
   }
   modalClose() {

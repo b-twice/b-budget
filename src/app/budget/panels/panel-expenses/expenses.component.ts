@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../../services/budget.service';
-import { UserExpense, UserTransaction } from '../../models';
-import { Category } from '../../models';
+import { FinanceService } from '../../services/finance.service';
+import { Expense, Transaction } from '../../models';
+import { Category, ExpenseMonth } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
 import { PanelChartService } from '../panel-chart/panel-chart.service';
@@ -15,7 +15,7 @@ import { PanelChartService } from '../panel-chart/panel-chart.service';
 })
 export class PanelExpensesComponent implements OnInit {
 
-  userExpenses: Observable<UserExpense[]>;
+  expenses: Observable<Expense[]>;
   categories: Observable<Category[]>;
   plannedExpensesTotal: number = 0;
   actualExpensesTotal: number = 0;
@@ -25,7 +25,7 @@ export class PanelExpensesComponent implements OnInit {
   user: string;
   year: string;
 
-  selectedTransactions: UserTransaction[];
+  selectedTransactions: Transaction[];
   selectedTransactionCategoryName: string;
 
   monthMap: any = {
@@ -49,7 +49,7 @@ export class PanelExpensesComponent implements OnInit {
 
   constructor(
     public route: ActivatedRoute,
-    public budgetService: BudgetService,
+    public apiService: FinanceService,
     public panelChartService: PanelChartService,
     public datePipe: DatePipe
   ) { }
@@ -62,13 +62,13 @@ export class PanelExpensesComponent implements OnInit {
         this.getExpenses();
       }
     )
-    this.categories = this.budgetService.getExpenseMonths();
+    this.categories = this.apiService.getExpenseMonths();
   }
 
   getExpenses(): void {
     if (!this.user || !this.year) { return; }
-    this.userExpenses = this.budgetService.getUserExpense(this.user, this.year, this.filterControls.activeCategories);
-    this.userExpenses.subscribe(t => {
+    this.expenses = this.apiService.getExpense(this.user, this.year, this.filterControls.activeCategories);
+    this.expenses.subscribe(t => {
       this.summarizeExpenses(t);
       // this.panelChartService.sendData(this.summarizeExpensesByMonth(t));
     });
@@ -84,7 +84,7 @@ export class PanelExpensesComponent implements OnInit {
     this.getExpenses();
   }
 
-  summarizeExpenses(expenses: UserExpense[]) {
+  summarizeExpenses(expenses: Expense[]) {
     this.plannedExpensesTotal = 0;
     this.actualExpensesTotal = 0;
     this.differencesTotal = 0;
@@ -94,13 +94,13 @@ export class PanelExpensesComponent implements OnInit {
       this.differencesTotal += t.difference;
     });
   }
-  getExpensePage(expense: UserExpense) {
+  getExpensePage(expense: Expense) {
     if (expense.month) {
-      this.budgetService.getUserTransactionByMonth(this.user, this.year, this.monthMap[expense.month], expense.categoryName)
+      this.apiService.getTransactionByMonth(this.user, this.year, this.monthMap[expense.month], expense.categoryName)
         .subscribe(i => this.selectedTransactions = i);
     }
     else {
-      this.budgetService.getUserTransactions(this.user, this.year, [expense.categoryName])
+      this.apiService.getTransactions(this.user, this.year, [expense.categoryName])
         .subscribe(i => this.selectedTransactions = i);
     }
 

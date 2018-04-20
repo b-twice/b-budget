@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { Grcocery } from '../../models';
+import { Grocery } from '../../models';
 import { GroceryFormComponent } from '../../forms/grocery/grocery-form.component';
-import { BudgetService } from '../../services/budget.service';
+import { FoodService } from '../../services/food.service';
 
 
 @Component({
@@ -11,8 +11,8 @@ import { BudgetService } from '../../services/budget.service';
 })
 export class CardGroceriesComponent implements OnInit {
 
-  @Input() grocery: Grcocery;
-  @Input() groceries: Grcocery[];
+  @Input() grocery: Grocery;
+  @Input() groceries: Grocery[];
   @Output() onModalClose = new EventEmitter();
   groceriesTotal: number = 0;
   groceriesOrganicTotal: number = 0;
@@ -27,7 +27,7 @@ export class CardGroceriesComponent implements OnInit {
 
 
   constructor(
-    public budgetService: BudgetService
+    public apiService: FoodService
   ) { }
 
   ngOnInit() {
@@ -54,8 +54,8 @@ export class CardGroceriesComponent implements OnInit {
     this.editing = true;
   }
 
-  onSubmit(item: Grcocery) {
-    this.budgetService.putGrocery(item.id, item).subscribe(result => {
+  onSubmit(item: Grocery) {
+    this.apiService.updateGrocery(item.id, item).subscribe(result => {
       this.editing = false;
     }, error => { console.log(error); });
 

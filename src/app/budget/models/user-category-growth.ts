@@ -1,4 +1,4 @@
-export class UserCategory {
+export class UserCategoryGrowth {
     constructor(
         public fiscalYear: string,
         public userName: string,

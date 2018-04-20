@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FiscalYear } from '../models/fiscal-year';
-import { BudgetService } from '../services/budget.service';
+import { CoreService } from '../services/core.service';
 @Component({
   selector: 'budget-year-nav',
   templateUrl: './year-nav.component.html',
@@ -15,15 +15,15 @@ export class YearNavComponent implements OnInit {
   currentPanel: string;
 
   constructor(
-    public budgetService: BudgetService,
+    public apiService: CoreService,
     public activatedRoute: ActivatedRoute,
     public router: Router
   ) { }
 
   ngOnInit() {
-    this.budgetService.getFiscalYears()
+    this.apiService.getFiscalYears()
       .subscribe(
-      fiscalYears => this.years = fiscalYears.map(fy => fy.year).reverse()
+        fiscalYears => this.years = fiscalYears.map(fy => fy.year).reverse()
       )
 
     this.activatedRoute.params.subscribe(

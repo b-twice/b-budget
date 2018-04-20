@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../../services/budget.service';
-import { UserCategory } from '../../models';
+import { FinanceService } from '../../services/finance.service';
+import { UserCategoryGrowth } from '../../models';
 import { UtilService } from '../../../shared/util/util.service';
 import { Observable } from 'rxjs/Observable';
 
@@ -20,28 +20,28 @@ export class PanelCategoriesComponent implements OnInit {
     "Utilities",
     "Miscellaneous"
   ];
-  userCategories: Observable<UserCategory[]>;
+  userCategories: Observable<UserCategoryGrowth[]>;
   name: string;
   year: string;
 
   constructor(
     public route: ActivatedRoute,
-    public budgetService: BudgetService,
+    public apiService: FinanceService,
     public utilService: UtilService
   ) { }
 
   ngOnInit() {
     this.route.parent.params.subscribe(
       params =>
-        this.getBudget(params['user'], params['year'])
+        this.getFinance(params['user'], params['year'])
     )
   }
 
-  getBudget(name: string, year: string): void {
+  getFinance(name: string, year: string): void {
     if (!name || !year) { return; }
     this.name = name;
     this.year = year;
-    this.userCategories = this.budgetService.getUserCategory(name, year)
+    this.userCategories = this.apiService.getUserCategoryGrowth(name, year);
   }
 
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { BudgetService } from '../services/budget.service';
 import { SelectIconService } from '../../shared/select-icon/select-icon.service';
 import { Category } from '../models';
 import { Observable } from 'rxjs/Observable';
@@ -19,7 +18,6 @@ export class FilterControlsComponent implements OnInit {
   @Input() clearOnChange: boolean = false; // force clear on cat change
 
   constructor(
-    public budgetService: BudgetService,
     public selectIconService: SelectIconService
   ) { }
 

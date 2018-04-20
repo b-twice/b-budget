@@ -6,7 +6,10 @@ import { HttpModule, Http, RequestOptions } from '@angular/http';
 
 import { BudgetRoutingModule } from './routing/budget-routing.module';
 
-import { BudgetService } from './services/budget.service';
+import { CoreService } from './services/core.service';
+import { FinanceService } from './services/finance.service';
+import { FoodService } from './services/food.service';
+import { PersonalService } from './services/personal.service';
 
 //shared
 import { SharedModule } from '../shared/shared.module';
@@ -84,7 +87,10 @@ import { GroceryFormComponent } from './forms/grocery/grocery-form.component';
         CardBooksComponent
     ],
     providers: [
-        BudgetService,
+        CoreService,
+        FinanceService,
+        FoodService,
+        PersonalService,
         PanelChartService,
         DatePipe
     ]

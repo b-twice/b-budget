@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../../services/budget.service';
-import { Grcocery, UserExpenseMonthly } from '../../models';
+import { FoodService } from '../../services/food.service';
+import { Grocery, TransactionMonthly } from '../../models';
 import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
@@ -15,7 +15,7 @@ import { PanelChartService } from '../panel-chart/panel-chart.service';
 })
 export class PanelGroceriesComponent implements OnInit {
 
-  userGroceries: Observable<Grcocery[]>;
+  userGroceries: Observable<Grocery[]>;
   groceriesTotal: number = 0;
   foodCategories: Observable<Category[]>;
   sortProperty: string;
@@ -23,8 +23,8 @@ export class PanelGroceriesComponent implements OnInit {
   user: string;
   year: string;
 
-  selectedGroceries: Grcocery[];
-  selectedGrocery: Grcocery | null;
+  selectedGroceries: Grocery[];
+  selectedGrocery: Grocery | null;
   chartLoaded: boolean = false;
 
   @ViewChild(FilterControlsComponent)
@@ -32,7 +32,7 @@ export class PanelGroceriesComponent implements OnInit {
 
   constructor(
     public route: ActivatedRoute,
-    public budgetService: BudgetService,
+    public apiService: FoodService,
     public panelChartService: PanelChartService,
     public datePipe: DatePipe
   ) { }
@@ -45,13 +45,13 @@ export class PanelGroceriesComponent implements OnInit {
         this.getGroceries();
       }
     )
-    this.foodCategories = this.budgetService.getFoodCategories();
+    this.foodCategories = this.apiService.getFoodCategories();
   }
 
   getGroceries(): void {
     if (!this.user || !this.year) { return; }
-    this.userGroceries = this.budgetService.getUserGroceries(this.user, this.year, this.filterControls.activeCategories);
-    this.budgetService.getUserGroceriesMonthly(this.user, this.year, 1, this.filterControls.activeCategories).subscribe(t => {
+    this.userGroceries = this.apiService.getGroceries(this.user, this.year, this.filterControls.activeCategories);
+    this.apiService.getGroceriesMonthly(this.user, this.year, 1, this.filterControls.activeCategories).subscribe(t => {
       this.summarizeGroceries(t);
       if (this.chartLoaded) {
         this.panelChartService.update(t);
@@ -74,7 +74,7 @@ export class PanelGroceriesComponent implements OnInit {
     this.getGroceries();
   }
 
-  summarizeGroceries(groceries: UserExpenseMonthly[]) {
+  summarizeGroceries(groceries: TransactionMonthly[]) {
     this.groceriesTotal = 0;
     groceries.forEach(g => {
       if (g.year == this.year) {
@@ -83,8 +83,8 @@ export class PanelGroceriesComponent implements OnInit {
     });
   }
 
-  getGroceryPage(grocery: Grcocery) {
-    this.budgetService.getUserGroceriesByName(this.user, this.year, grocery.name).subscribe(i => this.selectedGroceries = i);
+  getGroceryPage(grocery: Grocery) {
+    this.apiService.getGroceriesByName(this.user, this.year, grocery.name).subscribe(i => this.selectedGroceries = i);
     this.selectedGrocery = grocery;
   }
   modalClose() {

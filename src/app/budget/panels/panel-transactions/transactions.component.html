@@ -1,30 +1,30 @@
 <budget-filter-controls (onCategoryChange)="categoryChange()" [categories]="categories"></budget-filter-controls>
 <div class="transaction-table">
-    <div class="table-row table-column">
-        <div class="table-row-cell flex-size-1" (click)="sort('categoryName')">Category</div>
-        <div class="table-row-cell flex-size-1" (click)="sort('date')">Date</div>
-        <div class="table-row-cell flex-size-3" (click)="sort('description')">Description</div>
-        <div class="table-row-cell flex-size-1" (click)="sort('amount')">Amount</div>
+  <div class="table-row table-column">
+    <div class="table-row-cell flex-size-1" (click)="sort('categoryName')">Category</div>
+    <div class="table-row-cell flex-size-1" (click)="sort('date')">Date</div>
+    <div class="table-row-cell flex-size-3" (click)="sort('description')">Description</div>
+    <div class="table-row-cell flex-size-1" (click)="sort('amount')">Amount</div>
+  </div>
+  <div *ngIf="transactions | async as transactions;  else loading">
+    <div class="table-body table-main-content">
+      <div class="table-row" *ngFor="let transaction of transactions | dynamicSort:sortProperty:sortDesc">
+        <div class="table-row-cell flex-size-1">{{transaction.categoryName}}</div>
+        <div class="table-row-cell flex-size-1">{{transaction.date | date:'MMM d'}}</div>
+        <div class="table-row-cell flex-size-3">{{transaction.description}}</div>
+        <div class="table-row-cell flex-size-1">{{transaction.amount| currency:'USD':true:'1.0-0'}}</div>
+      </div>
     </div>
-    <div *ngIf="userTransactions | async as transactions;  else loading">
-        <div class="table-body table-main-content">
-            <div class="table-row" *ngFor="let transaction of transactions | dynamicSort:sortProperty:sortDesc">
-                <div class="table-row-cell flex-size-1">{{transaction.categoryName}}</div>
-                <div class="table-row-cell flex-size-1">{{transaction.date | date:'MMM d'}}</div>
-                <div class="table-row-cell flex-size-3">{{transaction.description}}</div>
-                <div class="table-row-cell flex-size-1">{{transaction.amount| currency:'USD':true:'1.0-0'}}</div>
-            </div>
-        </div>
+  </div>
+  <ng-template #loading>
+    <loading></loading>
+  </ng-template>
+  <div class="table-summary">
+    <div class="table-row-cell flex-size-1"></div>
+    <div class="table-row-cell flex-size-1"></div>
+    <div class="table-row-cell flex-size-3"></div>
+    <div class="table-row-cell flex-size-1">
+      <span class="link-underline">{{transactionsTotal | currency:'USD':true:'1.0-0'}}</span>
     </div>
-    <ng-template #loading>
-        <loading></loading>
-    </ng-template>
-    <div class="table-summary">
-        <div class="table-row-cell flex-size-1"></div>
-        <div class="table-row-cell flex-size-1"></div>
-        <div class="table-row-cell flex-size-3"></div>
-        <div class="table-row-cell flex-size-1">
-            <span class="link-underline">{{transactionsTotal | currency:'USD':true:'1.0-0'}}</span>
-        </div>
-    </div>
+  </div>
 </div>

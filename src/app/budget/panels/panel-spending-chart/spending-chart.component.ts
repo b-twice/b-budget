@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../../services/budget.service';
+import { FinanceService } from '../../services/finance.service';
 import { SpendingByCategory } from './spending-by-category';
-import { UserExpense } from '../../models';
+import { Expense } from '../../models';
 import * as d3Axis from 'd3-axis';
 import * as d3Selection from 'd3-selection';
 import * as d3Scale from 'd3-scale';
@@ -39,14 +39,14 @@ export class PanelSpendingChartComponent implements OnInit {
   bar: any;
 
   // data
-  data: Array<UserExpense>;
+  data: Array<Expense>;
   entries: Array<{ key: string, value: number }>;
 
   drawActive: boolean = false;
 
   constructor(
     public route: ActivatedRoute,
-    public budgetService: BudgetService
+    public apiService: FinanceService
   ) { }
 
   ngOnInit() {
@@ -57,7 +57,7 @@ export class PanelSpendingChartComponent implements OnInit {
   }
 
   activate(user, year) {
-    this.budgetService.getUserExpense(user, year, []).subscribe(data => {
+    this.apiService.getExpense(user, year, []).subscribe(data => {
       this.data = data;
       if (this.drawActive) {
         this.update(data);
@@ -158,7 +158,7 @@ export class PanelSpendingChartComponent implements OnInit {
 
   // prettify and transform incoming data for consumption in chart
   parseData() {
-    this.entries = d3Collection.nest<UserExpense, number>()
+    this.entries = d3Collection.nest<Expense, number>()
       .key(d => d.categoryName) // group data by unique values
       .rollup(d => d.map(d => d.actualExpense).reduce((a, b) => a + b))
       .entries(this.data);

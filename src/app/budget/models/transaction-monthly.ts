@@ -1,4 +1,4 @@
-export class UserExpenseMonthly {
+export class TransactionMonthly {
     constructor(
         public id: number,
         public userName: string,

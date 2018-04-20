@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../../services/budget.service';
+import { FoodService } from '../../services/food.service';
 import { Recipe, RecipeIngredient } from '../../models';
 import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
@@ -29,7 +29,7 @@ export class PanelRecipesComponent implements OnInit {
 
   constructor(
     public route: ActivatedRoute,
-    public budgetService: BudgetService,
+    public apiService: FoodService,
     public panelChartService: PanelChartService,
     public datePipe: DatePipe
   ) { }
@@ -41,12 +41,12 @@ export class PanelRecipesComponent implements OnInit {
         this.getRecipes();
       }
     )
-    this.recipeCategories = this.budgetService.getRecipeCategories();
+    this.recipeCategories = this.apiService.getRecipeCategories();
   }
 
   getRecipes(): void {
     if (!this.user) { return; }
-    this.Recipes = this.budgetService.getRecipes(this.user, this.filterControls.activeCategories);
+    this.Recipes = this.apiService.getRecipes(this.user, this.filterControls.activeCategories);
   }
 
   sort(sortProperty: string) {
@@ -60,8 +60,8 @@ export class PanelRecipesComponent implements OnInit {
   }
 
   getRecipeIngredients(name: string) {
-    this.budgetService.getRecipeIngredients(name).subscribe(i => this.recipeIngredients = i);
-    this.budgetService.getRecipe(this.user, name).subscribe(r => { this.selectedRecipe = r });
+    this.apiService.getRecipeIngredients(name).subscribe(i => this.recipeIngredients = i);
+    this.apiService.getRecipe(this.user, name).subscribe(r => { this.selectedRecipe = r });
   }
   recipeClose() {
     this.recipeIngredients = null;

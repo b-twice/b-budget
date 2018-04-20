@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../../services/budget.service';
-import { UserTransaction, UserExpenseMonthly } from '../../models';
+import { FinanceService } from '../../services/finance.service';
+import { Transaction, TransactionMonthly } from '../../models';
 import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
@@ -15,7 +15,7 @@ import { PanelChartService } from '../panel-chart/panel-chart.service';
 })
 export class PanelTransactionsComponent implements OnInit {
 
-  userTransactions: Observable<UserTransaction[]>;
+  transactions: Observable<Transaction[]>;
   categories: Observable<Category[]>;
   transactionsTotal: number = 0;
   sortProperty: string;
@@ -30,7 +30,7 @@ export class PanelTransactionsComponent implements OnInit {
 
   constructor(
     public route: ActivatedRoute,
-    public budgetService: BudgetService,
+    public apiService: FinanceService,
     public panelChartService: PanelChartService,
     public datePipe: DatePipe
   ) { }
@@ -43,13 +43,13 @@ export class PanelTransactionsComponent implements OnInit {
         this.getTransactions();
       }
     )
-    this.categories = this.budgetService.getCategories();
+    this.categories = this.apiService.getTransactionCategories();
   }
 
   getTransactions(): void {
     if (!this.user || !this.year) { return; }
-    this.userTransactions = this.budgetService.getUserTransactions(this.user, this.year, this.filterControls.activeCategories);
-    this.budgetService.getUserTransactionsMonthly(this.user, this.year, 1, this.filterControls.activeCategories).subscribe(t => {
+    this.transactions = this.apiService.getTransactions(this.user, this.year, this.filterControls.activeCategories);
+    this.apiService.getTransactionsMonthly(this.user, this.year, 1, this.filterControls.activeCategories).subscribe(t => {
       this.summarizeTransactions(t);
       if (this.chartLoaded) {
         this.panelChartService.update(t);
@@ -72,7 +72,7 @@ export class PanelTransactionsComponent implements OnInit {
     this.getTransactions();
   }
 
-  summarizeTransactions(transactions: UserExpenseMonthly[]) {
+  summarizeTransactions(transactions: TransactionMonthly[]) {
     this.transactionsTotal = 0;
     transactions.forEach(t => this.year == t.year ? this.transactionsTotal += t.amount : null);
   }

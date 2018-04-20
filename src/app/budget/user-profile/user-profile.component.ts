@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../services/budget.service';
+import { FinanceService } from '../services/finance.service';
 import { UserProfile } from '../models';
 import { UtilService } from '../../shared/util/util.service';
 import { Observable } from 'rxjs/Observable';
@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
   year: string;
   constructor(
     public route: ActivatedRoute,
-    public budgetService: BudgetService,
+    public apiService: FinanceService,
     public utilService: UtilService
   ) { }
 
@@ -31,6 +31,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUserProfile(name): void {
-    this.userProfile = this.budgetService.getUserProfile(name);
+    this.userProfile = this.apiService.getUserProfile(name);
   }
 }

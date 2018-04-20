@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../../services/budget.service';
+import { FinanceService } from '../../services/finance.service';
 import { UserSummary } from '../../models';
 import { SummaryByCategory } from './summary-by-category';
 import * as d3Axis from 'd3-axis';
@@ -63,7 +63,7 @@ export class PanelSummaryChartComponent implements OnInit {
 
   constructor(
     public route: ActivatedRoute,
-    public budgetService: BudgetService
+    public apiService: FinanceService
   ) { }
 
   ngOnInit() {
@@ -74,7 +74,7 @@ export class PanelSummaryChartComponent implements OnInit {
   }
 
   activate(user, year) {
-    this.budgetService.getUserSummary(user, year).subscribe(data => {
+    this.apiService.getUserSummary(user, year).subscribe(data => {
       this.data = data;
       if (this.drawActive) {
         this.update(data);

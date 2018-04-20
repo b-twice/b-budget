@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../../services/budget.service';
+import { FoodService } from '../../services/food.service';
 import { AnnualFoodProduct } from '../../models';
-import { Grcocery } from '../../models';
+import { Grocery } from '../../models';
 import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
@@ -23,15 +23,15 @@ export class PanelFoodProductsComponent implements OnInit {
   user: string;
   year: string;
 
-  selectedFoodProducts: Grcocery[];
-  selectedGrocery: Grcocery | null;
+  selectedFoodProducts: Grocery[];
+  selectedGrocery: Grocery | null;
 
   @ViewChild(FilterControlsComponent)
   private filterControls: FilterControlsComponent;
 
   constructor(
     public route: ActivatedRoute,
-    public budgetService: BudgetService,
+    public apiService: FoodService,
     public datePipe: DatePipe
   ) { }
 
@@ -43,12 +43,12 @@ export class PanelFoodProductsComponent implements OnInit {
         this.getFoodProducts();
       }
     )
-    this.foodCategories = this.budgetService.getFoodCategories();
+    this.foodCategories = this.apiService.getFoodCategories();
   }
 
   getFoodProducts(): void {
     if (!this.user || !this.year) { return; }
-    this.AnnualFoodProducts = this.budgetService.getAnnualFoodProduct(this.user, this.year, this.filterControls.activeCategories);
+    this.AnnualFoodProducts = this.apiService.getAnnualFoodProduct(this.user, this.year, this.filterControls.activeCategories);
     this.AnnualFoodProducts.subscribe(t => {
       this.summarizeFoodProducts(t);
     });
@@ -70,8 +70,8 @@ export class PanelFoodProductsComponent implements OnInit {
   }
 
   getFoodProductPage(groceryName: string) {
-    this.budgetService.getUserGroceriesByName(this.user, this.year, groceryName).subscribe(i => { this.selectedFoodProducts = i });
-    this.selectedGrocery = new Grcocery(null, null, null, groceryName);
+    this.apiService.getGroceriesByName(this.user, this.year, groceryName).subscribe(i => { this.selectedFoodProducts = i });
+    this.selectedGrocery = new Grocery(null, null, null, groceryName);
   }
   modalClose() {
     this.selectedFoodProducts = null;

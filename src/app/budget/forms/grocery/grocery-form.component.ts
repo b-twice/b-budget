@@ -2,8 +2,8 @@ import { Component, OnInit, EventEmitter, Input, Output, ViewChild } from '@angu
 import { FormsModule } from '@angular/forms';
 import { CompleterService, CompleterData, CompleterCmp } from 'ng2-completer';
 import { ActivatedRoute } from '@angular/router';
-import { BudgetService } from '../../services/budget.service';
-import { FoodProduct, Grcocery, Supermarket } from '../../models';
+import { FoodService } from '../../services/food.service';
+import { FoodProduct, Grocery, Supermarket } from '../../models';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -20,14 +20,14 @@ export class GroceryFormComponent implements OnInit {
     year: string;
     foodProductsService: CompleterData;
     supermarketsService: CompleterData;
-    model: Grcocery = new Grcocery(0, null, null, null);
-    @Output() onSubmit = new EventEmitter<Grcocery>();
+    model: Grocery = new Grocery(0, null, null, null);
+    @Output() onSubmit = new EventEmitter<Grocery>();
 
     @ViewChild("foodProduct") _foodProduct: CompleterCmp;
 
     constructor(
         public route: ActivatedRoute,
-        public budgetService: BudgetService,
+        public apiService: FoodService,
         public completerService: CompleterService,
     ) {
     }
@@ -39,20 +39,20 @@ export class GroceryFormComponent implements OnInit {
                 this.year = params['year'];
             }
         )
-        this.foodProducts = this.budgetService.getFoodProducts();
-        this.supermarkets = this.budgetService.getSupermarkets();
+        this.foodProducts = this.apiService.getFoodProducts();
+        this.supermarkets = this.apiService.getSupermarkets();
         this.foodProductsService = this.completerService.local(this.foodProducts, 'name', 'name');
         this.supermarketsService = this.completerService.local(this.supermarkets, 'name', 'name');
     }
 
     rebuild() {
-        this.model = new Grcocery(0, this.user, this.model.supermarket, null, this.model.date);
+        this.model = new Grocery(0, this.user, this.model.supermarket, null, this.model.date);
         this._foodProduct.focus();
     }
 
     onProductSelect() {
         if (this.model.name) {
-            this.budgetService.getLatestGrocery(this.model.name, this.model.supermarket).subscribe(grocery => {
+            this.apiService.getLatestGrocery(this.model.name, this.model.supermarket).subscribe(grocery => {
                 if (grocery) {
                     this.model.weight = grocery.weight;
                     this.model.count = grocery.count;
