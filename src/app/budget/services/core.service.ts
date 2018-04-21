@@ -27,17 +27,17 @@ export class CoreService {
         httpOptions = httpOptions ? httpOptions : { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.http.get<T>(requestUrl, httpOptions)
             .pipe(
-                catchError(this.handleError)
+            catchError(this.handleError)
             );
     }
 
-    public post<T>(data: {}, fragment: string): Observable<{} | T> {
+    public post<T>(fragment: string, data: {}): Observable<{} | T> {
         let postUrl = `${this.settings.apiEndpoint}/${fragment}`;
         let body = JSON.stringify(data);
         let httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.http.post<T>(postUrl, body, httpOptions)
             .pipe(
-                catchError(this.handleError)
+            catchError(this.handleError)
             );
     }
 
@@ -47,7 +47,7 @@ export class CoreService {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.http.put<T>(postUrl, body, httpOptions)
             .pipe(
-                catchError(this.handleError)
+            catchError(this.handleError)
             );
     }
 
