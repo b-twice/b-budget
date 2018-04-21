@@ -21,7 +21,7 @@
             <div class="table-row-cell flex-size-2">{{transaction.userName}}</div>
             <div class="table-row-cell flex-size-2">{{transaction.date}}</div>
             <div class="table-row-cell flex-size-3">{{transaction.description}}</div>
-            <div class="table-row-cell flex-size-1">{{transaction.amount | currency:'USD':true:'1.2-2'}}</div>
+            <div class="table-row-cell flex-size-1">{{transaction.amount | currency:'USD':'symbol':'1.2-2'}}</div>
           </div>
         </div>
         <div class="table-body table-main-content">
@@ -29,7 +29,7 @@
             <div class="table-row-cell flex-size-2">Total</div>
             <div class="table-row-cell flex-size-2"></div>
             <div class="table-row-cell flex-size-3"></div>
-            <div class="table-row-cell flex-size-1">{{transactionsTotal | currency:'USD':true:'1.2-2'}}</div>
+            <div class="table-row-cell flex-size-1">{{transactionsTotal | currency:'USD':'symbol':'1.2-2'}}</div>
           </div>
         </div>
       </div>

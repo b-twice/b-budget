@@ -10,10 +10,10 @@
     <div *ngIf="expenses | async as result ;  else loading">
       <div class="table-row" *ngFor="let expense of result | dynamicSort:sortProperty:sortDesc" (click)="getExpensePage(expense)">
         <div class="table-row-cell flex-size-3">{{expense.categoryName}}</div>
-        <div class="table-row-cell flex-size-2">{{expense.plannedExpense | currency:'USD':true:'1.0-0'}}</div>
-        <div class="table-row-cell flex-size-2">{{expense.actualExpense| currency:'USD':true:'1.0-0'}}</div>
+        <div class="table-row-cell flex-size-2">{{expense.plannedExpense | currency:'USD':'symbol':'1.0-0'}}</div>
+        <div class="table-row-cell flex-size-2">{{expense.actualExpense| currency:'USD':'symbol':'1.0-0'}}</div>
         <div class="table-row-cell flex-size-1" [ngClass]="expense.difference > 0 ? 'up' : 'down'">
-          {{expense.difference | currency:'USD':true:'1.0-0'}}
+          {{expense.difference | currency:'USD':'symbol':'1.0-0'}}
         </div>
       </div>
     </div>
@@ -27,13 +27,13 @@
     <div class="table-row-cell flex-size-3" style="flex-direction:column;">
       <span class="flex-row flex-between">
         <span>Planned Expenses:</span>
-        <span class="link-underline">{{plannedExpensesTotal | currency:'USD':true:'1.0-0'}}</span>
+        <span class="link-underline">{{plannedExpensesTotal | currency:'USD':'symbol':'1.0-0'}}</span>
       </span>
       <span class="flex-row flex-between">Actual Expenses:
-        <span class="link-underline">{{actualExpensesTotal | currency:'USD':true:'1.0-0'}}</span>
+        <span class="link-underline">{{actualExpensesTotal | currency:'USD':'symbol':'1.0-0'}}</span>
       </span>
       <span class="flex-row flex-between">Difference:
-        <span class="link-underline" [ngClass]="differencesTotal > 0 ? 'up' : 'down'">{{differencesTotal | currency:'USD':true:'1.0-0'}}</span>
+        <span class="link-underline" [ngClass]="differencesTotal > 0 ? 'up' : 'down'">{{differencesTotal | currency:'USD':'symbol':'1.0-0'}}</span>
       </span>
     </div>
   </div>

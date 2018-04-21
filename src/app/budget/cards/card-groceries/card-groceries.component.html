@@ -31,8 +31,8 @@
               <div class="table-row-cell flex-size-2 flex-center">
                 <i *ngIf="item.seasonal == 'Yes'" class="fa fa-check"></i>
               </div>
-              <div class="table-row-cell flex-size-2 flex-center">{{item.unitPrice | currency:'USD':true:'1.2-2'}}</div>
-              <div class="table-row-cell flex-size-1 flex-center">{{item.amount | currency:'USD':true:'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-2 flex-center">{{item.unitPrice | currency:'USD':'symbol':'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-1 flex-center">{{item.amount | currency:'USD':'symbol':'1.2-2'}}</div>
               <div class="table-row-cell flex-size-1 table-row-edit" (click)="edit(item)">
                 <i class="fa fa-edit"></i>
               </div>
@@ -45,7 +45,7 @@
               <div class="table-row-cell flex-size-2"></div>
               <div class="table-row-cell flex-size-2"></div>
               <div class="table-row-cell flex-size-2"></div>
-              <div class="table-row-cell flex-size-1">{{groceriesTotal | currency:'USD':true:'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-1">{{groceriesTotal | currency:'USD':'symbol':'1.2-2'}}</div>
             </div>
           </div>
         </div>

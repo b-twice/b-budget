@@ -38,7 +38,7 @@ export class FoodService extends CoreService {
     // Groceries
     public getGroceries(name: string, year: string, categories: string[]): Observable<Grocery[]> {
         let params = new HttpParams();
-        categories.map(c => params.append('categoryNames', c));
+        categories.forEach(c => params = params.append('categoryNames', c));
         const httpOptions = { params: params };
         return this.request<Grocery[]>(`food/groceries/year/${year}/user/${name}`, httpOptions);
     }
@@ -47,7 +47,7 @@ export class FoodService extends CoreService {
     }
     public getGroceriesMonthly(name: string, year: string, range: number, categories: string[]): Observable<TransactionMonthly[]> {
         let params = new HttpParams();
-        categories.map(c => params.append('categoryNames', c));
+        categories.forEach(c => params = params.append('categoryNames', c));
         const httpOptions = { params: params };
         return this.request<TransactionMonthly[]>(`food/groceries/year/${year}/user/${name}/monthly/range/${range}`, httpOptions);
     }
@@ -64,15 +64,9 @@ export class FoodService extends CoreService {
 
 
     // Food products
-    public getAnnualFoodProducts(year: string, categories: string[]): Observable<AnnualFoodProduct[]> {
-        let params = new HttpParams();
-        categories.map(c => params.append('categoryNames', c));
-        const httpOptions = { params: params };
-        return this.request<AnnualFoodProduct[]>(`food/products/year/${year}`, httpOptions);
-    }
     public getAnnualFoodProduct(name: string, year: string, categories: string[]): Observable<AnnualFoodProduct[]> {
         let params = new HttpParams();
-        categories.map(c => params.append('categoryNames', c));
+        categories.forEach(c => params = params.append('categoryNames', c));
         const httpOptions = { params: params };
         return this.request<AnnualFoodProduct[]>(`food/products/year/${year}/user/${name}`, httpOptions);
     }
@@ -86,7 +80,7 @@ export class FoodService extends CoreService {
     // Recipes
     public getRecipes(name: string, categories: string[]): Observable<Recipe[]> {
         let params = new HttpParams();
-        categories.map(c => params.append('categoryNames', c));
+        categories.forEach(c => params = params.append('categoryNames', c));
         const httpOptions = { params: params };
         return this.request<Recipe[]>(`food/recipes/user/${name}`, httpOptions);
     }

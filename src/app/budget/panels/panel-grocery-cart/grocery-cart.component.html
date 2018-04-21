@@ -24,7 +24,7 @@
         </div>
         <div class="cart-total" *ngIf="groceryCart.length">
             <span>
-                <b>{{cartTotal | currency:'USD':true:'1.2-2'}}</b>
+                <b>{{cartTotal | currency:'USD':'symbol':'1.2-2'}}</b>
             </span>
         </div>
         <span *ngIf="!groceryCart.length">

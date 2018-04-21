@@ -20,7 +20,7 @@ export class PersonalService extends CoreService {
     // Books
     public getBooks(name: string, year: string, categories: string[]): Observable<Book[]> {
         let params = new HttpParams();
-        categories.map(c => params.append('categoryNames', c));
+        categories.forEach(c => params = params.append('categoryNames', c));
         const httpOptions = { params: params };
         return this.request<Book[]>(`personal/books/year/${year}/user/${name}`, httpOptions);
     }

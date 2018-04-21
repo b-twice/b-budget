@@ -15,8 +15,8 @@
         <div class="table-row-cell flex-size-2">{{food_product.name}}</div>
         <div class="table-row-cell flex-size-1 flex-center">{{food_product.count}}</div>
         <div class="table-row-cell flex-size-1 flex-center">{{food_product.weight | number:'1.2-2'}} {{food_product.unit}}</div>
-        <div class="table-row-cell flex-size-2 flex-center">{{food_product.unitPrice | currency:'USD':true:'1.2-2'}}</div>
-        <div class="table-row-cell flex-size-1 flex-center">{{food_product.amount| currency:'USD':true:'1.2-2'}}</div>
+        <div class="table-row-cell flex-size-2 flex-center">{{food_product.unitPrice | currency:'USD':'symbol':'1.2-2'}}</div>
+        <div class="table-row-cell flex-size-1 flex-center">{{food_product.amount| currency:'USD':'symbol':'1.2-2'}}</div>
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@
     <div class="table-row-cell flex-size-1"></div>
     <div class="table-row-cell flex-size-2"></div>
     <div class="table-row-cell flex-size-1 flex-center">
-      <span class="link-underline">{{food_productsTotal | currency:'USD':true:'1.0-0'}}</span>
+      <span class="link-underline">{{food_productsTotal | currency:'USD':'symbol':'1.0-0'}}</span>
     </div>
   </div>
 </div>

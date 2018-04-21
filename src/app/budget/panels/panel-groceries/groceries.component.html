@@ -23,8 +23,8 @@
         <div class="table-row-cell flex-size-1 flex-center">
           <i *ngIf="grocery.organic == 'Yes'" class="fa fa-check"></i>
         </div>
-        <div class="table-row-cell flex-size-2 flex-center">{{grocery.unitPrice | currency:'USD':true:'1.2-2'}}</div>
-        <div class="table-row-cell flex-size-1 flex-center">{{grocery.amount| currency:'USD':true:'1.2-2'}}</div>
+        <div class="table-row-cell flex-size-2 flex-center">{{grocery.unitPrice | currency:'USD':'symbol':'1.2-2'}}</div>
+        <div class="table-row-cell flex-size-1 flex-center">{{grocery.amount| currency:'USD':'symbol':'1.2-2'}}</div>
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@
     <div class="table-row-cell flex-size-1"></div>
     <div class="table-row-cell flex-size-2"></div>
     <div class="table-row-cell flex-size-1">
-      <span class="link-underline">{{groceriesTotal | currency:'USD':true:'1.0-0'}}</span>
+      <span class="link-underline">{{groceriesTotal | currency:'USD':'symbol':'1.0-0'}}</span>
     </div>
   </div>
 </div>
