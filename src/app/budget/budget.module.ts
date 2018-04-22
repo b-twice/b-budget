@@ -39,10 +39,13 @@ import { PanelGroceryCartComponent } from './panels/panel-grocery-cart/grocery-c
 import { PanelGroceryControlsComponent } from './panels/panel-grocery-controls/grocery-controls.component';
 import { PanelFoodProductsComponent } from './panels/panel-food-products/food-products.component';
 import { PanelRecipesComponent } from './panels/panel-recipes/panel-recipes.component';
+import { PanelMealPlansComponent } from './panels/panel-meal-plans/meal-plans.component';
 import { CardRecipeIngredientsComponent } from './cards/card-recipe-ingredients/card-recipe-ingredients.component';
 import { CardGroceriesComponent } from './cards/card-groceries/card-groceries.component';
 import { CardExpensesComponent } from './cards/card-expenses/card-expenses.component';
 import { CardBooksComponent } from './cards/card-books/card-books.component';
+import { CardRecipesComponent } from './cards/card-recipes/card-recipes.component';
+import { CardGroceryListComponent } from './cards/card-grocery-list/card-grocery-list.component';
 
 import { GroceryFormComponent } from './forms/grocery/grocery-form.component';
 
@@ -80,10 +83,13 @@ import { GroceryFormComponent } from './forms/grocery/grocery-form.component';
         PanelGroceriesComponent,
         PanelFoodProductsComponent,
         PanelRecipesComponent,
+        PanelMealPlansComponent,
         CardRecipeIngredientsComponent,
         CardGroceriesComponent,
         CardExpensesComponent,
-        CardBooksComponent
+        CardBooksComponent,
+        CardRecipesComponent,
+        CardGroceryListComponent
     ],
     providers: [
         CoreService,

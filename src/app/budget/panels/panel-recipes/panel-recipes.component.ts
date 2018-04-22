@@ -15,7 +15,7 @@ import { PanelChartService } from '../panel-chart/panel-chart.service';
 })
 export class PanelRecipesComponent implements OnInit {
 
-  Recipes: Observable<Recipe[]>;
+  recipes: Observable<Recipe[]>;
   recipesTotal: number = 0;
   recipeCategories: Observable<Category[]>;
   sortProperty: string;
@@ -46,7 +46,7 @@ export class PanelRecipesComponent implements OnInit {
 
   getRecipes(): void {
     if (!this.user) { return; }
-    this.Recipes = this.apiService.getRecipes(this.user, this.filterControls.activeCategories);
+    this.recipes = this.apiService.getRecipes(this.user, this.filterControls.activeCategories);
   }
 
   sort(sortProperty: string) {
@@ -59,9 +59,9 @@ export class PanelRecipesComponent implements OnInit {
     this.getRecipes();
   }
 
-  getRecipeIngredients(name: string) {
-    this.apiService.getRecipeIngredients(name).subscribe(i => this.recipeIngredients = i);
-    this.apiService.getRecipe(this.user, name).subscribe(r => { this.selectedRecipe = r });
+  getRecipeIngredients(recipe: Recipe) {
+    this.apiService.getRecipeIngredients(recipe.name).subscribe(i => this.recipeIngredients = i);
+    this.selectedRecipe = recipe;
   }
   recipeClose() {
     this.recipeIngredients = null;

@@ -1,0 +1,24 @@
+@import '../../../../styles/base.scss';
+@import '../../../../styles/flex.scss';
+@import '../../../../styles/table.scss';
+.panel-style  {
+    @extend .panel-base;
+    padding:0;
+}
+
+.section-header {
+    @extend .section-header;
+}
+
+.title {
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    margin-bottom:1rem;
+
+    h3 {
+        margin:0;
+        padding:0;
+    }
+
+}

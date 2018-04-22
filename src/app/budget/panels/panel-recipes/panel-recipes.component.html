@@ -10,9 +10,9 @@
     <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
     <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
   </div>
-  <div *ngIf="Recipes | async as recipes; else loading">
+  <div *ngIf="recipes | async as result; else loading">
     <div class="table-body table-main-content">
-      <div class="table-row" *ngFor="let recipe of recipes | dynamicSort:sortProperty:sortDesc" (click)="getRecipeIngredients(recipe.name)">
+      <div class="table-row" *ngFor="let recipe of result | dynamicSort:sortProperty:sortDesc" (click)="getRecipeIngredients(recipe.name)">
         <div class="table-row-cell flex-size-2">{{recipe.cookbook}}</div>
         <div class="table-row-cell flex-size-2">{{recipe.category}}</div>
         <div class="table-row-cell flex-size-3">{{recipe.name}}</div>

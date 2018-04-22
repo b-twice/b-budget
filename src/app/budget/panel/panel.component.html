@@ -14,5 +14,6 @@
     </div>
 </div>
 <budget-panel-recipes *ngIf="currentPanel == 'recipes'"></budget-panel-recipes>
+<budget-panel-meal-plans *ngIf="currentPanel == 'mealPlans'"></budget-panel-meal-plans>
 <budget-panel-books *ngIf="currentPanel == 'books'"></budget-panel-books>
 <budget-panel-chart *ngIf="!currentAction && (currentPanel == 'transactions' || currentPanel == 'groceries')"></budget-panel-chart>

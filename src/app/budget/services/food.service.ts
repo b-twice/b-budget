@@ -11,7 +11,8 @@ import {
     FoodProduct,
     TransactionMonthly,
     Category,
-    Supermarket
+    Supermarket,
+    MealPlan
 } from '../models';
 
 @Injectable()
@@ -90,5 +91,14 @@ export class FoodService extends CoreService {
     public getRecipeIngredients(name: string): Observable<RecipeIngredient[]> {
         return this.request<RecipeIngredient[]>(`food/recipes/recipe/${name}`, null);
     }
+
+    // Meal Plans
+    public getMealPlans(name: string): Observable<MealPlan[]> {
+        return this.request<MealPlan[]>(`food/meal-plans/user/${name}`, null);
+    }
+    public getMealPlanRecipes(name: string): Observable<Recipe[]> {
+        return this.request<Recipe[]>(`food/meal-plans/recipes/${name}`, null);
+    }
+
 
 }

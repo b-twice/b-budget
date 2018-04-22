@@ -280,7 +280,11 @@ button {
     padding: 3em;
     background-color: white;
     overflow: auto;
-    border-radius: 5px;
+	border-radius: 5px;
+	
+	&.large{
+		max-width:150rem
+	}
 }
 .popup-body {
     width:100%;
