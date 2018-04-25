@@ -12,7 +12,7 @@
   </div>
   <div *ngIf="recipes | async as result; else loading">
     <div class="table-body table-main-content">
-      <div class="table-row" *ngFor="let recipe of result | dynamicSort:sortProperty:sortDesc" (click)="getRecipeIngredients(recipe.name)">
+      <div class="table-row" *ngFor="let recipe of result | dynamicSort:sortProperty:sortDesc" (click)="getRecipeIngredients(recipe)">
         <div class="table-row-cell flex-size-2">{{recipe.cookbook}}</div>
         <div class="table-row-cell flex-size-2">{{recipe.category}}</div>
         <div class="table-row-cell flex-size-3">{{recipe.name}}</div>

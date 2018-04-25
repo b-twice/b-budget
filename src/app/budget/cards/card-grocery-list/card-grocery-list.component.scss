@@ -10,6 +10,28 @@
     @extend .section-header;
 }
 
+.popup-content {
+    padding:1rem;
+    &.print-view {
+        justify-content: center;
+        .popup-body {
+            width:120rem;
+        }
+    }
+}
+
+.item-list {
+    display:flex;
+    align-items:center;
+    i {
+        margin-right: 1rem;
+    }
+
+
+
+}
+
+
 .title {
     display:flex;
     flex-direction:column;

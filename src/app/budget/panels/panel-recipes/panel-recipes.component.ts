@@ -60,7 +60,7 @@ export class PanelRecipesComponent implements OnInit {
   }
 
   getRecipeIngredients(recipe: Recipe) {
-    this.apiService.getRecipeIngredients(recipe.name).subscribe(i => this.recipeIngredients = i);
+    this.apiService.getRecipeIngredients([recipe.name]).subscribe(i => this.recipeIngredients = i);
     this.selectedRecipe = recipe;
   }
   recipeClose() {

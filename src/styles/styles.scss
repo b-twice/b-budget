@@ -282,8 +282,11 @@ button {
     overflow: auto;
 	border-radius: 5px;
 	
-	&.large{
-		max-width:150rem
+	&.full-screen{
+		max-width:100%;
+		height:100%;
+		align-items:start;
+		justify-content:start;
 	}
 }
 .popup-body {

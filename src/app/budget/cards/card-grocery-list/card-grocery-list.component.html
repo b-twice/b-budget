@@ -1,5 +1,5 @@
 <div class="popup-wrapper" (click)="closeModal()">
-    <div class="popup-content large">
+    <div class="popup-content full-screen print-view">
         <div class="popup-body" (click)="stopPropogation($event)">
 
             <div class="popup-close">
@@ -7,7 +7,14 @@
             </div>
 
             <div class="title">
-                <h3>{{mealPlan.name}}</h3>
+                <h3>{{mealPlan.name}} Grocery List</h3>
+            </div>
+
+            <div class="item-list" *ngFor="let recipe of recipes">
+                <i class="fa fa-angle-right"></i>
+                <span>({{recipe.category}}) {{recipe.name}} -
+                    <em>{{recipe.cookbook}} pg. {{recipe.pageNumber}}</em>
+                </span>
             </div>
         </div>
     </div>

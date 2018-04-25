@@ -88,9 +88,13 @@ export class FoodService extends CoreService {
     public getRecipe(name: string, recipeName: string): Observable<Recipe> {
         return this.request<Recipe>(`food/recipes/user/${name}/recipe/${recipeName}`, null);
     }
-    public getRecipeIngredients(name: string): Observable<RecipeIngredient[]> {
-        return this.request<RecipeIngredient[]>(`food/recipes/recipe/${name}`, null);
+    public getRecipeIngredients(recipes: string[]): Observable<RecipeIngredient[]> {
+        let params = new HttpParams();
+        recipes.forEach(c => params = params.append('recipeNames', c));
+        const httpOptions = { params: params };
+        return this.request<RecipeIngredient[]>(`food/recipes/ingredients`, httpOptions);
     }
+
 
     // Meal Plans
     public getMealPlans(name: string): Observable<MealPlan[]> {
@@ -99,6 +103,8 @@ export class FoodService extends CoreService {
     public getMealPlanRecipes(name: string): Observable<Recipe[]> {
         return this.request<Recipe[]>(`food/meal-plans/recipes/${name}`, null);
     }
-
+    public getMealPlanRecipeIngredients(name: string): Observable<RecipeIngredient[]> {
+        return this.request<RecipeIngredient[]>(`food/meal-plans/ingredients/${name}`, null);
+    }
 
 }
