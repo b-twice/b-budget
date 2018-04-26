@@ -1,35 +1,35 @@
 <div class="meal-plans-table">
-    <div class="table-row table-column">
-        <div class="table-row-cell flex-size-3" (click)="sort('name')">Name</div>
-        <div class="table-row-cell flex-size-2 flex-center" (click)="sort('days')">Days</div>
-        <div class="table-row-cell flex-size-2 flex-center" (click)="sort('cost')">Cost</div>
-        <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
-        <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
-        <div class="table-row-cell flex-size-1 flex-center">Recipes</div>
-        <div class="table-row-cell flex-size-1 flex-center">Print</div>
-    </div>
-    <div *ngIf="mealPlans | async as result; else loading">
-        <div class="table-body table-main-content">
-            <div class="table-row" *ngFor="let mealPlan of result | dynamicSort:sortProperty:sortDesc">
-                <div class="table-row-cell flex-size-3">{{mealPlan.name}}</div>
-                <div class="table-row-cell flex-size-2 flex-center">{{mealPlan.days}}</div>
-                <div class="table-row-cell flex-size-2 flex-center">{{mealPlan.cost | currency:'USD':'symbol':'1.2-2'}}</div>
-                <div class="table-row-cell flex-size-2 flex-center">{{mealPlan.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
-                <div class="table-row-cell flex-size-2 flex-center">{{mealPlan.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
-                <div class="table-row-cell flex-size-1 flex-center" (click)="getMealPlanRecipes(mealPlan)">
-                    <i class="fa fa-eye"></i>
-                </div>
-                <div class="table-row-cell flex-size-1 flex-center" (click)="printGroceryList(mealPlan)">
-                    <i class="fa fa-print"></i>
-                </div>
-            </div>
+  <div class="table-row table-column">
+    <div class="table-row-cell flex-size-3" (click)="sort('name')">Name</div>
+    <div class="table-row-cell flex-size-2 flex-center" (click)="sort('days')">Days</div>
+    <div class="table-row-cell flex-size-2 flex-center" (click)="sort('cost')">Cost</div>
+    <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
+    <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
+    <div class="table-row-cell flex-size-1 flex-center">Recipes</div>
+    <div class="table-row-cell flex-size-1 flex-center">Print</div>
+  </div>
+  <div *ngIf="mealPlans | async as result; else loading">
+    <div class="table-body table-main-content">
+      <div class="table-row" *ngFor="let mealPlan of result | dynamicSort:sortProperty:sortDesc">
+        <div class="table-row-cell flex-size-3">{{mealPlan.name}}</div>
+        <div class="table-row-cell flex-size-2 flex-center">{{mealPlan.days}}</div>
+        <div class="table-row-cell flex-size-2 flex-center">{{mealPlan.cost | currency:'USD':'symbol':'1.2-2'}}</div>
+        <div class="table-row-cell flex-size-2 flex-center">{{mealPlan.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
+        <div class="table-row-cell flex-size-2 flex-center">{{mealPlan.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
+        <div class="table-row-cell flex-size-1 flex-center" (click)="getMealPlanRecipes(mealPlan)">
+          <i class="fa fa-eye"></i>
         </div>
+        <div class="table-row-cell flex-size-1 flex-center" (click)="printGroceryList(mealPlan)">
+          <i class="fa fa-print"></i>
+        </div>
+      </div>
     </div>
-    <ng-template #loading>
-        <loading></loading>
-    </ng-template>
+  </div>
+  <ng-template #loading>
+    <loading></loading>
+  </ng-template>
 </div>
 <budget-recipes-card *ngIf="mealPlanRecipes && selectedMealPlan && !mealPlanRecipeIngredients" [recipes]="mealPlanRecipes"
-    [mealPlan]="selectedMealPlan" (onModalClose)="modalClose()"></budget-recipes-card>
+  [mealPlan]="selectedMealPlan" (onModalClose)="modalClose()"></budget-recipes-card>
 <budget-grocery-list-card *ngIf="mealPlanRecipes && selectedMealPlan && mealPlanRecipeIngredients" [recipes]="mealPlanRecipes"
-    [mealPlan]="selectedMealPlan" (onModalClose)="modalClose()"></budget-grocery-list-card>
+  [mealPlan]="selectedMealPlan" [ingredients]="mealPlanRecipeIngredients" (onModalClose)="modalClose()"></budget-grocery-list-card>

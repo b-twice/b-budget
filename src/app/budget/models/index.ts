@@ -8,6 +8,7 @@ export * from './transaction';
 export * from './grocery';
 export * from './recipe';
 export * from './recipe-ingredient';
+export * from './meal-plan-recipe-ingredient';
 export * from './annual-food-product';
 export * from './food-product';
 export * from './expense';

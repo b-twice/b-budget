@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { Recipe, MealPlan, Grocery } from '../../models';
+import { Recipe, MealPlan, MealPlanRecipeIngredient } from '../../models';
 
 @Component({
     selector: 'budget-grocery-list-card',
@@ -10,13 +10,16 @@ export class CardGroceryListComponent implements OnInit {
 
     @Input() recipes: Recipe[];
     @Input() mealPlan: MealPlan;
+    @Input() ingredients: MealPlanRecipeIngredient[];
     @Output() onModalClose = new EventEmitter();
     sortProperty: string;
     sortDesc: boolean = false;
+    ingredientsByCategory: { [key: string]: MealPlanRecipeIngredient[] } = {};
 
     constructor() { }
 
     ngOnInit() {
+        this.ingredientsByCategory = this.categorizeIngredients();
     }
 
     closeModal() {
@@ -31,4 +34,17 @@ export class CardGroceryListComponent implements OnInit {
         this.sortProperty = sortProperty;
     }
 
+    categorizeIngredients(): { [key: string]: MealPlanRecipeIngredient[] } {
+        let data = {}
+        console.log(this.ingredients)
+        this.ingredients.forEach(i => {
+            let category = i.category.replace(" ", "_")
+            if (!(category in this.ingredientsByCategory)) {
+                data[category] = [];
+            }
+            data[category].push(i);
+        });
+        console.log(data)
+        return data;
+    }
 }

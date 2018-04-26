@@ -17,6 +17,8 @@ import { SelectIconService } from './select-icon/select-icon.service';
 
 // Pipes
 import { DynamicSortPipe } from './pipes/dynamic-sort.pipe';
+import { MapToIterablePipe } from './pipes/map-to-iterable.pipe';
+import { MapToKeysPipe } from './pipes/map-to-keys.pipe';
 
 @NgModule({
     imports: [
@@ -28,7 +30,9 @@ import { DynamicSortPipe } from './pipes/dynamic-sort.pipe';
         SiteHeaderComponent,
         NumberChangeComponent,
         SelectIconComponent,
-        DynamicSortPipe
+        DynamicSortPipe,
+        MapToIterablePipe,
+        MapToKeysPipe
     ],
     exports: [
         CommonModule,
@@ -38,7 +42,9 @@ import { DynamicSortPipe } from './pipes/dynamic-sort.pipe';
         DropdownModule,
         NumberChangeComponent,
         SelectIconComponent,
-        DynamicSortPipe
+        DynamicSortPipe,
+        MapToIterablePipe,
+        MapToKeysPipe
     ],
     providers: [
         UtilService,

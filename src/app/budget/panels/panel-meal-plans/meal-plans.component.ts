@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../services/food.service';
-import { MealPlan, Recipe, RecipeIngredient } from '../../models';
+import { MealPlan, Recipe, MealPlanRecipeIngredient } from '../../models';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -19,7 +19,7 @@ export class PanelMealPlansComponent implements OnInit {
     user: string;
     mealPlanRecipes: Recipe[];
     selectedMealPlan: MealPlan;
-    mealPlanRecipeIngredients: RecipeIngredient[];
+    mealPlanRecipeIngredients: MealPlanRecipeIngredient[];
 
     constructor(
         public route: ActivatedRoute,
@@ -53,7 +53,6 @@ export class PanelMealPlansComponent implements OnInit {
     }
 
     printGroceryList(mealPlan: MealPlan): void {
-        this.mealPlanRecipeIngredients = [];
         this.apiService.getMealPlanRecipes(mealPlan.name).subscribe(r => this.mealPlanRecipes = r);
         this.apiService.getMealPlanRecipeIngredients(mealPlan.name).subscribe(i => this.mealPlanRecipeIngredients = i);
         this.selectedMealPlan = mealPlan;
