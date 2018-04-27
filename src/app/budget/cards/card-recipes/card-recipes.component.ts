@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Recipe, MealPlan } from '../../models';
 
 @Component({
@@ -8,7 +9,7 @@ import { Recipe, MealPlan } from '../../models';
 })
 export class CardRecipesComponent implements OnInit {
 
-    @Input() recipes: Recipe[];
+    @Input() recipes: Observable<Recipe[]>;
     @Input() mealPlan: MealPlan;
     @Output() onModalClose = new EventEmitter();
     sortProperty: string;

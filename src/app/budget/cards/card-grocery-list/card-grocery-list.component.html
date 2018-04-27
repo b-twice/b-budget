@@ -10,17 +10,19 @@
         <h3>{{mealPlan.name}} Grocery List</h3>
       </div>
 
-      <div class="item-list" *ngFor="let recipe of recipes">
-        <i class="fa fa-angle-right"></i>
-        <span>({{recipe.category}}) {{recipe.name}} -
-          <em>{{recipe.cookbook}} pg. {{recipe.pageNumber}}</em>
-        </span>
+      <div *ngIf="recipes | async as result">
+        <div class="item-list" *ngFor="let recipe of result">
+          <i class="fa fa-angle-right"></i>
+          <span>({{recipe.category}}) {{recipe.name}} -
+            <em>{{recipe.cookbook}} pg. {{recipe.pageNumber}}</em>
+          </span>
+        </div>
       </div>
 
-      <div *ngFor="let o of ingredientsByCategory | mapToIterable">
+      <div *ngFor="let o of groceriesByCategory | mapToIterable">
         <strong>{{o.key}}</strong>
-        <div *ngFor="let ingredient of o['value']">
-          <span>{{ingredient.name}}</span>
+        <div *ngFor="let grocery of o['value']">
+          <span>{{grocery.name}}</span>
         </div>
       </div>
     </div>

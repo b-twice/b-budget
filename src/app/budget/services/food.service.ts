@@ -7,7 +7,7 @@ import {
     Grocery,
     Recipe,
     RecipeIngredient,
-    MealPlanRecipeIngredient,
+    MealPlanGrocery,
     AnnualFoodProduct,
     FoodProduct,
     TransactionMonthly,
@@ -104,8 +104,8 @@ export class FoodService extends CoreService {
     public getMealPlanRecipes(name: string): Observable<Recipe[]> {
         return this.request<Recipe[]>(`food/meal-plans/recipes/${name}`, null);
     }
-    public getMealPlanRecipeIngredients(name: string): Observable<MealPlanRecipeIngredient[]> {
-        return this.request<MealPlanRecipeIngredient[]>(`food/meal-plans/ingredients/${name}`, null);
+    public getMealPlanGroceries(name: string): Observable<MealPlanGrocery[]> {
+        return this.request<MealPlanGrocery[]>(`food/meal-plans/groceries/${name}`, null);
     }
 
 }

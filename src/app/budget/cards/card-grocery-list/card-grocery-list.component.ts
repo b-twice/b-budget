@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { Recipe, MealPlan, MealPlanRecipeIngredient } from '../../models';
+import { Observable } from 'rxjs/Observable';
+import { Recipe, MealPlan, MealPlanGrocery } from '../../models';
 
 @Component({
     selector: 'budget-grocery-list-card',
@@ -8,18 +9,18 @@ import { Recipe, MealPlan, MealPlanRecipeIngredient } from '../../models';
 })
 export class CardGroceryListComponent implements OnInit {
 
-    @Input() recipes: Recipe[];
+    @Input() recipes: Observable<Recipe[]>;
     @Input() mealPlan: MealPlan;
-    @Input() ingredients: MealPlanRecipeIngredient[];
+    @Input() groceries: Observable<MealPlanGrocery[]>;
     @Output() onModalClose = new EventEmitter();
     sortProperty: string;
     sortDesc: boolean = false;
-    ingredientsByCategory: { [key: string]: MealPlanRecipeIngredient[] } = {};
+    groceriesByCategory: { [key: string]: MealPlanGrocery[] } = {};
 
     constructor() { }
 
     ngOnInit() {
-        this.ingredientsByCategory = this.categorizeIngredients();
+        this.groceries.subscribe(g => this.groceriesByCategory = this.categorizeGroceries(g))
     }
 
     closeModal() {
@@ -34,17 +35,19 @@ export class CardGroceryListComponent implements OnInit {
         this.sortProperty = sortProperty;
     }
 
-    categorizeIngredients(): { [key: string]: MealPlanRecipeIngredient[] } {
-        let data = {}
-        console.log(this.ingredients)
-        this.ingredients.forEach(i => {
-            let category = i.category.replace(" ", "_")
-            if (!(category in this.ingredientsByCategory)) {
+    categorizeGroceries(groceries: MealPlanGrocery[]): { [key: string]: MealPlanGrocery[] } {
+        let data = {};
+        if (!groceries) {
+            return data;
+        }
+        groceries.forEach(g => {
+            let category = g.category.replace(" ", "_")
+            if (!data.hasOwnProperty(category)) {
+                console.log(category)
                 data[category] = [];
             }
-            data[category].push(i);
+            data[category].push(g);
         });
-        console.log(data)
         return data;
     }
 }

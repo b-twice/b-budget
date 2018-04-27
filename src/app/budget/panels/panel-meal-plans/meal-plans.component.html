@@ -29,7 +29,6 @@
     <loading></loading>
   </ng-template>
 </div>
-<budget-recipes-card *ngIf="mealPlanRecipes && selectedMealPlan && !mealPlanRecipeIngredients" [recipes]="mealPlanRecipes"
-  [mealPlan]="selectedMealPlan" (onModalClose)="modalClose()"></budget-recipes-card>
-<budget-grocery-list-card *ngIf="mealPlanRecipes && selectedMealPlan && mealPlanRecipeIngredients" [recipes]="mealPlanRecipes"
-  [mealPlan]="selectedMealPlan" [ingredients]="mealPlanRecipeIngredients" (onModalClose)="modalClose()"></budget-grocery-list-card>
+<budget-recipes-card *ngIf="showRecipeList" [recipes]="mealPlanRecipes" [mealPlan]="selectedMealPlan" (onModalClose)="modalClose()"></budget-recipes-card>
+<budget-grocery-list-card *ngIf="showGroceryList" [recipes]="mealPlanRecipes" [mealPlan]="selectedMealPlan" [groceries]="mealPlanGroceries"
+  (onModalClose)="modalClose()"></budget-grocery-list-card>

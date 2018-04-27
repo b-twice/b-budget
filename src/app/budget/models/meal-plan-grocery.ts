@@ -1,0 +1,12 @@
+export class MealPlanGrocery {
+    constructor(
+        public mealPlanName: string,
+        public name: string,
+        public category: string,
+        public count: number = 0,
+        public weight: number = 0,
+        public unit: string
+    ) { }
+}
+
+

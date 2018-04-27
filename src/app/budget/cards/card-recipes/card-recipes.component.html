@@ -19,15 +19,17 @@
                     <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
                     <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
                 </div>
-                <div class="table-body table-main-content">
-                    <div class="table-row" *ngFor="let recipe of recipes | dynamicSort:sortProperty:sortDesc">
-                        <div class="table-row-cell flex-size-4">{{recipe.name}}</div>
-                        <div class="table-row-cell flex-size-3">{{recipe.cookbook}}</div>
-                        <div class="table-row-cell flex-size-2">{{recipe.category}}</div>
-                        <div class="table-row-cell flex-size-1">{{recipe.pageNumber}}</div>
-                        <div class="table-row-cell flex-size-2 flex-center">{{recipe.cost | currency:'USD':'symbol':'1.2-2'}}</div>
-                        <div class="table-row-cell flex-size-2 flex-center">{{recipe.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
-                        <div class="table-row-cell flex-size-2 flex-center">{{recipe.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
+                <div *ngIf="recipes | async as result">
+                    <div class="table-body table-main-content">
+                        <div class="table-row" *ngFor="let recipe of result | dynamicSort:sortProperty:sortDesc">
+                            <div class="table-row-cell flex-size-4">{{recipe.name}}</div>
+                            <div class="table-row-cell flex-size-3">{{recipe.cookbook}}</div>
+                            <div class="table-row-cell flex-size-2">{{recipe.category}}</div>
+                            <div class="table-row-cell flex-size-1">{{recipe.pageNumber}}</div>
+                            <div class="table-row-cell flex-size-2 flex-center">{{recipe.cost | currency:'USD':'symbol':'1.2-2'}}</div>
+                            <div class="table-row-cell flex-size-2 flex-center">{{recipe.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
+                            <div class="table-row-cell flex-size-2 flex-center">{{recipe.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
+                        </div>
                     </div>
                 </div>
                 <div class="table-body table-main-content">

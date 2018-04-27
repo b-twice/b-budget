@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../services/food.service';
-import { MealPlan, Recipe, MealPlanRecipeIngredient } from '../../models';
+import { MealPlan, Recipe, MealPlanGrocery } from '../../models';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -17,9 +17,11 @@ export class PanelMealPlansComponent implements OnInit {
     sortProperty: string;
     sortDesc: boolean = false;
     user: string;
-    mealPlanRecipes: Recipe[];
+    mealPlanRecipes: Observable<Recipe[]>;
     selectedMealPlan: MealPlan;
-    mealPlanRecipeIngredients: MealPlanRecipeIngredient[];
+    mealPlanGroceries: Observable<MealPlanGrocery[]>;
+    showRecipeList: boolean;
+    showGroceryList: boolean;
 
     constructor(
         public route: ActivatedRoute,
@@ -41,21 +43,24 @@ export class PanelMealPlansComponent implements OnInit {
     }
 
     getMealPlanRecipes(mealPlan: MealPlan): void {
-        this.apiService.getMealPlanRecipes(mealPlan.name).subscribe(r => this.mealPlanRecipes = r);
+        this.mealPlanRecipes = this.apiService.getMealPlanRecipes(mealPlan.name);
         this.selectedMealPlan = mealPlan;
+        this.showRecipeList = true;
     }
 
     modalClose() {
         this.mealPlanRecipes = null;
         this.selectedMealPlan = null;
-        this.mealPlanRecipeIngredients = null;
-
+        this.mealPlanGroceries = null;
+        this.showGroceryList = false;
+        this.showRecipeList = false;
     }
 
     printGroceryList(mealPlan: MealPlan): void {
-        this.apiService.getMealPlanRecipes(mealPlan.name).subscribe(r => this.mealPlanRecipes = r);
-        this.apiService.getMealPlanRecipeIngredients(mealPlan.name).subscribe(i => this.mealPlanRecipeIngredients = i);
+        this.mealPlanRecipes = this.apiService.getMealPlanRecipes(mealPlan.name);
+        this.mealPlanGroceries = this.apiService.getMealPlanGroceries(mealPlan.name);
         this.selectedMealPlan = mealPlan;
+        this.showGroceryList = true;
     }
 
     sort(sortProperty: string) {
