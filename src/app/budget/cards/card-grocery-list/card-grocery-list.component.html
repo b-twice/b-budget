@@ -11,7 +11,7 @@
       </div>
 
       <div *ngIf="recipes | async as result">
-        <div class="item-list" *ngFor="let recipe of result">
+        <div class="recipe-list" *ngFor="let recipe of result">
           <i class="fa fa-angle-right"></i>
           <span>({{recipe.category}}) {{recipe.name}} -
             <em>{{recipe.cookbook}} pg. {{recipe.pageNumber}}</em>
@@ -20,9 +20,9 @@
       </div>
 
       <div *ngFor="let o of groceriesByCategory | mapToIterable">
-        <strong>{{o.key}}</strong>
-        <div *ngFor="let grocery of o['value']">
-          <span>{{grocery.name}}</span>
+        <strong>{{o.key.replace("_", " ")}}</strong>
+        <div class="grocery-list">
+          <span *ngFor="let grocery of o['value']">{{grocery.name}}</span>
         </div>
       </div>
     </div>

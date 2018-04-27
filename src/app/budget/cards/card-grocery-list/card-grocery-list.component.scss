@@ -1,46 +1,48 @@
 @import '../../../../styles/base.scss';
 @import '../../../../styles/flex.scss';
 @import '../../../../styles/table.scss';
-.panel-style  {
-    @extend .panel-base;
-    padding:0;
+.panel-style {
+  @extend .panel-base;
+  padding: 0;
 }
 
 .section-header {
-    @extend .section-header;
+  @extend .section-header;
 }
 
 .popup-content {
-    padding:1rem;
-    &.print-view {
-        justify-content: center;
-        .popup-body {
-            width:120rem;
-        }
+  padding: 1rem;
+  &.print-view {
+    justify-content: center;
+    .popup-body {
+      width: 120rem;
     }
+  }
 }
 
-.item-list {
-    display:flex;
-    align-items:center;
-    i {
-        margin-right: 1rem;
-    }
-
-
-
+.recipe-list {
+  display: flex;
+  align-items: center;
+  i {
+    margin-right: 1rem;
+  }
 }
 
+.grocery-list {
+  display: flex;
+  align-items: center;
+  span {
+    margin-right: 1.5rem;
+  }
+}
 
 .title {
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    margin-bottom:1rem;
-
-    h3 {
-        margin:0;
-        padding:0;
-    }
-
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  h3 {
+    margin: 0;
+    padding: 0;
+  }
 }
