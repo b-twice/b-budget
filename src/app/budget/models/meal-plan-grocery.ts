@@ -5,7 +5,9 @@ export class MealPlanGrocery {
         public category: string,
         public count: number = 0,
         public weight: number = 0,
-        public unit: string
+        public unit: string,
+        public dirty: number = 0,
+        public supermarket: string
     ) { }
 }
 

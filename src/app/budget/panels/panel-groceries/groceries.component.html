@@ -18,8 +18,12 @@
         <div class="table-row-cell flex-size-2">{{grocery.supermarket}}</div>
         <div class="table-row-cell flex-size-2">{{grocery.category}}</div>
         <div class="table-row-cell flex-size-2">{{grocery.name}}</div>
-        <div class="table-row-cell flex-size-1 flex-center">{{grocery.count}}</div>
-        <div class="table-row-cell flex-size-1 flex-center">{{grocery.weight | number:'1.2-2'}} {{grocery.unit}}</div>
+        <div class="table-row-cell flex-size-1 flex-center">
+          <span *ngIf="grocery.count > 0">{{grocery.count}}</span>
+        </div>
+        <div class="table-row-cell flex-size-1 flex-center">
+          <span *ngIf="grocery.weight > 0">{{grocery.weight | number:'1.2-2'}} {{grocery.unit}}</span>
+        </div>
         <div class="table-row-cell flex-size-1 flex-center">
           <i *ngIf="grocery.organic == 'Yes'" class="fa fa-check"></i>
         </div>

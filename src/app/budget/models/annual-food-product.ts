@@ -9,6 +9,7 @@ export class AnnualFoodProduct {
         public weight: number = 0,
         public unit: string = 'lb',
         public amount: number = 0,
-        public unitPrice: number = 0
+        public unitPrice: number = 0,
+        public dirty: number = 0
     ) { }
 }

@@ -15,7 +15,7 @@
   &.print-view {
     justify-content: center;
     .popup-body {
-      width: 120rem;
+      width: 80rem;
     }
   }
 }
@@ -28,11 +28,30 @@
   }
 }
 
-.grocery-list {
-  display: flex;
-  align-items: center;
-  span {
-    margin-right: 1.5rem;
+.groceries {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  margin-top:1rem;
+  .grocery-list-group {
+    display:flex;
+    flex-direction:column;
+    width:40rem;
+    margin-bottom:1rem;
+    .grocery-list {
+      display: flex;
+      flex-direction:column;
+      flex-wrap:wrap;
+      .grocery-item {
+        display:flex;
+        margin-right: 1.5rem;
+        align-items:center;
+      }
+      i {
+        margin-left:1rem;
+        color: #27ae60;
+      }
+    }
   }
 }
 
@@ -45,4 +64,17 @@
     margin: 0;
     padding: 0;
   }
+}
+
+
+.list-dot {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  -webkit-transition: background-color 0.5s ease 0s;
+  transition: background-color 0.5s ease 0s;
+  margin-right:.5rem;
+  background-color:#000;
 }

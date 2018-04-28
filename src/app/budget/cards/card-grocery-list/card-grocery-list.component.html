@@ -19,12 +19,21 @@
         </div>
       </div>
 
-      <div *ngFor="let o of groceriesByCategory | mapToIterable">
-        <strong>{{o.key.replace("_", " ")}}</strong>
-        <div class="grocery-list">
-          <span *ngFor="let grocery of o['value']">{{grocery.name}}</span>
+      <div class="groceries">
+        <div class="grocery-list-group" *ngFor="let o of groceriesByCategory | mapToIterable">
+          <strong>{{o.key.replace("_", " ")}}</strong>
+          <ul class="grocery-list">
+            <li class='grocery-item' *ngFor="let grocery of o['value']">
+              <span class='list-dot'></span>
+              <span *ngIf="grocery.count > 0">{{grocery.count}}&nbsp;</span>
+              <span *ngIf="grocery.weight> 0">{{grocery.weight}}{{grocery.unit}}&nbsp;</span>{{grocery.name}}
+              <span *ngIf="grocery.supermarket">&nbsp;({{grocery.supermarket}})</span>
+              <i *ngIf="grocery.dirty" class="fa fa-leaf"></i>
+            </li>
+          </ul>
         </div>
       </div>
+
     </div>
   </div>
 </div>

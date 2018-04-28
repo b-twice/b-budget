@@ -43,7 +43,6 @@ export class CardGroceryListComponent implements OnInit {
         groceries.forEach(g => {
             let category = g.category.replace(" ", "_")
             if (!data.hasOwnProperty(category)) {
-                console.log(category)
                 data[category] = [];
             }
             data[category].push(g);
