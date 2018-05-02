@@ -1,42 +1,48 @@
-<div class="popup-wrapper" (click)="closeRecipe()">
+<div class="popup-wrapper" (click)="closeModal()">
   <div class="popup-content">
     <div class="popup-body" (click)="stopPropogation($event)">
 
       <div class="popup-close">
-        <i class="fa fa-times fa-22" (click)="closeRecipe()" aria-hidden="true"></i>
+        <i class="fa fa-times fa-22" (click)="closeModal()" aria-hidden="true"></i>
       </div>
 
-      <div class="recipe-title">
-        <h3>{{recipe.name}}</h3>
-        <div>
-          <em>{{recipe.cookbook}}</em>
-          <em *ngIf="recipe.pageNumber > 0">pg. {{recipe.pageNumber}}</em>
-        </div>
-      </div>
-      <div class="ingredient-table">
-        <div class="table-row table-column">
-          <div class="table-row-cell flex-size-4" (click)="sort('name')">Ingredient</div>
-          <div class="table-row-cell flex-size-2 flex-center" (click)="sort('cost')">Cost</div>
-          <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
-          <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
-        </div>
-        <div class="table-body table-main-content">
-          <div class="table-row" *ngFor="let ingredient of ingredients | dynamicSort:sortProperty:sortDesc">
-            <div class="table-row-cell flex-size-4">{{ingredient.measurement}} {{ingredient.name}}</div>
-            <div class="table-row-cell flex-size-2">{{ingredient.cost | currency:'USD':'symbol':'1.2-2'}}</div>
-            <div class="table-row-cell flex-size-2">{{ingredient.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
-            <div class="table-row-cell flex-size-2">{{ingredient.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
+      <div *ngIf="recipe | async as result; else loading">
+        <div class="recipe-title">
+          <h3>{{result.name}}</h3>
+          <div>
+            <em>{{result.cookbook}}</em>
+            <em *ngIf="recipe.pageNumber > 0">pg. {{result.pageNumber}}</em>
           </div>
         </div>
-        <div class="table-body table-main-content">
-          <div class="table-row recipe-total">
-            <div class="table-row-cell flex-size-4">Total</div>
-            <div class="table-row-cell flex-size-2">{{recipeTotal | currency:'USD':'symbol':'1.2-2'}}</div>
-            <div class="table-row-cell flex-size-2">{{recipeOrganicTotal | currency:'USD':'symbol':'1.2-2'}}</div>
-            <div class="table-row-cell flex-size-2">{{recipeSeasonalTotal | currency:'USD':'symbol':'1.2-2'}}</div>
+        <div class="ingredient-table">
+          <div class="table-row table-column">
+            <div class="table-row-cell flex-size-4" (click)="sort('name')">Ingredient</div>
+            <div class="table-row-cell flex-size-2 flex-center" (click)="sort('cost')">Cost</div>
+            <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
+            <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
+          </div>
+          <div class="table-body table-main-content">
+            <div class="table-row" *ngFor="let ingredient of ingredients | dynamicSort:sortProperty:sortDesc">
+              <div class="table-row-cell flex-size-4">{{ingredient.measurement}} {{ingredient.name}}</div>
+              <div class="table-row-cell flex-size-2">{{ingredient.cost | currency:'USD':'symbol':'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-2">{{ingredient.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-2">{{ingredient.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
+            </div>
+          </div>
+          <div class="table-body table-main-content">
+            <div class="table-row recipe-total">
+              <div class="table-row-cell flex-size-4">Total</div>
+              <div class="table-row-cell flex-size-2">{{recipeTotal | currency:'USD':'symbol':'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-2">{{recipeOrganicTotal | currency:'USD':'symbol':'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-2">{{recipeSeasonalTotal | currency:'USD':'symbol':'1.2-2'}}</div>
+            </div>
           </div>
         </div>
       </div>
+      <ng-template #loading>
+        <loading></loading>
+      </ng-template>
+
     </div>
   </div>
 </div>

@@ -7,22 +7,19 @@ import { Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
 import { PanelChartService } from '../panel-chart/panel-chart.service';
+import { NavigationService } from '../../services/navigation.service';
+import { PanelBaseComponent } from '../panel-base/panel-base.component'
+
 
 @Component({
   selector: 'budget-panel-recipes',
   templateUrl: './panel-recipes.component.html',
   styleUrls: ['./panel-recipes.component.scss']
 })
-export class PanelRecipesComponent implements OnInit {
+export class PanelRecipesComponent extends PanelBaseComponent implements OnInit {
 
   recipes: Observable<Recipe[]>;
-  recipesTotal: number = 0;
   recipeCategories: Observable<Category[]>;
-  sortProperty: string;
-  sortDesc: boolean = false;
-  user: string;
-  recipeIngredients: RecipeIngredient[];
-  selectedRecipe: Recipe;
 
   @ViewChild(FilterControlsComponent)
   private filterControls: FilterControlsComponent;
@@ -31,43 +28,25 @@ export class PanelRecipesComponent implements OnInit {
     public route: ActivatedRoute,
     public apiService: FoodService,
     public panelChartService: PanelChartService,
+    public navigationService: NavigationService,
     public datePipe: DatePipe
-  ) { }
+  ) {
+    super(route, navigationService)
+  }
 
   ngOnInit() {
-    this.route.parent.params.subscribe(
-      params => {
-        this.user = params['user'];
-        this.getRecipes();
-      }
-    )
+    this.resolveRoutes();
     this.recipeCategories = this.apiService.getRecipeCategories();
   }
 
-  getRecipes(): void {
+  getData(): void {
     if (!this.user) { return; }
     this.recipes = this.apiService.getRecipes(this.user, this.filterControls.activeCategories);
   }
 
-  sort(sortProperty: string) {
-    if (this.sortProperty === sortProperty) this.sortDesc = !this.sortDesc;
-    else this.sortDesc = false;
-    this.sortProperty = sortProperty;
-  }
-
   categoryChange() {
-    this.getRecipes();
+    this.getData();
   }
-
-  getRecipeIngredients(recipe: Recipe) {
-    this.apiService.getRecipeIngredients([recipe.name]).subscribe(i => this.recipeIngredients = i);
-    this.selectedRecipe = recipe;
-  }
-  recipeClose() {
-    this.recipeIngredients = null;
-    this.selectedRecipe = null;
-  }
-
 }
 
 

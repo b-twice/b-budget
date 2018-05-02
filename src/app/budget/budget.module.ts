@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { DatePipe, CommonModule } from '@angular/common';
 
-import { BudgetRoutingModule } from './routing/budget-routing.module';
+import { BudgetRoutingModule } from './budget-routing.module';
 
 import { CoreService } from './services/core.service';
 import { FinanceService } from './services/finance.service';
@@ -93,12 +93,12 @@ import { GroceryFormComponent } from './forms/grocery/grocery-form.component';
 
         CardBaseComponent,
         CardRecipeIngredientsComponent,
-        CardGroceriesComponent,
         CardExpensesComponent,
         CardBooksComponent,
         CardRecipesComponent,
         CardGroceryListComponent,
-        CardGroceryEditComponent
+        CardGroceryEditComponent,
+        CardGroceriesComponent
     ],
     providers: [
         CoreService,

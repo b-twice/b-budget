@@ -56,6 +56,12 @@ export class PanelBaseComponent {
         this.sortProperty = sortProperty;
     }
 
+    categoryChange() {
+        this.getData();
+    }
+
+
+
 
 }
 

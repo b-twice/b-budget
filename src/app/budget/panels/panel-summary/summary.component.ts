@@ -1,64 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { NavigationService } from '../../services/navigation.service';
+import { PanelBaseComponent } from '../panel-base/panel-base.component'
 
 @Component({
     selector: 'budget-panel-summary',
     templateUrl: './summary.component.html',
     styleUrls: ['./summary.component.scss']
 })
-export class PanelSummaryComponent implements OnInit {
+export class PanelSummaryComponent extends PanelBaseComponent implements OnInit {
 
-    displayGroupsOrder: string[] = [
-        "Earnings",
-        "Investments",
-        "Assets",
-        "Other"
-    ]
-    displayGroups: {} = {
-        Earnings: [
-            "income",
-            "incomeTaxable",
-            "takeHomePay",
-        ],
-        Investments: [
-            "saved",
-            "retirementContribution",
-            "stockContribution"
-        ],
-        Assets: [
-            "saving",
-            "retirement",
-            "stock",
-        ],
-        Other: [
-            "spent",
-            "taxed",
-            "debt"
-        ]
-    }
-    displayName: {} = {
-        income: "Gross Income",
-        incomeTaxable: "Taxable Income",
-        takeHomePay: "Take Home Pay",
-        spent: "Money Spent",
-        saved: "Saved",
-        retirementContribution: "Retirement",
-        stockContribution: "Personal Investments",
-        saving: "Savings",
-        retirement: "Retirement",
-        stock: "Personal Investments",
-        taxed: "Taxed",
-        debt: "Debts",
-
-    }
     constructor(
-    ) { }
+        public route: ActivatedRoute,
+        public navigationService: NavigationService,
+    ) {
+        super(route, navigationService);
+    }
 
     ngOnInit() {
-    }
-
-    getKeyDisplay(key: string): string {
-        return this.displayName[key];
+        this.resolveRoutes();
     }
 
 }

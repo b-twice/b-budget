@@ -1,17 +1,17 @@
 @import '../../../../styles/base.scss';
 
-.panel-style  {
-    @extend .panel-base;
-}
-
 .section-header {
     @extend .section-header;
 }
-
 :host {
+    @extend .panel-base-container;
+}
+
+.panel{
+    @extend .panel-base;
     width:100%;
-    @extend .panel-style;
     background:#fff;
+    flex-direction:column;
 }
 
 .category-row {

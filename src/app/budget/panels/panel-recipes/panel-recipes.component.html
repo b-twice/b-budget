@@ -1,32 +1,34 @@
-<budget-filter-controls (onCategoryChange)="categoryChange()" [categories]="recipeCategories"></budget-filter-controls>
-<div class="recipe-table">
-  <div class="table-row table-column">
-    <div class="table-row-cell flex-size-2" (click)="sort('cookbook')">Cookbook</div>
-    <div class="table-row-cell flex-size-2" (click)="sort('category')">Category</div>
-    <div class="table-row-cell flex-size-3" (click)="sort('name')">Name</div>
-    <div class="table-row-cell flex-size-2 flex-center" (click)="sort('servings')">Servings</div>
-    <div class="table-row-cell flex-size-2 flex-center" (click)="sort('servingCost')">Serving Cost</div>
-    <div class="table-row-cell flex-size-2 flex-center" (click)="sort('cost')">Cost</div>
-    <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
-    <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
-  </div>
-  <div *ngIf="recipes | async as result; else loading">
-    <div class="table-body table-main-content">
-      <div class="table-row" *ngFor="let recipe of result | dynamicSort:sortProperty:sortDesc" (click)="getRecipeIngredients(recipe)">
-        <div class="table-row-cell flex-size-2">{{recipe.cookbook}}</div>
-        <div class="table-row-cell flex-size-2">{{recipe.category}}</div>
-        <div class="table-row-cell flex-size-3">{{recipe.name}}</div>
-        <div class="table-row-cell flex-size-2 flex-center">{{recipe.servings}}</div>
-        <div class="table-row-cell flex-size-2 flex-center">{{recipe.servingCost | currency:'USD':'symbol':'1.2-2'}}</div>
-        <div class="table-row-cell flex-size-2 flex-center">{{recipe.cost | currency:'USD':'symbol':'1.2-2'}}</div>
-        <div class="table-row-cell flex-size-2 flex-center">{{recipe.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
-        <div class="table-row-cell flex-size-2 flex-center">{{recipe.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
+<div class="panel">
+  <budget-filter-controls (onCategoryChange)="categoryChange()" [categories]="recipeCategories"></budget-filter-controls>
+  <div class="recipe-table">
+    <div class="table-row table-column">
+      <div class="table-row-cell flex-size-2" (click)="sort('cookbook')">Cookbook</div>
+      <div class="table-row-cell flex-size-2" (click)="sort('category')">Category</div>
+      <div class="table-row-cell flex-size-3" (click)="sort('name')">Name</div>
+      <div class="table-row-cell flex-size-2 flex-center" (click)="sort('servings')">Servings</div>
+      <div class="table-row-cell flex-size-2 flex-center" (click)="sort('servingCost')">Serving Cost</div>
+      <div class="table-row-cell flex-size-2 flex-center" (click)="sort('cost')">Cost</div>
+      <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
+      <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
+    </div>
+    <div *ngIf="recipes | async as result; else loading">
+      <div class="table-body table-main-content">
+        <div class="table-row" *ngFor="let recipe of result | dynamicSort:sortProperty:sortDesc" [routerLink]="[{ outlets: { ingredients: [recipe.name] } }]">
+          <div class="table-row-cell flex-size-2">{{recipe.cookbook}}</div>
+          <div class="table-row-cell flex-size-2">{{recipe.category}}</div>
+          <div class="table-row-cell flex-size-3">{{recipe.name}}</div>
+          <div class="table-row-cell flex-size-2 flex-center">{{recipe.servings}}</div>
+          <div class="table-row-cell flex-size-2 flex-center">{{recipe.servingCost | currency:'USD':'symbol':'1.2-2'}}</div>
+          <div class="table-row-cell flex-size-2 flex-center">{{recipe.cost | currency:'USD':'symbol':'1.2-2'}}</div>
+          <div class="table-row-cell flex-size-2 flex-center">{{recipe.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
+          <div class="table-row-cell flex-size-2 flex-center">{{recipe.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
+        </div>
       </div>
     </div>
+    <ng-template #loading>
+      <loading></loading>
+    </ng-template>
   </div>
-  <ng-template #loading>
-    <loading></loading>
-  </ng-template>
 </div>
-<budget-recipe-ingredients *ngIf="recipeIngredients && selectedRecipe" [ingredients]="recipeIngredients" [recipe]="selectedRecipe"
-  (onRecipeClose)="recipeClose()"></budget-recipe-ingredients>
+
+<router-outlet name="ingredients"></router-outlet>

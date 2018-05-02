@@ -6,36 +6,43 @@
         <i class="fa fa-times fa-22" (click)="closeModal()" aria-hidden="true"></i>
       </div>
 
-      <div class="author-title">
-        <h3>{{author}}</h3>
-      </div>
-      <div class="book-table">
-        <div class="table-row table-column">
-          <div class="table-row-cell flex-size-2" (click)="sort('category')">Category</div>
-          <div class="table-row-cell flex-size-1" (click)="sort('year')">Year</div>
-          <div class="table-row-cell flex-size-1" (click)="sort('user')">User</div>
-          <div class="table-row-cell flex-size-4" (click)="sort('name')">Name</div>
-          <div class="table-row-cell flex-size-1" (click)="sort('status')">Status</div>
+      <div *ngIf="books | async as booksResult; else loading">
+        <div class="author-title">
+          <h3>{{authorName}}</h3>
         </div>
-        <div class="table-body table-main-content">
-          <div class="table-row" *ngFor="let book of books | dynamicSort:sortProperty:sortDesc">
-            <div class="table-row-cell flex-size-2">{{book.category}}</div>
-            <div class="table-row-cell flex-size-1">{{book.year}}</div>
-            <div class="table-row-cell flex-size-1">{{book.user}}</div>
-            <div class="table-row-cell flex-size-4">{{book.name}}</div>
-            <div class="table-row-cell flex-size-1">{{book.status}}</div>
+        <div class="book-table">
+          <div class="table-row table-column">
+            <div class="table-row-cell flex-size-2" (click)="sort('category')">Category</div>
+            <div class="table-row-cell flex-size-1" (click)="sort('year')">Year</div>
+            <div class="table-row-cell flex-size-1" (click)="sort('user')">User</div>
+            <div class="table-row-cell flex-size-4" (click)="sort('name')">Name</div>
+            <div class="table-row-cell flex-size-1" (click)="sort('status')">Status</div>
+          </div>
+          <div class="table-body table-main-content">
+            <div class="table-row" *ngFor="let book of booksResult | dynamicSort:sortProperty:sortDesc">
+              <div class="table-row-cell flex-size-2">{{book.category}}</div>
+              <div class="table-row-cell flex-size-1">{{book.year}}</div>
+              <div class="table-row-cell flex-size-1">{{book.user}}</div>
+              <div class="table-row-cell flex-size-4">{{book.name}}</div>
+              <div class="table-row-cell flex-size-1">{{book.status}}</div>
+            </div>
+          </div>
+          <div class="table-body table-main-content">
+            <div class="table-row book-total">
+              <div class="table-row-cell flex-size-2">Total</div>
+              <div class="table-row-cell flex-size-1"></div>
+              <div class="table-row-cell flex-size-1"></div>
+              <div class="table-row-cell flex-size-4"></div>
+              <div class="table-row-cell flex-size-1">{{booksTotal}}</div>
+            </div>
           </div>
         </div>
-        <div class="table-body table-main-content">
-          <div class="table-row book-total">
-            <div class="table-row-cell flex-size-2">Total</div>
-            <div class="table-row-cell flex-size-1"></div>
-            <div class="table-row-cell flex-size-1"></div>
-            <div class="table-row-cell flex-size-4"></div>
-            <div class="table-row-cell flex-size-1">{{booksTotal}}</div>
-          </div>
-        </div>
       </div>
+      <ng-template #loading>
+        <loading></loading>
+      </ng-template>
+
+
     </div>
   </div>
 </div>

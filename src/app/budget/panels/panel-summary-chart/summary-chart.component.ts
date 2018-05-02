@@ -67,7 +67,7 @@ export class PanelSummaryChartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.parent.params.subscribe(
+    this.route.params.subscribe(
       params =>
         this.activate(params['user'], params['year'])
     )

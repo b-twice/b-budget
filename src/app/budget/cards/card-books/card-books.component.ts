@@ -1,5 +1,10 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute } from '@angular/router';
 import { Book } from '../../models';
+import { CardBaseComponent } from '../card-base/card-base.component'
+import { PersonalService } from '../../services/personal.service';
 
 
 @Component({
@@ -7,31 +12,31 @@ import { Book } from '../../models';
   templateUrl: './card-books.component.html',
   styleUrls: ['./card-books.component.scss']
 })
-export class CardBooksComponent implements OnInit {
+export class CardBooksComponent extends CardBaseComponent implements OnInit {
 
-  @Input() author: string;
-  @Input() books: Book[];
-  @Output() onModalClose = new EventEmitter();
+  authorName: string;
+  books: Observable<Book[]>;
   booksTotal: number = 0;
-  sortProperty: string;
-  sortDesc: boolean = false;
 
-  constructor() { }
+  constructor(
+    public route: ActivatedRoute,
+    public apiService: PersonalService,
+    public location: Location
+  ) {
+    super(location)
+  }
 
   ngOnInit() {
-    this.booksTotal = this.books.length;
+    this.route.params.subscribe(params => {
+      this.authorName = params['name'];
+      this.getData();
+    })
+
   }
 
-  closeModal() {
-    this.onModalClose.emit();
-  }
-
-  stopPropogation(event): void { event.stopPropagation(); }
-
-  sort(sortProperty: string) {
-    if (this.sortProperty === sortProperty) this.sortDesc = !this.sortDesc;
-    else this.sortDesc = false;
-    this.sortProperty = sortProperty;
+  getData() {
+    this.books = this.apiService.getBooksByAuthor(this.authorName);
+    this.books.subscribe(books => this.booksTotal = books.length);
   }
 
 

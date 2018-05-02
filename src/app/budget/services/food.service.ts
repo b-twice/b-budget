@@ -92,8 +92,8 @@ export class FoodService extends CoreService {
         const httpOptions = { params: params };
         return this.request<Recipe[]>(`food/recipes/user/${name}`, httpOptions);
     }
-    public getRecipe(name: string, recipeName: string): Observable<Recipe> {
-        return this.request<Recipe>(`food/recipes/user/${name}/recipe/${recipeName}`, null);
+    public getRecipe(name: string): Observable<Recipe> {
+        return this.request<Recipe>(`food/recipes/recipe/${name}`, null);
     }
     public getRecipeIngredients(recipes: string[]): Observable<RecipeIngredient[]> {
         let params = new HttpParams();

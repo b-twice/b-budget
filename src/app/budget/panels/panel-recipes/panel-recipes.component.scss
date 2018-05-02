@@ -11,13 +11,15 @@
 }
 
 :host {
-    display:flex;
-    flex-direction:row;
-    width:100%;
-    @extend .panel-style;
-    background:#fff;
+    @extend .panel-base-container;
+}
+.panel{
+    @extend .panel-base;
+    padding:0;
     max-height:75rem;
 }
+
+
 .recipe-table {
   display:flex;
   flex-direction:column;

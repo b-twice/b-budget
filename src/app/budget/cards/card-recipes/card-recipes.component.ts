@@ -1,8 +1,8 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { Recipe, MealPlan } from '../../models';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../services/food.service';
 import { CardBaseComponent } from '../card-base/card-base.component'
 

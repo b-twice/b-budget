@@ -1,28 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PersonalService } from '../../services/personal.service';
-import { Book } from '../../models';
-import { Category } from '../../models';
+import { Book, Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
-import { PanelChartService } from '../panel-chart/panel-chart.service';
+import { NavigationService } from '../../services/navigation.service';
+import { PanelBaseComponent } from '../panel-base/panel-base.component'
 
 @Component({
   selector: 'budget-panel-books',
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.scss']
 })
-export class PanelBooksComponent implements OnInit {
+export class PanelBooksComponent extends PanelBaseComponent implements OnInit {
 
-  Books: Observable<Book[]>;
-  booksTotal: number = 0;
+  books: Observable<Book[]>;
   bookCategories: Observable<Category[]>;
-  sortProperty: string;
-  sortDesc: boolean = false;
-  user: string;
-  year: string;
-  selectedBooks: Book[];
-  selectedAuthor: string;
 
   @ViewChild(FilterControlsComponent)
   private filterControls: FilterControlsComponent;
@@ -30,43 +23,18 @@ export class PanelBooksComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     public apiService: PersonalService,
-  ) { }
+    public navigationService: NavigationService
+  ) {
+    super(route, navigationService);
+  }
 
   ngOnInit() {
-    this.route.parent.params.subscribe(
-      params => {
-        this.user = params['user'];
-        this.year = params['year'];
-        this.getBooks();
-      }
-    )
+    this.resolveRoutes();
     this.bookCategories = this.apiService.getBookCategories();
   }
 
-  getBooks(): void {
-    if (!this.user) { return; }
-    if (!this.year) { return; }
-    this.Books = this.apiService.getBooks(this.user, this.year, this.filterControls.activeCategories);
-  }
-
-  sort(sortProperty: string) {
-    if (this.sortProperty === sortProperty) this.sortDesc = !this.sortDesc;
-    else this.sortDesc = false;
-    this.sortProperty = sortProperty;
-  }
-
-  categoryChange() {
-    this.getBooks();
-  }
-
-  getBooksByAuthor(name: string) {
-    this.selectedAuthor = name;
-    this.apiService.getBooksByAuthor(name).subscribe(books => { this.selectedBooks = books });
-    return
-  }
-  modalClose() {
-    this.selectedAuthor = null;
-    this.selectedBooks = null;
+  getData(): void {
+    this.books = this.apiService.getBooks(this.user, this.year, this.filterControls.activeCategories);
   }
 
 }

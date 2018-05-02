@@ -1,44 +1,59 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
+import { Location } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
 import { RecipeIngredient, Recipe } from '../../models';
+import { ActivatedRoute } from '@angular/router';
+import { FoodService } from '../../services/food.service';
+import { CardBaseComponent } from '../card-base/card-base.component'
 
 @Component({
   selector: 'budget-recipe-ingredients',
   templateUrl: './card-recipe-ingredients.component.html',
   styleUrls: ['./card-recipe-ingredients.component.scss']
 })
-export class CardRecipeIngredientsComponent implements OnInit {
+export class CardRecipeIngredientsComponent extends CardBaseComponent implements OnInit {
 
-  @Input() ingredients: RecipeIngredient[];
-  @Input() recipe: Recipe;
-  @Output() onRecipeClose = new EventEmitter();
+  recipeName: string;
+  ingredients: RecipeIngredient[];
+  recipe: Observable<Recipe>;
   recipeTotal: number = 0;
   recipeOrganicTotal: number = 0;
   recipeSeasonalTotal: number = 0;
   sortProperty: string;
   sortDesc: boolean = false;
 
-  constructor() { }
+  constructor(
+    public route: ActivatedRoute,
+    public apiService: FoodService,
+    public location: Location
+  ) {
+    super(location)
+  }
+
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.recipeName = params['name'];
+      this.getData();
+    });
     this.ingredients.forEach(i => {
       this.recipeTotal += i.cost;
       this.recipeOrganicTotal += i.costOrganic;
       this.recipeSeasonalTotal += i.costSeasonal;
     });
-
   }
 
-  closeRecipe() {
-    this.onRecipeClose.emit();
+  getData() {
+    this.recipe = this.apiService.getRecipe(this.recipeName);
+    this.apiService.getRecipeIngredients([this.recipeName]).subscribe(ingredients => {
+      this.ingredients = ingredients;
+      // this should be stuffed on the recipe rather then summarized here
+      ingredients.forEach(i => {
+        this.recipeTotal += i.cost;
+        this.recipeOrganicTotal += i.costOrganic;
+        this.recipeSeasonalTotal += i.costSeasonal;
+      });
+    });
   }
-
-  stopPropogation(event): void { event.stopPropagation(); }
-
-  sort(sortProperty: string) {
-    if (this.sortProperty === sortProperty) this.sortDesc = !this.sortDesc;
-    else this.sortDesc = false;
-    this.sortProperty = sortProperty;
-  }
-
 
 }

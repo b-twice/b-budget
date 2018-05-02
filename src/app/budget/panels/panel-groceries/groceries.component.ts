@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../services/food.service';
 import { Grocery, TransactionMonthly } from '../../models';
 import { Category, NavigationParams } from '../../models';
@@ -30,8 +30,7 @@ export class PanelGroceriesComponent extends PanelBaseComponent implements OnIni
     public apiService: FoodService,
     public panelChartService: PanelChartService,
     public navigationService: NavigationService,
-    public datePipe: DatePipe,
-    public router: Router
+    public datePipe: DatePipe
   ) {
     super(route, navigationService);
   }
@@ -53,10 +52,6 @@ export class PanelGroceriesComponent extends PanelBaseComponent implements OnIni
         this.chartLoaded = true;
       }
     });
-  }
-
-  categoryChange() {
-    this.getData();
   }
 
   summarizeGroceries(groceries: TransactionMonthly[]) {
