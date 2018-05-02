@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NavigationService } from '../services/navigation.service';
+import { NavigationParams } from '../models';
 import { FiscalYear } from '../models/fiscal-year';
 import { CoreService } from '../services/core.service';
 @Component({
@@ -10,13 +12,12 @@ import { CoreService } from '../services/core.service';
 export class YearNavComponent implements OnInit {
 
   years: string[];
-  currentUser: string;
-  currentYear: string;
-  currentPanel: string;
+  params: NavigationParams;
 
   constructor(
     public apiService: CoreService,
     public activatedRoute: ActivatedRoute,
+    public navigationService: NavigationService,
     public router: Router
   ) { }
 
@@ -25,19 +26,7 @@ export class YearNavComponent implements OnInit {
       .subscribe(
         fiscalYears => this.years = fiscalYears.map(fy => fy.year).reverse()
       )
-
-    this.activatedRoute.params.subscribe(
-      params => {
-        this.currentUser = params['user'];
-        this.currentYear = params['year'];
-      }
-    )
-
-    this.activatedRoute.firstChild.params.subscribe(
-      params => {
-        this.currentPanel = params['panel'];
-      }
-    )
+    this.navigationService.updateData.subscribe(data => this.params = data);
 
   }
 }

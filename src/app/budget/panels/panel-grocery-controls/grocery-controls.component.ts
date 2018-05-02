@@ -9,15 +9,17 @@ import { ActivatedRoute } from '@angular/router';
 export class PanelGroceryControlsComponent implements OnInit {
 
   user: string;
+  year: string;
 
   constructor(
     public route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.route.parent.params.subscribe(
+    this.route.params.subscribe(
       params => {
         this.user = params['user'];
+        this.year = params['year'];
       }
     )
 

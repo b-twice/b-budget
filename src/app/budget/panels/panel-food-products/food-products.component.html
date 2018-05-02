@@ -1,41 +1,45 @@
-<budget-filter-controls (onCategoryChange)="categoryChange()" [categories]="foodCategories"></budget-filter-controls>
-<div class="food-product-table">
-  <div class="table-row table-column">
-    <div class="table-row-cell flex-size-2" (click)="sort('category')">Category</div>
-    <div class="table-row-cell flex-size-2" (click)="sort('name')">Name</div>
-    <div class="table-row-cell flex-size-1 flex-center" (click)="sort('count')">Count</div>
-    <div class="table-row-cell flex-size-1 flex-center" (click)="sort('weight')">Weight</div>
-    <div class="table-row-cell flex-size-2 flex-center" (click)="sort('unitPrice')">Unit Price</div>
-    <div class="table-row-cell flex-size-1 flex-center" (click)="sort('amount')">Price</div>
-  </div>
-  <div *ngIf="AnnualFoodProducts | async as food_products; else loading">
-    <div class="table-body table-main-content">
-      <div class="table-row" *ngFor="let food_product of food_products | dynamicSort:sortProperty:sortDesc" (click)="getFoodProductPage(food_product.name)">
-        <div class="table-row-cell flex-size-2">{{food_product.category}}</div>
-        <div class="table-row-cell flex-size-2">{{food_product.name}}</div>
-        <div class="table-row-cell flex-size-1 flex-center">
-          <span *ngIf="food_product.count > 0">{{food_product.count}}</span>
-        </div>
-        <div class="table-row-cell flex-size-1 flex-center">
-          <span *ngIf="food_product.weight > 0">{{food_product.weight | number:'1.2-2'}} {{food_product.unit}}</span>
-        </div>
-        <div class="table-row-cell flex-size-2 flex-center">{{food_product.unitPrice | currency:'USD':'symbol':'1.2-2'}}</div>
-        <div class="table-row-cell flex-size-1 flex-center">{{food_product.amount| currency:'USD':'symbol':'1.2-2'}}</div>
+<div class="panel">
+  <budget-filter-controls (onCategoryChange)="categoryChange()" [categories]="foodCategories"></budget-filter-controls>
+  <div class="food-product-table">
+    <div class="table-row table-column">
+      <div class="table-row-cell flex-size-2" (click)="sort('category')">Category</div>
+      <div class="table-row-cell flex-size-2" (click)="sort('name')">Name</div>
+      <div class="table-row-cell flex-size-1 flex-center" (click)="sort('count')">Count</div>
+      <div class="table-row-cell flex-size-1 flex-center" (click)="sort('weight')">Weight</div>
+      <div class="table-row-cell flex-size-2 flex-center" (click)="sort('unitPrice')">Unit Price</div>
+      <div class="table-row-cell flex-size-1 flex-center" (click)="sort('amount')">Price</div>
+    </div>
+    <div *ngIf="annualFoodProducts | async as foodProducts; else loading">
+      <div class="table-body table-main-content">
+        <a class="table-row" *ngFor="let foodProduct of foodProducts | dynamicSort:sortProperty:sortDesc" [routerLink]="[{ outlets: { list: [user, year, foodProduct.name] } }]">
+          <div class="table-row-cell flex-size-2">{{foodProduct.category}}</div>
+          <div class="table-row-cell flex-size-2">{{foodProduct.name}}</div>
+          <div class="table-row-cell flex-size-1 flex-center">
+            <span *ngIf="foodProduct.count > 0">{{foodProduct.count}}</span>
+          </div>
+          <div class="table-row-cell flex-size-1 flex-center">
+            <span *ngIf="foodProduct.weight > 0">{{foodProduct.weight | number:'1.2-2'}} {{foodProduct.unit}}</span>
+          </div>
+          <div class="table-row-cell flex-size-2 flex-center">{{foodProduct.unitPrice | currency:'USD':'symbol':'1.2-2'}}</div>
+          <div class="table-row-cell flex-size-1 flex-center">{{foodProduct.amount| currency:'USD':'symbol':'1.2-2'}}</div>
+        </a>
+      </div>
+    </div>
+    <ng-template #loading>
+      <loading></loading>
+    </ng-template>
+    <div class="table-summary">
+      <div class="table-row-cell flex-size-2"></div>
+      <div class="table-row-cell flex-size-2"></div>
+      <div class="table-row-cell flex-size-1"></div>
+      <div class="table-row-cell flex-size-1"></div>
+      <div class="table-row-cell flex-size-2"></div>
+      <div class="table-row-cell flex-size-1 flex-center">
+        <span class="link-underline">{{foodProductsTotal | currency:'USD':'symbol':'1.0-0'}}</span>
       </div>
     </div>
   </div>
-  <ng-template #loading>
-    <loading></loading>
-  </ng-template>
-  <div class="table-summary">
-    <div class="table-row-cell flex-size-2"></div>
-    <div class="table-row-cell flex-size-2"></div>
-    <div class="table-row-cell flex-size-1"></div>
-    <div class="table-row-cell flex-size-1"></div>
-    <div class="table-row-cell flex-size-2"></div>
-    <div class="table-row-cell flex-size-1 flex-center">
-      <span class="link-underline">{{food_productsTotal | currency:'USD':'symbol':'1.0-0'}}</span>
-    </div>
-  </div>
 </div>
-<budget-groceries-card *ngIf="selectedFoodProducts" [grocery]="selectedGrocery" [groceries]="selectedFoodProducts" (onModalClose)="modalClose()"></budget-groceries-card>
+
+<router-outlet name="list"></router-outlet>
+<router-outlet name="form"></router-outlet>

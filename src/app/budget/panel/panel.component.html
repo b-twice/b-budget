@@ -2,14 +2,12 @@
 <budget-panel-categories *ngIf="currentPanel == 'categories'"></budget-panel-categories>
 <budget-panel-transactions *ngIf="currentPanel == 'transactions'"></budget-panel-transactions>
 <budget-panel-expenses *ngIf="currentPanel == 'expenses'"></budget-panel-expenses>
-<budget-panel-food-products *ngIf="currentPanel == 'foodProducts'"></budget-panel-food-products>
 <div *ngIf="currentPanel == 'groceries'">
     <div *ngIf="currentAction == 'add'">
         <budget-panel-grocery-cart></budget-panel-grocery-cart>
 
     </div>
     <div *ngIf="!currentAction">
-        <budget-panel-grocery-controls></budget-panel-grocery-controls>
         <budget-panel-groceries></budget-panel-groceries>
     </div>
 </div>

@@ -9,6 +9,7 @@ import { CoreService } from './services/core.service';
 import { FinanceService } from './services/finance.service';
 import { FoodService } from './services/food.service';
 import { PersonalService } from './services/personal.service';
+import { NavigationService } from './services/navigation.service';
 
 //shared
 import { SharedModule } from '../shared/shared.module';
@@ -40,12 +41,15 @@ import { PanelGroceryControlsComponent } from './panels/panel-grocery-controls/g
 import { PanelFoodProductsComponent } from './panels/panel-food-products/food-products.component';
 import { PanelRecipesComponent } from './panels/panel-recipes/panel-recipes.component';
 import { PanelMealPlansComponent } from './panels/panel-meal-plans/meal-plans.component';
+import { PanelBaseComponent } from './panels/panel-base/panel-base.component';
+
 import { CardRecipeIngredientsComponent } from './cards/card-recipe-ingredients/card-recipe-ingredients.component';
 import { CardGroceriesComponent } from './cards/card-groceries/card-groceries.component';
 import { CardExpensesComponent } from './cards/card-expenses/card-expenses.component';
 import { CardBooksComponent } from './cards/card-books/card-books.component';
 import { CardRecipesComponent } from './cards/card-recipes/card-recipes.component';
 import { CardGroceryListComponent } from './cards/card-grocery-list/card-grocery-list.component';
+import { CardGroceryEditComponent } from './cards/card-grocery-edit/card-grocery-edit.component';
 
 import { GroceryFormComponent } from './forms/grocery/grocery-form.component';
 
@@ -84,12 +88,15 @@ import { GroceryFormComponent } from './forms/grocery/grocery-form.component';
         PanelFoodProductsComponent,
         PanelRecipesComponent,
         PanelMealPlansComponent,
+        PanelBaseComponent,
+
         CardRecipeIngredientsComponent,
         CardGroceriesComponent,
         CardExpensesComponent,
         CardBooksComponent,
         CardRecipesComponent,
-        CardGroceryListComponent
+        CardGroceryListComponent,
+        CardGroceryEditComponent
     ],
     providers: [
         CoreService,
@@ -97,6 +104,7 @@ import { GroceryFormComponent } from './forms/grocery/grocery-form.component';
         FoodService,
         PersonalService,
         PanelChartService,
+        NavigationService,
         DatePipe
     ]
 })

@@ -3,28 +3,27 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../services/food.service';
 import { AnnualFoodProduct } from '../../models';
-import { Grocery } from '../../models';
-import { Category } from '../../models';
+import { Grocery, Category, NavigationParams } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
+import { NavigationService } from '../../services/navigation.service';
+import { PanelBaseComponent } from '../panel-base/panel-base.component'
 
 @Component({
   selector: 'budget-panel-food-products',
   templateUrl: './food-products.component.html',
   styleUrls: ['./food-products.component.scss']
 })
-export class PanelFoodProductsComponent implements OnInit {
+export class PanelFoodProductsComponent extends PanelBaseComponent implements OnInit {
 
-  AnnualFoodProducts: Observable<AnnualFoodProduct[]>;
-  food_productsTotal: number = 0;
+  annualFoodProducts: Observable<AnnualFoodProduct[]>;
+  foodProductsTotal: number = 0;
   foodCategories: Observable<Category[]>;
   sortProperty: string;
   sortDesc: boolean = false;
   user: string;
   year: string;
-
-  selectedFoodProducts: Grocery[];
-  selectedGrocery: Grocery | null;
+  panel: string;
 
   @ViewChild(FilterControlsComponent)
   private filterControls: FilterControlsComponent;
@@ -32,51 +31,32 @@ export class PanelFoodProductsComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     public apiService: FoodService,
+    public navigationService: NavigationService,
     public datePipe: DatePipe
-  ) { }
+  ) {
+    super(route, navigationService);
+  }
 
   ngOnInit() {
-    this.route.parent.params.subscribe(
-      params => {
-        this.user = params['user'];
-        this.year = params['year'];
-        this.getFoodProducts();
-      }
-    )
+    this.resolveRoutes();
     this.foodCategories = this.apiService.getFoodCategories();
   }
 
-  getFoodProducts(): void {
+  getData(): void {
     if (!this.user || !this.year) { return; }
-    this.AnnualFoodProducts = this.apiService.getAnnualFoodProduct(this.user, this.year, this.filterControls.activeCategories);
-    this.AnnualFoodProducts.subscribe(t => {
+    this.annualFoodProducts = this.apiService.getAnnualFoodProduct(this.user, this.year, this.filterControls.activeCategories);
+    this.annualFoodProducts.subscribe(t => {
       this.summarizeFoodProducts(t);
     });
   }
 
-  sort(sortProperty: string) {
-    if (this.sortProperty === sortProperty) this.sortDesc = !this.sortDesc;
-    else this.sortDesc = false;
-    this.sortProperty = sortProperty;
-  }
-
   categoryChange() {
-    this.getFoodProducts();
+    this.getData();
   }
 
-  summarizeFoodProducts(food_products: AnnualFoodProduct[]) {
-    this.food_productsTotal = 0;
-    food_products.forEach(g => this.food_productsTotal += g.amount);
+  summarizeFoodProducts(foodProducts: AnnualFoodProduct[]) {
+    this.foodProductsTotal = 0;
+    foodProducts.forEach(g => this.foodProductsTotal += g.amount);
   }
-
-  getFoodProductPage(groceryName: string) {
-    this.apiService.getGroceriesByName(this.user, this.year, groceryName).subscribe(i => { this.selectedFoodProducts = i });
-    this.selectedGrocery = new Grocery(null, null, null, groceryName);
-  }
-  modalClose() {
-    this.selectedFoodProducts = null;
-    this.selectedGrocery = null;
-  }
-
 
 }

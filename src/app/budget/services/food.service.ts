@@ -56,8 +56,14 @@ export class FoodService extends CoreService {
     public getLatestGrocery(foodProduct: string, supermarket: string): Observable<Grocery> {
         return this.request<Grocery>(`food/groceries/latest/${foodProduct}/supermarket/${supermarket}`, null);
     }
+    public getGrocery(id: number): Observable<Grocery> {
+        return this.request(`food/groceries/grocery/${id}`, null);
+    }
     public updateGrocery(id: number, data: any) {
         return this.put(`food/groceries/grocery/${id}`, data);
+    }
+    public deleteGrocery(id: number) {
+        return this.delete(`food/groceries/grocery/${id}`);
     }
     public checkoutGroceries(data: any) {
         return this.post(`food/groceries`, data);
@@ -98,6 +104,9 @@ export class FoodService extends CoreService {
 
 
     // Meal Plans
+    public getMealPlan(name: string): Observable<MealPlan> {
+        return this.request<MealPlan>(`food/meal-plans/meal-plan/${name}`, null);
+    }
     public getMealPlans(name: string): Observable<MealPlan[]> {
         return this.request<MealPlan[]>(`food/meal-plans/user/${name}`, null);
     }

@@ -1,5 +1,8 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Grocery } from '../../models';
+import { Observable } from 'rxjs/Observable';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GroceryFormComponent } from '../../forms/grocery/grocery-form.component';
 import { FoodService } from '../../services/food.service';
 
@@ -11,9 +14,12 @@ import { FoodService } from '../../services/food.service';
 })
 export class CardGroceriesComponent implements OnInit {
 
-  @Input() grocery: Grocery;
-  @Input() groceries: Grocery[];
-  @Output() onModalClose = new EventEmitter();
+  user: string;
+  year: string;
+  groceryName: string;
+
+  groceries: Observable<Grocery[]>;
+  onModalClose = new EventEmitter();
   groceriesTotal: number = 0;
   groceriesOrganicTotal: number = 0;
   groceriesSeasonalTotal: number = 0;
@@ -23,22 +29,40 @@ export class CardGroceriesComponent implements OnInit {
   editing: boolean = false;
 
   @ViewChild(GroceryFormComponent)
-  groceryForm: GroceryFormComponent;
+  form: GroceryFormComponent;
 
 
   constructor(
+    public route: ActivatedRoute,
+    public router: Router,
     public apiService: FoodService
   ) { }
 
   ngOnInit() {
-    this.groceries.forEach(i => {
-      this.groceriesTotal += i.amount;
-    });
+    // tried to use forkjoin but would never subscribe...
+    this.route.parent.params.subscribe(params => {
+      this.user = params['user'];
+      this.year = params['year'];
+      this.getGroceries();
+    })
+    this.route.params.subscribe(params => {
+      this.groceryName = params['name'];
+      this.getGroceries();
+    })
+  }
+
+
+  getGroceries(): void {
+    if (!this.user || !this.year || !this.groceryName) { return; }
+    this.groceries = this.apiService.getGroceriesByName(this.user, this.year, this.groceryName);
+    this.groceries.subscribe(i => i.forEach(g =>
+      this.groceriesTotal += g.amount
+    ));
 
   }
 
   closeModal() {
-    this.onModalClose.emit();
+    this.router.navigate(['.', { outlets: { list: null } }], { relativeTo: this.route.parent });
   }
 
   stopPropogation(event): void { event.stopPropagation(); }
@@ -50,15 +74,7 @@ export class CardGroceriesComponent implements OnInit {
   }
 
   edit(grocery) {
-    this.groceryForm.model = grocery;
-    this.editing = true;
-  }
-
-  onSubmit(item: Grocery) {
-    this.apiService.updateGrocery(item.id, item).subscribe(result => {
-      this.editing = false;
-    }, error => { console.log(error); });
-
+    this.router.navigate(['.', { outlets: { list: null, form: [grocery.id] } }], { relativeTo: this.route.parent });
   }
 
 }

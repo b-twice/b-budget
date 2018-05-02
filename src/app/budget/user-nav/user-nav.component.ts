@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoreService } from '../services/core.service';
-import { User } from '../models/user';
+import { NavigationService } from '../services/navigation.service';
+import { User, NavigationParams } from '../models';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,28 +12,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class UserNavComponent implements OnInit {
 
   users: User[];
-  currentYear: string;
-  currentPanel: string
+  params: NavigationParams;
+  year: string;
+  panel: string
 
   constructor(
     public apiService: CoreService,
     public activatedRoute: ActivatedRoute,
+    public navigationService: NavigationService,
     public router: Router
   ) { }
 
   ngOnInit() {
     this.getUsers();
-    this.activatedRoute.params.subscribe(
-      params =>
-        this.currentYear = params['year']
-    )
-
-    this.activatedRoute.firstChild.params.subscribe(
-      params =>
-        this.currentPanel = params['panel']
-    )
-
-
+    this.navigationService.updateData.subscribe(data => this.params = data);
   }
 
   getUsers() {
@@ -41,5 +34,4 @@ export class UserNavComponent implements OnInit {
         users => this.users = users
       )
   }
-
 }

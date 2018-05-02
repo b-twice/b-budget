@@ -22,7 +22,7 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(
+    this.route.firstChild.params.subscribe(
       params => {
         this.user = params['user'];
         this.getUserProfile(this.user);

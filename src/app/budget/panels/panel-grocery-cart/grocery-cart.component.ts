@@ -1,19 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FoodService } from '../../services/food.service';
-import { Grocery } from '../../models';
+import { Grocery, NavigationParams } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { GroceryFormComponent } from '../../forms/grocery/grocery-form.component';
+import { NavigationService } from '../../services/navigation.service';
+import { PanelBaseComponent } from '../panel-base/panel-base.component'
 
 @Component({
   selector: 'budget-panel-grocery-cart',
   templateUrl: './grocery-cart.component.html',
   styleUrls: ['./grocery-cart.component.scss']
 })
-export class PanelGroceryCartComponent implements OnInit {
+export class PanelGroceryCartComponent extends PanelBaseComponent implements OnInit {
 
-  user: string;
-  year: string;
   groceryCart: Grocery[];
   cartTotal: number = 0;
   saveError: boolean = false;
@@ -23,14 +25,22 @@ export class PanelGroceryCartComponent implements OnInit {
 
 
   constructor(
-    public apiService: FoodService
+    public route: ActivatedRoute,
+    public location: Location,
+    public apiService: FoodService,
+    public navigationService: NavigationService
   ) {
+    super(route, navigationService);
   }
 
   ngOnInit() {
     this.groceryCart = [];
+    this.resolveRoutes();
   }
 
+  back() {
+    this.location.back();
+  }
   onSubmit(item: Grocery) {
     this.groceryCart.push(item);
     this.cartTotal += item.amount;

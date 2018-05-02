@@ -8,8 +8,9 @@
 
       <div [hidden]="editing">
         <div class="grocery-title">
-          <h3>{{grocery.name}}</h3>
+          <h3>{{groceryName}}</h3>
         </div>
+
         <div class="grocery-table">
           <div class="table-row table-column">
             <div class="table-row-cell flex-size-3" (click)="sort('supermarket')">Supermarket</div>
@@ -20,8 +21,8 @@
             <div class="table-row-cell flex-size-1 flex-center" (click)="sort('amount')">Cost</div>
             <div class="table-row-cell flex-size-1 flex-center">Edit</div>
           </div>
-          <div class="table-body table-main-content">
-            <div class="table-row" *ngFor="let item of groceries | dynamicSort:sortProperty:sortDesc">
+          <div *ngIf="groceries | async as result; else loading" class="table-body table-main-content">
+            <div class="table-row" *ngFor="let item of result | dynamicSort:sortProperty:sortDesc">
               <div class="table-row-cell flex-size-3">{{item.supermarket}}</div>
               <div class="table-row-cell flex-size-3 flex-center" *ngIf="item.count > 0">{{item.count}}</div>
               <div class="table-row-cell flex-size-3 flex-center" *ngIf="item.weight > 0">{{item.weight | number:'1.2-2'}} {{item.unit}}</div>
@@ -38,6 +39,9 @@
               </div>
             </div>
           </div>
+          <ng-template #loading>
+            <loading></loading>
+          </ng-template>
           <div class="table-body table-main-content">
             <div class="table-row grocery-total">
               <div class="table-row-cell flex-size-3">Total</div>
@@ -49,13 +53,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div [hidden]="!editing">
-        <div (click)="editing = false" class="icon-container" style="cursor:pointer;">
-          <i class="fa fa-arrow-left"></i>
-          <span>Back</span>
-        </div>
-        <budget-grocery-form submitLabel="Update" (onSubmit)="onSubmit($event)"></budget-grocery-form>
       </div>
     </div>
   </div>

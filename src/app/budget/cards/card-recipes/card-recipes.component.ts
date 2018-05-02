@@ -1,6 +1,9 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Recipe, MealPlan } from '../../models';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FoodService } from '../../services/food.service';
+
 
 @Component({
     selector: 'budget-recipes-card',
@@ -9,19 +12,33 @@ import { Recipe, MealPlan } from '../../models';
 })
 export class CardRecipesComponent implements OnInit {
 
-    @Input() recipes: Observable<Recipe[]>;
-    @Input() mealPlan: MealPlan;
-    @Output() onModalClose = new EventEmitter();
+    recipes: Observable<Recipe[]>;
+    mealPlan: Observable<MealPlan>;
     sortProperty: string;
     sortDesc: boolean = false;
+    mealPlanName: string;
 
-    constructor() { }
+    constructor(
+        public route: ActivatedRoute,
+        public router: Router,
+        public apiService: FoodService
+    ) { }
 
     ngOnInit() {
+        this.route.params.subscribe(params => {
+            this.mealPlanName = params['name'];
+            this.getData();
+        })
+
+    }
+
+    getData(): void {
+        this.mealPlan = this.apiService.getMealPlan(this.mealPlanName);
+        this.recipes = this.apiService.getMealPlanRecipes(this.mealPlanName);
     }
 
     closeModal() {
-        this.onModalClose.emit();
+        this.router.navigate(['.', { outlets: { recipes: null } }], { relativeTo: this.route.parent });
     }
 
     stopPropogation(event): void { event.stopPropagation(); }

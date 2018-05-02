@@ -1,51 +1,59 @@
-<budget-filter-controls (onCategoryChange)="categoryChange()" [categories]="foodCategories"></budget-filter-controls>
-<div class="grocery-table">
-  <div class="table-row table-column">
-    <div class="table-row-cell flex-size-1" (click)="sort('date')">Date</div>
-    <div class="table-row-cell flex-size-2" (click)="sort('supermarket')">Supermarket</div>
-    <div class="table-row-cell flex-size-2" (click)="sort('category')">Category</div>
-    <div class="table-row-cell flex-size-2" (click)="sort('name')">Name</div>
-    <div class="table-row-cell flex-size-1" (click)="sort('count')">Count</div>
-    <div class="table-row-cell flex-size-1" (click)="sort('weight')">Weight</div>
-    <div class="table-row-cell flex-size-1" (click)="sort('organic')">Organic</div>
-    <div class="table-row-cell flex-size-2" (click)="sort('unitPrice')">Unit Price</div>
-    <div class="table-row-cell flex-size-1" (click)="sort('amount')">Price</div>
-  </div>
-  <div *ngIf="userGroceries | async as groceries; else loading">
-    <div class="table-body table-main-content">
-      <div class="table-row" *ngFor="let grocery of groceries | dynamicSort:sortProperty:sortDesc" (click)="getGroceryPage(grocery)">
-        <div class="table-row-cell flex-size-1">{{grocery.date | date:'MMM d'}}</div>
-        <div class="table-row-cell flex-size-2">{{grocery.supermarket}}</div>
-        <div class="table-row-cell flex-size-2">{{grocery.category}}</div>
-        <div class="table-row-cell flex-size-2">{{grocery.name}}</div>
-        <div class="table-row-cell flex-size-1 flex-center">
-          <span *ngIf="grocery.count > 0">{{grocery.count}}</span>
-        </div>
-        <div class="table-row-cell flex-size-1 flex-center">
-          <span *ngIf="grocery.weight > 0">{{grocery.weight | number:'1.2-2'}} {{grocery.unit}}</span>
-        </div>
-        <div class="table-row-cell flex-size-1 flex-center">
-          <i *ngIf="grocery.organic == 'Yes'" class="fa fa-check"></i>
-        </div>
-        <div class="table-row-cell flex-size-2 flex-center">{{grocery.unitPrice | currency:'USD':'symbol':'1.2-2'}}</div>
-        <div class="table-row-cell flex-size-1 flex-center">{{grocery.amount| currency:'USD':'symbol':'1.2-2'}}</div>
+<budget-panel-grocery-controls></budget-panel-grocery-controls>
+<div class="panel">
+
+  <budget-filter-controls (onCategoryChange)="categoryChange()" [categories]="foodCategories"></budget-filter-controls>
+  <div class="grocery-table">
+    <div class="table-row table-column">
+      <div class="table-row-cell flex-size-1" (click)="sort('date')">Date</div>
+      <div class="table-row-cell flex-size-2" (click)="sort('supermarket')">Supermarket</div>
+      <div class="table-row-cell flex-size-2" (click)="sort('category')">Category</div>
+      <div class="table-row-cell flex-size-2" (click)="sort('name')">Name</div>
+      <div class="table-row-cell flex-size-1" (click)="sort('count')">Count</div>
+      <div class="table-row-cell flex-size-1" (click)="sort('weight')">Weight</div>
+      <div class="table-row-cell flex-size-1" (click)="sort('organic')">Organic</div>
+      <div class="table-row-cell flex-size-2" (click)="sort('unitPrice')">Unit Price</div>
+      <div class="table-row-cell flex-size-1" (click)="sort('amount')">Price</div>
+    </div>
+    <div *ngIf="groceries | async as result; else loading">
+      <div class="table-body table-main-content">
+        <a class="table-row" *ngFor="let grocery of result | dynamicSort:sortProperty:sortDesc" [routerLink]="[{ outlets: { list: [grocery.name] } }]">
+          <div class="table-row-cell flex-size-1">{{grocery.date | date:'MMM d'}}</div>
+          <div class="table-row-cell flex-size-2">{{grocery.supermarket}}</div>
+          <div class="table-row-cell flex-size-2">{{grocery.category}}</div>
+          <div class="table-row-cell flex-size-2">{{grocery.name}}</div>
+          <div class="table-row-cell flex-size-1 flex-center">
+            <span *ngIf="grocery.count > 0">{{grocery.count}}</span>
+          </div>
+          <div class="table-row-cell flex-size-1 flex-center">
+            <span *ngIf="grocery.weight > 0">{{grocery.weight | number:'1.2-2'}} {{grocery.unit}}</span>
+          </div>
+          <div class="table-row-cell flex-size-1 flex-center">
+            <i *ngIf="grocery.organic == 'Yes'" class="fa fa-check"></i>
+          </div>
+          <div class="table-row-cell flex-size-2 flex-center">{{grocery.unitPrice | currency:'USD':'symbol':'1.2-2'}}</div>
+          <div class="table-row-cell flex-size-1 flex-center">{{grocery.amount| currency:'USD':'symbol':'1.2-2'}}</div>
+        </a>
+      </div>
+    </div>
+    <ng-template #loading>
+      <loading></loading>
+    </ng-template>
+    <div class="table-summary">
+      <div class="table-row-cell flex-size-1"></div>
+      <div class="table-row-cell flex-size-2"></div>
+      <div class="table-row-cell flex-size-2"></div>
+      <div class="table-row-cell flex-size-2"></div>
+      <div class="table-row-cell flex-size-1"></div>
+      <div class="table-row-cell flex-size-1"></div>
+      <div class="table-row-cell flex-size-2"></div>
+      <div class="table-row-cell flex-size-1">
+        <span class="link-underline">{{groceriesTotal | currency:'USD':'symbol':'1.0-0'}}</span>
       </div>
     </div>
   </div>
-  <ng-template #loading>
-    <loading></loading>
-  </ng-template>
-  <div class="table-summary">
-    <div class="table-row-cell flex-size-1"></div>
-    <div class="table-row-cell flex-size-2"></div>
-    <div class="table-row-cell flex-size-2"></div>
-    <div class="table-row-cell flex-size-2"></div>
-    <div class="table-row-cell flex-size-1"></div>
-    <div class="table-row-cell flex-size-1"></div>
-    <div class="table-row-cell flex-size-2"></div>
-    <div class="table-row-cell flex-size-1">
-      <span class="link-underline">{{groceriesTotal | currency:'USD':'symbol':'1.0-0'}}</span>
-    </div>
-  </div>
+
 </div>
-<budget-groceries-card *ngIf="selectedGroceries" [grocery]="selectedGrocery" [groceries]="selectedGroceries" (onModalClose)="modalClose()"></budget-groceries-card>
+<budget-panel-chart></budget-panel-chart>
+
+<router-outlet name="list"></router-outlet>
+<router-outlet name="form"></router-outlet>

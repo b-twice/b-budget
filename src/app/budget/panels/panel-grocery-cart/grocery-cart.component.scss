@@ -1,19 +1,11 @@
 @import '../../../../styles/base.scss';
-.panel-style  {
-    @extend .panel-base;
-    padding:0;
-}
-
 .section-header {
     @extend .section-header;
 }
 
 .panel {
-    display:flex;
-    flex-direction:row;
-    width:100%;
-    @extend .panel-style;
-    background:#fff;
+    @extend .panel-base;
+    padding:0;
     height:80rem;
 }
 

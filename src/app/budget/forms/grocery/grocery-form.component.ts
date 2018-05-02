@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { CompleterService, CompleterData, CompleterCmp } from 'ng2-completer';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../services/food.service';
-import { FoodProduct, Grocery, Supermarket } from '../../models';
+import { FoodProduct, Grocery, Supermarket, } from '../../models';
 import { Observable } from 'rxjs/Observable';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 
 @Component({
     selector: 'budget-grocery-form',
@@ -13,36 +14,45 @@ import { Observable } from 'rxjs/Observable';
 })
 export class GroceryFormComponent implements OnInit {
 
+    @Input() grocery: Grocery;
     @Input() submitLabel: string = 'Submit';
+
+    model: Grocery = new Grocery(0, null, null, null);
     foodProducts: Observable<FoodProduct[]>;
     supermarkets: Observable<Supermarket[]>;
     user: string;
     year: string;
     foodProductsService: CompleterData;
     supermarketsService: CompleterData;
-    model: Grocery = new Grocery(0, null, null, null);
     @Output() onSubmit = new EventEmitter<Grocery>();
+    @Output() onDelete = new EventEmitter<Grocery>();
 
     @ViewChild("foodProduct") _foodProduct: CompleterCmp;
 
     constructor(
         public route: ActivatedRoute,
         public apiService: FoodService,
-        public completerService: CompleterService,
+        public completerService: CompleterService
     ) {
     }
 
     ngOnInit() {
-        this.route.parent.params.subscribe(
+        this.route.params.subscribe(
             params => {
                 this.user = params['user'];
                 this.year = params['year'];
             }
-        )
-        this.foodProducts = this.apiService.getFoodProducts();
-        this.supermarkets = this.apiService.getSupermarkets();
-        this.foodProductsService = this.completerService.local(this.foodProducts, 'name', 'name');
-        this.supermarketsService = this.completerService.local(this.supermarkets, 'name', 'name');
+        );
+        forkJoin(
+            this.apiService.getFoodProducts(),
+            this.apiService.getSupermarkets()
+        ).subscribe(data => {
+            this.foodProductsService = this.completerService.local(data[0], 'name', 'name');
+            this.supermarketsService = this.completerService.local(data[1], 'name', 'name');
+            if (this.grocery) {
+                this.model = this.grocery
+            }
+        })
     }
 
     rebuild() {
@@ -66,12 +76,16 @@ export class GroceryFormComponent implements OnInit {
     }
 
     submit() {
-        this.model.user = this.user;
+        this.model.user = this.model.user ? this.model.user : this.user;
         this.model.weight = this.model.weight ? this.model.weight : 0;
         this.model.count = this.model.count ? this.model.count : 0;
         this.model.amount = this.model.amount ? this.model.amount : 0;
-
         this.onSubmit.emit(this.model);
+    }
+
+    delete() {
+        this.onDelete.emit(this.model);
+
     }
 
 }

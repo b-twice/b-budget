@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     selector: 'budget-dashboard',
     template:
-    `
+        `
     <budget-header></budget-header>
     <budget-user-nav></budget-user-nav>
     <div class="dashboard-layout">

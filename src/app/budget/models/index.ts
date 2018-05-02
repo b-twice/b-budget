@@ -17,3 +17,4 @@ export * from './books';
 export * from './transaction-monthly';
 export * from './supermarket';
 export * from './meal-plan';
+export * from './navigation-params';

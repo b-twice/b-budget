@@ -5,6 +5,7 @@ $secondary-color:  #15CD72;
 $secondary-color-focus: #0CB863;
 $background-shade-color:#EBEBEB;
 $error-color:#e74c3c;
+$error-color-focus:#c0392b;
 $content-space: 1rem;
 $card-shadow:0px 1px 4px 0px rgba(0,0,0,0.2);
 
@@ -22,11 +23,28 @@ $site-opacity-base: .9;
 }
 
 .panel-base {
+    display:flex;
+    flex-direction:row;
+    width:100%;
     padding:2rem;
     box-shadow: $card-shadow;
     border-top-right-radius: 2px;
     border-top-left-radius: 2px;
+    background:#fff;
 }
+
+.panel-base-container {
+    display:flex;
+    flex:1;
+    flex-direction:column;      
+    & > * {
+        margin-top:1rem;
+    }
+    :first-child {
+        margin-top:0;
+    }
+}
+
 
 .select-nav-base {
     display:flex;
@@ -116,6 +134,16 @@ button {
         cursor:not-allowed;
         background:#ecf0f1;
         color:#95a5a6;
+    }
+
+    &.delete {
+        background-color: $error-color;
+    }
+    &.delete:focus {
+        background-color: $error-color-focus;
+    }
+    &.delete:hover {
+        background-color: $error-color-focus;
     }
 }
 

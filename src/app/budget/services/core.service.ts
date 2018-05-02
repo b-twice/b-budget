@@ -27,7 +27,7 @@ export class CoreService {
         httpOptions = httpOptions ? httpOptions : { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.http.get<T>(requestUrl, httpOptions)
             .pipe(
-            catchError(this.handleError)
+                catchError(this.handleError)
             );
     }
 
@@ -37,7 +37,7 @@ export class CoreService {
         let httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.http.post<T>(postUrl, body, httpOptions)
             .pipe(
-            catchError(this.handleError)
+                catchError(this.handleError)
             );
     }
 
@@ -47,9 +47,18 @@ export class CoreService {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.http.put<T>(postUrl, body, httpOptions)
             .pipe(
-            catchError(this.handleError)
+                catchError(this.handleError)
             );
     }
+
+    public delete<T>(fragment: string): Observable<{} | T> {
+        let postUrl = `${this.settings.apiEndpoint}/${fragment}`;
+        return this.http.delete<T>(postUrl)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
 
     private handleError(error: HttpErrorResponse) {
         if (error.error instanceof ErrorEvent) {
