@@ -43,6 +43,7 @@ import { PanelRecipesComponent } from './panels/panel-recipes/panel-recipes.comp
 import { PanelMealPlansComponent } from './panels/panel-meal-plans/meal-plans.component';
 import { PanelBaseComponent } from './panels/panel-base/panel-base.component';
 
+import { CardBaseComponent } from './cards/card-base/card-base.component';
 import { CardRecipeIngredientsComponent } from './cards/card-recipe-ingredients/card-recipe-ingredients.component';
 import { CardGroceriesComponent } from './cards/card-groceries/card-groceries.component';
 import { CardExpensesComponent } from './cards/card-expenses/card-expenses.component';
@@ -90,6 +91,7 @@ import { GroceryFormComponent } from './forms/grocery/grocery-form.component';
         PanelMealPlansComponent,
         PanelBaseComponent,
 
+        CardBaseComponent,
         CardRecipeIngredientsComponent,
         CardGroceriesComponent,
         CardExpensesComponent,

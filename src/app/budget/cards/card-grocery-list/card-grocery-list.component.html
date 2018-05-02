@@ -7,10 +7,10 @@
       </div>
 
       <div class="title">
-        <h3>{{mealPlan.name}} Grocery List</h3>
+        <h3>{{mealPlanName}} Grocery List</h3>
       </div>
 
-      <div *ngIf="recipes | async as result">
+      <div *ngIf="recipes | async as result else loading">
         <div class="recipe-list" *ngFor="let recipe of result">
           <i class="fa fa-angle-right"></i>
           <span>({{recipe.category}}) {{recipe.name}} -
@@ -18,8 +18,11 @@
           </span>
         </div>
       </div>
+      <ng-template #loading>
+        <loading></loading>
+      </ng-template>
 
-      <div class="groceries">
+      <div class="groceries" *ngIf="groceriesByCategory">
         <div class="grocery-list-group" *ngFor="let o of groceriesByCategory | mapToIterable">
           <strong>{{o.key.replace("_", " ")}}</strong>
           <ul class="grocery-list">

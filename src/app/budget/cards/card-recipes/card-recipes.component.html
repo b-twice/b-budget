@@ -6,47 +6,45 @@
                 <i class="fa fa-times fa-22" (click)="closeModal()" aria-hidden="true"></i>
             </div>
 
-            <div>
-                <div *ngIf="mealPlan | async as mealPlanResult; else loading" class="table-body table-main-content">
-                    <div class="title">
-                        <h3>{{mealPlanResult.name}}</h3>
+            <div *ngIf="mealPlan | async as mealPlanResult; else loading" class="table-body table-main-content">
+                <div class="title">
+                    <h3>{{mealPlanResult.name}}</h3>
+                </div>
+                <div class="card-table">
+                    <div class="table-row table-column">
+                        <div class="table-row-cell flex-size-4" (click)="sort('name')">Name</div>
+                        <div class="table-row-cell flex-size-3" (click)="sort('cookbook')">Cookbook</div>
+                        <div class="table-row-cell flex-size-2" (click)="sort('category')">Category</div>
+                        <div class="table-row-cell flex-size-1 flex-center" (click)="sort('')">Page</div>
+                        <div class="table-row-cell flex-size-2 flex-center" (click)="sort('cost')">Cost</div>
+                        <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
+                        <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
                     </div>
-                    <div class="card-table">
-                        <div class="table-row table-column">
-                            <div class="table-row-cell flex-size-4" (click)="sort('name')">Name</div>
-                            <div class="table-row-cell flex-size-3" (click)="sort('cookbook')">Cookbook</div>
-                            <div class="table-row-cell flex-size-2" (click)="sort('category')">Category</div>
-                            <div class="table-row-cell flex-size-1 flex-center" (click)="sort('')">Page</div>
-                            <div class="table-row-cell flex-size-2 flex-center" (click)="sort('cost')">Cost</div>
-                            <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
-                            <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
-                        </div>
-                        <div *ngIf="recipes | async as result">
-                            <div class="table-body table-main-content">
-                                <div class="table-row" *ngFor="let recipe of result | dynamicSort:sortProperty:sortDesc">
-                                    <div class="table-row-cell flex-size-4">{{recipe.name}}</div>
-                                    <div class="table-row-cell flex-size-3">{{recipe.cookbook}}</div>
-                                    <div class="table-row-cell flex-size-2">{{recipe.category}}</div>
-                                    <div class="table-row-cell flex-size-1">{{recipe.pageNumber}}</div>
-                                    <div class="table-row-cell flex-size-2 flex-center">{{recipe.cost | currency:'USD':'symbol':'1.2-2'}}</div>
-                                    <div class="table-row-cell flex-size-2 flex-center">{{recipe.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
-                                    <div class="table-row-cell flex-size-2 flex-center">{{recipe.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div *ngIf="recipes | async as result">
                         <div class="table-body table-main-content">
-                            <div class="table-row total">
-                                <div class="table-row-cell flex-size-13">Total</div>
-                                <div class="table-row-cell flex-size-2">{{mealPlanResult.cost | currency:'USD':'symbol':'1.2-2'}}</div>
-                                <div class="table-row-cell flex-size-2">{{mealPlanResult.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
-                                <div class="table-row-cell flex-size-2">{{mealPlanResult.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
+                            <div class="table-row" *ngFor="let recipe of result | dynamicSort:sortProperty:sortDesc">
+                                <div class="table-row-cell flex-size-4">{{recipe.name}}</div>
+                                <div class="table-row-cell flex-size-3">{{recipe.cookbook}}</div>
+                                <div class="table-row-cell flex-size-2">{{recipe.category}}</div>
+                                <div class="table-row-cell flex-size-1">{{recipe.pageNumber}}</div>
+                                <div class="table-row-cell flex-size-2 flex-center">{{recipe.cost | currency:'USD':'symbol':'1.2-2'}}</div>
+                                <div class="table-row-cell flex-size-2 flex-center">{{recipe.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
+                                <div class="table-row-cell flex-size-2 flex-center">{{recipe.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="table-body table-main-content">
+                        <div class="table-row total">
+                            <div class="table-row-cell flex-size-13">Total</div>
+                            <div class="table-row-cell flex-size-2">{{mealPlanResult.cost | currency:'USD':'symbol':'1.2-2'}}</div>
+                            <div class="table-row-cell flex-size-2">{{mealPlanResult.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
+                            <div class="table-row-cell flex-size-2">{{mealPlanResult.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
                         </div>
                     </div>
                 </div>
-                <ng-template #loading>
-                    <loading></loading>
-                </ng-template>
             </div>
+            <ng-template #loading>
+                <loading></loading>
+            </ng-template>
         </div>
     </div>

@@ -1,38 +1,43 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common'
 import { Observable } from 'rxjs/Observable';
-import { Recipe, MealPlan, MealPlanGrocery } from '../../models';
+import { Recipe, MealPlanGrocery } from '../../models';
+import { ActivatedRoute } from '@angular/router';
+import { FoodService } from '../../services/food.service';
+import { CardBaseComponent } from '../card-base/card-base.component'
+
 
 @Component({
     selector: 'budget-grocery-list-card',
     templateUrl: './card-grocery-list.component.html',
     styleUrls: ['./card-grocery-list.component.scss']
 })
-export class CardGroceryListComponent implements OnInit {
+export class CardGroceryListComponent extends CardBaseComponent implements OnInit {
 
-    @Input() recipes: Observable<Recipe[]>;
-    @Input() mealPlan: MealPlan;
-    @Input() groceries: Observable<MealPlanGrocery[]>;
-    @Output() onModalClose = new EventEmitter();
-    sortProperty: string;
-    sortDesc: boolean = false;
+    recipes: Observable<Recipe[]>;
+    mealPlanName: string;
     groceriesByCategory: { [key: string]: MealPlanGrocery[] } = {};
 
-    constructor() { }
+    constructor(
+        public route: ActivatedRoute,
+        public apiService: FoodService,
+        public location: Location
+    ) {
+        super(location);
+    }
 
     ngOnInit() {
-        this.groceries.subscribe(g => this.groceriesByCategory = this.categorizeGroceries(g))
+        this.route.params.subscribe(params => {
+            this.mealPlanName = params['name'];
+            this.getData();
+        })
     }
 
-    closeModal() {
-        this.onModalClose.emit();
-    }
-
-    stopPropogation(event): void { event.stopPropagation(); }
-
-    sort(sortProperty: string) {
-        if (this.sortProperty === sortProperty) this.sortDesc = !this.sortDesc;
-        else this.sortDesc = false;
-        this.sortProperty = sortProperty;
+    getData() {
+        this.recipes = this.apiService.getMealPlanRecipes(this.mealPlanName);
+        this.apiService.getMealPlanGroceries(this.mealPlanName).subscribe(
+            g => this.groceriesByCategory = this.categorizeGroceries(g)
+        );
     }
 
     categorizeGroceries(groceries: MealPlanGrocery[]): { [key: string]: MealPlanGrocery[] } {

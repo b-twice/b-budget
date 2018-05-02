@@ -1,10 +1,6 @@
 @import '../../../../styles/base.scss';
 @import '../../../../styles/flex.scss';
 @import '../../../../styles/table.scss';
-.panel-style {
-  @extend .panel-base;
-  padding: 0;
-}
 
 .section-header {
   @extend .section-header;
