@@ -19,6 +19,9 @@ import { PanelBooksComponent } from './panels/panel-books/books.component';
 import { CardBooksComponent } from './cards/card-books/card-books.component';
 import { PanelSummaryComponent } from './panels/panel-summary/summary.component';
 import { PanelCategoriesComponent } from './panels/panel-categories/categories.component';
+import { PanelExpensesComponent } from './panels/panel-expenses/expenses.component';
+import { CardExpensesComponent } from './cards/card-expenses/card-expenses.component';
+import { PanelTransactionsComponent } from './panels/panel-transactions/transactions.component';
 
 const adminRoutes: Routes = [
     {
@@ -36,6 +39,27 @@ const adminRoutes: Routes = [
                 path: "categories/:user/:year",
                 component: PanelCategoriesComponent
             },
+            {
+                path: "expenses/:user/:year",
+                component: PanelExpensesComponent,
+                children: [
+                    {
+                        path: ':category',
+                        component: CardExpensesComponent,
+                        outlet: 'transactions'
+                    },
+                    {
+                        path: ':category/:month',
+                        component: CardExpensesComponent,
+                        outlet: 'transactionsByMonth'
+                    }
+                ]
+            },
+            {
+                path: "transactions/:user/:year",
+                component: PanelTransactionsComponent
+            },
+
 
 
             // Food

@@ -1,23 +1,20 @@
 @import '../../../../styles/base.scss';
 @import '../../../../styles/flex.scss';
 @import '../../../../styles/table.scss';
-.panel-style  {
-    @extend .panel-base;
-    padding:0;
-}
 
 .section-header {
     @extend .section-header;
 }
-
 :host {
-    display:flex;
-    flex-direction:row;
-    width:100%;
-    @extend .panel-style;
-    background:#fff;
-    height:55rem;
+    @extend .panel-base-container;
 }
+.panel{
+    @extend .panel-base;
+    padding:0;
+    max-height:55rem;
+}
+
+
 .transaction-table {
   display:flex;
   flex-direction:column;

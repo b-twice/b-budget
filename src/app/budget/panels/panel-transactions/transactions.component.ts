@@ -2,26 +2,23 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FinanceService } from '../../services/finance.service';
-import { Transaction, TransactionMonthly } from '../../models';
-import { Category } from '../../models';
+import { Transaction, TransactionMonthly, Category } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../filter-controls/filter-controls.component';
 import { PanelChartService } from '../panel-chart/panel-chart.service';
+import { NavigationService } from '../../services/navigation.service';
+import { PanelBaseComponent } from '../panel-base/panel-base.component'
 
 @Component({
   selector: 'budget-panel-transactions',
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss']
 })
-export class PanelTransactionsComponent implements OnInit {
+export class PanelTransactionsComponent extends PanelBaseComponent implements OnInit {
 
   transactions: Observable<Transaction[]>;
   categories: Observable<Category[]>;
   transactionsTotal: number = 0;
-  sortProperty: string;
-  sortDesc: boolean = false;
-  user: string;
-  year: string;
   chartLoaded: boolean = false;
 
   @ViewChild(FilterControlsComponent)
@@ -32,22 +29,18 @@ export class PanelTransactionsComponent implements OnInit {
     public route: ActivatedRoute,
     public apiService: FinanceService,
     public panelChartService: PanelChartService,
+    public navigationService: NavigationService,
     public datePipe: DatePipe
-  ) { }
+  ) {
+    super(route, navigationService);
+  }
 
   ngOnInit() {
-    this.route.parent.params.subscribe(
-      params => {
-        this.user = params['user'];
-        this.year = params['year'];
-        this.getTransactions();
-      }
-    )
+    this.resolveRoutes();
     this.categories = this.apiService.getTransactionCategories();
   }
 
-  getTransactions(): void {
-    if (!this.user || !this.year) { return; }
+  getData(): void {
     this.transactions = this.apiService.getTransactions(this.user, this.year, this.filterControls.activeCategories);
     this.apiService.getTransactionsMonthly(this.user, this.year, 1, this.filterControls.activeCategories).subscribe(t => {
       this.summarizeTransactions(t);
@@ -60,16 +53,6 @@ export class PanelTransactionsComponent implements OnInit {
       }
 
     });
-  }
-
-  sort(sortProperty: string) {
-    if (this.sortProperty === sortProperty) this.sortDesc = !this.sortDesc;
-    else this.sortDesc = false;
-    this.sortProperty = sortProperty;
-  }
-
-  categoryChange() {
-    this.getTransactions();
   }
 
   summarizeTransactions(transactions: TransactionMonthly[]) {

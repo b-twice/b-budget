@@ -1,42 +1,46 @@
-<budget-filter-controls (onCategoryChange)="categoryChange()" [categories]="categories" [clearOnChange]="true"></budget-filter-controls>
-<div class="expenses-table">
-  <div class="table-row table-column">
-    <div class="table-row-cell flex-size-3" (click)="sort('categoryName')">Category</div>
-    <div class="table-row-cell flex-size-2" (click)="sort('plannedExpense')">Planned Expense</div>
-    <div class="table-row-cell flex-size-2" (click)="sort('actualExpense')">Actual Expense</div>
-    <div class="table-row-cell flex-size-1" (click)="sort('difference')">Difference</div>
-  </div>
-  <div class="table-body table-main-content">
-    <div *ngIf="expenses | async as result ;  else loading">
-      <div class="table-row" *ngFor="let expense of result | dynamicSort:sortProperty:sortDesc" (click)="getExpensePage(expense)">
-        <div class="table-row-cell flex-size-3">{{expense.categoryName}}</div>
-        <div class="table-row-cell flex-size-2">{{expense.plannedExpense | currency:'USD':'symbol':'1.0-0'}}</div>
-        <div class="table-row-cell flex-size-2">{{expense.actualExpense| currency:'USD':'symbol':'1.0-0'}}</div>
-        <div class="table-row-cell flex-size-1" [ngClass]="expense.difference > 0 ? 'up' : 'down'">
-          {{expense.difference | currency:'USD':'symbol':'1.0-0'}}
+<div class="panel">
+  <budget-filter-controls (onCategoryChange)="categoryChange()" [categories]="categories" [clearOnChange]="true"></budget-filter-controls>
+  <div class="expenses-table">
+    <div class="table-row table-column">
+      <div class="table-row-cell flex-size-3" (click)="sort('categoryName')">Category</div>
+      <div class="table-row-cell flex-size-2" (click)="sort('plannedExpense')">Planned Expense</div>
+      <div class="table-row-cell flex-size-2" (click)="sort('actualExpense')">Actual Expense</div>
+      <div class="table-row-cell flex-size-1" (click)="sort('difference')">Difference</div>
+    </div>
+    <div class="table-body table-main-content">
+      <div *ngIf="expenses | async as result ;  else loading">
+        <!-- <div class="table-row" *ngFor="let expense of result | dynamicSort:sortProperty:sortDesc" [routerLink]="[{ outlets: { transactions: [expense.categoryName, expense.month] } }]"> -->
+        <div class="table-row" *ngFor="let expense of result | dynamicSort:sortProperty:sortDesc" (click)="openTransactionsModal(expense)">
+          <div class="table-row-cell flex-size-3">{{expense.categoryName}}</div>
+          <div class="table-row-cell flex-size-2">{{expense.plannedExpense | currency:'USD':'symbol':'1.0-0'}}</div>
+          <div class="table-row-cell flex-size-2">{{expense.actualExpense| currency:'USD':'symbol':'1.0-0'}}</div>
+          <div class="table-row-cell flex-size-1" [ngClass]="expense.difference > 0 ? 'up' : 'down'">
+            {{expense.difference | currency:'USD':'symbol':'1.0-0'}}
+          </div>
         </div>
       </div>
+      <ng-template #loading>
+        <loading></loading>
+      </ng-template>
     </div>
-    <ng-template #loading>
-      <loading></loading>
-    </ng-template>
-  </div>
-  <div class="table-summary" style="height:10rem">
-    <div class="table-row-cell flex-size-3"></div>
-    <div class="table-row-cell flex-size-2"></div>
-    <div class="table-row-cell flex-size-3" style="flex-direction:column;">
-      <span class="flex-row flex-between">
-        <span>Planned Expenses:</span>
-        <span class="link-underline">{{plannedExpensesTotal | currency:'USD':'symbol':'1.0-0'}}</span>
-      </span>
-      <span class="flex-row flex-between">Actual Expenses:
-        <span class="link-underline">{{actualExpensesTotal | currency:'USD':'symbol':'1.0-0'}}</span>
-      </span>
-      <span class="flex-row flex-between">Difference:
-        <span class="link-underline" [ngClass]="differencesTotal > 0 ? 'up' : 'down'">{{differencesTotal | currency:'USD':'symbol':'1.0-0'}}</span>
-      </span>
+    <div class="table-summary" style="height:10rem">
+      <div class="table-row-cell flex-size-3"></div>
+      <div class="table-row-cell flex-size-2"></div>
+      <div class="table-row-cell flex-size-3" style="flex-direction:column;">
+        <span class="flex-row flex-between">
+          <span>Planned Expenses:</span>
+          <span class="link-underline">{{plannedExpensesTotal | currency:'USD':'symbol':'1.0-0'}}</span>
+        </span>
+        <span class="flex-row flex-between">Actual Expenses:
+          <span class="link-underline">{{actualExpensesTotal | currency:'USD':'symbol':'1.0-0'}}</span>
+        </span>
+        <span class="flex-row flex-between">Difference:
+          <span class="link-underline" [ngClass]="differencesTotal > 0 ? 'up' : 'down'">{{differencesTotal | currency:'USD':'symbol':'1.0-0'}}</span>
+        </span>
+      </div>
     </div>
   </div>
 </div>
-<budget-expenses-card *ngIf="selectedTransactions" [transactionCategoryName]="selectedTransactionCategoryName" [transactions]="selectedTransactions"
-  (onModalClose)="modalClose()"></budget-expenses-card>
+
+<router-outlet name="transactions"></router-outlet>
+<router-outlet name="transactionsByMonth"></router-outlet>

@@ -1,4 +1,4 @@
-<div class="panel" *ngIf="userCategories | async | categoriesTransform: name: year as displayGroups; else loading">
+<div class="panel" *ngIf="userCategories | async | categoriesTransform: user: year as displayGroups; else loading">
   <div *ngFor="let displayGroup of displayGroupsOrder">
     <h4 class="section-header">{{displayGroup}}</h4>
     <div class="category-row" *ngFor="let category of displayGroups[displayGroup]">

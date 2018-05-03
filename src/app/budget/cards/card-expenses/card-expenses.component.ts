@@ -1,5 +1,10 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
 import { Transaction } from '../../models';
+import { ActivatedRoute } from '@angular/router';
+import { FinanceService } from '../../services/finance.service';
+import { CardBaseComponent } from '../card-base/card-base.component'
 
 
 @Component({
@@ -7,35 +12,62 @@ import { Transaction } from '../../models';
   templateUrl: './card-expenses.component.html',
   styleUrls: ['./card-expenses.component.scss']
 })
-export class CardExpensesComponent implements OnInit {
+export class CardExpensesComponent extends CardBaseComponent implements OnInit {
 
-  @Input() transactionCategoryName: string;
-  @Input() transactions: Transaction[];
-  @Output() onModalClose = new EventEmitter();
+  user: string;
+  year: string;
+  category: string;
+  month: string;
+  transactions: Observable<Transaction[]>;
   transactionsTotal: number = 0;
-  sortProperty: string;
-  sortDesc: boolean = false;
 
-  constructor() { }
+  monthMap: any = {
+    "January": "01",
+    "February": "02",
+    "March": "03",
+    "April": "04",
+    "May": "05",
+    "June": "06",
+    "July": "07",
+    "August": "08",
+    "September": "09",
+    "October": "10",
+    "November": "11",
+    "December": "12",
+  };
+
+  constructor(
+    public route: ActivatedRoute,
+    public apiService: FinanceService,
+    public location: Location
+  ) {
+    super(location)
+  }
 
   ngOnInit() {
-    this.transactions.forEach(i => {
-      this.transactionsTotal += i.amount;
+    this.route.parent.params.subscribe(params => {
+      this.user = params['user'];
+      this.year = params['year'];
+      this.getData();
     });
-
+    this.route.params.subscribe(params => {
+      this.category = params['category'];
+      this.month = params['month'];
+      this.getData();
+    })
   }
 
-  closeModal() {
-    this.onModalClose.emit();
+  getData() {
+    if (!((this.category || this.month) && this.user && this.year)) return;
+    if (this.month) {
+      this.transactions = this.apiService.getTransactionByMonth(this.user, this.year, this.monthMap[this.month], this.category);
+    }
+    else {
+      this.transactions = this.apiService.getTransactions(this.user, this.year, [this.category]);
+    }
+    this.transactions.subscribe(transactions =>
+      transactions.forEach(i =>
+        this.transactionsTotal += i.amount)
+    );
   }
-
-  stopPropogation(event): void { event.stopPropagation(); }
-
-  sort(sortProperty: string) {
-    if (this.sortProperty === sortProperty) this.sortDesc = !this.sortDesc;
-    else this.sortDesc = false;
-    this.sortProperty = sortProperty;
-  }
-
-
 }

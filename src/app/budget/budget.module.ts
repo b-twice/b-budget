@@ -25,7 +25,6 @@ import { UserNavComponent } from './user-nav/user-nav.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { YearNavComponent } from './year-nav/year-nav.component';
 import { PanelNavComponent } from './panel-nav/panel-nav.component';
-import { PanelComponent } from './panel/panel.component';
 import { AuthModule } from './services/auth.module';
 
 import { UserProfileTransformPipe } from './user-profile/user-profile-transform.pipe';
@@ -75,7 +74,6 @@ import { GroceryFormComponent } from './forms/grocery/grocery-form.component';
         PanelBooksComponent,
         YearNavComponent,
         PanelNavComponent,
-        PanelComponent,
         UserProfileTransformPipe,
         CategoriesTransformPipe,
         FilterControlsComponent,
