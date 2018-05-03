@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import { Recipe, MealPlan } from '../../models';
+import { Recipe, MealPlan } from '../../../models';
 import { ActivatedRoute } from '@angular/router';
-import { FoodService } from '../../services/food.service';
-import { CardBaseComponent } from '../card-base/card-base.component'
+import { FoodService } from '../../../services/food.service';
+import { ModalBaseComponent } from '../../core/base/modal-base.component'
 
 
 @Component({
-    selector: 'budget-recipes-card',
-    templateUrl: './card-recipes.component.html',
-    styleUrls: ['./card-recipes.component.scss']
+    selector: 'budget-recipes-modal',
+    templateUrl: './modal-recipes.component.html',
+    styleUrls: ['./modal-recipes.component.scss']
 })
-export class CardRecipesComponent extends CardBaseComponent implements OnInit {
+export class ModalRecipesComponent extends ModalBaseComponent implements OnInit {
 
     recipes: Observable<Recipe[]>;
     mealPlan: Observable<MealPlan>;

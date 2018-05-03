@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Grocery } from '../../models';
+import { Grocery } from '../../../models';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FoodService } from '../../services/food.service';
-import { CardBaseComponent } from '../card-base/card-base.component'
+import { FoodService } from '../../../services/food.service';
+import { ModalBaseComponent } from '../../core/base/modal-base.component'
 
 
 @Component({
-  selector: 'budget-groceries-card',
-  templateUrl: './card-groceries.component.html',
-  styleUrls: ['./card-groceries.component.scss']
+  selector: 'budget-groceries-modal',
+  templateUrl: './modal-groceries.component.html',
+  styleUrls: ['./modal-groceries.component.scss']
 })
-export class CardGroceriesComponent extends CardBaseComponent implements OnInit {
+export class ModalGroceriesComponent extends ModalBaseComponent implements OnInit {
 
   user: string;
   year: string;

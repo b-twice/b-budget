@@ -1,17 +1,17 @@
 import { Component, OnInit, } from '@angular/core';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import { RecipeIngredient, Recipe } from '../../models';
+import { RecipeIngredient, Recipe } from '../../../models';
 import { ActivatedRoute } from '@angular/router';
-import { FoodService } from '../../services/food.service';
-import { CardBaseComponent } from '../card-base/card-base.component'
+import { FoodService } from '../../../services/food.service';
+import { ModalBaseComponent } from '../../core/base/modal-base.component'
 
 @Component({
   selector: 'budget-recipe-ingredients',
-  templateUrl: './card-recipe-ingredients.component.html',
-  styleUrls: ['./card-recipe-ingredients.component.scss']
+  templateUrl: './modal-recipe-ingredients.component.html',
+  styleUrls: ['./modal-recipe-ingredients.component.scss']
 })
-export class CardRecipeIngredientsComponent extends CardBaseComponent implements OnInit {
+export class ModalRecipeIngredientsComponent extends ModalBaseComponent implements OnInit {
 
   recipeName: string;
   ingredients: RecipeIngredient[];

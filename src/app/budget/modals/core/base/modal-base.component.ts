@@ -4,11 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
-    selector: 'budget-card-base',
+    selector: 'budget-modal-base',
     template: '<div></div>',
     styleUrls: []
 })
-export class CardBaseComponent {
+export class ModalBaseComponent {
 
     sortProperty: string;
     sortDesc: boolean = false;

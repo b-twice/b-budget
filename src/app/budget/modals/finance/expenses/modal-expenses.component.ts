@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import { Transaction } from '../../models';
+import { Transaction } from '../../../models';
 import { ActivatedRoute } from '@angular/router';
-import { FinanceService } from '../../services/finance.service';
-import { CardBaseComponent } from '../card-base/card-base.component'
+import { FinanceService } from '../../../services/finance.service';
+import { ModalBaseComponent } from '../../core/base/modal-base.component'
 
 
 @Component({
-  selector: 'budget-expenses-card',
-  templateUrl: './card-expenses.component.html',
-  styleUrls: ['./card-expenses.component.scss']
+  selector: 'budget-expenses-modal',
+  templateUrl: './modal-expenses.component.html',
+  styleUrls: ['./modal-expenses.component.scss']
 })
-export class CardExpensesComponent extends CardBaseComponent implements OnInit {
+export class ModalExpensesComponent extends ModalBaseComponent implements OnInit {
 
   user: string;
   year: string;

@@ -1,11 +1,11 @@
-@import '../../../../styles/base.scss';
-@import '../../../../styles/flex.scss';
-@import '../../../../styles/table.scss';
+@import '../../../../../styles/base.scss';
+@import '../../../../../styles/flex.scss';
+@import '../../../../../styles/table.scss';
 .section-header {
     @extend .section-header;
 }
 
-.expense-card-table {
+.expense-modal-table {
   display:flex;
   flex-direction:column;
   flex:1;

@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
-import { Book } from '../../models';
-import { CardBaseComponent } from '../card-base/card-base.component'
-import { PersonalService } from '../../services/personal.service';
+import { Book } from '../../../models';
+import { ModalBaseComponent } from '../../core/base/modal-base.component'
+import { PersonalService } from '../../../services/personal.service';
 
 
 @Component({
-  selector: 'budget-books-card',
-  templateUrl: './card-books.component.html',
-  styleUrls: ['./card-books.component.scss']
+  selector: 'budget-books-modal',
+  templateUrl: './modal-books.component.html',
+  styleUrls: ['./modal-books.component.scss']
 })
-export class CardBooksComponent extends CardBaseComponent implements OnInit {
+export class ModalBooksComponent extends ModalBaseComponent implements OnInit {
 
   authorName: string;
   books: Observable<Book[]>;

@@ -1,6 +1,6 @@
-@import '../../../../styles/base.scss';
-@import '../../../../styles/flex.scss';
-@import '../../../../styles/table.scss';
+@import '../../../../../styles/base.scss';
+@import '../../../../../styles/flex.scss';
+@import '../../../../../styles/table.scss';
 .panel-style  {
     @extend .panel-base;
     padding:0;
@@ -10,7 +10,7 @@
     @extend .section-header;
 }
 
-.card-table {
+.modal-table {
   display:flex;
   flex-direction:column;
   flex:1;

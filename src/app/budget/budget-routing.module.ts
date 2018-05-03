@@ -4,23 +4,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { BudgetDashboardComponent } from './dashboard.component';
 import { AuthGuard } from '../login/auth-guard.service';
 
-import { CardGroceriesComponent } from './cards/card-groceries/card-groceries.component'
-import { CardGroceryEditComponent } from './cards/card-grocery-edit/card-grocery-edit.component'
+import { ModalGroceriesComponent } from './modals/food/groceries/modal-groceries.component'
+import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-grocery-edit.component'
 import { PanelGroceriesComponent } from './panels/panel-groceries/groceries.component'
 import { PanelChartComponent } from './panels/panel-chart/panel-chart.component'
 import { PanelFoodProductsComponent } from './panels/panel-food-products/food-products.component'
 import { PanelGroceryCartComponent } from './panels/panel-grocery-cart/grocery-cart.component'
-import { CardRecipesComponent } from './cards/card-recipes/card-recipes.component';
-import { CardGroceryListComponent } from './cards/card-grocery-list/card-grocery-list.component';
+import { ModalRecipesComponent } from './modals/food/recipes/modal-recipes.component';
+import { ModalGroceryListComponent } from './modals/food/grocery-list/modal-grocery-list.component';
 import { PanelMealPlansComponent } from './panels/panel-meal-plans/meal-plans.component';
 import { PanelRecipesComponent } from './panels/panel-recipes/panel-recipes.component';
-import { CardRecipeIngredientsComponent } from './cards/card-recipe-ingredients/card-recipe-ingredients.component';
+import { ModalRecipeIngredientsComponent } from './modals/food/recipe-ingredients/modal-recipe-ingredients.component';
 import { PanelBooksComponent } from './panels/panel-books/books.component';
-import { CardBooksComponent } from './cards/card-books/card-books.component';
+import { ModalBooksComponent } from './modals/personal/books/modal-books.component';
 import { PanelSummaryComponent } from './panels/panel-summary/summary.component';
 import { PanelCategoriesComponent } from './panels/panel-categories/categories.component';
 import { PanelExpensesComponent } from './panels/panel-expenses/expenses.component';
-import { CardExpensesComponent } from './cards/card-expenses/card-expenses.component';
+import { ModalExpensesComponent } from './modals/finance/expenses/modal-expenses.component';
 import { PanelTransactionsComponent } from './panels/panel-transactions/transactions.component';
 
 const adminRoutes: Routes = [
@@ -45,12 +45,12 @@ const adminRoutes: Routes = [
                 children: [
                     {
                         path: ':category',
-                        component: CardExpensesComponent,
+                        component: ModalExpensesComponent,
                         outlet: 'transactions'
                     },
                     {
                         path: ':category/:month',
-                        component: CardExpensesComponent,
+                        component: ModalExpensesComponent,
                         outlet: 'transactionsByMonth'
                     }
                 ]
@@ -73,12 +73,12 @@ const adminRoutes: Routes = [
                 children: [
                     {
                         path: ':name',
-                        component: CardGroceriesComponent,
+                        component: ModalGroceriesComponent,
                         outlet: 'list'
                     },
                     {
                         path: ':id',
-                        component: CardGroceryEditComponent,
+                        component: ModalGroceryEditComponent,
                         outlet: 'form'
                     }
                 ]
@@ -89,12 +89,12 @@ const adminRoutes: Routes = [
                 children: [
                     {
                         path: ':name',
-                        component: CardRecipesComponent,
+                        component: ModalRecipesComponent,
                         outlet: 'recipes'
                     },
                     {
                         path: ':name',
-                        component: CardGroceryListComponent,
+                        component: ModalGroceryListComponent,
                         outlet: 'groceryList'
                     }
                 ]
@@ -105,12 +105,12 @@ const adminRoutes: Routes = [
                 children: [
                     {
                         path: ':name',
-                        component: CardGroceriesComponent,
+                        component: ModalGroceriesComponent,
                         outlet: 'list'
                     },
                     {
                         path: ':id',
-                        component: CardGroceryEditComponent,
+                        component: ModalGroceryEditComponent,
                         outlet: 'form'
                     }
                 ]
@@ -121,7 +121,7 @@ const adminRoutes: Routes = [
                 children: [
                     {
                         path: ':name',
-                        component: CardRecipeIngredientsComponent,
+                        component: ModalRecipeIngredientsComponent,
                         outlet: 'ingredients'
                     }
                 ]
@@ -134,7 +134,7 @@ const adminRoutes: Routes = [
                 children: [
                     {
                         path: ':name',
-                        component: CardBooksComponent,
+                        component: ModalBooksComponent,
                         outlet: 'author'
                     }
                 ]

@@ -1,17 +1,17 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { Grocery } from '../../models';
+import { Grocery } from '../../../models';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GroceryFormComponent } from '../../forms/grocery/grocery-form.component';
-import { FoodService } from '../../services/food.service';
+import { GroceryFormComponent } from '../../../forms/grocery/grocery-form.component';
+import { FoodService } from '../../../services/food.service';
 
 
 @Component({
-    selector: 'budget-grocery-edit-card',
-    templateUrl: './card-grocery-edit.component.html',
-    styleUrls: ['./card-grocery-edit.component.scss']
+    selector: 'budget-grocery-edit-modal',
+    templateUrl: './modal-grocery-edit.component.html',
+    styleUrls: ['./modal-grocery-edit.component.scss']
 })
-export class CardGroceryEditComponent implements OnInit {
+export class ModalGroceryEditComponent implements OnInit {
 
     id: number;
     grocery: Grocery;

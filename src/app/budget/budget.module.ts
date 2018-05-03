@@ -42,14 +42,14 @@ import { PanelRecipesComponent } from './panels/panel-recipes/panel-recipes.comp
 import { PanelMealPlansComponent } from './panels/panel-meal-plans/meal-plans.component';
 import { PanelBaseComponent } from './panels/panel-base/panel-base.component';
 
-import { CardBaseComponent } from './cards/card-base/card-base.component';
-import { CardRecipeIngredientsComponent } from './cards/card-recipe-ingredients/card-recipe-ingredients.component';
-import { CardGroceriesComponent } from './cards/card-groceries/card-groceries.component';
-import { CardExpensesComponent } from './cards/card-expenses/card-expenses.component';
-import { CardBooksComponent } from './cards/card-books/card-books.component';
-import { CardRecipesComponent } from './cards/card-recipes/card-recipes.component';
-import { CardGroceryListComponent } from './cards/card-grocery-list/card-grocery-list.component';
-import { CardGroceryEditComponent } from './cards/card-grocery-edit/card-grocery-edit.component';
+import { ModalBaseComponent } from './modals/core/base/modal-base.component';
+import { ModalRecipeIngredientsComponent } from './modals/food/recipe-ingredients/modal-recipe-ingredients.component';
+import { ModalGroceriesComponent } from './modals/food/groceries/modal-groceries.component';
+import { ModalExpensesComponent } from './modals/finance/expenses/modal-expenses.component';
+import { ModalBooksComponent } from './modals/personal/books/modal-books.component';
+import { ModalRecipesComponent } from './modals/food/recipes/modal-recipes.component';
+import { ModalGroceryListComponent } from './modals/food/grocery-list/modal-grocery-list.component';
+import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-grocery-edit.component';
 
 import { GroceryFormComponent } from './forms/grocery/grocery-form.component';
 
@@ -89,14 +89,14 @@ import { GroceryFormComponent } from './forms/grocery/grocery-form.component';
         PanelMealPlansComponent,
         PanelBaseComponent,
 
-        CardBaseComponent,
-        CardRecipeIngredientsComponent,
-        CardExpensesComponent,
-        CardBooksComponent,
-        CardRecipesComponent,
-        CardGroceryListComponent,
-        CardGroceryEditComponent,
-        CardGroceriesComponent
+        ModalBaseComponent,
+        ModalRecipeIngredientsComponent,
+        ModalExpensesComponent,
+        ModalBooksComponent,
+        ModalRecipesComponent,
+        ModalGroceryListComponent,
+        ModalGroceryEditComponent,
+        ModalGroceriesComponent
     ],
     providers: [
         CoreService,
