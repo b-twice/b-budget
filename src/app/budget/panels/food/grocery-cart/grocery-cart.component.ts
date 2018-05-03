@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FoodService } from '../../../services/food.service';
 import { Grocery } from '../../../models/food';
-import { NavigationParams } from '../../../models/core';
 import { Observable } from 'rxjs/Observable';
 import { FormGroceryComponent } from '../../../forms/food/grocery/form-grocery.component';
 import { NavigationService } from '../../../services/navigation.service';

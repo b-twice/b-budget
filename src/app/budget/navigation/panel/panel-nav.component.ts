@@ -24,8 +24,8 @@ export class PanelNavComponent implements OnInit {
       }
     );
   }
-  isActive(panel: string, ) {
-    return this.router.isActive(this.router.createUrlTree(['/budget/', panel]), null);
+  isActive(group: string, panel: string, ) {
+    return this.router.isActive(this.router.createUrlTree(['/budget/', group, panel]), null);
   }
 
 

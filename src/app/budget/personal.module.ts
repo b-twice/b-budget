@@ -11,7 +11,6 @@ import { NavigationService } from './services/navigation.service';
 // modules
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from './core.module';
-import { AuthModule } from './services/auth.module';
 
 // components
 import { PanelBooksComponent } from './panels/personal/books/books.component';
@@ -22,7 +21,6 @@ import { ModalBooksComponent } from './modals/personal/books/modal-books.compone
     imports: [
         CommonModule,
         SharedModule,
-        AuthModule,
         CoreModule,
         RouterModule
     ],

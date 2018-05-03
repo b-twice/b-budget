@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { DatePipe, CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Ng2CompleterModule } from 'ng2-completer';
 
@@ -14,7 +13,7 @@ import { FoodService } from './services/food.service';
 // modules
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from './core.module';
-import { AuthModule } from './services/auth.module';
+import { FoodRoutingModule } from './food-routing.module'
 
 // components
 import { PanelGroceriesComponent } from './panels/food/groceries/groceries.component';
@@ -36,9 +35,8 @@ import { FormGroceryComponent } from './forms/food/grocery/form-grocery.componen
     imports: [
         CommonModule,
         SharedModule,
-        AuthModule,
         CoreModule,
-        RouterModule,
+        FoodRoutingModule,
         FormsModule,
         Ng2CompleterModule
 

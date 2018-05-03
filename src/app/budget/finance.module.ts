@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { DatePipe, CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 // services
 import { CoreService } from './services/core.service';
@@ -11,7 +10,7 @@ import { FinanceService } from './services/finance.service';
 // modules
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from './core.module';
-import { AuthModule } from './services/auth.module';
+import { FinanceRoutingModule } from './finance-routing.module'
 
 // components
 import { PanelSummaryComponent } from './panels/finance/summary/summary.component';
@@ -30,9 +29,8 @@ import { PanelSummaryChartComponent } from './panels/finance/summary-chart/summa
     imports: [
         CommonModule,
         SharedModule,
-        AuthModule,
         CoreModule,
-        RouterModule
+        FinanceRoutingModule
     ],
     declarations: [
         PanelSummaryComponent,
