@@ -1,111 +1,49 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Ng2CompleterModule } from 'ng2-completer';
-import { DatePipe, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { BudgetRoutingModule } from './budget-routing.module';
 
+// services
 import { CoreService } from './services/core.service';
-import { FinanceService } from './services/finance.service';
-import { FoodService } from './services/food.service';
-import { PersonalService } from './services/personal.service';
 import { NavigationService } from './services/navigation.service';
 
-//shared
+// modules
 import { SharedModule } from '../shared/shared.module';
-
-import { BudgetDashboardComponent } from './dashboard.component';
-import { HeaderComponent } from './header/header.component';
-import { PanelSummaryComponent } from './panels/panel-summary/summary.component';
-import { PanelCategoriesComponent } from './panels/panel-categories/categories.component';
-import { PanelTransactionsComponent } from './panels/panel-transactions/transactions.component';
-import { PanelExpensesComponent } from './panels/panel-expenses/expenses.component';
-import { PanelBooksComponent } from './panels/panel-books/books.component';
-import { UserNavComponent } from './user-nav/user-nav.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { YearNavComponent } from './year-nav/year-nav.component';
-import { PanelNavComponent } from './panel-nav/panel-nav.component';
+import { CoreModule } from './core.module';
+import { PersonalModule } from './personal.module';
+import { FinanceModule } from './finance.module';
+import { FoodModule } from './food.module';
 import { AuthModule } from './services/auth.module';
 
-import { UserProfileTransformPipe } from './user-profile/user-profile-transform.pipe';
-import { CategoriesTransformPipe } from './panels/panel-categories/categories-transform.pipe';
-import { FilterControlsComponent } from './filter-controls/filter-controls.component';
-import { PanelChartComponent } from './panels/panel-chart/panel-chart.component';
-import { PanelChartService } from './panels/panel-chart/panel-chart.service';
-import { PanelSummaryChartComponent } from './panels/panel-summary-chart/summary-chart.component';
-import { PanelSpendingChartComponent } from './panels/panel-spending-chart/spending-chart.component';
-import { PanelGroceriesComponent } from './panels/panel-groceries/groceries.component';
-import { PanelGroceryCartComponent } from './panels/panel-grocery-cart/grocery-cart.component';
-import { PanelGroceryControlsComponent } from './panels/panel-grocery-controls/grocery-controls.component';
-import { PanelFoodProductsComponent } from './panels/panel-food-products/food-products.component';
-import { PanelRecipesComponent } from './panels/panel-recipes/panel-recipes.component';
-import { PanelMealPlansComponent } from './panels/panel-meal-plans/meal-plans.component';
-import { PanelBaseComponent } from './panels/panel-base/panel-base.component';
+// components
+import { BudgetDashboardComponent } from './dashboard.component';
+import { HeaderComponent } from './base/header/header.component';
+import { UserNavComponent } from './navigation/user/user-nav.component';
+import { YearNavComponent } from './navigation/year/year-nav.component';
+import { PanelNavComponent } from './navigation/panel/panel-nav.component';
 
-import { ModalBaseComponent } from './modals/core/base/modal-base.component';
-import { ModalRecipeIngredientsComponent } from './modals/food/recipe-ingredients/modal-recipe-ingredients.component';
-import { ModalGroceriesComponent } from './modals/food/groceries/modal-groceries.component';
-import { ModalExpensesComponent } from './modals/finance/expenses/modal-expenses.component';
-import { ModalBooksComponent } from './modals/personal/books/modal-books.component';
-import { ModalRecipesComponent } from './modals/food/recipes/modal-recipes.component';
-import { ModalGroceryListComponent } from './modals/food/grocery-list/modal-grocery-list.component';
-import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-grocery-edit.component';
-
-import { GroceryFormComponent } from './forms/grocery/grocery-form.component';
 
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule,
-        Ng2CompleterModule,
         BudgetRoutingModule,
         SharedModule,
-        AuthModule
+        PersonalModule,
+        FinanceModule,
+        FoodModule,
+        AuthModule,
+        CoreModule
     ],
     declarations: [
         BudgetDashboardComponent,
-        PanelSummaryComponent,
         HeaderComponent,
         UserNavComponent,
-        UserProfileComponent,
-        PanelCategoriesComponent,
-        PanelTransactionsComponent,
-        PanelExpensesComponent,
-        PanelBooksComponent,
         YearNavComponent,
-        PanelNavComponent,
-        UserProfileTransformPipe,
-        CategoriesTransformPipe,
-        FilterControlsComponent,
-        PanelChartComponent,
-        PanelSummaryChartComponent,
-        PanelSpendingChartComponent,
-        PanelGroceryControlsComponent,
-        PanelGroceryCartComponent,
-        GroceryFormComponent,
-        PanelGroceriesComponent,
-        PanelFoodProductsComponent,
-        PanelRecipesComponent,
-        PanelMealPlansComponent,
-        PanelBaseComponent,
-
-        ModalBaseComponent,
-        ModalRecipeIngredientsComponent,
-        ModalExpensesComponent,
-        ModalBooksComponent,
-        ModalRecipesComponent,
-        ModalGroceryListComponent,
-        ModalGroceryEditComponent,
-        ModalGroceriesComponent
+        PanelNavComponent
     ],
     providers: [
         CoreService,
-        FinanceService,
-        FoodService,
-        PersonalService,
-        PanelChartService,
-        NavigationService,
-        DatePipe
+        NavigationService
     ]
 })
 export class BudgetModule { }

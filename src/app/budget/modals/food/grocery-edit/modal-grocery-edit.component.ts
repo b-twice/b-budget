@@ -1,8 +1,8 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { Grocery } from '../../../models';
+import { Grocery } from '../../../models/food';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GroceryFormComponent } from '../../../forms/grocery/grocery-form.component';
+import { FormGroceryComponent } from '../../../forms/food/grocery/form-grocery.component';
 import { FoodService } from '../../../services/food.service';
 
 
@@ -16,8 +16,8 @@ export class ModalGroceryEditComponent implements OnInit {
     id: number;
     grocery: Grocery;
 
-    @ViewChild(GroceryFormComponent)
-    form: GroceryFormComponent;
+    @ViewChild(FormGroceryComponent)
+    form: FormGroceryComponent;
 
 
     constructor(

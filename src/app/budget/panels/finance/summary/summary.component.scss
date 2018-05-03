@@ -1,0 +1,21 @@
+@import '../../../../../styles/base.scss';
+.section-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  opacity: 0.7;
+  font-size: 3.0rem;
+  padding-bottom: 1rem;
+  letter-spacing: 2px;
+  background-color: #FAFAFA;
+}
+
+i {
+  margin-right: 1rem;
+  padding-top: .5rem; // make more center with text
+}
+
+:host {
+  width: 100%;
+  background: #fff;
+}

@@ -6,14 +6,14 @@ import { APP_SETTINGS, IAppSettings } from '../../app.settings';
 
 import {
     UserProfile,
-    Category,
     UserSummary,
     UserCategoryGrowth,
     Transaction,
     ExpenseMonth,
     Expense,
     TransactionMonthly
-} from '../models';
+} from '../models/finance';
+import { Category } from '../models/core';
 
 @Injectable()
 export class FinanceService extends CoreService {

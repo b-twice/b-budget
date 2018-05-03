@@ -1,0 +1,30 @@
+@import '../../../../../styles/base.scss';
+@import '../../../../../styles/flex.scss';
+@import '../../../../../styles/table.scss';
+.section-header {
+  @extend .section-header;
+}
+
+:host {
+  @extend .panel-base-container;
+}
+
+.panel {
+  @extend .panel-base;
+  padding: 0;
+  max-height: 75rem;
+}
+
+.meal-plans-table {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.table-main-content {
+  max-height: 68rem;
+}
+
+.table-row {
+  cursor: pointer;
+}

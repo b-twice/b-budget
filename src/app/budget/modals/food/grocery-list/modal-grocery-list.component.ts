@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common'
 import { Observable } from 'rxjs/Observable';
-import { Recipe, MealPlanGrocery } from '../../../models';
+import { Recipe, MealPlanGrocery } from '../../../models/food';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../../services/food.service';
 import { ModalBaseComponent } from '../../core/base/modal-base.component'

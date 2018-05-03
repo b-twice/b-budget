@@ -10,11 +10,11 @@ import {
     MealPlanGrocery,
     AnnualFoodProduct,
     FoodProduct,
-    TransactionMonthly,
-    Category,
     Supermarket,
     MealPlan
-} from '../models';
+} from '../models/food';
+import { TransactionMonthly } from '../models/finance';
+import { Category } from '../models/core';
 
 @Injectable()
 export class FoodService extends CoreService {

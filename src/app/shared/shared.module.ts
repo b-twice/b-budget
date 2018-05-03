@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { LoadingComponent } from './loading';
 import { DropdownModule } from './dropdown';
 import { MessageComponent } from './message/message.component';
+import { FilterControlsComponent } from './../shared/filter-controls/filter-controls.component';
 
 // Site Components
 import { SiteHeaderComponent } from './site-header/site-header.component';
@@ -25,6 +26,7 @@ import { MapToKeysPipe } from './pipes/map-to-keys.pipe';
         CommonModule,
     ],
     declarations: [
+        FilterControlsComponent,
         LoadingComponent,
         MessageComponent,
         SiteHeaderComponent,
@@ -37,6 +39,7 @@ import { MapToKeysPipe } from './pipes/map-to-keys.pipe';
     exports: [
         CommonModule,
         LoadingComponent,
+        FilterControlsComponent,
         MessageComponent,
         SiteHeaderComponent,
         DropdownModule,

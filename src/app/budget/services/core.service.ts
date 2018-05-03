@@ -10,7 +10,7 @@ import { APP_SETTINGS, IAppSettings } from '../../app.settings';
 import {
     User,
     FiscalYear
-} from '../models';
+} from '../models/core';
 
 @Injectable()
 export class CoreService {

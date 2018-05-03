@@ -5,8 +5,8 @@ import { CoreService } from './core.service'
 import { APP_SETTINGS, IAppSettings } from '../../app.settings';
 import {
     Book,
-    Category,
-} from '../models';
+} from '../models/personal';
+import { Category } from '../models/core'
 
 @Injectable()
 export class PersonalService extends CoreService {

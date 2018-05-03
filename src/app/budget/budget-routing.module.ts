@@ -4,24 +4,33 @@ import { RouterModule, Routes } from '@angular/router';
 import { BudgetDashboardComponent } from './dashboard.component';
 import { AuthGuard } from '../login/auth-guard.service';
 
-import { ModalGroceriesComponent } from './modals/food/groceries/modal-groceries.component'
-import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-grocery-edit.component'
-import { PanelGroceriesComponent } from './panels/panel-groceries/groceries.component'
-import { PanelChartComponent } from './panels/panel-chart/panel-chart.component'
-import { PanelFoodProductsComponent } from './panels/panel-food-products/food-products.component'
-import { PanelGroceryCartComponent } from './panels/panel-grocery-cart/grocery-cart.component'
+//core
+import { PanelChartComponent } from './panels/core/chart/panel-chart.component'
+
+//finance
+import { PanelSummaryComponent } from './panels/finance/summary/summary.component';
+import { PanelCategoriesComponent } from './panels/finance/categories/categories.component';
+import { PanelExpensesComponent } from './panels/finance/expenses/expenses.component';
+import { ModalExpensesComponent } from './modals/finance/expenses/modal-expenses.component';
+import { PanelTransactionsComponent } from './panels/finance/transactions/transactions.component';
+
+//food
+import { PanelGroceriesComponent } from './panels/food/groceries/groceries.component'
+import { PanelFoodProductsComponent } from './panels/food/food-products/food-products.component'
+import { PanelGroceryCartComponent } from './panels/food/grocery-cart/grocery-cart.component'
+import { PanelMealPlansComponent } from './panels/food/meal-plans/meal-plans.component';
+import { PanelRecipesComponent } from './panels/food/recipes/panel-recipes.component';
+
 import { ModalRecipesComponent } from './modals/food/recipes/modal-recipes.component';
 import { ModalGroceryListComponent } from './modals/food/grocery-list/modal-grocery-list.component';
-import { PanelMealPlansComponent } from './panels/panel-meal-plans/meal-plans.component';
-import { PanelRecipesComponent } from './panels/panel-recipes/panel-recipes.component';
+import { ModalGroceriesComponent } from './modals/food/groceries/modal-groceries.component'
+import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-grocery-edit.component'
 import { ModalRecipeIngredientsComponent } from './modals/food/recipe-ingredients/modal-recipe-ingredients.component';
-import { PanelBooksComponent } from './panels/panel-books/books.component';
+
+
+//personal
+import { PanelBooksComponent } from './panels/personal/books/books.component';
 import { ModalBooksComponent } from './modals/personal/books/modal-books.component';
-import { PanelSummaryComponent } from './panels/panel-summary/summary.component';
-import { PanelCategoriesComponent } from './panels/panel-categories/categories.component';
-import { PanelExpensesComponent } from './panels/panel-expenses/expenses.component';
-import { ModalExpensesComponent } from './modals/finance/expenses/modal-expenses.component';
-import { PanelTransactionsComponent } from './panels/panel-transactions/transactions.component';
 
 const adminRoutes: Routes = [
     {

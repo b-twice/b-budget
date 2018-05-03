@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
-import { Book } from '../../../models';
+import { Book } from '../../../models/personal';
 import { ModalBaseComponent } from '../../core/base/modal-base.component'
 import { PersonalService } from '../../../services/personal.service';
 

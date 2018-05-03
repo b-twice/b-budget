@@ -1,0 +1,43 @@
+@import '../../../../styles/base.scss';
+// theme
+$active-link-underline--color: $primary-color;
+$nav-font-size: $nav-font-size;
+$nav-font-family: $font-body;
+$nav-opacity-base: $nav-opacity-base;
+$nav-opacity-hover: $nav-opacity-hover;
+:host {
+  left: 0;
+  right: 0;
+}
+
+.navbar {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  background: #FFF;
+  margin-top: .5rem;
+  margin-bottom: 0;
+  border-bottom: 2px solid #E9E9E9;
+  font-family: $nav-font-family;
+  a {
+    font-size: $nav-font-size;
+    padding-left: 8px;
+    padding-right: 8px;
+    height: 2.5rem;
+    opacity: $nav-opacity-base;
+    &:hover {
+      opacity: $nav-opacity-hover;
+      border-bottom: 2px solid $active-link-underline--color;
+    }
+    &:focus {
+      opacity: $nav-opacity-hover;
+      border-bottom: 2px solid $active-link-underline--color;
+    }
+  }
+  .active-link {
+    border-bottom: 2px solid $active-link-underline--color;
+  }
+}
