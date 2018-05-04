@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
     <div class="dashboard-layout">
         <main>
             <aside class="dashboard-sidebar">
-                <budget-user-profile></budget-user-profile>
                 <budget-panel-nav></budget-panel-nav>
                 <budget-year-nav></budget-year-nav>
             </aside>

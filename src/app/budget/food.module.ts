@@ -5,7 +5,6 @@ import { Ng2CompleterModule } from 'ng2-completer';
 
 // services
 import { CoreService } from './services/core.service';
-import { NavigationService } from './services/navigation.service';
 import { FinanceService } from './services/finance.service';
 import { FoodService } from './services/food.service';
 
@@ -63,7 +62,6 @@ import { FormGroceryComponent } from './forms/food/grocery/form-grocery.componen
         CoreService,
         FinanceService,
         FoodService,
-        NavigationService,
         DatePipe
     ]
 })

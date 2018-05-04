@@ -25,7 +25,7 @@ export class UserNavComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers();
-    this.navigationService.updateData.subscribe(data => this.params = data);
+    this.navigationService.updateData.subscribe(data => { this.params = data; console.log(this.params) });
   }
 
   getUsers() {

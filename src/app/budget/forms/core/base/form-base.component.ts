@@ -8,11 +8,11 @@ import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
 @Component({
-    selector: 'budget-grocery-form',
-    templateUrl: './form-grocery.component.html',
-    styleUrls: ['./form-grocery.component.scss']
+    selector: 'budget-form-base',
+    template: '<div>',
+    styleUrls: []
 })
-export class FormGroceryComponent implements OnInit {
+export class FormBaseComponent implements OnInit {
 
     @Input() grocery: Grocery;
     @Input() submitLabel: string = 'Submit';

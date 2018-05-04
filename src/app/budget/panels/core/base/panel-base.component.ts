@@ -27,16 +27,24 @@ export class PanelBaseComponent {
     resolveRoutes() {
         this.route.params.subscribe(
             params => {
+                console.log(params)
                 this.user = params['user'];
                 this.year = params['year'];
                 this.updateNavigation();
                 this.getData();
             }
         )
+        this.route.parent.parent.url.subscribe(
+            url => {
+                console.log(url)
+                this.module = url[0].path;
+                this.updateNavigation();
+            }
+        )
         this.route.url.subscribe(
             url => {
-                this.module = url[0].path;
-                this.panel = url[1].path;
+                console.log(url)
+                this.panel = url[0].path;
                 this.updateNavigation();
             }
         );
@@ -47,7 +55,8 @@ export class PanelBaseComponent {
     }
 
     updateNavigation() {
-        if (!(this.user && this.panel && this.year)) return;
+        if (!(this.user && this.panel && this.year && this.module)) return;
+        console.log('updating nav')
         var params = new NavigationParams(this.module, this.panel, this.user, this.year)
         this.navigationService.update(params);
     }

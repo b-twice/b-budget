@@ -3,7 +3,6 @@ import { DatePipe, CommonModule } from '@angular/common';
 
 // services
 import { CoreService } from './services/core.service';
-import { NavigationService } from './services/navigation.service';
 import { FinanceService } from './services/finance.service';
 
 
@@ -50,7 +49,6 @@ import { PanelSummaryChartComponent } from './panels/finance/summary-chart/summa
     providers: [
         CoreService,
         FinanceService,
-        NavigationService,
         DatePipe
     ]
 })
