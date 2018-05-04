@@ -19,18 +19,22 @@ import { AuthModule } from './services/auth.module';
 // components
 import { PanelGroceriesComponent } from './panels/food/groceries/groceries.component';
 import { PanelGroceryCartComponent } from './panels/food/grocery-cart/grocery-cart.component';
-import { PanelGroceryControlsComponent } from './panels/food/grocery-controls/grocery-controls.component';
 import { PanelFoodProductsComponent } from './panels/food/food-products/food-products.component';
 import { PanelRecipesComponent } from './panels/food/recipes/panel-recipes.component';
 import { PanelMealPlansComponent } from './panels/food/meal-plans/meal-plans.component';
 
+import { PanelGroceryControlsComponent } from './panels/food/grocery-controls/grocery-controls.component';
+import { PanelRecipeControlsComponent } from './panels/food/recipe-controls/recipe-controls.component';
+
 import { ModalRecipeIngredientsComponent } from './modals/food/recipe-ingredients/modal-recipe-ingredients.component';
 import { ModalGroceriesComponent } from './modals/food/groceries/modal-groceries.component';
 import { ModalRecipesComponent } from './modals/food/recipes/modal-recipes.component';
+import { ModalRecipeAddComponent } from './modals/food/recipe-add/modal-recipe-add.component';
 import { ModalGroceryListComponent } from './modals/food/grocery-list/modal-grocery-list.component';
 import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-grocery-edit.component';
 
 import { FormGroceryComponent } from './forms/food/grocery/form-grocery.component';
+import { FormRecipeComponent } from './forms/food/recipe/form-recipe.component';
 
 @NgModule({
     imports: [
@@ -44,20 +48,24 @@ import { FormGroceryComponent } from './forms/food/grocery/form-grocery.componen
 
     ],
     declarations: [
-        PanelGroceryControlsComponent,
         PanelGroceryCartComponent,
         PanelGroceriesComponent,
         PanelFoodProductsComponent,
         PanelRecipesComponent,
         PanelMealPlansComponent,
 
+        PanelGroceryControlsComponent,
+        PanelRecipeControlsComponent,
+
         ModalRecipeIngredientsComponent,
         ModalRecipesComponent,
+        ModalRecipeAddComponent,
         ModalGroceryListComponent,
         ModalGroceryEditComponent,
         ModalGroceriesComponent,
 
-        FormGroceryComponent
+        FormGroceryComponent,
+        FormRecipeComponent
     ],
     exports: [
     ],

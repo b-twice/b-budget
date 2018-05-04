@@ -6,3 +6,4 @@ export * from './food-product';
 export * from './grocery';
 export * from './supermarket';
 export * from './meal-plan';
+export * from './cookbook';

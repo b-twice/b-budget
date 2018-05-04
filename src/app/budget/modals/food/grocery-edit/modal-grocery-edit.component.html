@@ -1,19 +1,19 @@
 <div class="popup-wrapper" (click)="closeModal()">
-    <div class="popup-content">
-        <div class="popup-body" (click)="stopPropogation($event)">
+  <div class="popup-content">
+    <div class="popup-body" (click)="stopPropogation($event)">
 
 
-            <div class="popup-close">
-                <i class="fa fa-times fa-22" (click)="closeModal()" aria-hidden="true"></i>
-            </div>
+      <div class="popup-close">
+        <i class="fa fa-times fa-22" (click)="closeModal()" aria-hidden="true"></i>
+      </div>
 
 
-            <div (click)="closeModal()" class="icon-container" style="cursor:pointer;">
-                <i class="fa fa-arrow-left"></i>
-                <span>Back</span>
-            </div>
-            <budget-grocery-form *ngIf="grocery" submitLabel="Update" [grocery]="grocery" (onSubmit)="onSubmit($event)" (onDelete)="onDelete($event)"></budget-grocery-form>
+      <div (click)="closeModal()" class="icon-container" style="cursor:pointer;">
+        <i class="fa fa-arrow-left"></i>
+        <span>Back</span>
+      </div>
+      <budget-form-grocery *ngIf="grocery" submitLabel="Update" [grocery]="grocery" (onSubmit)="onSubmit($event)" (onDelete)="onDelete($event)"></budget-form-grocery>
 
-        </div>
     </div>
+  </div>
 </div>

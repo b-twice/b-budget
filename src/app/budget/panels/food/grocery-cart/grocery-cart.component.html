@@ -1,42 +1,42 @@
 <div class="controls">
-    <a (click)="back()" class="icon-container">
-        <i class="fa fa-arrow-left"></i>
-        <span>Back to Grocery List</span>
-    </a>
+  <a (click)="back()" class="icon-container">
+    <i class="fa fa-arrow-left"></i>
+    <span>Back to Grocery List</span>
+  </a>
 </div>
 <div class="panel">
-    <div class="cart">
-        <h4 class='section-header'>Cart</h4>
-        <div class="cart-items" *ngIf="groceryCart.length">
-            <div class="cart-item" *ngFor="let item of groceryCart; let i = index" [attr.data-index]="i">
-                <div>
-                    <i class="fa fa-angle-right"></i>&nbsp; &nbsp;
-                    <span *ngIf="!item.weight">{{item.count}}</span>
-                    <span *ngIf="!item.count">{{item.weight}}</span>{{item.unit}}&nbsp; {{item.name}}
-                    <span *ngIf="item.organic == 'Yes'">&nbsp;(O)</span>
-                    <span *ngIf="item.seasonal == 'Yes'">&nbsp;(S)</span>
-                </div>
-                <div>
-                    ${{item.amount}} &nbsp; &nbsp;
-                    <i class="fa fa-close icon-error" style="cursor:pointer" (click)="removeCartItem(i)"></i>
-                </div>
-            </div>
+  <div class="cart">
+    <h4 class='section-header'>Cart</h4>
+    <div class="cart-items" *ngIf="groceryCart.length">
+      <div class="cart-item" *ngFor="let item of groceryCart; let i = index" [attr.data-index]="i">
+        <div>
+          <i class="fa fa-angle-right"></i>&nbsp; &nbsp;
+          <span *ngIf="!item.weight">{{item.count}}</span>
+          <span *ngIf="!item.count">{{item.weight}}</span>{{item.unit}}&nbsp; {{item.name}}
+          <span *ngIf="item.organic == 'Yes'">&nbsp;(O)</span>
+          <span *ngIf="item.seasonal == 'Yes'">&nbsp;(S)</span>
         </div>
-        <div class="cart-total" *ngIf="groceryCart.length">
-            <span>
-                <b>{{cartTotal | currency:'USD':'symbol':'1.2-2'}}</b>
-            </span>
+        <div>
+          ${{item.amount}} &nbsp; &nbsp;
+          <i class="fa fa-close icon-error" style="cursor:pointer" (click)="removeCartItem(i)"></i>
         </div>
-        <span *ngIf="!groceryCart.length">
-            <em>No items in the cart</em>
-        </span>
+      </div>
     </div>
-    <div class="console">
-        <div class="register">
-            <budget-grocery-form submitLabel="Add To Cart" (onSubmit)="onSubmit($event)"></budget-grocery-form>
-            <button type="button" [disabled]="!groceryCart.length" class="button-full" (click)="checkout()">Checkout</button>
-        </div>
+    <div class="cart-total" *ngIf="groceryCart.length">
+      <span>
+        <b>{{cartTotal | currency:'USD':'symbol':'1.2-2'}}</b>
+      </span>
+    </div>
+    <span *ngIf="!groceryCart.length">
+      <em>No items in the cart</em>
+    </span>
+  </div>
+  <div class="console">
+    <div class="register">
+      <budget-form-grocery submitLabel="Add To Cart" (onSubmit)="onSubmit($event)"></budget-form-grocery>
+      <button type="button" [disabled]="!groceryCart.length" class="button-full" (click)="checkout()">Checkout</button>
+    </div>
 
-    </div>
+  </div>
 
 </div>

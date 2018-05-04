@@ -1,0 +1,25 @@
+<form #registerForm="ngForm" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="cookbook">Cookbook:</label>
+    <ng2-completer class="completer-limit" [(ngModel)]="model.cookbook" name="cookbooks" #cookbook="ngModel" [datasource]="cookbooksService"
+      [inputClass]="'form-control'" [placeholder]="'Search Cookbooks'" [autoMatch]="false" [clearUnselected]="false" [minSearchLength]="0"
+      required></ng2-completer>
+  </div>
+  <div class="form-group">
+    <label for="recipeCategory">Category:</label>
+    <ng2-completer class="completer-limit" [(ngModel)]="model.name" name="recipeCategory" #recipeCategory="ngModel" [datasource]="recipeCategoriesService"
+      [inputClass]="'form-control'" [placeholder]="'Search Categories'" [autoMatch]="true" [clearUnselected]="true" [minSearchLength]="0"
+      required #recipeCategory></ng2-completer>
+  </div>
+  <div class="form-group">
+    <label for="count">Name</label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="model.name" name="name" #name="ngModel" required>
+  </div>
+  <div class="form-group">
+    <label for="count">Page Number</label>
+    <input type="text" class="form-control" id="pageNumber" [(ngModel)]="model.pageNumber" name="pageNumber" #pageNumber="ngModel"
+      required>
+  </div>
+  <button type="submit" [disabled]="!registerForm.form.valid" class="button-full">{{submitLabel}}</button>
+  <button type="submit" *ngIf="model.id" (click)="delete()" class="button-full delete">Delete</button>
+</form>

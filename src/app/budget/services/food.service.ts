@@ -11,7 +11,8 @@ import {
     AnnualFoodProduct,
     FoodProduct,
     Supermarket,
-    MealPlan
+    MealPlan,
+    Cookbook
 } from '../models/food';
 import { TransactionMonthly } from '../models/finance';
 import { Category } from '../models/core';
@@ -34,6 +35,9 @@ export class FoodService extends CoreService {
     }
     public getSupermarkets(): Observable<Supermarket[]> {
         return this.request<Supermarket[]>('food/supermarkets');
+    }
+    public getCookbooks(): Observable<Cookbook[]> {
+        return this.request<Cookbook[]>('food/supermarkets');
     }
 
 
@@ -100,6 +104,15 @@ export class FoodService extends CoreService {
         recipes.forEach(c => params = params.append('recipeNames', c));
         const httpOptions = { params: params };
         return this.request<RecipeIngredient[]>(`food/recipes/ingredients`, httpOptions);
+    }
+    public addRecipe(data: Recipe) {
+        return this.post('food/recipes/recipe', data);
+    }
+    public updateRecipe(id: number, data: any) {
+        return this.put(`food/recipes/recipe/${id}`, data);
+    }
+    public deleteRecipe(id: number) {
+        return this.delete(`food/recipes/recipe/${id}`);
     }
 
 

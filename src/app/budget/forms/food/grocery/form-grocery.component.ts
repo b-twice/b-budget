@@ -6,27 +6,22 @@ import { FoodService } from '../../../services/food.service';
 import { FoodProduct, Grocery, Supermarket, } from '../../../models/food';
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { FormBaseComponent } from '../../core/base/form-base.component';
 
 @Component({
-    selector: 'budget-grocery-form',
+    selector: 'budget-form-grocery',
     templateUrl: './form-grocery.component.html',
     styleUrls: ['./form-grocery.component.scss']
 })
-export class FormGroceryComponent implements OnInit {
+export class FormGroceryComponent extends FormBaseComponent implements OnInit {
 
     @Input() grocery: Grocery;
-    @Input() submitLabel: string = 'Submit';
 
     model: Grocery = new Grocery(0, null, null, null);
     foodProducts: Observable<FoodProduct[]>;
     supermarkets: Observable<Supermarket[]>;
-    user: string;
-    year: string;
     foodProductsService: CompleterData;
     supermarketsService: CompleterData;
-    @Output() onSubmit = new EventEmitter<Grocery>();
-    @Output() onDelete = new EventEmitter<Grocery>();
-
     @ViewChild("foodProduct") _foodProduct: CompleterCmp;
 
     constructor(
@@ -34,15 +29,11 @@ export class FormGroceryComponent implements OnInit {
         public apiService: FoodService,
         public completerService: CompleterService
     ) {
+        super(route)
     }
 
     ngOnInit() {
-        this.route.params.subscribe(
-            params => {
-                this.user = params['user'];
-                this.year = params['year'];
-            }
-        );
+        this.resolveRoutes();
         forkJoin(
             this.apiService.getFoodProducts(),
             this.apiService.getSupermarkets()
@@ -75,17 +66,11 @@ export class FormGroceryComponent implements OnInit {
         }
     }
 
-    submit() {
+    beforeSubmit() {
         this.model.user = this.model.user ? this.model.user : this.user;
         this.model.weight = this.model.weight ? this.model.weight : 0;
         this.model.count = this.model.count ? this.model.count : 0;
         this.model.amount = this.model.amount ? this.model.amount : 0;
-        this.onSubmit.emit(this.model);
-    }
-
-    delete() {
-        this.onDelete.emit(this.model);
-
     }
 
 }
