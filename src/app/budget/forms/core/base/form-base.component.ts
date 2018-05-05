@@ -22,8 +22,14 @@ export class FormBaseComponent {
     resolveRoutes() {
         this.route.parent.params.subscribe(
             params => {
-                this.user = params['user'];
-                this.year = params['year'];
+                this.user = this.user ? this.user : params['user'];
+                this.year = this.year ? this.year : params['year'];
+            }
+        );
+        this.route.params.subscribe(
+            params => {
+                this.user = this.user ? this.user : params['user'];
+                this.year = this.year ? this.year : params['year'];
             }
         );
     }
