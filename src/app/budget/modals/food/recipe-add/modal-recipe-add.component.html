@@ -7,7 +7,7 @@
         <i class="fa fa-times fa-22" (click)="closeModal()" aria-hidden="true"></i>
       </div>
 
-      <budget-form-recipe submitLabel="Submit" (onSubmit)="onSubmit($event)"></budget-form-recipe>
+      <budget-form-recipe *ngIf="loaded || recipe" [recipe]="recipe" [submitLabel]="label" (onSubmit)="onSubmit($event)" (onDelete)="onDelete($event) "></budget-form-recipe>
 
     </div>
   </div>

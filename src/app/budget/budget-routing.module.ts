@@ -130,7 +130,7 @@ const adminRoutes: Routes = [
                 component: PanelRecipesComponent,
                 children: [
                     {
-                        path: ':name',
+                        path: ':id',
                         component: ModalRecipeIngredientsComponent,
                         outlet: 'ingredients'
                     },
@@ -138,7 +138,13 @@ const adminRoutes: Routes = [
                         path: 'add',
                         component: ModalRecipeAddComponent,
                         outlet: 'recipe'
+                    },
+                    {
+                        path: 'edit/:id',
+                        component: ModalRecipeAddComponent,
+                        outlet: 'recipe'
                     }
+
                 ]
             },
 

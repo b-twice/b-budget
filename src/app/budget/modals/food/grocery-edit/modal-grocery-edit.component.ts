@@ -43,7 +43,6 @@ export class ModalGroceryEditComponent implements OnInit {
     }
 
     closeModal() {
-        let year = new Date(this.grocery.date).getFullYear();
         this.router.navigate(['.', { outlets: { list: [this.grocery.name], form: null } }], { relativeTo: this.route.parent });
     }
 
@@ -51,18 +50,15 @@ export class ModalGroceryEditComponent implements OnInit {
 
 
     onSubmit(item: Grocery) {
-        let year = new Date(item.date).getFullYear();
         this.apiService.updateGrocery(item.id, item).subscribe(result => {
             this.router.navigate(['.', { outlets: { list: [item.name], form: null } }], { relativeTo: this.route.parent });
         }, error => { console.log(error); });
 
     }
     onDelete(item: Grocery) {
-        let year = new Date(item.date).getFullYear();
         this.apiService.deleteGrocery(item.id).subscribe(result => {
             this.router.navigate(['.', { outlets: { list: [item.name], form: null } }], { relativeTo: this.route.parent });
         }, error => { console.log(error); });
-
     }
 
 }

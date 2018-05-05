@@ -18,7 +18,7 @@ export class FormRecipeComponent extends FormBaseComponent implements OnInit {
 
     @Input() recipe: Recipe;
 
-    model: Recipe = new Recipe(null, null, null, null, null, null);
+    model: Recipe = new Recipe(0, null, null, null, null, null);
     recipeCategories: Observable<Category[]>;
     cookbooks: Observable<Cookbook[]>;
     user: string;
@@ -42,7 +42,7 @@ export class FormRecipeComponent extends FormBaseComponent implements OnInit {
             this.apiService.getCookbooks(),
             this.apiService.getRecipeCategories()
         ).subscribe(data => {
-            this.cookbooksService = this.completerService.local(data[0], 'name', 'name');
+            this.cookbooksService = this.completerService.local(data[0], 'title', 'title');
             this.recipeCategoriesService = this.completerService.local(data[1], 'name', 'name');
             if (this.recipe) {
                 this.model = this.recipe

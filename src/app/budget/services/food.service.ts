@@ -37,7 +37,7 @@ export class FoodService extends CoreService {
         return this.request<Supermarket[]>('food/supermarkets');
     }
     public getCookbooks(): Observable<Cookbook[]> {
-        return this.request<Cookbook[]>('food/supermarkets');
+        return this.request<Cookbook[]>('food/cookbooks');
     }
 
 
@@ -96,14 +96,11 @@ export class FoodService extends CoreService {
         const httpOptions = { params: params };
         return this.request<Recipe[]>(`food/recipes/user/${name}`, httpOptions);
     }
-    public getRecipe(name: string): Observable<Recipe> {
-        return this.request<Recipe>(`food/recipes/recipe/${name}`, null);
+    public getRecipe(id: number): Observable<Recipe> {
+        return this.request<Recipe>(`food/recipes/recipe/${id}`, null);
     }
-    public getRecipeIngredients(recipes: string[]): Observable<RecipeIngredient[]> {
-        let params = new HttpParams();
-        recipes.forEach(c => params = params.append('recipeNames', c));
-        const httpOptions = { params: params };
-        return this.request<RecipeIngredient[]>(`food/recipes/ingredients`, httpOptions);
+    public getRecipeIngredients(id: number): Observable<RecipeIngredient[]> {
+        return this.request<RecipeIngredient[]>(`food/recipes/ingredients/${id}`, null);
     }
     public addRecipe(data: Recipe) {
         return this.post('food/recipes/recipe', data);

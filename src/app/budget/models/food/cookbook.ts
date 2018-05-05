@@ -1,7 +1,7 @@
 export class Cookbook {
     constructor(
         public id: number,
-        public name: string,
+        public title: string,
         public author: string
     ) { }
 }

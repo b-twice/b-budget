@@ -49,5 +49,5 @@
         </div>
     </div>
     <button type="submit" [disabled]="!registerForm.form.valid" class="button-full">{{submitLabel}}</button>
-    <button type="submit" *ngIf="model.id" (click)="delete()" class="button-full delete">Delete</button>
 </form>
+<button type="submit" *ngIf="model.id" (click)="delete()" class="button-full delete">Delete</button>

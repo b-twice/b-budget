@@ -20,7 +20,7 @@ export class FormBaseComponent {
     ) {
     }
     resolveRoutes() {
-        this.route.params.subscribe(
+        this.route.parent.params.subscribe(
             params => {
                 this.user = params['user'];
                 this.year = params['year'];

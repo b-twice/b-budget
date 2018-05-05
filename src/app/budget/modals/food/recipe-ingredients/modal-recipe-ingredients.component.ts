@@ -2,7 +2,7 @@ import { Component, OnInit, } from '@angular/core';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { RecipeIngredient, Recipe } from '../../../models/food';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FoodService } from '../../../services/food.service';
 import { ModalBaseComponent } from '../../core/base/modal-base.component'
 
@@ -13,7 +13,7 @@ import { ModalBaseComponent } from '../../core/base/modal-base.component'
 })
 export class ModalRecipeIngredientsComponent extends ModalBaseComponent implements OnInit {
 
-  recipeName: string;
+  id: number;
   ingredients: RecipeIngredient[];
   recipe: Observable<Recipe>;
   recipeTotal: number = 0;
@@ -24,6 +24,7 @@ export class ModalRecipeIngredientsComponent extends ModalBaseComponent implemen
 
   constructor(
     public route: ActivatedRoute,
+    public router: Router,
     public apiService: FoodService,
     public location: Location
   ) {
@@ -33,19 +34,14 @@ export class ModalRecipeIngredientsComponent extends ModalBaseComponent implemen
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.recipeName = params['name'];
+      this.id = params['id'];
       this.getData();
-    });
-    this.ingredients.forEach(i => {
-      this.recipeTotal += i.cost;
-      this.recipeOrganicTotal += i.costOrganic;
-      this.recipeSeasonalTotal += i.costSeasonal;
     });
   }
 
   getData() {
-    this.recipe = this.apiService.getRecipe(this.recipeName);
-    this.apiService.getRecipeIngredients([this.recipeName]).subscribe(ingredients => {
+    this.recipe = this.apiService.getRecipe(this.id);
+    this.apiService.getRecipeIngredients(this.id).subscribe(ingredients => {
       this.ingredients = ingredients;
       // this should be stuffed on the recipe rather then summarized here
       ingredients.forEach(i => {
@@ -54,6 +50,10 @@ export class ModalRecipeIngredientsComponent extends ModalBaseComponent implemen
         this.recipeSeasonalTotal += i.costSeasonal;
       });
     });
+  }
+
+  edit(recipe: Recipe) {
+    this.router.navigate(['.', { outlets: { ingredients: null, recipe: ['edit', recipe.id] } }], { relativeTo: this.route.parent });
   }
 
 }
