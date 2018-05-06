@@ -27,6 +27,8 @@ import { ModalGroceriesComponent } from './modals/food/groceries/modal-groceries
 import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-grocery-edit.component'
 import { ModalRecipeIngredientsComponent } from './modals/food/recipe-ingredients/modal-recipe-ingredients.component';
 import { ModalRecipeAddComponent } from './modals/food/recipe-add/modal-recipe-add.component';
+import { ModalRecipeIngredientAddComponent } from './modals/food/recipe-ingredient-add/modal-recipe-ingredient-add.component';
+
 
 
 //personal
@@ -129,6 +131,11 @@ const adminRoutes: Routes = [
                 path: "recipes/:user/:year",
                 component: PanelRecipesComponent,
                 children: [
+                    {
+                        path: ':add',
+                        component: ModalRecipeIngredientAddComponent,
+                        outlet: 'ingredient'
+                    },
                     {
                         path: ':id',
                         component: ModalRecipeIngredientsComponent,

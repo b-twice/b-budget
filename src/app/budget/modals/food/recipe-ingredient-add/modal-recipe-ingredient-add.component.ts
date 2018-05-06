@@ -1,26 +1,25 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common'
-import { Recipe } from '../../../models/food';
+import { RecipeIngredient } from '../../../models/food';
 import { Observable } from 'rxjs/Observable';
-import { FormRecipeComponent } from '../../../forms/food/recipe/form-recipe.component';
+import { FormRecipeIngredientComponent } from '../../../forms/food/recipe-ingredient/form-recipe-ingredient.component';
 import { FoodService } from '../../../services/food.service';
 import { ModalBaseComponent } from '../../core/base/modal-base.component';
 
 
 @Component({
-    selector: 'budget-recipe-add-modal',
-    templateUrl: './modal-recipe-add.component.html',
-    styleUrls: ['./modal-recipe-add.component.scss']
+    selector: 'budget-recipe-ingredient-add-modal',
+    templateUrl: './modal-recipe-ingredient-add.component.html',
+    styleUrls: ['./modal-recipe-ingredient-add.component.scss']
 })
-export class ModalRecipeAddComponent extends ModalBaseComponent implements OnInit {
+export class ModalRecipeIngredientAddComponent extends ModalBaseComponent implements OnInit {
 
-    @ViewChild(FormRecipeComponent)
-    form: FormRecipeComponent;
+    @ViewChild(FormRecipeIngredientComponent)
+    form: FormRecipeIngredientComponent;
 
     id: number;
-    user: string;
-    recipe: Recipe;
+    recipeIngredient: RecipeIngredient;
     loaded: boolean;
     label: string = 'Submit';
 
@@ -35,9 +34,6 @@ export class ModalRecipeAddComponent extends ModalBaseComponent implements OnIni
     }
 
     ngOnInit() {
-        this.route.parent.params.subscribe(params => {
-            this.user = params['user'];
-        });
         this.route.params.subscribe(params => {
             this.id = params['id'];
             this.getData();
@@ -46,9 +42,9 @@ export class ModalRecipeAddComponent extends ModalBaseComponent implements OnIni
 
     getData() {
         if (this.id) {
-            this.apiService.getRecipe(this.id).subscribe(recipe => {
+            this.apiService.getRecipeIngredient(this.id).subscribe(recipeIngredient => {
                 this.label = 'Update';
-                this.recipe = recipe;
+                this.recipeIngredient = recipeIngredient;
             });
         }
         else {
@@ -57,20 +53,20 @@ export class ModalRecipeAddComponent extends ModalBaseComponent implements OnIni
 
     }
 
-    onSubmit(item: Recipe) {
-        if (this.recipe) {
-            this.apiService.updateRecipe(item.id, item).subscribe(result => {
+    onSubmit(item: RecipeIngredient) {
+        if (this.recipeIngredient) {
+            this.apiService.updateRecipeIngredient(item.id, item).subscribe(result => {
                 this.closeModal();
             }, error => { console.log(error); });
         }
         else {
-            this.apiService.addRecipe(item).subscribe(result => {
+            this.apiService.addRecipeIngredient(item).subscribe(result => {
                 this.closeModal();
             }, error => { console.log(error); });
         }
     }
-    onDelete(item: Recipe) {
-        this.apiService.deleteRecipe(item.id).subscribe(result => {
+    onDelete(item: RecipeIngredient) {
+        this.apiService.deleteRecipeIngredient(item.id).subscribe(result => {
             this.router.navigate(['.', { outlets: { recipe: null } }], { relativeTo: this.route.parent });
         }, error => { console.log(error); });
     }

@@ -10,7 +10,6 @@ export class FormBaseComponent {
     @Input() submitLabel: string = 'Submit';
     model: {} = {};
     user: string;
-    year: string;
     @Output() onSubmit = new EventEmitter<any>();
     @Output() onDelete = new EventEmitter<any>();
 
@@ -18,20 +17,6 @@ export class FormBaseComponent {
     constructor(
         public route: ActivatedRoute
     ) {
-    }
-    resolveRoutes() {
-        this.route.parent.params.subscribe(
-            params => {
-                this.user = this.user ? this.user : params['user'];
-                this.year = this.year ? this.year : params['year'];
-            }
-        );
-        this.route.params.subscribe(
-            params => {
-                this.user = this.user ? this.user : params['user'];
-                this.year = this.year ? this.year : params['year'];
-            }
-        );
     }
 
     beforeSubmit() { }

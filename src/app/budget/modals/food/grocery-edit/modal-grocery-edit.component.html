@@ -12,7 +12,8 @@
         <i class="fa fa-arrow-left"></i>
         <span>Back</span>
       </div>
-      <budget-form-grocery *ngIf="grocery" submitLabel="Update" [grocery]="grocery" (onSubmit)="onSubmit($event)" (onDelete)="onDelete($event)"></budget-form-grocery>
+      <budget-form-grocery *ngIf="grocery && user" submitLabel="Update" [user]="user" [grocery]="grocery" (onSubmit)="onSubmit($event)"
+        (onDelete)="onDelete($event)"></budget-form-grocery>
 
     </div>
   </div>

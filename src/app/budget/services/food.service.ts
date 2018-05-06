@@ -90,6 +90,9 @@ export class FoodService extends CoreService {
     }
 
     // Recipes
+    public getRecipesAll(): Observable<Recipe[]> {
+        return this.request<Recipe[]>(`food/recipes`, null);
+    }
     public getRecipes(name: string, categories: string[]): Observable<Recipe[]> {
         let params = new HttpParams();
         categories.forEach(c => params = params.append('categoryNames', c));
@@ -98,9 +101,6 @@ export class FoodService extends CoreService {
     }
     public getRecipe(id: number): Observable<Recipe> {
         return this.request<Recipe>(`food/recipes/recipe/${id}`, null);
-    }
-    public getRecipeIngredients(id: number): Observable<RecipeIngredient[]> {
-        return this.request<RecipeIngredient[]>(`food/recipes/ingredients/${id}`, null);
     }
     public addRecipe(data: Recipe) {
         return this.post('food/recipes/recipe', data);
@@ -111,6 +111,25 @@ export class FoodService extends CoreService {
     public deleteRecipe(id: number) {
         return this.delete(`food/recipes/recipe/${id}`);
     }
+
+    public getRecipeIngredients(id: number): Observable<RecipeIngredient[]> {
+        return this.request<RecipeIngredient[]>(`food/recipes/ingredients/${id}`, null);
+    }
+
+    public getRecipeIngredient(id: number): Observable<RecipeIngredient> {
+        return this.request<RecipeIngredient>(`food/recipes/ingredient/${id}`, null);
+    }
+    public addRecipeIngredient(data: RecipeIngredient) {
+        return this.post('food/recipes/ingredient', data);
+    }
+    public updateRecipeIngredient(id: number, data: any) {
+        return this.put(`food/recipes/ingredient/${id}`, data);
+    }
+    public deleteRecipeIngredient(id: number) {
+        return this.delete(`food/recipes/ingredient/${id}`);
+    }
+
+
 
 
     // Meal Plans

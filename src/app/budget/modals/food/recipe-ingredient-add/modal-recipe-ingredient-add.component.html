@@ -7,8 +7,8 @@
         <i class="fa fa-times fa-22" (click)="closeModal()" aria-hidden="true"></i>
       </div>
 
-      <budget-form-recipe *ngIf="(loaded || recipe) && user" [user]="user" [recipe]="recipe" [submitLabel]="label" (onSubmit)="onSubmit($event)"
-        (onDelete)="onDelete($event) "></budget-form-recipe>
+      <budget-form-recipe-ingredient *ngIf="(loaded || recipeIngredient)" [recipeIngredient]="recipeIngredient" [submitLabel]="label"
+        (onSubmit)="onSubmit($event)" (onDelete)="onDelete($event) "></budget-form-recipe-ingredient>
 
     </div>
   </div>

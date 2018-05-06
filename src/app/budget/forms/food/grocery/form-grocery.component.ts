@@ -16,6 +16,7 @@ import { FormBaseComponent } from '../../core/base/form-base.component';
 export class FormGroceryComponent extends FormBaseComponent implements OnInit {
 
     @Input() grocery: Grocery;
+    @Input() user: string;
 
     model: Grocery = new Grocery(0, null, null, null);
     foodProducts: Observable<FoodProduct[]>;
@@ -33,7 +34,6 @@ export class FormGroceryComponent extends FormBaseComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.resolveRoutes();
         forkJoin(
             this.apiService.getFoodProducts(),
             this.apiService.getSupermarkets()

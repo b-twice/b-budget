@@ -27,6 +27,7 @@ import { PanelGroceryControlsComponent } from './panels/food/grocery-controls/gr
 import { PanelRecipeControlsComponent } from './panels/food/recipe-controls/recipe-controls.component';
 
 import { ModalRecipeIngredientsComponent } from './modals/food/recipe-ingredients/modal-recipe-ingredients.component';
+import { ModalRecipeIngredientAddComponent } from './modals/food/recipe-ingredient-add/modal-recipe-ingredient-add.component';
 import { ModalGroceriesComponent } from './modals/food/groceries/modal-groceries.component';
 import { ModalRecipesComponent } from './modals/food/recipes/modal-recipes.component';
 import { ModalRecipeAddComponent } from './modals/food/recipe-add/modal-recipe-add.component';
@@ -35,6 +36,7 @@ import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-groc
 
 import { FormGroceryComponent } from './forms/food/grocery/form-grocery.component';
 import { FormRecipeComponent } from './forms/food/recipe/form-recipe.component';
+import { FormRecipeIngredientComponent } from './forms/food/recipe-ingredient/form-recipe-ingredient.component';
 
 @NgModule({
     imports: [
@@ -57,6 +59,7 @@ import { FormRecipeComponent } from './forms/food/recipe/form-recipe.component';
         PanelGroceryControlsComponent,
         PanelRecipeControlsComponent,
 
+        ModalRecipeIngredientAddComponent,
         ModalRecipeIngredientsComponent,
         ModalRecipesComponent,
         ModalRecipeAddComponent,
@@ -65,7 +68,8 @@ import { FormRecipeComponent } from './forms/food/recipe/form-recipe.component';
         ModalGroceriesComponent,
 
         FormGroceryComponent,
-        FormRecipeComponent
+        FormRecipeComponent,
+        FormRecipeIngredientComponent
     ],
     exports: [
     ],

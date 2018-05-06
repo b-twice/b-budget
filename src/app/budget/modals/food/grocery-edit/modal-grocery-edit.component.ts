@@ -15,6 +15,7 @@ export class ModalGroceryEditComponent implements OnInit {
 
     id: number;
     grocery: Grocery;
+    user: string;
 
     @ViewChild(FormGroceryComponent)
     form: FormGroceryComponent;
@@ -27,6 +28,9 @@ export class ModalGroceryEditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.route.parent.params.subscribe(params => {
+            this.user = params['user'];
+        });
         this.route.params.subscribe(
             params => {
                 this.id = params['id'];

@@ -17,12 +17,11 @@ import { FormBaseComponent } from '../../core/base/form-base.component';
 export class FormRecipeComponent extends FormBaseComponent implements OnInit {
 
     @Input() recipe: Recipe;
+    @Input() user: string;
 
     model: Recipe = new Recipe(0, null, null, null, null, null);
     recipeCategories: Observable<Category[]>;
     cookbooks: Observable<Cookbook[]>;
-    user: string;
-    year: string;
     recipeCategoriesService: CompleterData;
     cookbooksService: CompleterData;
     @Output() onSubmit = new EventEmitter<Recipe>();
@@ -37,7 +36,6 @@ export class FormRecipeComponent extends FormBaseComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.resolveRoutes();
         forkJoin(
             this.apiService.getCookbooks(),
             this.apiService.getRecipeCategories()
