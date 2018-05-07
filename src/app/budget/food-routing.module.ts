@@ -9,6 +9,7 @@ import { PanelFoodProductsComponent } from './panels/food/food-products/food-pro
 import { PanelGroceryCartComponent } from './panels/food/grocery-cart/grocery-cart.component'
 import { PanelMealPlansComponent } from './panels/food/meal-plans/meal-plans.component';
 import { PanelRecipesComponent } from './panels/food/recipes/panel-recipes.component';
+import { PanelIngredientsComponent } from './panels/food/ingredients/panel-ingredients.component'
 
 import { ModalRecipesComponent } from './modals/food/recipes/modal-recipes.component';
 import { ModalGroceryListComponent } from './modals/food/grocery-list/modal-grocery-list.component';
@@ -77,14 +78,13 @@ const foodRoutes: Routes = [
                 ]
             },
             {
+                path: "ingredients",
+                component: PanelIngredientsComponent,
+            },
+            {
                 path: "recipes/:user/:year",
                 component: PanelRecipesComponent,
                 children: [
-                    {
-                        path: ':add',
-                        component: ModalRecipeIngredientAddComponent,
-                        outlet: 'ingredient'
-                    },
                     {
                         path: ':id',
                         component: ModalRecipeIngredientsComponent,

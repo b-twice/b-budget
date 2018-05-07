@@ -1,0 +1,34 @@
+<div class="controls">
+  <a (click)="back()" class="icon-container">
+    <i class="fa fa-arrow-left"></i>
+    <span>Back to Recipes</span>
+  </a>
+</div>
+<div class="panel">
+  <div class="cart">
+    <h4 class='section-header'>Cart</h4>
+    <div class="cart-items" *ngIf="ingredients.length">
+      <div class="cart-item" *ngFor="let item of ingredients; let i = index" [attr.data-index]="i">
+        <div>
+          <i class="fa fa-angle-right"></i>&nbsp; &nbsp;
+          <span>{{item.measurement}}</span>
+          {{item.name}}
+        </div>
+        <div>
+          <i class="fa fa-close icon-error" style="cursor:pointer" (click)="removeItem(i)"></i>
+        </div>
+      </div>
+    </div>
+    <span *ngIf="!ingredients.length">
+      <em>No items in the cart</em>
+    </span>
+  </div>
+  <div class="console">
+    <div class="register">
+      <budget-form-recipe-ingredient ngIf="user" [user]="user" submitLabel="Add To Cart" (onSubmit)="onSubmit($event)"></budget-form-recipe-ingredient>
+      <button type="button" [disabled]="!ingredients.length" class="button-full" (click)="checkout()">Submit</button>
+    </div>
+
+  </div>
+
+</div>

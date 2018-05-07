@@ -33,6 +33,11 @@ export class FormRecipeIngredientComponent extends FormBaseComponent implements 
         super(route)
     }
 
+    rebuild() {
+        this.model = new RecipeIngredient(0, null, null, null, null);
+    }
+
+
     ngOnInit() {
         this.apiService.getRecipesAll().subscribe(data => {
             this.recipeService = this.completerService.local(data, 'name', 'name');

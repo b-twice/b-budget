@@ -20,6 +20,7 @@ import { PanelGroceryCartComponent } from './panels/food/grocery-cart/grocery-ca
 import { PanelFoodProductsComponent } from './panels/food/food-products/food-products.component';
 import { PanelRecipesComponent } from './panels/food/recipes/panel-recipes.component';
 import { PanelMealPlansComponent } from './panels/food/meal-plans/meal-plans.component';
+import { PanelIngredientsComponent } from './panels/food/ingredients/panel-ingredients.component'
 
 import { PanelGroceryControlsComponent } from './panels/food/grocery-controls/grocery-controls.component';
 import { PanelRecipeControlsComponent } from './panels/food/recipe-controls/recipe-controls.component';
@@ -51,6 +52,7 @@ import { FormRecipeIngredientComponent } from './forms/food/recipe-ingredient/fo
         PanelFoodProductsComponent,
         PanelRecipesComponent,
         PanelMealPlansComponent,
+        PanelIngredientsComponent,
 
         PanelGroceryControlsComponent,
         PanelRecipeControlsComponent,

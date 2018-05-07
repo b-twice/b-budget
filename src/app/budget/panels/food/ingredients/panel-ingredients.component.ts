@@ -3,25 +3,24 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FoodService } from '../../../services/food.service';
-import { Grocery } from '../../../models/food';
+import { RecipeIngredient, Recipe } from '../../../models/food';
 import { Observable } from 'rxjs/Observable';
-import { FormGroceryComponent } from '../../../forms/food/grocery/form-grocery.component';
+import { FormRecipeIngredientComponent } from '../../../forms/food/recipe-ingredient/form-recipe-ingredient.component';
 import { NavigationService } from '../../../services/navigation.service';
 import { PanelBaseComponent } from '../../core/base/panel-base.component'
 
 @Component({
-  selector: 'budget-panel-grocery-cart',
-  templateUrl: './grocery-cart.component.html',
-  styleUrls: ['./grocery-cart.component.scss']
+  selector: 'budget-panel-ingredients',
+  templateUrl: './panel-ingredients.component.html',
+  styleUrls: ['./panel-ingredients.component.scss']
 })
-export class PanelGroceryCartComponent extends PanelBaseComponent implements OnInit {
+export class PanelIngredientsComponent extends PanelBaseComponent implements OnInit {
 
-  groceryCart: Grocery[];
-  cartTotal: number = 0;
+  ingredients: RecipeIngredient[];
   saveError: boolean = false;
 
-  @ViewChild(FormGroceryComponent)
-  groceryForm: FormGroceryComponent;
+  @ViewChild(FormRecipeIngredientComponent)
+  recipeIngredientForm: FormRecipeIngredientComponent;
 
 
   constructor(
@@ -34,30 +33,27 @@ export class PanelGroceryCartComponent extends PanelBaseComponent implements OnI
   }
 
   ngOnInit() {
-    this.groceryCart = [];
+    this.ingredients = [];
     this.resolveRoutes();
   }
 
   back() {
     this.location.back();
   }
-  onSubmit(item: Grocery) {
-    this.groceryCart.push(item);
-    this.cartTotal += item.amount;
-    this.groceryForm.rebuild();
+  onSubmit(item: RecipeIngredient) {
+    this.ingredients.push(item);
+    this.recipeIngredientForm.rebuild();
   }
 
   removeItem(index: number): void {
-    this.cartTotal -= this.groceryCart[index].amount;
-    this.groceryCart.splice(index, 1);
+    this.ingredients.splice(index, 1);
   }
 
   checkout(): void {
     this.saveError = false;
-    let data = { basket: this.groceryCart }
+    let data = { ingredients: this.ingredients }
     this.apiService.checkoutGroceries(data).subscribe(result => {
-      this.groceryCart = [];
-      this.cartTotal = 0;
+      this.ingredients = [];
     }, error => { console.log(error); this.saveError = true });
   }
 
