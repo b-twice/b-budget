@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BudgetRoutingModule } from './budget-routing.module';
+import { SharedServiceModule } from './shared-service.module'
 
 // services
 import { CoreService } from './services/core.service';
@@ -20,7 +21,8 @@ import { AuthModule } from './services/auth.module';
         SharedModule,
         AuthModule,
         FinanceModule,
-        CoreModule
+        CoreModule,
+        SharedServiceModule.forRoot()
     ],
     declarations: [
     ],

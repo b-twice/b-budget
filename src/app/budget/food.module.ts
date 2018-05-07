@@ -38,7 +38,6 @@ import { FormGroceryComponent } from './forms/food/grocery/form-grocery.componen
         FoodRoutingModule,
         FormsModule,
         Ng2CompleterModule
-
     ],
     declarations: [
         PanelGroceryControlsComponent,

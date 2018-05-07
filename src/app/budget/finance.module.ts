@@ -16,8 +16,6 @@ import { PanelSummaryComponent } from './panels/finance/summary/summary.componen
 import { PanelCategoriesComponent } from './panels/finance/categories/categories.component';
 import { PanelTransactionsComponent } from './panels/finance/transactions/transactions.component';
 import { PanelExpensesComponent } from './panels/finance/expenses/expenses.component';
-import { UserProfileComponent } from './base/user-profile/user-profile.component';
-import { UserProfileTransformPipe } from './base/user-profile/user-profile-transform.pipe';
 import { CategoriesTransformPipe } from './panels/finance/categories/categories-transform.pipe';
 import { PanelSpendingChartComponent } from './panels/finance/spending-chart/spending-chart.component';
 import { ModalExpensesComponent } from './modals/finance/expenses/modal-expenses.component';
@@ -33,18 +31,13 @@ import { PanelSummaryChartComponent } from './panels/finance/summary-chart/summa
     ],
     declarations: [
         PanelSummaryComponent,
-        UserProfileComponent,
         PanelCategoriesComponent,
         PanelTransactionsComponent,
         PanelExpensesComponent,
-        UserProfileTransformPipe,
         CategoriesTransformPipe,
         PanelSummaryChartComponent,
         PanelSpendingChartComponent,
         ModalExpensesComponent,
-    ],
-    exports: [
-        UserProfileComponent
     ],
     providers: [
         CoreService,

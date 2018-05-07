@@ -22,7 +22,7 @@ export class PanelNavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.navigationService.updateData.subscribe(data => { this.params = data; console.log(this.params) });
+    this.navigationService.updateData.subscribe(data => this.params = data);
   }
   isActive(group: string, panel: string, ) {
     return this.router.isActive(this.router.createUrlTree(['/budget/', group, panel]), null);

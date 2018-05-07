@@ -7,8 +7,8 @@ import { PanelChartService } from './panels/core/chart/panel-chart.service';
 
 //shared
 import { SharedModule } from '../shared/shared.module';
-import { ServiceModule } from './serve.modules'
 
+import { FormBaseComponent } from './forms/core/base/form-base.component';
 import { PanelBaseComponent } from './panels/core/base/panel-base.component';
 import { ModalBaseComponent } from './modals/core/base/modal-base.component';
 import { PanelChartComponent } from './panels/core/chart/panel-chart.component';
@@ -20,6 +20,8 @@ import { HeaderComponent } from './base/header/header.component';
 import { UserNavComponent } from './navigation/user/user-nav.component';
 import { YearNavComponent } from './navigation/year/year-nav.component';
 import { PanelNavComponent } from './navigation/panel/panel-nav.component';
+import { UserProfileComponent } from './base/user-profile/user-profile.component';
+import { UserProfileTransformPipe } from './base/user-profile/user-profile-transform.pipe';
 
 
 
@@ -28,10 +30,10 @@ import { PanelNavComponent } from './navigation/panel/panel-nav.component';
         CommonModule,
         SharedModule,
         RouterModule,
-        ServiceModule.forRoot()
     ],
     declarations: [
         PanelBaseComponent,
+        FormBaseComponent,
         ModalBaseComponent,
         PanelChartComponent,
         BudgetDashboardComponent,
@@ -39,7 +41,9 @@ import { PanelNavComponent } from './navigation/panel/panel-nav.component';
         HeaderComponent,
         UserNavComponent,
         YearNavComponent,
-        PanelNavComponent
+        PanelNavComponent,
+        UserProfileComponent,
+        UserProfileTransformPipe
 
     ],
     exports: [

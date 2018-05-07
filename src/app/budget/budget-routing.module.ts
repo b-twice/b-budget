@@ -23,11 +23,10 @@ const adminRoutes: Routes = [
                 path: 'personal',
                 loadChildren: 'app/budget/personal.module#PersonalModule',
             },
-
-            // {
-            //     path: '',
-            //     redirectTo: '/budget/finance/summary/All/2018'
-            // }
+            {
+                path: '',
+                redirectTo: '/budget/finance/summary/All/2018'
+            }
         ]
     }
 ];
