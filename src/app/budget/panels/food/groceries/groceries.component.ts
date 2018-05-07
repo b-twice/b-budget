@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../../services/food.service';
 import { Grocery } from '../../../models/food';
 import { TransactionMonthly } from '../../../models/finance';
-import { Category, NavigationParams } from '../../../models/core';
+import { Category } from '../../../models/core';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../../../shared/filter-controls/filter-controls.component';
 import { PanelChartService } from '../../core/chart/panel-chart.service';

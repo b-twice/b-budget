@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { DatePipe, CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Ng2CompleterModule } from 'ng2-completer';
 
 // services
 import { CoreService } from './services/core.service';
-import { NavigationService } from './services/navigation.service';
 import { FinanceService } from './services/finance.service';
 import { FoodService } from './services/food.service';
 
@@ -14,7 +12,7 @@ import { FoodService } from './services/food.service';
 // modules
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from './core.module';
-import { AuthModule } from './services/auth.module';
+import { FoodRoutingModule } from './food-routing.module'
 
 // components
 import { PanelGroceriesComponent } from './panels/food/groceries/groceries.component';
@@ -42,12 +40,10 @@ import { FormRecipeIngredientComponent } from './forms/food/recipe-ingredient/fo
     imports: [
         CommonModule,
         SharedModule,
-        AuthModule,
         CoreModule,
-        RouterModule,
+        FoodRoutingModule,
         FormsModule,
         Ng2CompleterModule
-
     ],
     declarations: [
         PanelGroceryCartComponent,
@@ -77,7 +73,6 @@ import { FormRecipeIngredientComponent } from './forms/food/recipe-ingredient/fo
         CoreService,
         FinanceService,
         FoodService,
-        NavigationService,
         DatePipe
     ]
 })

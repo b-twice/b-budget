@@ -14,6 +14,7 @@ export class PanelBaseComponent {
     user: string;
     year: string;
     panel: string;
+    module: string;
     sortProperty: string;
     sortDesc: boolean = false;
 
@@ -32,6 +33,12 @@ export class PanelBaseComponent {
                 this.getData();
             }
         )
+        this.route.parent.parent.url.subscribe(
+            url => {
+                this.module = url[0].path;
+                this.updateNavigation();
+            }
+        )
         this.route.url.subscribe(
             url => {
                 this.panel = url[0].path;
@@ -45,8 +52,8 @@ export class PanelBaseComponent {
     }
 
     updateNavigation() {
-        if (!(this.user && this.panel && this.year)) return;
-        var params = new NavigationParams(this.user, this.panel, this.year)
+        if (!(this.user && this.panel && this.year && this.module)) return;
+        var params = new NavigationParams(this.module, this.panel, this.user, this.year)
         this.navigationService.update(params);
     }
 

@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../../services/food.service';
 import { AnnualFoodProduct, Grocery } from '../../../models/food';
-import { Category, NavigationParams } from '../../../models/core';
+import { Category } from '../../../models/core';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../../../shared/filter-controls/filter-controls.component';
 import { NavigationService } from '../../../services/navigation.service';

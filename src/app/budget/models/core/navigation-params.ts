@@ -1,7 +1,8 @@
 export class NavigationParams {
     constructor(
-        public user: string,
+        public module: string,
         public panel: string,
+        public user: string,
         public year: string,
     ) { }
 }
