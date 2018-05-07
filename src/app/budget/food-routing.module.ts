@@ -15,6 +15,8 @@ import { ModalGroceryListComponent } from './modals/food/grocery-list/modal-groc
 import { ModalGroceriesComponent } from './modals/food/groceries/modal-groceries.component'
 import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-grocery-edit.component'
 import { ModalRecipeIngredientsComponent } from './modals/food/recipe-ingredients/modal-recipe-ingredients.component';
+import { ModalRecipeAddComponent } from './modals/food/recipe-add/modal-recipe-add.component';
+import { ModalRecipeIngredientAddComponent } from './modals/food/recipe-ingredient-add/modal-recipe-ingredient-add.component';
 
 const foodRoutes: Routes = [
     {
@@ -79,12 +81,29 @@ const foodRoutes: Routes = [
                 component: PanelRecipesComponent,
                 children: [
                     {
-                        path: ':name',
+                        path: ':add',
+                        component: ModalRecipeIngredientAddComponent,
+                        outlet: 'ingredient'
+                    },
+                    {
+                        path: ':id',
                         component: ModalRecipeIngredientsComponent,
                         outlet: 'ingredients'
+                    },
+                    {
+                        path: 'add',
+                        component: ModalRecipeAddComponent,
+                        outlet: 'recipe'
+                    },
+                    {
+                        path: 'edit/:id',
+                        component: ModalRecipeAddComponent,
+                        outlet: 'recipe'
                     }
+
                 ]
             },
+
             // Don't init component, redirect to user/All to display all in user profile
             {
                 path: '',

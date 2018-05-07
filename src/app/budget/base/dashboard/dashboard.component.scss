@@ -1,44 +1,39 @@
-@import '../../styles/base.scss';
-
-.panel-style  {
-    @extend .panel-base
+@import '../../../../styles/base.scss';
+.panel-style {
+  @extend .panel-base
 }
 
 :host {
-    display:flex;
-    flex:1;
-    flex-direction:column;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
-.dashboard-layout{
-    display:flex;
-    flex:1;
-    flex-direction:row;
-    justify-content:center;
-    background-color: #FAFAFA;
-
+.dashboard-layout {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #FAFAFA;
 }
+
 main {
-    display:flex;
-    flex:1;
-    max-width:$site-width;
-    padding-top:2rem;
-    padding-right:2rem;
-    padding-left:2rem;
-    padding-bottom:2rem;
-
-    .dashboard-main {
-        width:100%;
-        flex-direction:column;
-        margin-left:2rem;
-    }
-
-    .dashboard-sidebar {
-        display:flex;
-        flex:1;
-        flex-direction:column;
-        min-width:22rem;
-    }
-
+  display: flex;
+  flex: 1;
+  max-width: $site-width;
+  padding-top: 2rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  padding-bottom: 2rem;
+  .dashboard-main {
+    width: 100%;
+    flex-direction: column;
+    margin-left: 2rem;
+  }
+  .dashboard-sidebar {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 22rem;
+  }
 }
- 
