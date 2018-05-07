@@ -14,8 +14,8 @@ import { ModalBaseComponent } from './modals/core/base/modal-base.component';
 import { PanelChartComponent } from './panels/core/chart/panel-chart.component';
 
 // components
-import { BudgetDashboardComponent } from './dashboard.component';
-import { BudgetDashboardPanelComponent } from './dashboard-panel.component';
+import { BudgetDashboardComponent } from './base/dashboard/dashboard.component';
+import { BudgetDashboardPanelComponent } from './base/dashboard-panel/dashboard-panel.component';
 import { HeaderComponent } from './base/header/header.component';
 import { UserNavComponent } from './navigation/user/user-nav.component';
 import { YearNavComponent } from './navigation/year/year-nav.component';

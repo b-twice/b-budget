@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { BudgetDashboardPanelComponent } from './dashboard-panel.component';
+import { BudgetDashboardPanelComponent } from './base/dashboard-panel/dashboard-panel.component';
 
 //personal
 import { PanelBooksComponent } from './panels/personal/books/books.component';
