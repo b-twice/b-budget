@@ -33,7 +33,7 @@
   </div>
   <div class="console">
     <div class="register">
-      <budget-form-grocery ngIf="user" [user]="user" submitLabel="Add To Cart" (onSubmit)="onSubmit($event)"></budget-form-grocery>
+      <budget-form-grocery *ngIf="user" [user]="user" submitLabel="Add To Cart" (onSubmit)="onSubmit($event)"></budget-form-grocery>
       <button type="button" [disabled]="!groceryCart.length" class="button-full" (click)="checkout()">Checkout</button>
     </div>
 
