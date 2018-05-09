@@ -78,7 +78,7 @@ const foodRoutes: Routes = [
                 ]
             },
             {
-                path: "ingredients",
+                path: "ingredients/:user/:year",
                 component: PanelIngredientsComponent,
             },
             {

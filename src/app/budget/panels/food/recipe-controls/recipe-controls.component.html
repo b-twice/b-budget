@@ -2,7 +2,7 @@
   <i class="fa fa-plus "></i>
   <span>Add Recipe</span>
 </a>
-<a [routerLink]="['/budget', 'food', 'ingredients']" class="icon-container" *ngIf="user !== 'All'">
+<a [routerLink]="['/budget', 'food', 'ingredients', user, year]" class="icon-container" *ngIf="user !== 'All'">
   <i class="fa fa-plus "></i>
   <span>Add Recipe Ingredient</span>
 </a>

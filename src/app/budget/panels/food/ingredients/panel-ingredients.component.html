@@ -6,7 +6,7 @@
 </div>
 <div class="panel">
   <div class="cart">
-    <h4 class='section-header'>Cart</h4>
+    <h4 class='section-header'>Ingredients List</h4>
     <div class="cart-items" *ngIf="ingredients.length">
       <div class="cart-item" *ngFor="let item of ingredients; let i = index" [attr.data-index]="i">
         <div>
@@ -20,12 +20,12 @@
       </div>
     </div>
     <span *ngIf="!ingredients.length">
-      <em>No items in the cart</em>
+      <em>No ingredients added</em>
     </span>
   </div>
   <div class="console">
     <div class="register">
-      <budget-form-recipe-ingredient ngIf="user" [user]="user" submitLabel="Add To Cart" (onSubmit)="onSubmit($event)"></budget-form-recipe-ingredient>
+      <budget-form-recipe-ingredient submitLabel="Add To List" (onSubmit)="onSubmit($event)"></budget-form-recipe-ingredient>
       <button type="button" [disabled]="!ingredients.length" class="button-full" (click)="checkout()">Submit</button>
     </div>
 

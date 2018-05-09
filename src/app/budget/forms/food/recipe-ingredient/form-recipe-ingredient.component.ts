@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CompleterService, CompleterData, CompleterCmp } from 'ng2-completer';
 import { ActivatedRoute } from '@angular/router';
@@ -17,13 +17,14 @@ import { FormBaseComponent } from '../../core/base/form-base.component';
 export class FormRecipeIngredientComponent extends FormBaseComponent implements OnInit {
 
     @Input() recipeIngredient: RecipeIngredient;
-    @Input() user: string;
 
     model: RecipeIngredient = new RecipeIngredient(0, null, null, null, null);
     recipes: Observable<Recipe[]>;
     recipeService: CompleterData;
+    foodProductsService: CompleterData;
     @Output() onSubmit = new EventEmitter<RecipeIngredient>();
     @Output() onDelete = new EventEmitter<RecipeIngredient>();
+    @ViewChild("foodProduct") _foodProduct: CompleterCmp;
 
     constructor(
         public route: ActivatedRoute,
@@ -34,17 +35,22 @@ export class FormRecipeIngredientComponent extends FormBaseComponent implements 
     }
 
     rebuild() {
-        this.model = new RecipeIngredient(0, null, null, null, null);
+        this.model = new RecipeIngredient(0, this.model.recipe, null, null, null);
+        this._foodProduct.focus();
     }
 
 
     ngOnInit() {
-        this.apiService.getRecipesAll().subscribe(data => {
-            this.recipeService = this.completerService.local(data, 'name', 'name');
+        forkJoin(
+            this.apiService.getFoodProducts(),
+            this.apiService.getRecipesAll()
+        ).subscribe(data => {
+            this.foodProductsService = this.completerService.local(data[0], 'name', 'name');
+            this.recipeService = this.completerService.local(data[1], 'name', 'name');
             if (this.recipeIngredient) {
                 this.model = this.recipeIngredient;
             }
-        })
+        });
     }
 
 }
