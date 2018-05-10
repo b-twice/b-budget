@@ -52,7 +52,7 @@ export class PanelIngredientsComponent extends PanelBaseComponent implements OnI
   checkout(): void {
     this.saveError = false;
     let data = { ingredients: this.ingredients }
-    this.apiService.checkoutGroceries(data).subscribe(result => {
+    this.apiService.postIngredients(data).subscribe(result => {
       this.ingredients = [];
     }, error => { console.log(error); this.saveError = true });
   }

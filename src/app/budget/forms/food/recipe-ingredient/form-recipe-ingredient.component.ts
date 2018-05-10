@@ -39,6 +39,15 @@ export class FormRecipeIngredientComponent extends FormBaseComponent implements 
         this._foodProduct.focus();
     }
 
+    onProductSelect() {
+        if (this.model.name) {
+            this.apiService.getFoodProduct(this.model.name).subscribe(o => {
+                if (o) {
+                    this.model.unit = o.unit;
+                }
+            });
+        }
+    }
 
     ngOnInit() {
         forkJoin(

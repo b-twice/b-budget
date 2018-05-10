@@ -88,6 +88,10 @@ export class FoodService extends CoreService {
     public getFoodProducts(): Observable<FoodProduct[]> {
         return this.request<FoodProduct[]>('food/products', null);
     }
+    public getFoodProduct(name: string): Observable<FoodProduct> {
+        return this.request<FoodProduct>(`food/products/product/${name}`, null);
+    }
+
 
     // Recipes
     public getRecipesAll(): Observable<Recipe[]> {
@@ -118,6 +122,9 @@ export class FoodService extends CoreService {
 
     public getRecipeIngredient(id: number): Observable<RecipeIngredient> {
         return this.request<RecipeIngredient>(`food/recipes/ingredient/${id}`, null);
+    }
+    public postIngredients(data: any) {
+        return this.post(`food/recipes/ingredients`, data);
     }
     public addRecipeIngredient(data: RecipeIngredient) {
         return this.post('food/recipes/ingredient', data);
