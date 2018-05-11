@@ -20,6 +20,7 @@
             <div class="table-row-cell flex-size-2 flex-center" (click)="sort('cost')">Cost</div>
             <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
             <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
+            <div class="table-row-cell flex-size-1 flex-center">Edit</div>
           </div>
           <div class="table-body table-main-content">
             <div class="table-row" *ngFor="let ingredient of ingredients | dynamicSort:sortProperty:sortDesc">
@@ -27,6 +28,9 @@
               <div class="table-row-cell flex-size-2 flex-center">{{ingredient.cost | currency:'USD':'symbol':'1.2-2'}}</div>
               <div class="table-row-cell flex-size-2 flex-center">{{ingredient.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
               <div class="table-row-cell flex-size-2 flex-center">{{ingredient.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-1 table-row-edit" (click)="editIngredient(ingredient)">
+                <i class="fa fa-edit"></i>
+              </div>
             </div>
           </div>
           <div class="table-body table-main-content">
@@ -35,10 +39,11 @@
               <div class="table-row-cell flex-size-2 flex-center">{{recipeTotal | currency:'USD':'symbol':'1.2-2'}}</div>
               <div class="table-row-cell flex-size-2 flex-center">{{recipeOrganicTotal | currency:'USD':'symbol':'1.2-2'}}</div>
               <div class="table-row-cell flex-size-2 flex-center">{{recipeSeasonalTotal | currency:'USD':'symbol':'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-1"></div>
             </div>
           </div>
         </div>
-        <button type="submit" *ngIf="user !== 'All'" (click)="edit(result)" class="button-full">Edit</button>
+        <button type="submit" *ngIf="user !== 'All'" (click)="edit(result)" class="button-full">Edit Recipe</button>
       </div>
       <ng-template #loading>
         <loading></loading>

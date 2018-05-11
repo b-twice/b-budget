@@ -53,7 +53,11 @@ export class ModalRecipeIngredientsComponent extends ModalBaseComponent implemen
   }
 
   edit(recipe: Recipe) {
-    this.router.navigate(['.', { outlets: { ingredients: null, recipe: ['edit', recipe.id] } }], { relativeTo: this.route.parent });
+    this.router.navigate(['.', { outlets: { ingredient: null, ingredients: null, recipe: ['edit', recipe.id] } }], { relativeTo: this.route.parent });
+  }
+
+  editIngredient(ingredient: RecipeIngredient) {
+    this.router.navigate(['.', { outlets: { recipe: null, ingredients: ['edit', ingredient.id] } }], { relativeTo: this.route.parent });
   }
 
 }

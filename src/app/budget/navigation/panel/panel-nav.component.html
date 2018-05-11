@@ -5,7 +5,7 @@
   <a [routerLink]="['/budget', 'finance', 'expenses', params?.user, params?.year]" [class.active-link]="isActive('finance', 'expenses')">Expenses</a>
   <a [routerLink]="['/budget', 'food', 'foodProducts', params?.user, params?.year]" [class.active-link]="isActive('food', 'foodProducts')">Food Products</a>
   <a [routerLink]="['/budget', 'food', 'groceries', params?.user, params?.year]" [class.active-link]="isActive('food', 'groceries') || isActive('food', 'groceryCart')">Groceries</a>
-  <a [routerLink]="['/budget', 'food', 'recipes', params?.user, params?.year]" [class.active-link]="isActive('food', 'recipes')">Recipes</a>
+  <a [routerLink]="['/budget', 'food', 'recipes', params?.user, params?.year]" [class.active-link]="isActive('food', 'recipes') || isActive('food', 'ingredients')">Recipes</a>
   <a [routerLink]="['/budget', 'food', 'mealPlans', params?.user, params?.year]" [class.active-link]="isActive('food', 'mealPlans')">Meal Plans</a>
   <a [routerLink]="['/budget', 'personal', 'books', params?.user, params?.year]" [class.active-link]="isActive('personal', 'books')">Books</a>
 </div>

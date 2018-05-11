@@ -17,12 +17,11 @@
   </div>
   <div class="form-group">
     <label for="count">Page Number</label>
-    <input type="text" class="form-control" id="pageNumber" [(ngModel)]="model.pageNumber" name="pageNumber" #pageNumber="ngModel"
-      required>
+    <input type="text" class="form-control" id="pageNumber" [(ngModel)]="model.pageNumber" name="pageNumber" #pageNumber="ngModel">
   </div>
   <div class="form-group">
     <label for="count">Servings</label>
-    <input type="text" class="form-control" id="servings" [(ngModel)]="model.servings" name="servings" #servings="ngModel" required>
+    <input type="text" class="form-control" id="servings" [(ngModel)]="model.servings" name="servings" #servings="ngModel">
   </div>
   <button type="submit" [disabled]="!registerForm.form.valid" class="button-full">{{submitLabel}}</button>
 </form>

@@ -86,6 +86,16 @@ const foodRoutes: Routes = [
                 component: PanelRecipesComponent,
                 children: [
                     {
+                        path: 'add',
+                        component: ModalRecipeIngredientAddComponent,
+                        outlet: 'ingredients'
+                    },
+                    {
+                        path: 'edit/:id',
+                        component: ModalRecipeIngredientAddComponent,
+                        outlet: 'ingredients'
+                    },
+                    {
                         path: ':id',
                         component: ModalRecipeIngredientsComponent,
                         outlet: 'ingredients'

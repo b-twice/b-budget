@@ -42,9 +42,9 @@ export class ModalRecipeIngredientAddComponent extends ModalBaseComponent implem
 
     getData() {
         if (this.id) {
-            this.apiService.getRecipeIngredient(this.id).subscribe(recipeIngredient => {
+            this.apiService.getRecipeIngredient(this.id).subscribe(ingredient => {
                 this.label = 'Update';
-                this.recipeIngredient = recipeIngredient;
+                this.recipeIngredient = ingredient;
             });
         }
         else {
@@ -67,7 +67,7 @@ export class ModalRecipeIngredientAddComponent extends ModalBaseComponent implem
     }
     onDelete(item: RecipeIngredient) {
         this.apiService.deleteRecipeIngredient(item.id).subscribe(result => {
-            this.router.navigate(['.', { outlets: { recipe: null } }], { relativeTo: this.route.parent });
+            this.closeModal();
         }, error => { console.log(error); });
     }
 
