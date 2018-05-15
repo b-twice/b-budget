@@ -1,0 +1,15 @@
+<div class="popup-wrapper" (click)="closeModal()">
+  <div class="popup-content">
+    <div class="popup-body" (click)="stopPropogation($event)">
+
+
+      <div class="popup-close">
+        <i class="fa fa-times fa-22" (click)="closeModal()" aria-hidden="true"></i>
+      </div>
+
+      <budget-form-meal-plan *ngIf="(loaded || mealPlan) && user" [user]="user" [mealPlan]="mealPlan" [submitLabel]="label" (onSubmit)="onSubmit($event)"
+        (onDelete)="onDelete($event) "></budget-form-meal-plan>
+
+    </div>
+  </div>
+</div>

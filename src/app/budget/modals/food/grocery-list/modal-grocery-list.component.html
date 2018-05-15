@@ -6,11 +6,11 @@
         <i class="fa fa-times fa-22" (click)="closeModal()" aria-hidden="true"></i>
       </div>
 
-      <div class="title">
-        <h3>{{mealPlanName}} Grocery List</h3>
-      </div>
-
       <div *ngIf="recipes | async as result else loading">
+        <div class="title">
+          <h3>{{mealPlan.name}} Grocery List</h3>
+        </div>
+
         <div class="recipe-list" *ngFor="let recipe of result">
           <i class="fa fa-angle-right"></i>
           <span>({{recipe.category}}) {{recipe.name}} -

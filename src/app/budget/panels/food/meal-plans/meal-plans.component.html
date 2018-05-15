@@ -1,3 +1,4 @@
+<budget-panel-meal-plan-controls></budget-panel-meal-plan-controls>
 <div class="panel">
   <div class="meal-plans-table">
     <div class="table-row table-column">
@@ -6,7 +7,7 @@
       <div class="table-row-cell flex-size-2 flex-center" (click)="sort('cost')">Cost</div>
       <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
       <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
-      <div class="table-row-cell flex-size-1 flex-center">Recipes</div>
+      <div class="table-row-cell flex-size-1 flex-center">View</div>
       <div class="table-row-cell flex-size-1 flex-center">Print</div>
     </div>
     <div *ngIf="mealPlans | async as result; else loading">
@@ -17,12 +18,12 @@
           <div class="table-row-cell flex-size-2 flex-center">{{mealPlan.cost | currency:'USD':'symbol':'1.2-2'}}</div>
           <div class="table-row-cell flex-size-2 flex-center">{{mealPlan.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
           <div class="table-row-cell flex-size-2 flex-center">{{mealPlan.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
-          <a class="table-row-cell flex-size-1 flex-center" [routerLink]="[{ outlets: { recipes: [mealPlan.name] } }]">
+          <a class="table-row-cell flex-size-1 flex-center" [routerLink]="[{ outlets: { mealPlan: [mealPlan.id] } }]">
             <i class="fa fa-eye"></i>
           </a>
-          <div class="table-row-cell flex-size-1 flex-center" [routerLink]="[{ outlets: { groceryList: [mealPlan.name] } }]">
+          <a class="table-row-cell flex-size-1 flex-center" [routerLink]="[{ outlets: { groceryList: [mealPlan.id] } }]">
             <i class="fa fa-print"></i>
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -31,5 +32,5 @@
     </ng-template>
   </div>
 </div>
-<router-outlet name="recipes"></router-outlet>
+<router-outlet name="mealPlan"></router-outlet>
 <router-outlet name="groceryList"></router-outlet>

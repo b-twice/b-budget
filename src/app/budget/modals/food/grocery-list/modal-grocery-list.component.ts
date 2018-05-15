@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common'
 import { Observable } from 'rxjs/Observable';
-import { Recipe, MealPlanGrocery } from '../../../models/food';
+import { Recipe, MealPlanGrocery, MealPlan } from '../../../models/food';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../../services/food.service';
 import { ModalBaseComponent } from '../../core/base/modal-base.component'
@@ -14,8 +14,9 @@ import { ModalBaseComponent } from '../../core/base/modal-base.component'
 })
 export class ModalGroceryListComponent extends ModalBaseComponent implements OnInit {
 
+    mealPlan: MealPlan;
     recipes: Observable<Recipe[]>;
-    mealPlanName: string;
+    id: number;
     groceriesByCategory: { [key: string]: MealPlanGrocery[] } = {};
 
     constructor(
@@ -28,16 +29,19 @@ export class ModalGroceryListComponent extends ModalBaseComponent implements OnI
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            this.mealPlanName = params['name'];
+            this.id = params['id'];
             this.getData();
         })
     }
 
     getData() {
-        this.recipes = this.apiService.getMealPlanRecipes(this.mealPlanName);
-        this.apiService.getMealPlanGroceries(this.mealPlanName).subscribe(
-            g => this.groceriesByCategory = this.categorizeGroceries(g)
-        );
+        this.apiService.getMealPlan(this.id).subscribe(o => {
+            this.mealPlan = o;
+            this.recipes = this.apiService.getMealPlanRecipes(o.name);
+            this.apiService.getMealPlanGroceries(o.name).subscribe(
+                g => this.groceriesByCategory = this.categorizeGroceries(g)
+            );
+        });
     }
 
     categorizeGroceries(groceries: MealPlanGrocery[]): { [key: string]: MealPlanGrocery[] } {

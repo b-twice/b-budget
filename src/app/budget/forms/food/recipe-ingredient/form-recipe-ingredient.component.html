@@ -25,6 +25,7 @@
       </span>
     </div>
   </div>
+  <em *ngIf="ingredientMeasurement">{{ingredientMeasurement}}</em>
   <div class="form-group">
     <label for="count">Measurement</label>
     <input type="text" class="form-control" id="measurement" [(ngModel)]="model.measurement" name="measurement" #measurement="ngModel"

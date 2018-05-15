@@ -140,8 +140,8 @@ export class FoodService extends CoreService {
 
 
     // Meal Plans
-    public getMealPlan(name: string): Observable<MealPlan> {
-        return this.request<MealPlan>(`food/meal-plans/meal-plan/${name}`, null);
+    public getMealPlan(id: number): Observable<MealPlan> {
+        return this.request<MealPlan>(`food/meal-plans/meal-plan/${id}`, null);
     }
     public getMealPlans(name: string): Observable<MealPlan[]> {
         return this.request<MealPlan[]>(`food/meal-plans/user/${name}`, null);
@@ -152,5 +152,13 @@ export class FoodService extends CoreService {
     public getMealPlanGroceries(name: string): Observable<MealPlanGrocery[]> {
         return this.request<MealPlanGrocery[]>(`food/meal-plans/groceries/${name}`, null);
     }
-
+    public addMealPlan(data: MealPlan) {
+        return this.post('food/meal-plans/meal-plan', data);
+    }
+    public updateMealPlan(id: number, data: any) {
+        return this.put(`food/meal-plans/meal-plan/${id}`, data);
+    }
+    public deleteMealPlan(id: number) {
+        return this.delete(`food/meal-plans/meal-plan/${id}`);
+    }
 }

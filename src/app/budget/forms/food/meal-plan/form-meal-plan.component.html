@@ -1,0 +1,12 @@
+<form #registerForm="ngForm" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="count">Name</label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="model.name" name="name" #name="ngModel" required>
+  </div>
+  <div class="form-group">
+    <label for="count">Days</label>
+    <input type="text" class="form-control" id="days" [(ngModel)]="model.days" name="days" #days="ngModel">
+  </div>
+  <button type="submit" [disabled]="!registerForm.form.valid" class="button-full">{{submitLabel}}</button>
+</form>
+<button type="submit" *ngIf="model.id" (click)="delete()" class="button-full delete">Delete</button>

@@ -24,11 +24,13 @@ import { PanelIngredientsComponent } from './panels/food/ingredients/panel-ingre
 
 import { PanelGroceryControlsComponent } from './panels/food/grocery-controls/grocery-controls.component';
 import { PanelRecipeControlsComponent } from './panels/food/recipe-controls/recipe-controls.component';
+import { PanelMealPlanControlsComponent } from './panels/food/meal-plan-controls/meal-plan-controls.component';
 
 import { ModalRecipeIngredientsComponent } from './modals/food/recipe-ingredients/modal-recipe-ingredients.component';
 import { ModalRecipeIngredientAddComponent } from './modals/food/recipe-ingredient-add/modal-recipe-ingredient-add.component';
 import { ModalGroceriesComponent } from './modals/food/groceries/modal-groceries.component';
-import { ModalRecipesComponent } from './modals/food/recipes/modal-recipes.component';
+import { ModalMealPlanComponent } from './modals/food/meal-plan/modal-meal-plan.component';
+import { ModalMealPlanAddComponent } from './modals/food/meal-plan-add/modal-meal-plan-add.component';
 import { ModalRecipeAddComponent } from './modals/food/recipe-add/modal-recipe-add.component';
 import { ModalGroceryListComponent } from './modals/food/grocery-list/modal-grocery-list.component';
 import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-grocery-edit.component';
@@ -36,6 +38,7 @@ import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-groc
 import { FormGroceryComponent } from './forms/food/grocery/form-grocery.component';
 import { FormRecipeComponent } from './forms/food/recipe/form-recipe.component';
 import { FormRecipeIngredientComponent } from './forms/food/recipe-ingredient/form-recipe-ingredient.component';
+import { FormMealPlanComponent } from './forms/food/meal-plan/form-meal-plan.component';
 
 @NgModule({
     imports: [
@@ -56,10 +59,12 @@ import { FormRecipeIngredientComponent } from './forms/food/recipe-ingredient/fo
 
         PanelGroceryControlsComponent,
         PanelRecipeControlsComponent,
+        PanelMealPlanControlsComponent,
 
         ModalRecipeIngredientAddComponent,
         ModalRecipeIngredientsComponent,
-        ModalRecipesComponent,
+        ModalMealPlanComponent,
+        ModalMealPlanAddComponent,
         ModalRecipeAddComponent,
         ModalGroceryListComponent,
         ModalGroceryEditComponent,
@@ -67,7 +72,8 @@ import { FormRecipeIngredientComponent } from './forms/food/recipe-ingredient/fo
 
         FormGroceryComponent,
         FormRecipeComponent,
-        FormRecipeIngredientComponent
+        FormRecipeIngredientComponent,
+        FormMealPlanComponent
     ],
     exports: [
     ],

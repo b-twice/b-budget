@@ -22,6 +22,7 @@ export class FormRecipeIngredientComponent extends FormBaseComponent implements 
     recipes: Observable<Recipe[]>;
     recipeService: CompleterData;
     foodProductsService: CompleterData;
+    ingredientMeasurement: string;
     @Output() onSubmit = new EventEmitter<RecipeIngredient>();
     @Output() onDelete = new EventEmitter<RecipeIngredient>();
     @ViewChild("foodProduct") _foodProduct: CompleterCmp;
@@ -37,6 +38,7 @@ export class FormRecipeIngredientComponent extends FormBaseComponent implements 
     rebuild() {
         this.model = new RecipeIngredient(0, this.model.recipe, null, null, null);
         this._foodProduct.focus();
+        this.ingredientMeasurement = null;
     }
 
     onProductSelect() {
@@ -44,6 +46,7 @@ export class FormRecipeIngredientComponent extends FormBaseComponent implements 
             this.apiService.getFoodProduct(this.model.name).subscribe(o => {
                 if (o) {
                     this.model.unit = o.unit;
+                    this.ingredientMeasurement = o.measurement;
                 }
             });
         }
