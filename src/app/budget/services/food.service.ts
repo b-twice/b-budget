@@ -12,6 +12,7 @@ import {
     FoodProduct,
     Supermarket,
     MealPlan,
+    MealPlanRecipe,
     Cookbook
 } from '../models/food';
 import { TransactionMonthly } from '../models/finance';
@@ -161,4 +162,18 @@ export class FoodService extends CoreService {
     public deleteMealPlan(id: number) {
         return this.delete(`food/meal-plans/meal-plan/${id}`);
     }
+
+    public addMealPlanRecipes(data: any) {
+        return this.post(`food/meal-plans/recipes`, data);
+    }
+    public addMealPlanRecipe(data: MealPlanRecipe) {
+        return this.post('food/meal-plans/recipe', data);
+    }
+    public updateMealPlanRecipe(id: number, data: any) {
+        return this.put(`food/meal-plans/recipe/${id}`, data);
+    }
+    public deleteMealPlanRecipe(id: number) {
+        return this.delete(`food/meal-plans/recipe/${id}`);
+    }
+
 }
