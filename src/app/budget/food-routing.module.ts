@@ -13,6 +13,8 @@ import { PanelIngredientsComponent } from './panels/food/ingredients/panel-ingre
 
 import { ModalMealPlanComponent } from './modals/food/meal-plan/modal-meal-plan.component';
 import { ModalMealPlanAddComponent } from './modals/food/meal-plan-add/modal-meal-plan-add.component';
+import { ModalMealPlanRecipeAddComponent } from './modals/food/meal-plan-recipe-add/modal-meal-plan-recipe-add.component';
+import { ModalMealPlanRecipeEditComponent } from './modals/food/meal-plan-recipe-edit/modal-meal-plan-recipe-edit.component';
 import { ModalGroceryListComponent } from './modals/food/grocery-list/modal-grocery-list.component';
 import { ModalGroceriesComponent } from './modals/food/groceries/modal-groceries.component'
 import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-grocery-edit.component'
@@ -50,6 +52,16 @@ const foodRoutes: Routes = [
                 path: "mealPlans/:user/:year",
                 component: PanelMealPlansComponent,
                 children: [
+                    {
+                        path: 'recipe/add/:id',
+                        component: ModalMealPlanRecipeAddComponent,
+                        outlet: 'mealPlan'
+                    },
+                    {
+                        path: 'recipe/edit/:id',
+                        component: ModalMealPlanRecipeEditComponent,
+                        outlet: 'mealPlan'
+                    },
                     {
                         path: 'add',
                         component: ModalMealPlanAddComponent,

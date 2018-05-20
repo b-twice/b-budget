@@ -147,8 +147,11 @@ export class FoodService extends CoreService {
     public getMealPlans(name: string): Observable<MealPlan[]> {
         return this.request<MealPlan[]>(`food/meal-plans/user/${name}`, null);
     }
-    public getMealPlanRecipes(name: string): Observable<Recipe[]> {
-        return this.request<Recipe[]>(`food/meal-plans/recipes/${name}`, null);
+    public getMealPlanRecipes(name: string): Observable<MealPlanRecipe[]> {
+        return this.request<MealPlanRecipe[]>(`food/meal-plans/recipes/${name}`, null);
+    }
+    public getMealPlanRecipe(id: number): Observable<MealPlanRecipe> {
+        return this.request<MealPlanRecipe>(`food/meal-plans/recipe/${id}`, null);
     }
     public getMealPlanGroceries(name: string): Observable<MealPlanGrocery[]> {
         return this.request<MealPlanGrocery[]>(`food/meal-plans/groceries/${name}`, null);

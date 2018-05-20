@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import { Recipe, MealPlan } from '../../../models/food';
+import { MealPlanRecipe, MealPlan } from '../../../models/food';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FoodService } from '../../../services/food.service';
 import { ModalBaseComponent } from '../../core/base/modal-base.component'
@@ -14,7 +14,7 @@ import { ModalBaseComponent } from '../../core/base/modal-base.component'
 })
 export class ModalMealPlanComponent extends ModalBaseComponent implements OnInit {
 
-    recipes: Observable<Recipe[]>;
+    recipes: Observable<MealPlanRecipe[]>;
     mealPlan: MealPlan;
     id: number;
 
@@ -43,6 +43,13 @@ export class ModalMealPlanComponent extends ModalBaseComponent implements OnInit
 
     edit(mealPlan: MealPlan) {
         this.router.navigate(['.', { outlets: { mealPlan: ['edit', mealPlan.id] } }], { relativeTo: this.route.parent });
+    }
+
+    addRecipe(mealPlan: MealPlan) {
+        this.router.navigate(['.', { outlets: { mealPlan: ['recipe', 'add', mealPlan.id] } }], { relativeTo: this.route.parent });
+    }
+    editRecipe(mealPlanRecipe: MealPlanRecipe) {
+        this.router.navigate(['.', { outlets: { mealPlan: ['recipe', 'edit', mealPlanRecipe.id] } }], { relativeTo: this.route.parent });
     }
 
 }

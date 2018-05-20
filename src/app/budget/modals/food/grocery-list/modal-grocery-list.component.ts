@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common'
 import { Observable } from 'rxjs/Observable';
-import { Recipe, MealPlanGrocery, MealPlan } from '../../../models/food';
+import { MealPlanRecipe, MealPlanGrocery, MealPlan } from '../../../models/food';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../../services/food.service';
 import { ModalBaseComponent } from '../../core/base/modal-base.component'
@@ -15,7 +15,7 @@ import { ModalBaseComponent } from '../../core/base/modal-base.component'
 export class ModalGroceryListComponent extends ModalBaseComponent implements OnInit {
 
     mealPlan: MealPlan;
-    recipes: Observable<Recipe[]>;
+    recipes: Observable<MealPlanRecipe[]>;
     id: number;
     groceriesByCategory: { [key: string]: MealPlanGrocery[] } = {};
 

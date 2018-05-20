@@ -31,6 +31,8 @@ import { ModalRecipeIngredientAddComponent } from './modals/food/recipe-ingredie
 import { ModalGroceriesComponent } from './modals/food/groceries/modal-groceries.component';
 import { ModalMealPlanComponent } from './modals/food/meal-plan/modal-meal-plan.component';
 import { ModalMealPlanAddComponent } from './modals/food/meal-plan-add/modal-meal-plan-add.component';
+import { ModalMealPlanRecipeAddComponent } from './modals/food/meal-plan-recipe-add/modal-meal-plan-recipe-add.component';
+import { ModalMealPlanRecipeEditComponent } from './modals/food/meal-plan-recipe-edit/modal-meal-plan-recipe-edit.component';
 import { ModalRecipeAddComponent } from './modals/food/recipe-add/modal-recipe-add.component';
 import { ModalGroceryListComponent } from './modals/food/grocery-list/modal-grocery-list.component';
 import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-grocery-edit.component';
@@ -39,6 +41,7 @@ import { FormGroceryComponent } from './forms/food/grocery/form-grocery.componen
 import { FormRecipeComponent } from './forms/food/recipe/form-recipe.component';
 import { FormRecipeIngredientComponent } from './forms/food/recipe-ingredient/form-recipe-ingredient.component';
 import { FormMealPlanComponent } from './forms/food/meal-plan/form-meal-plan.component';
+import { FormMealPlanRecipeComponent } from './forms/food/meal-plan-recipe/form-meal-plan-recipe.component';
 
 @NgModule({
     imports: [
@@ -65,6 +68,8 @@ import { FormMealPlanComponent } from './forms/food/meal-plan/form-meal-plan.com
         ModalRecipeIngredientsComponent,
         ModalMealPlanComponent,
         ModalMealPlanAddComponent,
+        ModalMealPlanRecipeAddComponent,
+        ModalMealPlanRecipeEditComponent,
         ModalRecipeAddComponent,
         ModalGroceryListComponent,
         ModalGroceryEditComponent,
@@ -73,7 +78,8 @@ import { FormMealPlanComponent } from './forms/food/meal-plan/form-meal-plan.com
         FormGroceryComponent,
         FormRecipeComponent,
         FormRecipeIngredientComponent,
-        FormMealPlanComponent
+        FormMealPlanComponent,
+        FormMealPlanRecipeComponent
     ],
     exports: [
     ],

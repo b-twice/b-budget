@@ -6,7 +6,7 @@
                 <i class="fa fa-times fa-22" (click)="closeModal()" aria-hidden="true"></i>
             </div>
 
-            <div *ngIf="recipes | async as result; else loading" class="table-body table-main-content">
+            <div *ngIf="recipes | async as result; else loading">
                 <div class="title">
                     <h3>{{mealPlan.name}}</h3>
                 </div>
@@ -19,6 +19,7 @@
                         <div class="table-row-cell flex-size-2 flex-center" (click)="sort('cost')">Cost</div>
                         <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costOrganic')">Cost (O)</div>
                         <div class="table-row-cell flex-size-2 flex-center" (click)="sort('costSeasonal')">Cost (S)</div>
+                        <div class="table-row-cell flex-size-1 flex-center">Edit</div>
                     </div>
                     <div class="table-body table-main-content">
                         <div class="table-row" *ngFor="let recipe of result | dynamicSort:sortProperty:sortDesc">
@@ -29,6 +30,9 @@
                             <div class="table-row-cell flex-size-2 flex-center">{{recipe.cost | currency:'USD':'symbol':'1.2-2'}}</div>
                             <div class="table-row-cell flex-size-2 flex-center">{{recipe.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
                             <div class="table-row-cell flex-size-2 flex-center">{{recipe.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
+                            <div class="table-row-cell flex-size-1 table-row-edit" (click)="editRecipe(recipe)">
+                                <i class="fa fa-edit"></i>
+                            </div>
                         </div>
                     </div>
                     <div class="table-body table-main-content">
@@ -37,10 +41,12 @@
                             <div class="table-row-cell flex-size-2">{{mealPlan.cost | currency:'USD':'symbol':'1.2-2'}}</div>
                             <div class="table-row-cell flex-size-2">{{mealPlan.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
                             <div class="table-row-cell flex-size-2">{{mealPlan.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
+                            <div class="table-row-cell flex-size-1"></div>
                         </div>
                     </div>
                 </div>
                 <button type="submit" *ngIf="user !== 'All'" (click)="edit(mealPlan)" class="button-full">Edit Meal Plan</button>
+                <button type="submit" *ngIf="user !== 'All'" (click)="addRecipe(mealPlan)" class="button-full">Add Recipe</button>
             </div>
             <ng-template #loading>
                 <loading></loading>

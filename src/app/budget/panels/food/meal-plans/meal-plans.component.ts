@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../../services/food.service';
-import { MealPlan, Recipe, MealPlanGrocery } from '../../../models/food';
+import { MealPlan, MealPlanRecipe, MealPlanGrocery } from '../../../models/food';
 import { NavigationService } from '../../../services/navigation.service';
 import { Observable } from 'rxjs/Observable';
 import { PanelBaseComponent } from '../../core/base/panel-base.component'
@@ -16,7 +16,7 @@ export class PanelMealPlansComponent extends PanelBaseComponent implements OnIni
 
     mealPlans: Observable<MealPlan[]>;
     mealPlansTotal: number = 0;
-    mealPlanRecipes: Observable<Recipe[]>;
+    mealPlanRecipes: Observable<MealPlanRecipe[]>;
     selectedMealPlan: MealPlan;
     mealPlanGroceries: Observable<MealPlanGrocery[]>;
     showRecipeList: boolean;
