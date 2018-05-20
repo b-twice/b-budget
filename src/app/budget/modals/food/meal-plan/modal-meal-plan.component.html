@@ -41,6 +41,7 @@
                     </div>
                 </div>
                 <button type="submit" *ngIf="user !== 'All'" (click)="edit(mealPlan)" class="button-full">Edit Meal Plan</button>
+                <button type="submit" *ngIf="user !== 'All'" (click)="add(mealPlan)" class="button-full">Add Recipe</button>
             </div>
             <ng-template #loading>
                 <loading></loading>
