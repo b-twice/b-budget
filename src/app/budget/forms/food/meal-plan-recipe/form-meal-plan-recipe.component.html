@@ -5,6 +5,10 @@
       [inputClass]="'form-control'" [placeholder]="'Search Recipes'" [autoMatch]="false" [clearUnselected]="false" [minSearchLength]="0"
       required></ng2-completer>
   </div>
+  <div class="form-group">
+    <label for="count">Count</label>
+    <input type="text" class="form-control" id="count" [(ngModel)]="model.count" name="count" #count="ngModel">
+  </div>
   <button type="submit" [disabled]="!registerForm.form.valid" class="button-full">{{submitLabel}}</button>
 </form>
 <button type="submit" *ngIf="model.id" (click)="delete()" class="button-full delete">Delete</button>

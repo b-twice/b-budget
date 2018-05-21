@@ -7,7 +7,7 @@
 }
 
 .popup-content {
-  padding: 1rem;
+  padding:.25rem;
   &.print-view {
     justify-content: center;
     .popup-body {
@@ -19,37 +19,57 @@
 .recipe-list {
   display: flex;
   align-items: center;
+  font-size:1.4rem;
   i {
     margin-right: 1rem;
   }
 }
+
 
 .groceries {
   display:flex;
   flex-direction:row;
   flex-wrap:wrap;
   margin-top:1rem;
-  .grocery-list-group {
-    display:flex;
-    flex-direction:column;
-    width:40rem;
-    margin-bottom:1rem;
-    .grocery-list {
-      display: flex;
-      flex-direction:column;
-      flex-wrap:wrap;
-      .grocery-item {
-        display:flex;
-        margin-right: 1.5rem;
-        align-items:center;
-      }
-      i {
-        margin-left:1rem;
-        color: #27ae60;
-      }
-    }
-  }
+  font-size:1.1rem;
 }
+.grocery-list-group {
+  display:flex;
+  flex-direction:column;
+  width:20rem;
+  margin-bottom:1rem;
+}
+ul.grocery-list {
+  list-style:inside none disc !important;
+}
+
+.grocery-item {
+  margin-right: 1.5rem;
+  i {
+    margin-left:1rem;
+    color: #27ae60;
+  }
+  // .supermarket {
+  //   display:inline-block;
+  //   width:20rem;
+  //   border:1px solid;
+  //   border-radius:999rem;
+  //   padding:.1rem;
+  // }
+}
+.grocery-name {
+  -webkit-print-color-adjust: exact;
+  color-adjust: exact;
+  &.E{
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 80%, rgba(42,179,75,1) 100%);
+  }
+  &.K{
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 80%, rgba(0,89,181,1) 100%);
+  }
+
+}
+
+
 
 .title {
   display: flex;
