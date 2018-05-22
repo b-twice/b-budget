@@ -7,7 +7,7 @@ import { Category } from '../../../models/core';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../../../shared/filter-controls/filter-controls.component';
 import { PanelChartService } from '../../core/chart/panel-chart.service';
-import { NavigationService } from '../../../services/navigation.service';
+import { AppService } from '../../../services/app.service';
 import { PanelBaseComponent } from '../../core/base/panel-base.component'
 
 @Component({
@@ -30,10 +30,10 @@ export class PanelTransactionsComponent extends PanelBaseComponent implements On
     public route: ActivatedRoute,
     public apiService: FinanceService,
     public panelChartService: PanelChartService,
-    public navigationService: NavigationService,
+    public appService: AppService,
     public datePipe: DatePipe
   ) {
-    super(route, navigationService);
+    super(route, appService);
   }
 
   ngOnInit() {

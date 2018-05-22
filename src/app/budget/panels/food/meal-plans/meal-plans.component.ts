@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../../services/food.service';
 import { MealPlan, MealPlanRecipe, MealPlanGrocery } from '../../../models/food';
-import { NavigationService } from '../../../services/navigation.service';
+import { AppService } from '../../../services/app.service';
 import { Observable } from 'rxjs/Observable';
 import { PanelBaseComponent } from '../../core/base/panel-base.component'
 
@@ -25,14 +25,15 @@ export class PanelMealPlansComponent extends PanelBaseComponent implements OnIni
     constructor(
         public route: ActivatedRoute,
         public apiService: FoodService,
-        public navigationService: NavigationService,
+        public appService: AppService,
         public datePipe: DatePipe
     ) {
-        super(route, navigationService);
+        super(route, appService);
     }
 
     ngOnInit() {
         this.resolveRoutes();
+        this.appService.editEvent$.subscribe(item => this.getData());
     }
 
     getData(): void {

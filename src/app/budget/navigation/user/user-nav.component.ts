@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CoreService } from '../../services/core.service';
-import { NavigationService } from '../../services/navigation.service';
+import { AppService } from '../../services/app.service';
 import { User, NavigationParams } from '../../models/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -19,13 +19,13 @@ export class UserNavComponent implements OnInit {
   constructor(
     public apiService: CoreService,
     public activatedRoute: ActivatedRoute,
-    public navigationService: NavigationService,
+    public appService: AppService,
     public router: Router
   ) { }
 
   ngOnInit() {
     this.getUsers();
-    this.navigationService.updateData.subscribe(data => this.params = data);
+    this.appService.navigation.subscribe(data => this.params = data);
   }
 
   getUsers() {

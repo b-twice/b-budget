@@ -6,7 +6,7 @@ import { AnnualFoodProduct, Grocery } from '../../../models/food';
 import { Category } from '../../../models/core';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../../../shared/filter-controls/filter-controls.component';
-import { NavigationService } from '../../../services/navigation.service';
+import { AppService } from '../../../services/app.service';
 import { PanelBaseComponent } from '../../core/base/panel-base.component'
 
 @Component({
@@ -31,10 +31,10 @@ export class PanelFoodProductsComponent extends PanelBaseComponent implements On
   constructor(
     public route: ActivatedRoute,
     public apiService: FoodService,
-    public navigationService: NavigationService,
+    public appService: AppService,
     public datePipe: DatePipe
   ) {
-    super(route, navigationService);
+    super(route, appService);
   }
 
   ngOnInit() {

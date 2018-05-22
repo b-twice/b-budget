@@ -6,7 +6,7 @@ import { FoodService } from '../../../services/food.service';
 import { Grocery } from '../../../models/food';
 import { Observable } from 'rxjs/Observable';
 import { FormGroceryComponent } from '../../../forms/food/grocery/form-grocery.component';
-import { NavigationService } from '../../../services/navigation.service';
+import { AppService } from '../../../services/app.service';
 import { PanelBaseComponent } from '../../core/base/panel-base.component'
 
 @Component({
@@ -28,9 +28,9 @@ export class PanelGroceryCartComponent extends PanelBaseComponent implements OnI
     public route: ActivatedRoute,
     public location: Location,
     public apiService: FoodService,
-    public navigationService: NavigationService
+    public appService: AppService
   ) {
-    super(route, navigationService);
+    super(route, appService);
   }
 
   ngOnInit() {

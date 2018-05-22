@@ -4,7 +4,7 @@ import { FinanceService } from '../../../services/finance.service';
 import { UserCategoryGrowth } from '../../../models/finance';
 import { UtilService } from '../../../../shared/util/util.service';
 import { Observable } from 'rxjs/Observable';
-import { NavigationService } from '../../../services/navigation.service';
+import { AppService } from '../../../services/app.service';
 import { PanelBaseComponent } from '../../core/base/panel-base.component'
 
 
@@ -28,10 +28,10 @@ export class PanelCategoriesComponent extends PanelBaseComponent implements OnIn
   constructor(
     public route: ActivatedRoute,
     public apiService: FinanceService,
-    public navigationService: NavigationService,
+    public appService: AppService,
     public utilService: UtilService
   ) {
-    super(route, navigationService);
+    super(route, appService);
   }
 
   ngOnInit() {

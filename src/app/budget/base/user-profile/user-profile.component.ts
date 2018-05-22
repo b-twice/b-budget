@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavigationService } from '../../services/navigation.service';
+import { AppService } from '../../services/app.service';
 import { FinanceService } from '../../services/finance.service';
 import { UserProfile } from '../../models/finance';
 import { UtilService } from '../../../shared/util/util.service';
@@ -18,14 +18,14 @@ export class UserProfileComponent implements OnInit {
   year: string;
   constructor(
     public route: ActivatedRoute,
-    public navigationService: NavigationService,
+    public appService: AppService,
     public apiService: FinanceService,
     public utilService: UtilService
   ) { }
 
   ngOnInit() {
 
-    this.navigationService.updateData.subscribe(
+    this.appService.navigation.subscribe(
       params => {
         this.user = params['user'];
         this.getUserProfile(this.user);

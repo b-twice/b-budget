@@ -11,7 +11,7 @@
     </div>
     <div *ngIf="annualFoodProducts | async as foodProducts; else loading">
       <div class="table-body table-main-content">
-        <a class="table-row" *ngFor="let foodProduct of foodProducts | dynamicSort:sortProperty:sortDesc" [routerLink]="[{ outlets: { list: [user, year, foodProduct.name] } }]">
+        <a class="table-row" *ngFor="let foodProduct of foodProducts | dynamicSort:sortProperty:sortDesc" [routerLink]="[{ outlets: { list: [foodProduct.name] } }]">
           <div class="table-row-cell flex-size-2">{{foodProduct.category}}</div>
           <div class="table-row-cell flex-size-2">{{foodProduct.name}}</div>
           <div class="table-row-cell flex-size-1 flex-center">

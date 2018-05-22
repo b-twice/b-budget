@@ -1,7 +1,7 @@
 import { Component, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavigationParams } from '../../../models/core';
-import { NavigationService } from '../../../services/navigation.service';
+import { AppService } from '../../../services/app.service';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class PanelBaseComponent {
 
     constructor(
         public route: ActivatedRoute,
-        public navigationService: NavigationService,
+        public appService: AppService,
     ) { }
 
     resolveRoutes() {
@@ -54,7 +54,7 @@ export class PanelBaseComponent {
     updateNavigation() {
         if (!(this.user && this.panel && this.year && this.module)) return;
         var params = new NavigationParams(this.module, this.panel, this.user, this.year)
-        this.navigationService.update(params);
+        this.appService.updateNavigation(params);
     }
 
     sort(sortProperty: string) {

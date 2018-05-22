@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { FormMealPlanRecipeComponent } from '../../../forms/food/meal-plan-recipe/form-meal-plan-recipe.component';
 import { FoodService } from '../../../services/food.service';
 import { ModalBaseComponent } from '../../core/base/modal-base.component';
+import { AppService } from '../../../services/app.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class ModalMealPlanRecipeAddComponent extends ModalBaseComponent implemen
         public location: Location,
         public route: ActivatedRoute,
         public router: Router,
-        public apiService: FoodService
+        public apiService: FoodService,
+        public appService: AppService
     ) {
         super(location)
     }
@@ -48,6 +50,7 @@ export class ModalMealPlanRecipeAddComponent extends ModalBaseComponent implemen
 
     onSubmit(item: MealPlanRecipe) {
         this.apiService.addMealPlanRecipe(item).subscribe(result => {
+            this.appService.edit<MealPlanRecipe>(item);
             this.closeModal();
         }, error => { console.log(error); });
     }

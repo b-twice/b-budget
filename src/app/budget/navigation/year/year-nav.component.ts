@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NavigationService } from '../../services/navigation.service';
+import { AppService } from '../../services/app.service';
 import { FiscalYear, NavigationParams } from '../../models/core';
 import { CoreService } from '../../services/core.service';
 
@@ -17,7 +17,7 @@ export class YearNavComponent implements OnInit {
   constructor(
     public apiService: CoreService,
     public activatedRoute: ActivatedRoute,
-    public navigationService: NavigationService,
+    public appService: AppService,
     public router: Router
   ) { }
 
@@ -26,7 +26,7 @@ export class YearNavComponent implements OnInit {
       .subscribe(
         fiscalYears => this.years = fiscalYears.map(fy => fy.year).reverse()
       )
-    this.navigationService.updateData.subscribe(data => this.params = data);
+    this.appService.navigation.subscribe(data => this.params = data);
 
   }
 }

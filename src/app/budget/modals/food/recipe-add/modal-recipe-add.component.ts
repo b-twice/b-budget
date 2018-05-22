@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { FormRecipeComponent } from '../../../forms/food/recipe/form-recipe.component';
 import { FoodService } from '../../../services/food.service';
 import { ModalBaseComponent } from '../../core/base/modal-base.component';
-
+import { AppService } from '../../../services/app.service';
 
 @Component({
     selector: 'budget-recipe-add-modal',
@@ -29,7 +29,8 @@ export class ModalRecipeAddComponent extends ModalBaseComponent implements OnIni
         public location: Location,
         public route: ActivatedRoute,
         public router: Router,
-        public apiService: FoodService
+        public apiService: FoodService,
+        public appService: AppService
     ) {
         super(location)
     }
@@ -60,11 +61,13 @@ export class ModalRecipeAddComponent extends ModalBaseComponent implements OnIni
     onSubmit(item: Recipe) {
         if (this.recipe) {
             this.apiService.updateRecipe(item.id, item).subscribe(result => {
+                this.appService.edit<Recipe>(item);
                 this.closeModal();
             }, error => { console.log(error); });
         }
         else {
             this.apiService.addRecipe(item).subscribe(result => {
+                this.appService.edit<Recipe>(item);
                 this.closeModal();
             }, error => { console.log(error); });
         }

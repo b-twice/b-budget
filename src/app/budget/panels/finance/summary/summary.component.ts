@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { NavigationService } from '../../../services/navigation.service';
+import { AppService } from '../../../services/app.service';
 import { PanelBaseComponent } from '../../core/base/panel-base.component'
 
 @Component({
@@ -13,9 +13,9 @@ export class PanelSummaryComponent extends PanelBaseComponent implements OnInit 
 
     constructor(
         public route: ActivatedRoute,
-        public navigationService: NavigationService,
+        public appService: AppService,
     ) {
-        super(route, navigationService);
+        super(route, appService);
     }
 
     ngOnInit() {

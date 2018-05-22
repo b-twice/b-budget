@@ -6,7 +6,7 @@ import { Expense, Transaction, ExpenseMonth } from '../../../models/finance';
 import { Category, } from '../../../models/core';
 import { Observable } from 'rxjs/Observable';
 import { FilterControlsComponent } from '../../../../shared/filter-controls/filter-controls.component';
-import { NavigationService } from '../../../services/navigation.service';
+import { AppService } from '../../../services/app.service';
 import { PanelBaseComponent } from '../../core/base/panel-base.component'
 
 @Component({
@@ -32,10 +32,10 @@ export class PanelExpensesComponent extends PanelBaseComponent implements OnInit
     public route: ActivatedRoute,
     public router: Router,
     public apiService: FinanceService,
-    public navigationService: NavigationService,
+    public appService: AppService,
     public datePipe: DatePipe
   ) {
-    super(route, navigationService);
+    super(route, appService);
   }
   ngOnInit() {
     this.resolveRoutes();

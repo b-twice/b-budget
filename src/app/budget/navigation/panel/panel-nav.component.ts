@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NavigationService } from '../../services/navigation.service';
+import { AppService } from '../../services/app.service';
 import { User, NavigationParams } from '../../models/core';
 
 
@@ -18,11 +18,11 @@ export class PanelNavComponent implements OnInit {
   constructor(
     public router: Router,
     public activatedRoute: ActivatedRoute,
-    public navigationService: NavigationService,
+    public appService: AppService,
   ) { }
 
   ngOnInit() {
-    this.navigationService.updateData.subscribe(data => this.params = data);
+    this.appService.navigation.subscribe(data => this.params = data);
   }
   isActive(group: string, panel: string, ) {
     return this.router.isActive(this.router.createUrlTree(['/budget/', group, panel]), null);
