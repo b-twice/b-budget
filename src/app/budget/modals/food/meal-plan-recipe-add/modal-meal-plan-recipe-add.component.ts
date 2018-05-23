@@ -52,7 +52,7 @@ export class ModalMealPlanRecipeAddComponent extends ModalBaseComponent implemen
         this.apiService.addMealPlanRecipe(item).subscribe(result => {
             this.appService.edit<MealPlanRecipe>(item);
             this.closeModal();
-        }, error => { console.log(error); });
+        }, error => { this.form.throwError(error); });
     }
 
 }

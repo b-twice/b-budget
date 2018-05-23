@@ -19,7 +19,7 @@ export class FormRecipeComponent extends FormBaseComponent implements OnInit {
     @Input() recipe: Recipe;
     @Input() user: string;
 
-    model: Recipe = new Recipe(0, null, null, null, null, null);
+    model: Recipe = new Recipe(0, null, null, null, null);
     recipeCategories: Observable<Category[]>;
     cookbooks: Observable<Cookbook[]>;
     recipeCategoriesService: CompleterData;

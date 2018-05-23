@@ -21,7 +21,7 @@ export class PanelGroceryCartComponent extends PanelBaseComponent implements OnI
   saveError: boolean = false;
 
   @ViewChild(FormGroceryComponent)
-  groceryForm: FormGroceryComponent;
+  form: FormGroceryComponent;
 
 
   constructor(
@@ -44,7 +44,7 @@ export class PanelGroceryCartComponent extends PanelBaseComponent implements OnI
   onSubmit(item: Grocery) {
     this.groceryCart.push(item);
     this.cartTotal += item.amount;
-    this.groceryForm.rebuild();
+    this.form.rebuild();
   }
 
   removeItem(index: number): void {
@@ -58,7 +58,8 @@ export class PanelGroceryCartComponent extends PanelBaseComponent implements OnI
     this.apiService.checkoutGroceries(data).subscribe(result => {
       this.groceryCart = [];
       this.cartTotal = 0;
-    }, error => { console.log(error); this.saveError = true });
+    }, error => { this.form.throwError(error); this.saveError = true; });
+
   }
 
 }

@@ -60,19 +60,19 @@ export class ModalRecipeIngredientAddComponent extends ModalBaseComponent implem
             this.apiService.updateRecipeIngredient(item.id, item).subscribe(result => {
                 this.appService.edit<RecipeIngredient>(item);
                 this.closeModal();
-            }, error => { console.log(error); });
+            }, error => { this.form.throwError(error); });
         }
         else {
             this.apiService.addRecipeIngredient(item).subscribe(result => {
                 this.appService.edit<RecipeIngredient>(item);
                 this.closeModal();
-            }, error => { console.log(error); });
+            }, error => { this.form.throwError(error); });
         }
     }
     onDelete(item: RecipeIngredient) {
         this.apiService.deleteRecipeIngredient(item.id).subscribe(result => {
             this.closeModal();
-        }, error => { console.log(error); });
+        }, error => { this.form.throwError(error); });
     }
 
 

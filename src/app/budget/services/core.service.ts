@@ -64,7 +64,11 @@ export class CoreService {
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
             console.error('An error occurred:', error.error.message);
-        } else {
+        }
+        else if (error.error) {
+            return new ErrorObservable(`An error occured: ${error.error}`);
+        }
+        else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
             console.error(
@@ -72,8 +76,7 @@ export class CoreService {
                 `body was: ${error.error}`);
         }
         // return an ErrorObservable with a user-facing error message
-        return new ErrorObservable(
-            'Something bad happened; please try again later.');
+        return new ErrorObservable(error.error);
     };
 
     public getUsers(): Observable<User[]> {

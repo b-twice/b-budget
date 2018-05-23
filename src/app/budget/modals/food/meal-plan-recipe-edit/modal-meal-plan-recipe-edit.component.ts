@@ -52,13 +52,13 @@ export class ModalMealPlanRecipeEditComponent extends ModalBaseComponent impleme
         this.apiService.updateMealPlanRecipe(item.id, item).subscribe(result => {
             this.appService.edit<MealPlanRecipe>(item);
             this.closeModal();
-        }, error => { console.log(error); });
+        }, error => { this.form.throwError(error); });
     }
     onDelete(item: MealPlanRecipe) {
         this.apiService.deleteMealPlanRecipe(item.id).subscribe(result => {
             this.appService.edit<MealPlanRecipe>(item);
             this.closeModal();
-        }, error => { console.log(error); });
+        }, error => { this.form.throwError(error); });
     }
 
 }

@@ -10,6 +10,7 @@ export class FormBaseComponent {
     @Input() submitLabel: string = 'Submit';
     model: {} = {};
     user: string;
+    error: string;
     @Output() onSubmit = new EventEmitter<any>();
     @Output() onDelete = new EventEmitter<any>();
 
@@ -22,12 +23,16 @@ export class FormBaseComponent {
     beforeSubmit() { }
 
     submit() {
+        this.error = null;
         this.beforeSubmit();
         this.onSubmit.emit(this.model);
     }
 
     delete() {
         this.onDelete.emit(this.model);
+    }
+    throwError(error: string) {
+        this.error = error;
     }
 
 }

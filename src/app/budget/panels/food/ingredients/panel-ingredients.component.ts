@@ -20,7 +20,7 @@ export class PanelIngredientsComponent extends PanelBaseComponent implements OnI
   saveError: boolean = false;
 
   @ViewChild(FormRecipeIngredientComponent)
-  recipeIngredientForm: FormRecipeIngredientComponent;
+  form: FormRecipeIngredientComponent;
 
 
   constructor(
@@ -42,7 +42,7 @@ export class PanelIngredientsComponent extends PanelBaseComponent implements OnI
   }
   onSubmit(item: RecipeIngredient) {
     this.ingredients.push(item);
-    this.recipeIngredientForm.rebuild();
+    this.form.rebuild();
   }
 
   removeItem(index: number): void {
@@ -54,7 +54,7 @@ export class PanelIngredientsComponent extends PanelBaseComponent implements OnI
     let data = { ingredients: this.ingredients }
     this.apiService.postIngredients(data).subscribe(result => {
       this.ingredients = [];
-    }, error => { console.log(error); this.saveError = true });
+    }, error => { this.form.throwError(error); this.saveError = true; });
   }
 
 }

@@ -56,13 +56,13 @@ export class ModalGroceryEditComponent implements OnInit {
     onSubmit(item: Grocery) {
         this.apiService.updateGrocery(item.id, item).subscribe(result => {
             this.router.navigate(['.', { outlets: { list: [item.name], form: null } }], { relativeTo: this.route.parent });
-        }, error => { console.log(error); });
+        }, error => { this.form.throwError(error); });
 
     }
     onDelete(item: Grocery) {
         this.apiService.deleteGrocery(item.id).subscribe(result => {
             this.router.navigate(['.', { outlets: { list: [item.name], form: null } }], { relativeTo: this.route.parent });
-        }, error => { console.log(error); });
+        }, error => { this.form.throwError(error); });
     }
 
 }
