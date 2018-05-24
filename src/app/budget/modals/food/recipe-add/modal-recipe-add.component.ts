@@ -74,6 +74,7 @@ export class ModalRecipeAddComponent extends ModalBaseComponent implements OnIni
     }
     onDelete(item: Recipe) {
         this.apiService.deleteRecipe(item.id).subscribe(result => {
+            this.appService.edit<Recipe>(item);
             this.router.navigate(['.', { outlets: { recipe: null } }], { relativeTo: this.route.parent });
         }, error => { this.form.throwError(error); });
     }

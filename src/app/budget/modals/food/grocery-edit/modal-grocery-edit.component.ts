@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroceryComponent } from '../../../forms/food/grocery/form-grocery.component';
 import { FoodService } from '../../../services/food.service';
+import { AppService } from '../../../services/app.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class ModalGroceryEditComponent implements OnInit {
     constructor(
         public route: ActivatedRoute,
         public router: Router,
-        public apiService: FoodService
+        public apiService: FoodService,
+        public appService: AppService
     ) { }
 
     ngOnInit() {
@@ -55,12 +57,14 @@ export class ModalGroceryEditComponent implements OnInit {
 
     onSubmit(item: Grocery) {
         this.apiService.updateGrocery(item.id, item).subscribe(result => {
+            this.appService.edit<Grocery>(item);
             this.router.navigate(['.', { outlets: { list: [item.name], form: null } }], { relativeTo: this.route.parent });
         }, error => { this.form.throwError(error); });
 
     }
     onDelete(item: Grocery) {
         this.apiService.deleteGrocery(item.id).subscribe(result => {
+            this.appService.edit<Grocery>(item);
             this.router.navigate(['.', { outlets: { list: [item.name], form: null } }], { relativeTo: this.route.parent });
         }, error => { this.form.throwError(error); });
     }

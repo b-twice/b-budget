@@ -71,6 +71,7 @@ export class ModalRecipeIngredientAddComponent extends ModalBaseComponent implem
     }
     onDelete(item: RecipeIngredient) {
         this.apiService.deleteRecipeIngredient(item.id).subscribe(result => {
+            this.appService.edit<RecipeIngredient>(item);
             this.closeModal();
         }, error => { this.form.throwError(error); });
     }
