@@ -15,6 +15,7 @@
           {{item.name}}
         </div>
         <div>
+          <i class="fa fa-pencil" style="cursor:pointer" (click)="editItem(item, i)"></i>
           <i class="fa fa-close icon-error" style="cursor:pointer" (click)="removeItem(i)"></i>
         </div>
       </div>

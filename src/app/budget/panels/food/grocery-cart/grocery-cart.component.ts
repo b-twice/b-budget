@@ -47,6 +47,10 @@ export class PanelGroceryCartComponent extends PanelBaseComponent implements OnI
     this.form.rebuild();
   }
 
+  editItem(item: Grocery, index: number) {
+    this.form.model = item;
+    this.removeItem(index);
+  }
   removeItem(index: number): void {
     this.cartTotal -= this.groceryCart[index].amount;
     this.groceryCart.splice(index, 1);

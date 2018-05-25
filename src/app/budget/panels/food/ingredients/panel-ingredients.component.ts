@@ -45,6 +45,10 @@ export class PanelIngredientsComponent extends PanelBaseComponent implements OnI
     this.form.rebuild();
   }
 
+  editItem(item: RecipeIngredient, index: number) {
+    this.form.model = item;
+    this.removeItem(index);
+  }
   removeItem(index: number): void {
     this.ingredients.splice(index, 1);
   }
