@@ -46,3 +46,15 @@
   cursor:pointer;
   justify-content:center;
 }
+
+.table-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: $content-space;
+
+  div {
+    cursor:pointer;
+  }
+}

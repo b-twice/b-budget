@@ -31,7 +31,7 @@ export class CoreService {
             );
     }
 
-    public post<T>(fragment: string, data: {}): Observable<{} | T> {
+    public post<T>(fragment: string, data: {}): Observable<T> {
         let postUrl = `${this.settings.apiEndpoint}/${fragment}`;
         let body = JSON.stringify(data);
         let httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
@@ -41,7 +41,7 @@ export class CoreService {
             );
     }
 
-    public put<T>(fragment: string, data: {}): Observable<{} | T> {
+    public put<T>(fragment: string, data: {}): Observable<T> {
         let postUrl = `${this.settings.apiEndpoint}/${fragment}`;
         let body = JSON.stringify(data);
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
@@ -51,7 +51,7 @@ export class CoreService {
             );
     }
 
-    public delete<T>(fragment: string): Observable<{} | T> {
+    public delete<T>(fragment: string): Observable<T> {
         let postUrl = `${this.settings.apiEndpoint}/${fragment}`;
         return this.http.delete<T>(postUrl)
             .pipe(

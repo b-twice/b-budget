@@ -68,7 +68,7 @@ export class ModalRecipeAddComponent extends ModalBaseComponent implements OnIni
         else {
             this.apiService.addRecipe(item).subscribe(result => {
                 this.appService.edit<Recipe>(item);
-                this.closeModal();
+                this.router.navigate(['.', { outlets: { recipe: null, ingredients: [result.id] } }], { relativeTo: this.route.parent });
             }, error => { this.form.throwError(error); });
         }
     }

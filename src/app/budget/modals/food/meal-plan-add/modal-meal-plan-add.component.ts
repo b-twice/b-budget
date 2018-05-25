@@ -69,7 +69,7 @@ export class ModalMealPlanAddComponent extends ModalBaseComponent implements OnI
         else {
             this.apiService.addMealPlan(item).subscribe(result => {
                 this.appService.edit<MealPlan>(item);
-                this.closeModal();
+                this.router.navigate(['.', { outlets: { mealPlan: [result.id] } }], { relativeTo: this.route.parent });
             }, error => { this.form.throwError(error); });
         }
     }
