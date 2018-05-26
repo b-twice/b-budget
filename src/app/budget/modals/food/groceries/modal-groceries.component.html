@@ -13,6 +13,7 @@
 
         <div class="grocery-table">
           <div class="table-row table-column">
+            <div class="table-row-cell flex-size-2" (click)="sort('date')">Date</div>
             <div class="table-row-cell flex-size-3" (click)="sort('supermarket')">Supermarket</div>
             <div class="table-row-cell flex-size-3" (click)="sort('name')">Count/Weight</div>
             <div class="table-row-cell flex-size-2 flex-center" (click)="sort('organic')">Organic</div>
@@ -23,6 +24,7 @@
           </div>
           <div *ngIf="groceries | async as result; else loading" class="table-body table-main-content">
             <div class="table-row" *ngFor="let item of result | dynamicSort:sortProperty:sortDesc">
+              <div class="table-row-cell flex-size-2">{{item.date | date:'MMM d'}}</div>
               <div class="table-row-cell flex-size-3">{{item.supermarket}}</div>
               <div class="table-row-cell flex-size-3 flex-center" *ngIf="item.count > 0">{{item.count}}</div>
               <div class="table-row-cell flex-size-3 flex-center" *ngIf="item.weight > 0">{{item.weight | number:'1.2-2'}} {{item.unit}}</div>
@@ -44,7 +46,8 @@
           </ng-template>
           <div class="table-body table-main-content">
             <div class="table-row grocery-total">
-              <div class="table-row-cell flex-size-3">Total</div>
+              <div class="table-row-cell flex-size-2">Total</div>
+              <div class="table-row-cell flex-size-3"></div>
               <div class="table-row-cell flex-size-3"></div>
               <div class="table-row-cell flex-size-2"></div>
               <div class="table-row-cell flex-size-2"></div>
