@@ -31,6 +31,7 @@ export class PanelSpendingChartComponent implements OnInit {
   // containers
   chart: d3Selection.Selection<any, any, any, any>;
   chartGroup: any;
+  tooltip: d3Selection.Selection<any, any, any, any>;
   lineGroup: any;
   xAxis: any;
   yAxis: any;
@@ -107,6 +108,11 @@ export class PanelSpendingChartComponent implements OnInit {
       .classed('spending-svg-container', true)
       .attr("width", this.width)
       .attr("height", this.height);
+    // Define the div for the tooltip
+    this.tooltip = d3Selection.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
 
 
     // need to calculate width of chart within margins, so that chart doesn't extend to full boundaries of svg
@@ -152,7 +158,20 @@ export class PanelSpendingChartComponent implements OnInit {
       .attr("x", d => this.xDomain(d.key))
       .attr("y", d => this.yDomain(d.value))
       .attr("width", this.xDomain.bandwidth())
-      .attr("height", d => chartHeight - this.yDomain(d.value));
+      .attr("height", d => chartHeight - this.yDomain(d.value))
+      .on("mouseover", d => {
+        this.tooltip.transition()
+          .duration(200)
+          .style("opacity", .9);
+        this.tooltip.html(`$${d.value.toLocaleString()}`)
+          .style("left", (d3Selection.event.pageX) + "px")
+          .style("top", (d3Selection.event.pageY - 28) + "px");
+      })
+      .on("mouseout", (d) =>
+        this.tooltip.transition()
+          .duration(500)
+          .style("opacity", 0)
+      );
 
   }
 

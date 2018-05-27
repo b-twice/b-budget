@@ -33,6 +33,7 @@ export class PanelSummaryChartComponent implements OnInit {
 
   // containers
   chart: d3Selection.Selection<any, any, any, any>;
+  tooltip: d3Selection.Selection<any, any, any, any>;
   chartGroup: any;
   lineGroup: any;
   xAxis: any;
@@ -44,7 +45,7 @@ export class PanelSummaryChartComponent implements OnInit {
 
   // data
   data: Array<UserSummary>;
-  entries: Array<{ key: string, values: SummaryByCategory }>;
+  entries: Array<{ key: string, values: SummaryByCategory[] }>;
 
   drawActive: boolean = false;
 
@@ -109,6 +110,12 @@ export class PanelSummaryChartComponent implements OnInit {
     chart.select(".y.axis") // change the y axis
       .duration(750)
       .call(this.yAxis);
+    // cant do a transition because some points may not exist anymore
+    // rather remove all the data and add the points back in
+    this.chartGroup.selectAll(".dot")
+      .remove()
+    this.addPointData();
+
   }
 
 
@@ -120,6 +127,10 @@ export class PanelSummaryChartComponent implements OnInit {
       .classed('svg-container', true)
       .attr("width", this.width)
       .attr("height", this.height);
+    // Define the div for the tooltip
+    this.tooltip = d3Selection.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
 
 
     // need to calculate width of chart within margins, so that chart doesn't extend to full boundaries of svg
@@ -183,6 +194,10 @@ export class PanelSummaryChartComponent implements OnInit {
       .classed('line-label', true)
       .text(d => d.id);
 
+    // 12. Appends a circle for each datapoint 
+    this.addPointData();
+
+
   }
 
   // prettify and transform incoming data for consumption in chart
@@ -220,5 +235,33 @@ export class PanelSummaryChartComponent implements OnInit {
     this.xAxis = d3Axis.axisBottom(this.xDomain);
     this.yAxis = d3Axis.axisLeft(this.yDomain);
   }
+
+  // create a collection consumable for points, yes this is also not d3 like but works;
+  addPointData(): void {
+    var data = [];
+    this.entries.map(d => d.values.map(o => { o['key'] = d.key; return data.push(o) }));
+    this.chartGroup.selectAll(".dot")
+      .data(data)
+      .enter().append("circle") // Uses the enter().append() method
+      .attr("class", "dot") // Assign a class for styling
+      .attr("cx", (d, i) => this.xDomain(d.year))
+      .attr("cy", (d) => this.yDomain(d.amount))
+      .attr("r", 4)
+      .style("fill", d => this.zDomain(d.key))
+      .on("mouseover", d => {
+        this.tooltip.transition()
+          .duration(200)
+          .style("opacity", .9);
+        this.tooltip.html(`$${d.amount.toLocaleString()}`)
+          .style("left", (d3Selection.event.pageX) + "px")
+          .style("top", (d3Selection.event.pageY - 28) + "px");
+      })
+      .on("mouseout", (d) =>
+        this.tooltip.transition()
+          .duration(500)
+          .style("opacity", 0)
+      );
+  }
+
 
 }

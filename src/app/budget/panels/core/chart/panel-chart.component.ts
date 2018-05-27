@@ -185,8 +185,6 @@ export class PanelChartComponent implements OnInit, OnDestroy {
     // 12. Appends a circle for each datapoint 
     this.addPointData();
 
-
-
     this.drawActive = true;
   }
 
@@ -230,22 +228,18 @@ export class PanelChartComponent implements OnInit, OnDestroy {
       .attr("r", 4)
       .style("fill", d => this.zDomain(d.key))
       .on("mouseover", d => {
-        console.log('yo')
         this.tooltip.transition()
           .duration(200)
           .style("opacity", .9);
-        this.tooltip.html(d.amount)
+        this.tooltip.html(`$${d.amount.toLocaleString()}`)
           .style("left", (d3Selection.event.pageX) + "px")
           .style("top", (d3Selection.event.pageY - 28) + "px");
-        console.log(this.tooltip)
       })
-      .on("mouseout", (d) => {
-        console.log('goodbye')
+      .on("mouseout", (d) =>
         this.tooltip.transition()
           .duration(500)
-          .style("opacity", 0);
-      });
-    ;
+          .style("opacity", 0)
+      );
   }
 
 }

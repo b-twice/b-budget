@@ -1,4 +1,6 @@
 @import '../../../../../styles/base.scss';
+@import '../../../../../styles/graph.scss';
+
 .panel-style {
   padding: 1rem;
   @extend .panel-base;
@@ -19,8 +21,3 @@
   flex: 1;
 }
 
-/deep/ .line {
-  // stroke: $primary-color;
-  stroke-width: 1.5;
-  fill: none;
-}
