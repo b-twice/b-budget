@@ -33,6 +33,7 @@ export class PanelChartComponent implements OnInit, OnDestroy {
 
   // containers
   chart: d3Selection.Selection<any, any, any, any>;
+  tooltip: d3Selection.Selection<any, any, any, any>;
   chartGroup: any;
   lineGroup: any;
   xAxis: any;
@@ -44,7 +45,7 @@ export class PanelChartComponent implements OnInit, OnDestroy {
 
   // data
   data: Array<Transaction>;
-  entries: Array<{ key: string, values: Transaction }>;
+  entries: Array<{ key: string, values: Transaction[] }>;
 
   drawActive: boolean = false;
 
@@ -96,6 +97,12 @@ export class PanelChartComponent implements OnInit, OnDestroy {
     chart.select(".y.axis") // change the y axis
       .duration(750)
       .call(this.yAxis);
+
+    // cant do a transition because some points may not exist anymore
+    // rather remove all the data and add the points back in
+    this.chartGroup.selectAll(".dot")
+      .remove()
+    this.addPointData();
   }
 
 
@@ -108,6 +115,10 @@ export class PanelChartComponent implements OnInit, OnDestroy {
       .classed('svg-container', true)
       .attr("width", this.width)
       .attr("height", this.height);
+    // Define the div for the tooltip
+    this.tooltip = d3Selection.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
 
 
     // need to calculate width of chart within margins, so that chart doesn't extend to full boundaries of svg
@@ -171,9 +182,14 @@ export class PanelChartComponent implements OnInit, OnDestroy {
       .style("font", "10px sans-serif")
       .classed('line-label', true)
       .text(d => d.id);
+    // 12. Appends a circle for each datapoint 
+    this.addPointData();
+
+
 
     this.drawActive = true;
   }
+
 
   // prettify and transform incoming data for consumption in chart
   parseData() {
@@ -199,6 +215,37 @@ export class PanelChartComponent implements OnInit, OnDestroy {
     this.zDomain(this.entries.keys);
     this.xAxis = d3Axis.axisBottom(this.xDomain);
     this.yAxis = d3Axis.axisLeft(this.yDomain);
+  }
+
+  // create a collection consumable for points, yes this is also not d3 like but works;
+  addPointData(): void {
+    var data = [];
+    this.entries.map(d => d.values.map(o => { o['key'] = d.key; return data.push(o) }));
+    this.chartGroup.selectAll(".dot")
+      .data(data)
+      .enter().append("circle") // Uses the enter().append() method
+      .attr("class", "dot") // Assign a class for styling
+      .attr("cx", (d, i) => this.xDomain(d.month))
+      .attr("cy", (d) => this.yDomain(d.amount))
+      .attr("r", 4)
+      .style("fill", d => this.zDomain(d.key))
+      .on("mouseover", d => {
+        console.log('yo')
+        this.tooltip.transition()
+          .duration(200)
+          .style("opacity", .9);
+        this.tooltip.html(d.amount)
+          .style("left", (d3Selection.event.pageX) + "px")
+          .style("top", (d3Selection.event.pageY - 28) + "px");
+        console.log(this.tooltip)
+      })
+      .on("mouseout", (d) => {
+        console.log('goodbye')
+        this.tooltip.transition()
+          .duration(500)
+          .style("opacity", 0);
+      });
+    ;
   }
 
 }
