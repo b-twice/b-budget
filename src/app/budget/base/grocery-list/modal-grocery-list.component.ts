@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common'
 import { Observable } from 'rxjs/Observable';
-import { MealPlanRecipe, MealPlanGrocery, MealPlan } from '../../../models/food';
+import { MealPlanRecipe, MealPlanGrocery, MealPlan } from '../../models/food';
 import { ActivatedRoute } from '@angular/router';
-import { FoodService } from '../../../services/food.service';
-import { ModalBaseComponent } from '../../core/base/modal-base.component'
+import { FoodService } from '../../services/food.service';
 
 
 @Component({
@@ -12,7 +10,7 @@ import { ModalBaseComponent } from '../../core/base/modal-base.component'
     templateUrl: './modal-grocery-list.component.html',
     styleUrls: ['./modal-grocery-list.component.scss']
 })
-export class ModalGroceryListComponent extends ModalBaseComponent implements OnInit {
+export class ModalGroceryListComponent implements OnInit {
 
     mealPlan: MealPlan;
     recipes: Observable<MealPlanRecipe[]>;
@@ -21,10 +19,8 @@ export class ModalGroceryListComponent extends ModalBaseComponent implements OnI
 
     constructor(
         public route: ActivatedRoute,
-        public apiService: FoodService,
-        public location: Location
+        public apiService: FoodService
     ) {
-        super(location);
     }
 
     ngOnInit() {

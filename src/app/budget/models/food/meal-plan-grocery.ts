@@ -7,7 +7,8 @@ export class MealPlanGrocery {
         public weight: number = 0,
         public unit: string,
         public dirty: number = 0,
-        public supermarket: string
+        public supermarket: string,
+        public remove: false
     ) { }
 }
 

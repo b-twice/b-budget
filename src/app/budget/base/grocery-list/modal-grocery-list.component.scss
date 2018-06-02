@@ -1,19 +1,15 @@
-@import '../../../../../styles/base.scss';
-@import '../../../../../styles/flex.scss';
-@import '../../../../../styles/table.scss';
+@import '../../../../styles/base.scss';
+@import '../../../../styles/flex.scss';
+@import '../../../../styles/table.scss';
 
 .section-header {
   @extend .section-header;
 }
 
-.popup-content {
-  padding:.25rem;
-  &.print-view {
-    justify-content: center;
-    .popup-body {
-      width: 80rem;
-    }
-  }
+
+:host {
+  width: 80rem;
+  margin: 0 auto;
 }
 
 .recipe-list {
@@ -45,10 +41,15 @@ ul.grocery-list {
 
 .grocery-item {
   margin-right: 1.5rem;
+  cursor:pointer;
   i {
     margin-left:1rem;
     color: #27ae60;
   }
+  &.strike {
+    text-decoration: line-through;
+  }
+
   // .supermarket {
   //   display:inline-block;
   //   width:20rem;

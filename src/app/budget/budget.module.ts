@@ -6,6 +6,7 @@ import { SharedServiceModule } from './shared-service.module'
 
 // services
 import { CoreService } from './services/core.service';
+import { FoodService } from './services/food.service';
 
 // modules
 import { SharedModule } from '../shared/shared.module';
@@ -13,6 +14,8 @@ import { CoreModule } from './core.module';
 import { FinanceModule } from './finance.module';
 import { AuthModule } from './services/auth.module';
 
+// components
+import { ModalGroceryListComponent } from './base/grocery-list/modal-grocery-list.component';
 
 @NgModule({
     imports: [
@@ -25,9 +28,11 @@ import { AuthModule } from './services/auth.module';
         SharedServiceModule.forRoot()
     ],
     declarations: [
+        ModalGroceryListComponent
     ],
     providers: [
-        CoreService
+        CoreService,
+        FoodService
     ]
 })
 export class BudgetModule { }

@@ -34,7 +34,6 @@ import { ModalMealPlanAddComponent } from './modals/food/meal-plan-add/modal-mea
 import { ModalMealPlanRecipeAddComponent } from './modals/food/meal-plan-recipe-add/modal-meal-plan-recipe-add.component';
 import { ModalMealPlanRecipeEditComponent } from './modals/food/meal-plan-recipe-edit/modal-meal-plan-recipe-edit.component';
 import { ModalRecipeAddComponent } from './modals/food/recipe-add/modal-recipe-add.component';
-import { ModalGroceryListComponent } from './modals/food/grocery-list/modal-grocery-list.component';
 import { ModalGroceryEditComponent } from './modals/food/grocery-edit/modal-grocery-edit.component';
 
 import { FormGroceryComponent } from './forms/food/grocery/form-grocery.component';
@@ -71,7 +70,6 @@ import { FormMealPlanRecipeComponent } from './forms/food/meal-plan-recipe/form-
         ModalMealPlanRecipeAddComponent,
         ModalMealPlanRecipeEditComponent,
         ModalRecipeAddComponent,
-        ModalGroceryListComponent,
         ModalGroceryEditComponent,
         ModalGroceriesComponent,
 

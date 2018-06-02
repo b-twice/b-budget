@@ -21,7 +21,7 @@
           <a class="table-row-cell flex-size-1 flex-center" [routerLink]="[{ outlets: { mealPlan: [mealPlan.id] } }]">
             <i class="fa fa-eye"></i>
           </a>
-          <a class="table-row-cell flex-size-1 flex-center" [routerLink]="[{ outlets: { groceryList: [mealPlan.id] } }]">
+          <a class="table-row-cell flex-size-1 flex-center" [routerLink]="['/budget/groceryList', mealPlan.id]">
             <i class="fa fa-print"></i>
           </a>
         </div>
