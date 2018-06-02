@@ -11,10 +11,10 @@
       <div class="cart-item" *ngFor="let item of groceryCart; let i = index" [attr.data-index]="i">
         <div>
           <i class="fa fa-angle-right"></i>&nbsp; &nbsp;
-          <span *ngIf="!item.weight">{{item.count}}</span>
-          <span *ngIf="!item.count">{{item.weight}}</span>{{item.unit}}&nbsp; {{item.name}}
-          <span *ngIf="item.organic == 'Yes'">&nbsp;(O)</span>
-          <span *ngIf="item.seasonal == 'Yes'">&nbsp;(S)</span>
+          <span *ngIf="item.count > 0">{{item.count}}</span>
+          <span *ngIf="item.weight > 0">{{item.weight}}{{item.unit}}</span> {{item.name}} &nbsp;
+          <i *ngIf="item.organic == 'Yes'" class="fa fa-leaf"></i>
+          <i *ngIf="item.seasonal == 'Yes'" class="fa fa-tree"></i>
         </div>
         <div>
           ${{item.amount}} &nbsp; &nbsp;
