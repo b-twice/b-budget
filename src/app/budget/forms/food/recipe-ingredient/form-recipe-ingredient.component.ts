@@ -23,6 +23,7 @@ export class FormRecipeIngredientComponent extends FormBaseComponent implements 
     recipeService: CompleterData;
     foodProductsService: CompleterData;
     ingredientMeasurement: string;
+    quantityType: string;
     @Output() onSubmit = new EventEmitter<RecipeIngredient>();
     @Output() onDelete = new EventEmitter<RecipeIngredient>();
     @ViewChild("foodProduct") _foodProduct: CompleterCmp;
@@ -39,6 +40,7 @@ export class FormRecipeIngredientComponent extends FormBaseComponent implements 
         this.model = new RecipeIngredient(0, this.model.recipe, null, null, null);
         this._foodProduct.focus();
         this.ingredientMeasurement = null;
+        this.quantityType = null;
     }
 
     onProductSelect() {
@@ -47,6 +49,7 @@ export class FormRecipeIngredientComponent extends FormBaseComponent implements 
                 if (o) {
                     this.model.unit = o.unit;
                     this.ingredientMeasurement = o.measurement;
+                    this.quantityType = o.quantityType;
                 }
             });
         }

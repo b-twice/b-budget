@@ -4,6 +4,7 @@ export class FoodProduct {
         public name: string,
         public unit: string,
         public dirty: number,
-        public measurement: string
+        public measurement: string,
+        public quantityType: string
     ) { }
 }

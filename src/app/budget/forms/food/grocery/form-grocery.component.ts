@@ -23,6 +23,7 @@ export class FormGroceryComponent extends FormBaseComponent implements OnInit {
     supermarkets: Observable<Supermarket[]>;
     foodProductsService: CompleterData;
     supermarketsService: CompleterData;
+    latestGrocery: boolean = false;
     @ViewChild("foodProduct") _foodProduct: CompleterCmp;
 
     constructor(
@@ -49,11 +50,13 @@ export class FormGroceryComponent extends FormBaseComponent implements OnInit {
     rebuild() {
         this.model = new Grocery(0, this.user, this.model.supermarket, null, this.model.date);
         this._foodProduct.focus();
+        this.latestGrocery = false;
     }
 
     onProductSelect() {
         if (this.model.name) {
             this.apiService.getLatestGrocery(this.model.name, this.model.supermarket).subscribe(grocery => {
+                this.latestGrocery = grocery ? true : false;
                 if (grocery) {
                     this.model.weight = grocery.weight;
                     this.model.count = grocery.count;
@@ -61,6 +64,17 @@ export class FormGroceryComponent extends FormBaseComponent implements OnInit {
                     this.model.organic = grocery.organic;
                     this.model.seasonal = grocery.seasonal;
                     this.model.unit = grocery.unit;
+                    this.model.quantityType = grocery.quantityType;
+                }
+                else {
+                    this.model.weight = 0;
+                    this.model.count = 0;
+                    this.model.amount = 0;
+                    this.model.organic = null;
+                    this.model.seasonal = 'No';
+                    this.model.unit = 'lb';
+                    this.model.quantityType = 'None';
+
                 }
             });
         }

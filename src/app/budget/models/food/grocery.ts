@@ -12,6 +12,7 @@ export class Grocery {
         public organic: string = 'No',
         public seasonal: string = 'No',
         public amount: number = 0,
-        public unitPrice: number = 0
+        public unitPrice: number = 0,
+        public quantityType: string = 'None'
     ) { }
 }
