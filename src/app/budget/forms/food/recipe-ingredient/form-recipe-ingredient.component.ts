@@ -64,6 +64,13 @@ export class FormRecipeIngredientComponent extends FormBaseComponent implements 
             this.recipeService = this.completerService.local(data[1], 'name', 'name');
             if (this.recipeIngredient) {
                 this.model = this.recipeIngredient;
+                this.apiService.getFoodProduct(this.model.name).subscribe(o => {
+                    if (o) {
+                        this.model.unit = o.unit;
+                        this.ingredientMeasurement = o.measurement;
+                        this.quantityType = o.quantityType;
+                    }
+                });
             }
         });
     }
