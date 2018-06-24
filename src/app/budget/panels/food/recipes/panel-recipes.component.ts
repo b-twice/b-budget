@@ -46,7 +46,8 @@ export class PanelRecipesComponent extends PanelBaseComponent implements OnInit 
 
   getData(): void {
     if (!this.user) { return; }
-    this.recipes = this.apiService.getRecipesWithIngredient(this.user, this.recipeControls.searchValue, this.filterControls.activeCategories);
+    let searchValue = this.recipeControls.searchValue ? this.recipeControls.searchValue : "";
+    this.recipes = this.apiService.getRecipesWithIngredient(this.user, searchValue, this.filterControls.activeCategories);
   }
 
   categoryChange() {
