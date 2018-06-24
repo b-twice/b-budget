@@ -104,6 +104,12 @@ export class FoodService extends CoreService {
         const httpOptions = { params: params };
         return this.request<Recipe[]>(`food/recipes/user/${name}`, httpOptions);
     }
+    public getRecipesWithIngredient(name: string, ingredient: string, categories: string[]): Observable<Recipe[]> {
+        let params = new HttpParams();
+        categories.forEach(c => params = params.append('categoryNames', c));
+        const httpOptions = { params: params };
+        return this.request<Recipe[]>(`food/recipes/user/${name}/${ingredient}`, httpOptions);
+    }
     public getRecipe(id: number): Observable<Recipe> {
         return this.request<Recipe>(`food/recipes/recipe/${id}`, null);
     }

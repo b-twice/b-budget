@@ -1,8 +1,20 @@
-<a [routerLink]="[{ outlets: { recipe: ['add']  }}]" class="icon-container" *ngIf="user !== 'All'">
-  <i class="fa fa-plus "></i>
-  <span>Add Recipe</span>
-</a>
-<a [routerLink]="['/budget', 'food', 'ingredients', user, year]" class="icon-container" *ngIf="user !== 'All'">
-  <i class="fa fa-plus "></i>
-  <span>Add Recipe Ingredients</span>
-</a>
+<div class="search-wrapper">
+  <div class="form-group">
+    <div class="input-addon">
+      <input input #searchBox type="search" aria-label="search" placeholder="Search Ingredients">
+      <span class="input-addon-item" (click)="search()">
+        <span class="fa fa-search"></span>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="edit-wrapper">
+  <a [routerLink]="[{ outlets: { recipe: ['add']  }}]" class="icon-container" *ngIf="user !== 'All'">
+    <i class="fa fa-plus "></i>
+    <span>Add Recipe</span>
+  </a>
+  <a [routerLink]="['/budget', 'food', 'ingredients', user, year]" class="icon-container" *ngIf="user !== 'All'">
+    <i class="fa fa-plus "></i>
+    <span>Add Recipe Ingredients</span>
+  </a>
+</div>

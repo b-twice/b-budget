@@ -1,4 +1,4 @@
-<budget-panel-recipe-controls></budget-panel-recipe-controls>
+<budget-panel-recipe-controls (onSearch)="ingredientSearch($event)"></budget-panel-recipe-controls>
 <div class="panel">
   <budget-filter-controls (onCategoryChange)="categoryChange()" [categories]="recipeCategories"></budget-filter-controls>
   <div class="recipe-table">

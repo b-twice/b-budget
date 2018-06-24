@@ -4,12 +4,22 @@
 :host {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
   width: 100%;
+  justify-content:space-between;
   margin-bottom: $content-space;
+}
+
+.edit-wrapper {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 a {
   cursor: pointer;
   margin-left:2rem;
+}
+
+.input-addon-item {
+  cursor:pointer;
 }

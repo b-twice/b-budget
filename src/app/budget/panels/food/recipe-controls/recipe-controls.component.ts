@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,6 +10,9 @@ export class PanelRecipeControlsComponent implements OnInit {
 
   user: string;
   year: string;
+  searchValue: string;
+  @ViewChild('searchBox') searchBox: ElementRef;
+  @Output() onSearch = new EventEmitter<string>();
 
   constructor(
     public route: ActivatedRoute
@@ -23,6 +26,12 @@ export class PanelRecipeControlsComponent implements OnInit {
       }
     )
 
+  }
+
+  search() {
+    let searchValue = this.searchBox.nativeElement.value;
+    this.searchValue = searchValue;
+    this.onSearch.emit(searchValue);
   }
 
 
