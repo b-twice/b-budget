@@ -52,9 +52,9 @@ export class ModalRecipeIngredientsComponent extends ModalBaseComponent implemen
     });
   }
 
-  closeModal() {
-    this.router.navigate(['.', { outlets: { ingredients: null } }], { relativeTo: this.route.parent });
-  }
+  // closeModal() {
+  //   this.router.navigate(['.', { outlets: { ingredients: null } }], { relativeTo: this.route.parent });
+  // }
 
   edit(recipe: Recipe) {
     this.router.navigate(['.', { outlets: { ingredient: null, ingredients: null, recipe: ['edit', recipe.id] } }], { relativeTo: this.route.parent });

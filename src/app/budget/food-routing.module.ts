@@ -62,6 +62,11 @@ const foodRoutes: Routes = [
                         outlet: 'mealPlan'
                     },
                     {
+                        path: 'recipe/view/:id',
+                        component: ModalRecipeIngredientsComponent,
+                        outlet: 'mealPlan'
+                    },
+                    {
                         path: 'add',
                         component: ModalMealPlanAddComponent,
                         outlet: 'mealPlan'
