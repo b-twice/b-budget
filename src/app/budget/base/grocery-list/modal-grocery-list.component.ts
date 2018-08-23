@@ -33,7 +33,7 @@ export class ModalGroceryListComponent implements OnInit {
     getData() {
         this.apiService.getMealPlan(this.id).subscribe(o => {
             this.mealPlan = o;
-            this.recipes = this.apiService.getMealPlanRecipes(o.name);
+            this.recipes = this.apiService.getMealPlanRecipes(o.id);
             this.apiService.getMealPlanGroceries(o.name).subscribe(
                 g => this.groceriesByCategory = this.categorizeGroceries(g)
             );

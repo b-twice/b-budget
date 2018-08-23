@@ -37,7 +37,8 @@ export class ModalMealPlanComponent extends ModalBaseComponent implements OnInit
     getData(): void {
         this.apiService.getMealPlan(this.id).subscribe(o => {
             this.mealPlan = o;
-            this.recipes = this.apiService.getMealPlanRecipes(o.name);
+            console.log(o)
+            this.recipes = this.apiService.getMealPlanRecipes(o.id);
         });
     }
 

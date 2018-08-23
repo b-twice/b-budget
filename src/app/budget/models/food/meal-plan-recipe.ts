@@ -2,6 +2,7 @@ export class MealPlanRecipe {
         constructor(
                 public id: number,
                 public mealPlanName: string,
+                public mealPlanId: number,
                 public name: string,
                 public category: string,
                 public cookbook: string,

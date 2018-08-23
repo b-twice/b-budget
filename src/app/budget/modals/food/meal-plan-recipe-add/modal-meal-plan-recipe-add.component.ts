@@ -43,12 +43,13 @@ export class ModalMealPlanRecipeAddComponent extends ModalBaseComponent implemen
 
     getData() {
         this.apiService.getMealPlan(this.id).subscribe(mealPlan => {
-            this.mealPlanRecipe = new MealPlanRecipe(0, mealPlan.name, null, null, null);
+            this.mealPlanRecipe = new MealPlanRecipe(0, mealPlan.name, 0, null, null, null);
         });
 
     }
 
     onSubmit(item: MealPlanRecipe) {
+        console.log(item)
         this.apiService.addMealPlanRecipe(item).subscribe(result => {
             this.appService.edit<MealPlanRecipe>(item);
             this.closeModal();
