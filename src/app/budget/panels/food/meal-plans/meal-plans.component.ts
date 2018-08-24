@@ -42,7 +42,7 @@ export class PanelMealPlansComponent extends PanelBaseComponent implements OnIni
 
     printGroceryList(mealPlan: MealPlan): void {
         this.mealPlanRecipes = this.apiService.getMealPlanRecipes(mealPlan.id);
-        this.mealPlanGroceries = this.apiService.getMealPlanGroceries(mealPlan.name);
+        this.mealPlanGroceries = this.apiService.getMealPlanGroceries(mealPlan.id);
         this.selectedMealPlan = mealPlan;
         this.showGroceryList = true;
     }
