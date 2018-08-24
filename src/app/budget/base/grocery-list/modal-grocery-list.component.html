@@ -17,7 +17,7 @@
     <ul class="grocery-list">
       <li class='grocery-item' [ngClass]="{'strike': grocery.remove}" (click)="grocery.remove=!grocery.remove" *ngFor="let grocery of o['value']">
         <span *ngIf="grocery.count > 0">{{grocery.count}}&nbsp;</span>
-        <span *ngIf="grocery.weight> 0">{{grocery.weight}}{{grocery.unit}}&nbsp;</span>
+        <span *ngIf="grocery.weight > 0">{{grocery.weight}}{{grocery.unit}}&nbsp;</span>
         <span [ngClass]="grocery.supermarket" class="grocery-name">{{grocery.name}}</span>
         <!-- <span [ngClass]="grocery.supermarket" class="supermarket" *ngIf="grocery.supermarket">{{grocery.supermarket}}</span> -->
         <i *ngIf="grocery.dirty" class="fa fa-leaf"></i>
