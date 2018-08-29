@@ -53,7 +53,7 @@ export class ModalMealPlanComponent extends ModalBaseComponent implements OnInit
         this.router.navigate(['.', { outlets: { mealPlan: ['recipe', 'add', mealPlan.id] } }], { relativeTo: this.route.parent });
     }
     viewRecipe(mealPlanRecipe: MealPlanRecipe) {
-        this.router.navigate(['.', { outlets: { mealPlan: ['recipe', 'view', mealPlanRecipe.id] } }], { relativeTo: this.route.parent });
+        this.router.navigate(['.', { outlets: { mealPlan: ['recipe', 'view', mealPlanRecipe.recipeId] } }], { relativeTo: this.route.parent });
     }
     editRecipe(mealPlanRecipe: MealPlanRecipe) {
         this.router.navigate(['.', { outlets: { mealPlan: ['recipe', 'edit', mealPlanRecipe.id] } }], { relativeTo: this.route.parent });
