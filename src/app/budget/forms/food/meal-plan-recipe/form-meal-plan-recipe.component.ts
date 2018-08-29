@@ -18,7 +18,7 @@ export class FormMealPlanRecipeComponent extends FormBaseComponent implements On
 
     @Input() mealPlanRecipe: MealPlanRecipe;
 
-    model: MealPlanRecipe = new MealPlanRecipe(0, null, 0, null, null, null);
+    model: MealPlanRecipe = new MealPlanRecipe(0, 0, null, 0, null, null, null);
     @Output() onSubmit = new EventEmitter<MealPlanRecipe>();
     @Output() onDelete = new EventEmitter<MealPlanRecipe>();
 

@@ -43,7 +43,7 @@ export class ModalMealPlanRecipeAddComponent extends ModalBaseComponent implemen
 
     getData() {
         this.apiService.getMealPlan(this.id).subscribe(mealPlan => {
-            this.mealPlanRecipe = new MealPlanRecipe(0, mealPlan.name, 0, null, null, null);
+            this.mealPlanRecipe = new MealPlanRecipe(0, 0, mealPlan.name, 0, null, null, null);
         });
 
     }
