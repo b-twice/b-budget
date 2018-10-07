@@ -9,6 +9,7 @@ export class MealPlanGrocery {
         public unit: string,
         public dirty: number = 0,
         public supermarket: string,
+        public supermarketName: string,
         public remove: false
     ) { }
 }
