@@ -34,8 +34,10 @@
 ========================================================================== */
 
 
-*, *:before, *:after {
-	box-sizing: border-box;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
 
@@ -46,29 +48,29 @@
 ========================================================================== */
 
 html {
-	box-sizing: border-box;
-	font-size: 62.5%;
+  box-sizing: border-box;
+  font-size: 62.5%;
 }
 
 body {
-	margin:0;
-	font-family: $font-body;
-	font-size:1.8rem;
-	letter-spacing:0.02em;
-	word-wrap:break-word;
-	text-rendering:optimizeLegibility;
-	line-height: 1.7;
-	-moz-font-feature-settings: "liga" on;
-	opacity: 1;
+  margin: 0;
+  font-family: $font-body;
+  font-size: 1.8rem;
+  letter-spacing: 0.02em;
+  word-wrap: break-word;
+  text-rendering: optimizeLegibility;
+  line-height: 1.7;
+  -moz-font-feature-settings: "liga"on;
+  opacity: 1;
 }
 
 /**
  * Ensure page always cover full height of screen
  */
 app-root {
-	display:flex;
-	flex-direction:column;
-	min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 
@@ -85,64 +87,65 @@ h3,
 h4,
 h5,
 h6 {
-	line-height: 1.15em;
-	letter-spacing:-0.02em;
-	margin-top:1rem;
-	margin-bottom:.5rem;
+  line-height: 1.15em;
+  letter-spacing: -0.02em;
+  margin-top: 1rem;
+  margin-bottom: .5rem;
 }
 
 h1 {
-	font-family:$font-header;
-	font-size: 6rem;
-	letter-spacing: 2px;
-	text-indent: -3px;
+  font-family: $font-header;
+  font-size: 6rem;
+  letter-spacing: 2px;
+  text-indent: -3px;
 }
 
 h2 {
-	font-family:$font-header;
-	font-size: 3.4rem;
-	letter-spacing: 2px;
+  font-family: $font-header;
+  font-size: 3.4rem;
+  letter-spacing: 2px;
 }
 
 h3 {
-	font-family:$font-header;
-	font-size: 3rem;
+  font-family: $font-header;
+  font-size: 3rem;
 }
 
 h4 {
-	font-family:$font-header;
-	font-size: 2.5rem;
+  font-family: $font-header;
+  font-size: 2.5rem;
 }
 
 h5 {
-	font-family:$font-header;
-	font-size: 2rem;
-	margin-bottom:0.2em;
+  font-family: $font-header;
+  font-size: 2rem;
+  margin-bottom: 0.2em;
 }
 
 h6 {
-	font-family:$font-header;
-	font-size: 1.2rem;
+  font-family: $font-header;
+  font-size: 1.2rem;
 }
 
 a {
-	color:inherit;
-	text-decoration:none;
+  color: inherit;
+  text-decoration: none;
 }
 
 p {
-	font-size:2.1rem;
-	line-height:1.7;
-	color: rgba(0, 0, 0, 0.8);
-	letter-spacing:-0.003em;
-	margin-bottom: 2em;
-	margin-top:0;
+  font-size: 2.1rem;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.8);
+  letter-spacing: -0.003em;
+  margin-bottom: 2em;
+  margin-top: 0;
 }
 
-ol, ul {
-  list-style:none;
-  margin:0;
-  padding:0;
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 
@@ -151,50 +154,55 @@ ol, ul {
 ========================================================================== */
 
 .page-content {
-	padding:0 $break-medium;
-	max-width: $layout-width;
-	margin: 0 auto;
+  padding: 0 $break-medium;
+  max-width: $layout-width;
+  margin: 0 auto;
 }
+
 .layout-wrapper {
-	display: flex;
-	flex-direction: column;
-	max-width: $layout-width;
-	width:100%;
-	padding: 0 $break-medium;
+  display: flex;
+  flex-direction: column;
+  max-width: $layout-width;
+  width: 100%;
+  padding: 0 $break-medium;
 }
+
 .layout-wrapper--margin {
-	margin: $layout-margin;
+  margin: $layout-margin;
 }
 
 /* ==========================================================================
 #BUTTONS
 ========================================================================== */
 button {
-    display: block;
-    padding: 15px;
-    border:none;
-    background:none;
-    font-size: 2rem;
-    text-align: center;
-    cursor: pointer;
+  display: block;
+  padding: 15px;
+  border: none;
+  background: none;
+  font-size: 2rem;
+  text-align: center;
+  cursor: pointer;
 
-	&:focus {
-		transition: background 0.1s;
-	}
-	&:hover {
-		transition: background 0.1s;
-	}
-	&:disabled {
-		background-color: #eee;
-		color: #aaa;
-		cursor: auto;
+  &:focus {
+    transition: background 0.1s;
+  }
 
-	}
-	&.button-full {
-		width:100%;
-		margin: 20px auto;
+  &:hover {
+    transition: background 0.1s;
+  }
 
-	}
+  &:disabled {
+    background-color: #eee;
+    color: #aaa;
+    cursor: auto;
+
+  }
+
+  &.button-full {
+    width: 100%;
+    margin: 20px auto;
+
+  }
 }
 
 /* ==========================================================================
@@ -202,61 +210,64 @@ button {
 ========================================================================== */
 
 .form-group {
-	margin-top:.5em;
-	margin-bottom:.5em;
-	input {
-		display: block;
-		background: #fcfcfc;
-		border: 2px solid #e7e7e7;
-		margin-top:.25rem;
-		margin-left: auto;
-		margin-right:auto;
-		padding: 15px;
-		width: 100%;
-		border-radius: 3px;
-		transition: opacity 0.4s;
-		text-align: left;
-		height: 5rem;
-		-webkit-appearance: none;
-		
-		&:-webkit-autofill {
-			-webkit-box-shadow: 0 0 0px 1000px white inset;
-		}
-	}
-	select {
-		display: block;
-		background: #fcfcfc;
-		border: 2px solid #e7e7e7;
-		margin: 20px auto;
-		padding: 15px;
-		width: 100%;
-		border-radius: 3px;
-		font-size: 18px;
-		transition: opacity 0.4s;
-		text-align: left;
-		height: auto;
-	} 
-	// input {
-	// 	&.ng-valid {
-	// 		background-color:#FFF;
-	// 		border-left: 5px solid #15CD72;
-	// 	}
-	// 	&.ng-invalid {
-	// 		border-left: 5px solid #a94442; /* red */
-	// 	}
-	// }
+  margin-top: .5em;
+  margin-bottom: .5em;
+
+  input {
+    display: block;
+    background: #fcfcfc;
+    border: 2px solid #e7e7e7;
+    margin-top: .25rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    width: 100%;
+    border-radius: 3px;
+    transition: opacity 0.4s;
+    text-align: left;
+    height: 5rem;
+    // -webkit-appearance: none;
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px white inset;
+    }
+  }
+
+  select {
+    display: block;
+    background: #fcfcfc;
+    border: 2px solid #e7e7e7;
+    margin: 20px auto;
+    padding: 15px;
+    width: 100%;
+    border-radius: 3px;
+    font-size: 18px;
+    transition: opacity 0.4s;
+    text-align: left;
+    height: auto;
+  }
+
+  // input {
+  // 	&.ng-valid {
+  // 		background-color:#FFF;
+  // 		border-left: 5px solid #15CD72;
+  // 	}
+  // 	&.ng-invalid {
+  // 		border-left: 5px solid #a94442; /* red */
+  // 	}
+  // }
 }
 
 /* ==========================================================================
 #FORMS
 ========================================================================== */
 .circle-icon {
-	display: inline-block;
-    height: 10px;
-    width: 10px;
-    border-radius: 999px;
-    background: #fff;
-    margin-right: .5em;
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  border-radius: 999px;
+  background: #fff;
+  margin-right: .5em;
 }
 
 
@@ -264,46 +275,48 @@ button {
 #Popups
 ========================================================================== */
 .popup-wrapper {
-    display: flex;
-    align-items:center;
-    justify-content:center;
-    position: absolute;
-    top:0;
-    right: 0;
-    left: 0;
-    bottom:0;
-    z-index:1002;
-    background-color: rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1002;
+  background-color: rgba(0, 0, 0, 0.1);
 }
+
 .popup-content {
-    display:flex;
-    flex:1;
-    align-items:center;
-    justify-content:center;
-    max-width:95rem;
-    padding: 3em;
-    background-color: white;
-    overflow: auto;
-	border-radius: 5px;
-	
-	&.full-screen{
-		max-width:100%;
-		height:100%;
-		align-items:start;
-		justify-content:start;
-	}
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  max-width: 95rem;
+  padding: 3em;
+  background-color: white;
+  overflow: auto;
+  border-radius: 5px;
+
+  &.full-screen {
+    max-width: 100%;
+    height: 100%;
+    align-items: start;
+    justify-content: start;
+  }
 }
+
 .popup-body {
-    width:100%;
+  width: 100%;
 }
 
 .popup-close {
-    display:flex;
-    flex-direction:row-reverse;
-    flex:1;
-    margin-bottom:.5em;
-}
-.popup-close i {
-    cursor:pointer;
+  display: flex;
+  flex-direction: row-reverse;
+  flex: 1;
+  margin-bottom: .5em;
 }
 
+.popup-close i {
+  cursor: pointer;
+}
