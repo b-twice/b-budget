@@ -5,6 +5,7 @@ export class Recipe {
         public cookbook: string,
         public category: string,
         public name: string,
+        public url: string = null,
         public pageNumber: number = 0,
         public servings: number = 0,
         public servingCost: number = 0,

@@ -7,6 +7,7 @@ export class MealPlanRecipe {
                 public name: string,
                 public category: string,
                 public cookbook: string,
+                public url: string = null,
                 public pageNumber: number = 0,
                 public servings: number = 0,
                 public count: number = 1,

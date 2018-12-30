@@ -8,7 +8,7 @@
 
       <div *ngIf="recipe | async as result; else loading">
         <div class="recipe-title">
-          <h3>{{result.name}}</h3>
+          <h3><a class="link" *ngIf="result.url" [href]="result.url">{{result.name}}</a><span *ngIf="!result.url">{{result.name}}</span></h3>
           <div>
             <em>{{result.cookbook}}</em>
             <em *ngIf="result.pageNumber > 0">pg. {{result.pageNumber}}</em>
@@ -26,8 +26,10 @@
             <div class="table-row" *ngFor="let ingredient of ingredients | dynamicSort:sortProperty:sortDesc">
               <div class="table-row-cell flex-size-4">{{ingredient.measurement}} {{ingredient.name}}</div>
               <div class="table-row-cell flex-size-2 flex-center">{{ingredient.cost | currency:'USD':'symbol':'1.2-2'}}</div>
-              <div class="table-row-cell flex-size-2 flex-center">{{ingredient.costOrganic | currency:'USD':'symbol':'1.2-2'}}</div>
-              <div class="table-row-cell flex-size-2 flex-center">{{ingredient.costSeasonal | currency:'USD':'symbol':'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-2 flex-center">{{ingredient.costOrganic |
+                currency:'USD':'symbol':'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-2 flex-center">{{ingredient.costSeasonal |
+                currency:'USD':'symbol':'1.2-2'}}</div>
               <div class="table-row-cell flex-size-1 table-row-edit" (click)="editIngredient(ingredient)">
                 <i class="fa fa-edit"></i>
               </div>
@@ -37,8 +39,10 @@
             <div class="table-row recipe-total">
               <div class="table-row-cell flex-size-4">Total</div>
               <div class="table-row-cell flex-size-2 flex-center">{{recipeTotal | currency:'USD':'symbol':'1.2-2'}}</div>
-              <div class="table-row-cell flex-size-2 flex-center">{{recipeOrganicTotal | currency:'USD':'symbol':'1.2-2'}}</div>
-              <div class="table-row-cell flex-size-2 flex-center">{{recipeSeasonalTotal | currency:'USD':'symbol':'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-2 flex-center">{{recipeOrganicTotal |
+                currency:'USD':'symbol':'1.2-2'}}</div>
+              <div class="table-row-cell flex-size-2 flex-center">{{recipeSeasonalTotal |
+                currency:'USD':'symbol':'1.2-2'}}</div>
               <div class="table-row-cell flex-size-1"></div>
             </div>
           </div>

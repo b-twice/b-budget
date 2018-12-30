@@ -2,15 +2,15 @@
 <form #registerForm="ngForm" (ngSubmit)="submit()">
   <div class="form-group">
     <label for="cookbook">Cookbook:</label>
-    <ng2-completer class="completer-limit" [(ngModel)]="model.cookbook" name="cookbooks" #cookbook="ngModel" [datasource]="cookbooksService"
-      [inputClass]="'form-control'" [placeholder]="'Search Cookbooks'" [autoMatch]="false" [clearUnselected]="false" [minSearchLength]="0"
-      required></ng2-completer>
+    <ng2-completer class="completer-limit" [(ngModel)]="model.cookbook" name="cookbooks" #cookbook="ngModel"
+      [datasource]="cookbooksService" [inputClass]="'form-control'" [placeholder]="'Search Cookbooks'" [autoMatch]="false"
+      [clearUnselected]="false" [minSearchLength]="0" required></ng2-completer>
   </div>
   <div class="form-group">
     <label for="recipeCategory">Category:</label>
-    <ng2-completer class="completer-limit" [(ngModel)]="model.category" name="recipeCategory" #recipeCategory="ngModel" [datasource]="recipeCategoriesService"
-      [inputClass]="'form-control'" [placeholder]="'Search Categories'" [autoMatch]="false" [clearUnselected]="false" [minSearchLength]="0"
-      required #recipeCategory></ng2-completer>
+    <ng2-completer class="completer-limit" [(ngModel)]="model.category" name="recipeCategory" #recipeCategory="ngModel"
+      [datasource]="recipeCategoriesService" [inputClass]="'form-control'" [placeholder]="'Search Categories'"
+      [autoMatch]="false" [clearUnselected]="false" [minSearchLength]="0" required #recipeCategory></ng2-completer>
   </div>
   <div class="form-group">
     <label for="count">Name</label>
@@ -18,11 +18,16 @@
   </div>
   <div class="form-group">
     <label for="count">Page Number</label>
-    <input type="text" class="form-control" id="pageNumber" [(ngModel)]="model.pageNumber" name="pageNumber" #pageNumber="ngModel">
+    <input type="text" class="form-control" id="pageNumber" [(ngModel)]="model.pageNumber" name="pageNumber"
+      #pageNumber="ngModel">
   </div>
   <div class="form-group">
     <label for="count">Servings</label>
     <input type="text" class="form-control" id="servings" [(ngModel)]="model.servings" name="servings" #servings="ngModel">
+  </div>
+  <div class="form-group">
+    <label for="count">URL</label>
+    <input type="text" class="form-control" id="url" [(ngModel)]="model.url" name="url" #url="ngModel">
   </div>
   <button type="submit" [disabled]="!registerForm.form.valid" class="button-full">{{submitLabel}}</button>
 </form>
