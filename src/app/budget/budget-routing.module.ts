@@ -33,7 +33,7 @@ const adminRoutes: Routes = [
             },
             {
                 path: '',
-                redirectTo: '/budget/finance/summary/All/2018'
+                redirectTo: '/budget/finance/summary/All/2019'
             }
         ]
     }
