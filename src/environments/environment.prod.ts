@@ -5,7 +5,7 @@ export const environment = {
         realm: "budget",
         domain: 'bgeo.auth0.com',
         clientID: '2CocHiOvn4pRWyUMfQm22wkuBkv9NxBr',
-        audience: 'https://budgetapi.bgeo.io'
+        audience: 'https://budgetapi.brianbrown.dev'
     },
-    apiEndpoint: 'https://budgetapi.bgeo.io/api'
+    apiEndpoint: 'https://budgetapi.brianbrown.dev/api'
 };

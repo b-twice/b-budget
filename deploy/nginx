@@ -1,12 +1,12 @@
-# sudo vim /etc/nginx/sites-available/budget.bgeo.io
-# sudo ln -s /etc/nginx/sites-available/budget.bgeo.io /etc/nginx/sites-enabled/budget.bgeo.io
+# sudo vim /etc/nginx/sites-available/budget.brianbrown.dev
+# sudo ln -s /etc/nginx/sites-available/budget.brianbrown.dev /etc/nginx/sites-enabled/budget.brianbrown.dev
 # sudo systemctl restart nginx
 
 server {
         listen 80;
         listen [::]:80;
 
-        server_name budget.bgeo.io;
+        server_name budget.brianbrown.dev;
         if ($http_x_forwarded_proto = "http") {
             return 301 https://$server_name$request_uri;
         }
