@@ -6,4 +6,4 @@ rm -rf node_modules
 echo "Installing packages"
 npm install
 echo "Building package"
-node_modules/@angular/cli/bin/ng build --aot --dev
+node_modules/@angular/cli/bin/ng build --aot
