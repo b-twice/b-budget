@@ -23,7 +23,7 @@ export class PanelGroceriesComponent extends PanelBaseComponent implements OnIni
   foodCategories: Observable<Category[]>;
   chartLoaded: boolean = false;
 
-  @ViewChild(FilterControlsComponent)
+  @ViewChild(FilterControlsComponent, { static: true })
   private filterControls: FilterControlsComponent;
 
   constructor(

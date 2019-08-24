@@ -6,6 +6,7 @@ import { SummaryByCategory } from './summary-by-category';
 import * as d3Axis from 'd3-axis';
 import * as d3Selection from 'd3-selection';
 import * as d3Scale from 'd3-scale';
+import * as d3ScaleChromatic from 'd3-scale-chromatic';
 import * as d3Shape from 'd3-shape';
 import * as d3Collection from 'd3-collection';
 import * as d3Transition from 'd3-transition';
@@ -140,7 +141,7 @@ export class PanelSummaryChartComponent implements OnInit {
     // setup domains for data
     this.xDomain = d3Scale.scalePoint<number>().range([0, chartWidth]); // equal intervals across width of chart
     this.yDomain = d3Scale.scaleLinear().rangeRound([chartHeight, 0]); // linear range of rounded values
-    this.zDomain = d3Scale.scaleOrdinal(d3Scale.schemeCategory10); // ordinal scale of colors
+    this.zDomain = d3Scale.scaleOrdinal(d3ScaleChromatic.schemeCategory10); // ordinal scale of colors
 
     // create the line that is configured to consume data
     this.line = d3Shape.line<SummaryByCategory>()

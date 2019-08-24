@@ -12,3 +12,4 @@ declare module 'd3-shape.js';
 declare module 'd3-collection.js';
 declare module 'd3-transition.js';
 declare module 'd3-time-format.js';
+declare module 'd3-scale-chromatic.js';

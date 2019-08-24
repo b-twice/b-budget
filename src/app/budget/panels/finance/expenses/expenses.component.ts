@@ -24,7 +24,7 @@ export class PanelExpensesComponent extends PanelBaseComponent implements OnInit
   selectedTransactions: Transaction[];
   selectedTransactionCategoryName: string;
 
-  @ViewChild(FilterControlsComponent)
+  @ViewChild(FilterControlsComponent, { static: true })
   private filterControls: FilterControlsComponent;
 
 

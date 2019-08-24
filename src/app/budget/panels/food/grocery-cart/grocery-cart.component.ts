@@ -20,7 +20,7 @@ export class PanelGroceryCartComponent extends PanelBaseComponent implements OnI
   cartTotal: number = 0;
   saveError: boolean = false;
 
-  @ViewChild(FormGroceryComponent)
+  @ViewChild(FormGroceryComponent, { static: false })
   form: FormGroceryComponent;
 
 

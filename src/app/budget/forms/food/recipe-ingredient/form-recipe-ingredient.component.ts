@@ -1,10 +1,8 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CompleterService, CompleterData, CompleterCmp } from 'ng2-completer';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../../services/food.service';
 import { Recipe, RecipeIngredient } from '../../../models/food';
-import { Category } from '../../../models/core';
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { FormBaseComponent } from '../../core/base/form-base.component';
@@ -12,7 +10,7 @@ import { FormBaseComponent } from '../../core/base/form-base.component';
 @Component({
     selector: 'budget-form-recipe-ingredient',
     templateUrl: './form-recipe-ingredient.component.html',
-    styleUrls: ['./form-recipe-ingredient.component.scss']
+    styleUrls: ['./form-recipe-ingredient.component.scss'],
 })
 export class FormRecipeIngredientComponent extends FormBaseComponent implements OnInit {
 
@@ -26,7 +24,7 @@ export class FormRecipeIngredientComponent extends FormBaseComponent implements 
     quantityType: string;
     @Output() onSubmit = new EventEmitter<RecipeIngredient>();
     @Output() onDelete = new EventEmitter<RecipeIngredient>();
-    @ViewChild("foodProduct") _foodProduct: CompleterCmp;
+    @ViewChild("foodProduct", { static: true }) _foodProduct: CompleterCmp;
 
     constructor(
         public route: ActivatedRoute,

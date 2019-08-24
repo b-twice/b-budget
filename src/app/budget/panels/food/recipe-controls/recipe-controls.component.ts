@@ -11,7 +11,7 @@ export class PanelRecipeControlsComponent implements OnInit {
   user: string;
   year: string;
   searchValue: string;
-  @ViewChild('searchBox') searchBox: ElementRef;
+  @ViewChild('searchBox', { static: true }) searchBox: ElementRef;
   @Output() onSearch = new EventEmitter<string>();
 
   constructor(

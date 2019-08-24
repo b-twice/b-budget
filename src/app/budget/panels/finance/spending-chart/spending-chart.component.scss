@@ -1,4 +1,5 @@
 @import '../../../../../styles/base.scss';
+
 .panel-style {
   padding: 1rem;
   @extend .panel-base;
@@ -17,12 +18,4 @@
   background: #fff;
   @extend .panel-style;
   flex: 1;
-}
-
-/deep/ .spending-bar {
-  fill: #95a5a6;
-}
-
-/deep/ .spending-bar:hover {
-  fill: #7f8c8d;
 }

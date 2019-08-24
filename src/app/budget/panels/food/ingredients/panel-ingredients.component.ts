@@ -19,7 +19,7 @@ export class PanelIngredientsComponent extends PanelBaseComponent implements OnI
   ingredients: RecipeIngredient[];
   saveError: boolean = false;
 
-  @ViewChild(FormRecipeIngredientComponent)
+  @ViewChild(FormRecipeIngredientComponent, { static: true })
   form: FormRecipeIngredientComponent;
 
 

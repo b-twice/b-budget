@@ -16,7 +16,7 @@ import { AppService } from '../../../services/app.service';
 })
 export class ModalRecipeIngredientAddComponent extends ModalBaseComponent implements OnInit {
 
-    @ViewChild(FormRecipeIngredientComponent)
+    @ViewChild(FormRecipeIngredientComponent, { static: false })
     form: FormRecipeIngredientComponent;
 
     id: number;

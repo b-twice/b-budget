@@ -22,7 +22,7 @@ export class PanelTransactionsComponent extends PanelBaseComponent implements On
   transactionsTotal: number = 0;
   chartLoaded: boolean = false;
 
-  @ViewChild(FilterControlsComponent)
+  @ViewChild(FilterControlsComponent, { static: true })
   private filterControls: FilterControlsComponent;
 
 

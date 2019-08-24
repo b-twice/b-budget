@@ -1,5 +1,4 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CompleterService, CompleterData, CompleterCmp } from 'ng2-completer';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../../../services/food.service';
@@ -11,7 +10,7 @@ import { FormBaseComponent } from '../../core/base/form-base.component';
 @Component({
     selector: 'budget-form-grocery',
     templateUrl: './form-grocery.component.html',
-    styleUrls: ['./form-grocery.component.scss']
+    styleUrls: ['./form-grocery.component.scss'],
 })
 export class FormGroceryComponent extends FormBaseComponent implements OnInit {
 
@@ -23,7 +22,7 @@ export class FormGroceryComponent extends FormBaseComponent implements OnInit {
     supermarkets: Observable<Supermarket[]>;
     foodProductsService: CompleterData;
     supermarketsService: CompleterData;
-    @ViewChild("foodProduct") _foodProduct: CompleterCmp;
+    @ViewChild("foodProduct", { static: true }) _foodProduct: CompleterCmp;
 
     constructor(
         public route: ActivatedRoute,

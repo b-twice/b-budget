@@ -25,7 +25,7 @@ export class PanelFoodProductsComponent extends PanelBaseComponent implements On
   year: string;
   panel: string;
 
-  @ViewChild(FilterControlsComponent)
+  @ViewChild(FilterControlsComponent, { static: true })
   private filterControls: FilterControlsComponent;
 
   constructor(

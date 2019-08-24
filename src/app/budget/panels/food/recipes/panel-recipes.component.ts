@@ -22,10 +22,10 @@ export class PanelRecipesComponent extends PanelBaseComponent implements OnInit 
   recipes: Observable<Recipe[]>;
   recipeCategories: Observable<Category[]>;
 
-  @ViewChild(FilterControlsComponent)
+  @ViewChild(FilterControlsComponent, { static: true })
   private filterControls: FilterControlsComponent;
 
-  @ViewChild(PanelRecipeControlsComponent)
+  @ViewChild(PanelRecipeControlsComponent, { static: true })
   private recipeControls: PanelRecipeControlsComponent;
 
   constructor(

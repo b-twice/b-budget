@@ -18,7 +18,7 @@ export class PanelBooksComponent extends PanelBaseComponent implements OnInit {
   books: Observable<Book[]>;
   bookCategories: Observable<Category[]>;
 
-  @ViewChild(FilterControlsComponent)
+  @ViewChild(FilterControlsComponent, { static: true })
   private filterControls: FilterControlsComponent;
 
   constructor(

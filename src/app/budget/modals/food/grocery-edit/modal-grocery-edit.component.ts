@@ -18,7 +18,7 @@ export class ModalGroceryEditComponent implements OnInit {
     grocery: Grocery;
     user: string;
 
-    @ViewChild(FormGroceryComponent)
+    @ViewChild(FormGroceryComponent, { static: false })
     form: FormGroceryComponent;
 
 
