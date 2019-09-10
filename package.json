@@ -1,10 +1,11 @@
 {
-  "name": "bgeo-budget-web",
-  "version": "0.0.0",
+  "name": "b-budget-web",
+  "version": "1.0.0",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
+    "build": "ng build --prod --aot",
     "start": "ng serve --aot"
   },
   "private": true,
