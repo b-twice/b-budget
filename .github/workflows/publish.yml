@@ -26,7 +26,7 @@ jobs:
         HOST_IP: ${{ secrets.HOST_IP }}
         HOST_NAME: ${{ secrets.HOST_NAME }}
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
-        SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }
+        SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
       with: 
         args: $GITHUB_WORKSPACE/dist/ ${{ secrets.HOST_USER }}@$HOST_NAME:${{ secrets.DEPLOY_PATH }}
 
