@@ -7,6 +7,6 @@ services:
       context: ./
       dockerfile: Dockerfile.dev
     ports:
-      - "4100:4200"
+      - "4200:4200"
     volumes:
       - ./src:/opt/app/src

@@ -1,4 +1,4 @@
-<div *ngIf="user" class="user-image" [style.background-image]="'url(/assets/users/' + user + '.png)'"></div>
+<div *ngIf="user" class="user-image" [style.background-image]="'url(./assets/users/' + user + '.png)'"></div>
 <div *ngIf="userProfile | async | userProfileTransform: user as profile;else loading" class="user-profile">
   <span>Income: {{profile.income | currency:'USD':'symbol':'1.0-0'}}</span>
   <span>Debt: {{profile.debt | currency:'USD':'symbol':'1.0-0'}}</span>
