@@ -13,7 +13,7 @@ export function tokenGetter() {
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,
-                whitelistedDomains: ['localhost:5000', 'api.brianbrown.dev']
+                whitelistedDomains: ['localhost:5000', 'api.brianbrown.dev', 'brianbrown.dev']
             }
         })
     ]
