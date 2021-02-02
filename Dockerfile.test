@@ -3,7 +3,7 @@ WORKDIR /opt/app
 COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install
 COPY . .
-RUN npx ng build --prod --aot --base-href '/budget/ '--configuration test
+RUN npx ng build --prod --aot --base-href '/budget/' --configuration test
 
 
 FROM nginx:1.19.6 AS deploy-stage
