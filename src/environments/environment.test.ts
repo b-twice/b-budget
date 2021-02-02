@@ -7,5 +7,5 @@ export const environment = {
         clientID: '2CocHiOvn4pRWyUMfQm22wkuBkv9NxBr',
         audience: 'https://budgetapi.brianbrown.dev'
     },
-    apiEndpoint: 'https://brianbrown.dev/api'
+    apiEndpoint: 'https://test.brianbrown.dev/api'
 };

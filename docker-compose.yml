@@ -1,0 +1,12 @@
+version: '2'
+services:
+  web:
+    container_name: budget-dev
+    image: budget-dev:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4100:4200"
+    volumes:
+      - ./src:/opt/app/src

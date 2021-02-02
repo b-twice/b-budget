@@ -1,0 +1,6 @@
+FROM node:12.18.1 AS build-stage
+WORKDIR /opt/app
+COPY ["package.json", "package-lock.json*", "./"]
+RUN npm install
+COPY . .
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--poll", "2000"]
